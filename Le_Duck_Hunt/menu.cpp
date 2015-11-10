@@ -1,3 +1,5 @@
+// coucou
+#define AHA
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
