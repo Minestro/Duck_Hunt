@@ -11,7 +11,7 @@
 #include <sstream>
 
 void showMenu(int &modeMenu);
-bool testHover(int sx, int sy, Bouton bouton);
+//bool testHover(int sx, int sy, Bouton bouton);
 
 struct Sprite
 {

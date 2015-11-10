@@ -5,20 +5,23 @@
 
 #include <SDL/SDL.h>
 #include "applySurface.h"
-#include "pong.h"
+
+struct Image
+{
+    SDL_Surface *image;
+    SDL_Rect position;
+};
 
 struct Images
 {
-    SDL_Surface *spritesTouchesUn;
-    SDL_Surface *spritesTouchesDeux;
-    SDL_Surface *commandes;
-    SDL_Surface *letsPong;
-    SDL_Surface *astuce;
-    SDL_Surface *essayer;
-    SDL_Surface *GO;
-    SDL_Surface *bienvenue;
-    SDL_Surface *presentation;
-    SDL_Surface *licenceCC;
+    Image backGame;
+    Image backGameBlit;
+    Image duck;
+    Image hit;
+    Image menu;
+    Image points;
+    Image shot;
+    Image viseur;
 };
 
 
@@ -27,12 +30,8 @@ struct Sprites
     SDL_Rect sprite[9];
 };
 
-Sprites creationSprites();
-void charger(Images *i);
 
-void applySpritesIntro(ConstantesPong contexte, Images i, Pong jeu);
-void applySpritesPostIntro(ConstantesPong contexte, Images i, Pong jeu);
-void applySpritesPostIntroDeux(ConstantesPong contexte, Sprites s, Images i, Pong jeu);
-void applySpritesOwr(ConstantesPong contexte, Images i, Pong jeu);
+Sprites creationSprites();
+void charger(Images &i);
 
 #endif // IMAGES_H

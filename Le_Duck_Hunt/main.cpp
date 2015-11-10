@@ -4,6 +4,9 @@
 #include <SDL/SDL_image.h>
 #define BPP 32
 
+#include "images.h"
+#include "applySurface.h"
+
 using namespace std;
 
 int main()
@@ -14,20 +17,26 @@ int main()
 
     SDL_Init(SDL_INIT_VIDEO);
 
+    const int HAUTEUR = SDL_GetVideoInfo()->current_h;
+    const int LARGEUR = SDL_GetVideoInfo()->current_w;
+
     SDL_WM_SetCaption("DuckHunt", NULL);
 
-    ecran = SDL_SetVideoMode(SDL_GetVideoInfo()->current_w, SDL_GetVideoInfo()->current_h, BPP, SDL_HWSURFACE | SDL_FULLSCREEN);
+    ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_FULLSCREEN);
 
     Uint32 noir = SDL_MapRGB(ecran->format, 0, 0, 0);
 
     Uint8 *keystates = SDL_GetKeyState(NULL);
 
-    SDL_Rect image;
+    Images images;
+    charger(images);
 
 
     while(continuer)
     {
         SDL_FillRect(ecran, NULL, noir);
+
+        applySurface((LARGEUR - images.backGame.image->w) / 2, (HAUTEUR - images.backGame.image->w) / 2, images.backGame.image, ecran, NULL);
 
         while(SDL_PollEvent(&evenements))
         {
