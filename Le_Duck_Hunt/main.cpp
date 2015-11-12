@@ -1,11 +1,11 @@
 #include <iostream>
 #include <cstdlib>
 #include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
 #define BPP 32
 
 #include "images.h"
-#include "applySurface.h"
+#include "collerSurface.h"
+
 
 using namespace std;
 
@@ -13,9 +13,9 @@ int main()
 {
     SDL_Surface *ecran;
     SDL_Event evenements;
-    bool continuer = true;
 
     SDL_Init(SDL_INIT_VIDEO);
+    IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
 
     const int HAUTEUR = SDL_GetVideoInfo()->current_h;
     const int LARGEUR = SDL_GetVideoInfo()->current_w;
@@ -30,33 +30,21 @@ int main()
 
     Images images;
     charger(images);
+    placer(images);
 
-
-    while(continuer)
+    do
     {
+        SDL_PollEvent(&evenements);
+
         SDL_FillRect(ecran, NULL, noir);
-
-        applySurface((LARGEUR - images.backGame.image->w) / 2, (HAUTEUR - images.backGame.image->w) / 2, images.backGame.image, ecran, NULL);
-
-        while(SDL_PollEvent(&evenements))
-        {
-            switch(evenements.type)
-            {
-                case SDL_QUIT:
-                    continuer = false;
-                    break;
-              default:
-                    break;
-            }
-            if(keystates[SDLK_q])
-            {
-                continuer = false;
-            }
-        }
+        collerSurface(images.backGame, ecran, NULL);
+        collerSurface(images.backGameBlit, ecran, NULL);
 
         SDL_Flip(ecran);
-    }
 
+    } while(!keystates[SDLK_q]);
+
+    libererImages(images);
     SDL_FreeSurface(ecran);
 
     SDL_Quit();
