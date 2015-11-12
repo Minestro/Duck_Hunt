@@ -34,7 +34,7 @@ int main()
 
     do
     {
-        SDL_PollEvent(&evenements);
+        SDL_WaitEvent(&evenements);
 
         SDL_FillRect(ecran, NULL, noir);
         collerSurface(images.backGame, ecran, NULL);
