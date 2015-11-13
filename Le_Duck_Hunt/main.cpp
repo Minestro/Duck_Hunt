@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+#include "main.h"
 #define BPP 32
 
 using namespace std;
@@ -18,17 +19,12 @@ int main()
 
     ecran = SDL_SetVideoMode(SDL_GetVideoInfo()->current_w, SDL_GetVideoInfo()->current_h, BPP, SDL_HWSURFACE | SDL_FULLSCREEN);
 
-    Uint32 noir = SDL_MapRGB(ecran->format, 0, 0, 0);
+   // Uint8 *keystates = SDL_GetKeyState(NULL);
 
-    Uint8 *keystates = SDL_GetKeyState(NULL);
-
-    SDL_Rect image;
-
+    Bouton bouton;
 
     while(continuer)
     {
-        SDL_FillRect(ecran, NULL, noir);
-
         while(SDL_PollEvent(&evenements))
         {
             switch(evenements.type)
@@ -39,13 +35,8 @@ int main()
               default:
                     break;
             }
-            if(keystates[SDLK_q])
-            {
-                continuer = false;
-            }
         }
-
-        SDL_Flip(ecran);
+        afficherImage(ecran);
     }
 
     SDL_FreeSurface(ecran);
@@ -54,4 +45,5 @@ int main()
 
     return EXIT_SUCCESS;
 }
+// test
 
