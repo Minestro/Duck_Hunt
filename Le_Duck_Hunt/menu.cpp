@@ -46,9 +46,9 @@ void Menu(Sprite background, Sprite bouton, int &modeMenu, int &modeJeu, SDL_Sur
 }
 
 
-void showMenu(Sprite background, Sprite bouton, int &modeJeu, int &modeMenu)
+void showMenu(SDL_Surface *ecran, Sprite background, Sprite bouton, int &modeJeu, int &modeMenu)
 {
-    SDL_BlitSurface(background.source, NULL, screen, &background.position);
+    SDL_BlitSurface(background.source, NULL, ecran, &background.position);
 
 }
 

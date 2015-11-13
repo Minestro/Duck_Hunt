@@ -11,39 +11,37 @@ int main()
 {
     SDL_Surface *ecran;
     SDL_Event evenements;
-    bool continuer = true;
 
     SDL_Init(SDL_INIT_VIDEO);
+    IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
 
     SDL_WM_SetCaption("DuckHunt", NULL);
 
-    ecran = SDL_SetVideoMode(SDL_GetVideoInfo()->current_w, SDL_GetVideoInfo()->current_h, BPP, SDL_HWSURFACE | SDL_FULLSCREEN);
+    ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_FULLSCREEN);
 
-   // Uint8 *keystates = SDL_GetKeyState(NULL);
+    bool continuer = true;
+    // Uint8 *keystates = SDL_GetKeyState(NULL);
 
     Bouton bouton;
 
-    while(continuer)
+    Uint8 *keystates = SDL_GetKeyState(NULL);
+
+    //charger(images);
+    //placer(images);
+
+    while(SDL_PollEvent(&evenements))
     {
-        while(SDL_PollEvent(&evenements))
+        switch(evenements.type)
         {
-            switch(evenements.type)
-            {
-                case SDL_QUIT:
-                    continuer = false;
-                    break;
-              default:
-                    break;
-            }
+        case SDL_QUIT:
+            continuer = false;
+            break;
+        default:
+            break;
         }
         afficherImage(ecran);
     }
-
-    SDL_FreeSurface(ecran);
-
     SDL_Quit();
-
     return EXIT_SUCCESS;
 }
-// test
 
