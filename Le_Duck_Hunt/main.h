@@ -29,15 +29,18 @@ struct Police
     std::string police;
 };
 
-struct Bouton
+struct Boutons
 {
     SDL_Surface *source;
     SDL_Rect position[NB_BOUTON];
     SDL_Rect lecture[2];
 };
 
+void menu(Sprite, Sprite, int &modeMenu, int &modeJeu, SDL_Surface *screen, Police)
 void showMenu(SDL_Surface *ecran, Sprite, Sprite, int &modeJeu, int &modeMenu);
 bool testHover(int, int, Bouton bouton);
 void afficherImage(SDL_Surface *ecran);
+SDL_Surface *loadImage(string);
+SDL_Surface *loadImageWithColorKey(string, int, int, int);
 
 #endif // HEADER_H

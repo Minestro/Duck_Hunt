@@ -14,7 +14,6 @@ int main()
 
     SDL_Init(SDL_INIT_VIDEO);
     IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
-
     SDL_WM_SetCaption("DuckHunt", NULL);
 
     ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_FULLSCREEN);
@@ -22,13 +21,9 @@ int main()
     bool continuer = true;
     // Uint8 *keystates = SDL_GetKeyState(NULL);
 
-    Bouton bouton;
+    chargerSprites();
 
-    Uint8 *keystates = SDL_GetKeyState(NULL);
-
-    //charger(images);
-    //placer(images);
-
+    menu(background_menu, bouton, modeMenu, modeJeu, screen, police);
     while(SDL_PollEvent(&evenements))
     {
         switch(evenements.type)
@@ -39,7 +34,8 @@ int main()
         default:
             break;
         }
-        afficherImage(ecran);
+        menu(background_menu, bouton, modeMenu, modeJeu, screen, police);
+        afficherImage(ecran, background, background_blit,);
     }
     SDL_Quit();
     return EXIT_SUCCESS;

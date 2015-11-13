@@ -10,7 +10,7 @@
 
 using namespace std;
 
-void Menu(Sprite background, Sprite bouton, int &modeMenu, int &modeJeu, SDL_Surface *screen, Police police)
+void menu(Sprite background, Sprite bouton, int &modeMenu, int &modeJeu, SDL_Surface *screen, Police police)
 {
     bool sortir = false;
     bool bl = false;
@@ -41,7 +41,7 @@ void Menu(Sprite background, Sprite bouton, int &modeMenu, int &modeJeu, SDL_Sur
         default:
             break;
         }
-        //showMenu(background, bouton, modeJeu, modeMenu);
+        showMenu(background, bouton, modeJeu, modeMenu);
     }
 }
 

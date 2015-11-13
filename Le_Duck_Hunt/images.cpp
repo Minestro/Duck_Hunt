@@ -1,6 +1,6 @@
-#include "images.h"
+#include "main.h"
 
-SDL_Surface *chargerUneImage(string nomFichier)
+SDL_Surface *loadImage(string nomFichier)
 {
     SDL_Surface *image = NULL;
     SDL_Surface *imageOptimisee = NULL;
@@ -76,34 +76,18 @@ SDL_Surface *loadImageWithColorKey(string filename, int r, int g, int b)
 
 
 /*** fonction qui charge les images ***/
-void charger(Images &i)
+void chargerImages()
 {
-    i.backGame.image = chargerUneImage("sprites/backGame.png");
-    i.backGameBlit.image = loadImageWithColorKey("sprites/backGameBlit.png", 0, 0, 0);
-    i.duck.image = chargerUneImage("sprites/duck.png"); // à découper
-    i.hit.image = chargerUneImage("sprites/hit.png");
-    i.menu.image = chargerUneImage("sprites/menu.png");
-    i.points.image = chargerUneImage("sprites/points.png");
-    i.shot.image = chargerUneImage("sprites/shot.png");
-    i.viseur.image = chargerUneImage("sprites/viseur.png");
-}
-
-void placer(Images &i)
-{
-    i.backGame.x = (SDL_GetVideoSurface()->w - i.backGame.image->w) / 2;
-    i.backGame.y = (SDL_GetVideoSurface()->h - i.backGame.image->h) / 2;
-    i.backGameBlit.x = (SDL_GetVideoSurface()->w - i.backGameBlit.image->w) / 2;
-    i.backGameBlit.y = (SDL_GetVideoSurface()->h - i.backGameBlit.image->h) / 2;
+    Boutons bouton;
+    Sprite background, background_blit, background_menu, viseur;
+    background.source=loadImage("sprites/backGame.png");
+    background_blit.source=loadImage("sprites/backGameBlit.png");
+    background_menu.source=loadImage("sprites/menu.png");
+    bouton.source=loadImageWithColorKey("sprites/boutons.bmp",0,0,0);
+    viseur.source=loadImageWithColorKey("sprites/viseur.png",0,0,0);
 }
 
 void libererImages(Images i)
 {
-    SDL_FreeSurface(i.backGame.image);
-    SDL_FreeSurface(i.backGameBlit.image);
-    SDL_FreeSurface(i.duck.image);
-    SDL_FreeSurface(i.hit.image);
-    SDL_FreeSurface(i.menu.image);
-    SDL_FreeSurface(i.points.image);
-    SDL_FreeSurface(i.shot.image);
-    SDL_FreeSurface(i.viseur.image);
+    //A faire
 }
