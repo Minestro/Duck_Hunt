@@ -21,6 +21,14 @@ struct Sprite
     SDL_Rect lecture;
 };
 
+struct Sprites
+{
+    Sprite background;
+    Sprite background_blit;
+    Sprite background_menu;
+    Sprite viseur;
+};
+
 struct Police
 {
     TTF_Font *fonts;
@@ -36,11 +44,12 @@ struct Boutons
     SDL_Rect lecture[2];
 };
 
-void menu(Sprite, Sprite, int &modeMenu, int &modeJeu, SDL_Surface *screen, Police)
-void showMenu(SDL_Surface *ecran, Sprite, Sprite, int &modeJeu, int &modeMenu);
-bool testHover(int, int, Bouton bouton);
-void afficherImage(SDL_Surface *ecran);
-SDL_Surface *loadImage(string);
-SDL_Surface *loadImageWithColorKey(string, int, int, int);
+void menu(Sprite, Boutons, int &modeMenu, int &modeJeu, SDL_Surface *screen, Police);
+void showMenu(SDL_Surface *ecran, Sprite, Boutons, int &modeJeu, int &modeMenu);
+bool testHover(int, int, Boutons bouton);
+void afficherImage(SDL_Surface *ecran, Sprites);
+void chargerImages(Sprites &sprites, Boutons &bouton);
+SDL_Surface *loadImage(std::string);
+SDL_Surface *loadImageWithColorKey(std::string, int, int, int);
 
 #endif // HEADER_H

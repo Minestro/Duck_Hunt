@@ -1,6 +1,6 @@
 #include "main.h"
 
-SDL_Surface *loadImage(string nomFichier)
+SDL_Surface *loadImage(std::string nomFichier)
 {
     SDL_Surface *image = NULL;
     SDL_Surface *imageOptimisee = NULL;
@@ -76,15 +76,13 @@ SDL_Surface *loadImageWithColorKey(string filename, int r, int g, int b)
 
 
 /*** fonction qui charge les images ***/
-void chargerImages()
+void chargerImages(Sprites &sprites, Bouton &bouton)
 {
-    Boutons bouton;
-    Sprite background, background_blit, background_menu, viseur;
-    background.source=loadImage("sprites/backGame.png");
-    background_blit.source=loadImage("sprites/backGameBlit.png");
-    background_menu.source=loadImage("sprites/menu.png");
     bouton.source=loadImageWithColorKey("sprites/boutons.bmp",0,0,0);
-    viseur.source=loadImageWithColorKey("sprites/viseur.png",0,0,0);
+    sprites.background.source=loadImage("sprites/backGame.png");
+    sprites.background_blit.source=loadImage("sprites/backGameBlit.png");
+    sprites.background_menu.source=loadImage("sprites/menu.png");
+    sprites.viseur.source=loadImageWithColorKey("sprites/viseur.png",0,0,0);
 }
 
 void libererImages(Images i)

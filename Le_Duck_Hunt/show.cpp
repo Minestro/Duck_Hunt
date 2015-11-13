@@ -10,7 +10,7 @@
 
 using namespace std;
 
-void afficherImage(SDL_Surface *ecran)
+void afficherImage(SDL_Surface *ecran, Sprites sprite)
 {
     SDL_FillRect(ecran,&ecran->clip_rect, SDL_MapRGB(ecran->format,0,0,0));
     SDL_Flip(ecran);

@@ -19,11 +19,18 @@ int main()
     ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_FULLSCREEN);
 
     bool continuer = true;
+    int modeJeu = 0;    //Le mode de jeu.
+    int modeMenu = 0;   //Détermine la page du menu à afficher.
+
     // Uint8 *keystates = SDL_GetKeyState(NULL);
 
-    chargerSprites();
+    Boutons bouton;
+    Sprites sprites;
+    chargerImages(sprites, bouton);
 
-    menu(background_menu, bouton, modeMenu, modeJeu, screen, police);
+    Police police;
+
+    menu(sprites.background_menu, bouton, modeMenu, modeJeu, ecran, police);
     while(SDL_PollEvent(&evenements))
     {
         switch(evenements.type)
@@ -34,8 +41,8 @@ int main()
         default:
             break;
         }
-        menu(background_menu, bouton, modeMenu, modeJeu, screen, police);
-        afficherImage(ecran, background, background_blit,);
+        menu(sprites.background_menu, bouton, modeMenu, modeJeu, ecran, police);
+        afficherImage(ecran, sprites);
     }
     SDL_Quit();
     return EXIT_SUCCESS;
