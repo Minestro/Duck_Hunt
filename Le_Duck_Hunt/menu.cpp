@@ -18,6 +18,8 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SDL_Sur
     SDL_Event event;
     while (sortir==false)
     {
+        while(SDL_PollEvent(&event))
+        {
         switch (event.type) {
         case SDL_QUIT:
             modeJeu=0;
@@ -40,8 +42,8 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SDL_Sur
         default:
             break;
         }
+        }
         showMenu(ecran, sprites, boutons, modeJeu, modeMenu, sx, sy);
-        SDL_Delay(20);
     }
 }
 

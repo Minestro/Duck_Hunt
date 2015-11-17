@@ -37,16 +37,22 @@ struct Police
     std::string police;
 };
 
+struct Bouton
+{
+    SDL_Rect position;
+    SDL_Rect lecture;
+};
+
 struct Boutons
 {
     SDL_Surface *source;
-    SDL_Rect position[NB_BOUTON];
-    SDL_Rect lecture[2];
+    Bouton play;
+    Bouton quit;
 };
 
 void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SDL_Surface *screen, Police, Uint8 *keystates);
 void showMenu(SDL_Surface *ecran, Sprites, Boutons, int &modeJeu, int &modeMenu, int, int);
-bool testHover(int, int, Boutons bouton);
+bool testHover(int sx, int sy, Sprite sprite);
 void genererRendu(SDL_Surface *ecran, Sprites sprites);
 void chargerImages(Sprites &sprites, Boutons &bouton);
 SDL_Surface *loadImage(std::string);

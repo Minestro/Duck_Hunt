@@ -18,7 +18,6 @@ int main()
 
     ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE);
 
-    bool continuer = true;
     int modeJeu = 0;    //Le mode de jeu.
     int modeMenu = 0;   //Détermine la page du menu à afficher.
 
@@ -32,17 +31,17 @@ int main()
     menu(sprites, boutons, modeMenu, modeJeu, ecran, police, keystates);
     while (modeJeu!=0)
     {
-    while(SDL_PollEvent(&evenements))
-    {
-        switch(evenements.type)
+        while(SDL_PollEvent(&evenements))
         {
-        case SDL_QUIT:
-            continuer = false;
-            break;
-        default:
-            break;
+            switch(evenements.type)
+            {
+            case SDL_QUIT:
+                modeJeu = 0;
+                break;
+            default:
+                break;
+            }
         }
-    }
         menu(sprites, boutons, modeMenu, modeJeu, ecran, police, keystates);
         genererRendu(ecran, sprites);
     }
