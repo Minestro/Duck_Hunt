@@ -2,51 +2,34 @@
 
 using namespace std;
 
-void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SDL_Surface *ecran, Police police, Uint8 *keystates)
+void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SDL_Surface *ecran, Police police, Uint8 *keystates, SourisEvent &sourisEvent)
 {
-    bool sortir = false;
-    bool bl = false;
-    int sx, sy;
-    SDL_Event event;
+    bool sortir = false;;
     while (sortir==false)
     {
-        while(SDL_PollEvent(&event))
+        if (getEvents(sourisEvent, keystates))
         {
-            switch (event.type) {
-            case SDL_QUIT:
-                modeJeu=0;
-                sortir=true;
-                break;
-            case SDL_MOUSEMOTION:
-                sx = event.motion.x;
-                sy = event.motion.y;
-            case SDL_MOUSEBUTTONDOWN :
-                if(event.button.button==SDL_BUTTON_LEFT)
-                {
-                    bl = true;
-                }
-                break;
-            case SDL_MOUSEBUTTONUP :
-                if(event.button.button==SDL_BUTTON_LEFT)
-                {
-                    bl = false;
-                }
-            default:
-                break;
-            }
+            sortir = true;
         }
-        keystates = SDL_GetKeyState(NULL);
         switch (modeMenu)
         {
             case 0:
                 sortir = true;
             break;
             case 1 :
-                showMenu(ecran, sprites, boutons, modeMenu, sx, sy);
-                if ((testHoverBouton(sx, sy, boutons.quit))&&bl)
+                boutons.play.position.x=(LARGEUR/2)-(boutons.play.lecture[0].w/2);
+                boutons.play.position.y=200;
+                boutons.quit.position.x=(LARGEUR/2)-(boutons.quit.lecture[0].w/2);
+                boutons.quit.position.y=400;
+                showMenu(ecran, sprites, boutons, modeMenu, sourisEvent.sx, sourisEvent.sy);
+                if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.quit))&&sourisEvent.bl)
                 {
                     modeMenu = 0;
 
+                } else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.play))&&sourisEvent.bl)
+                {
+                    modeJeu = 1;
+                    modeMenu = 0;
                 }
             break;
         }

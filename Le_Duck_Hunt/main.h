@@ -50,13 +50,23 @@ struct Boutons
     Bouton quit;
 };
 
-void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SDL_Surface *screen, Police, Uint8 *keystates);
+struct SourisEvent
+{
+    bool bl;
+    bool br;
+    bool bm;
+    int sx;
+    int sy;
+};
+
+void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SDL_Surface *screen, Police, Uint8 *keystates, SourisEvent &sourisEvent);
 void showMenu(SDL_Surface *ecran, Sprites, Boutons, int &modeMenu, int, int);
 bool testHoverBouton(int, int, Bouton);
-void genererRendu(SDL_Surface *ecran, Sprites sprites);
+void genererRendu(SDL_Surface *ecran, Sprites sprites, int, int);
 void chargerImages(Sprites &sprites, Boutons &bouton);
-void initBouton(Bouton &bouton);
+void initBouton(Bouton &bouton, int);
 SDL_Surface *loadImage(std::string);
 SDL_Surface *loadImageWithColorKey(std::string, int, int, int);
+bool getEvents (SourisEvent &sourisEvent, Uint8 *keystates);
 
 #endif // HEADER_H

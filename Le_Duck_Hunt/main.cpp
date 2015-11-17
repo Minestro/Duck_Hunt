@@ -5,7 +5,7 @@ using namespace std;
 int main()
 {
     SDL_Surface *ecran;
-    SDL_Event evenements;
+    SourisEvent sourisEvent;
 
     SDL_Init(SDL_INIT_VIDEO);
     IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
@@ -22,24 +22,16 @@ int main()
     Sprites sprites;
     Police police;
     chargerImages(sprites, boutons);
-    initBouton(boutons.quit);
+    initBouton(boutons.quit, 0);
+    initBouton(boutons.play, 1);
 
-    menu(sprites, boutons, modeMenu, modeJeu, ecran, police, keystates);
-    while (modeJeu!=0)
+    menu(sprites, boutons, modeMenu, modeJeu, ecran, police, keystates, sourisEvent);
+    while ((modeJeu!=0)&&!(getEvents(sourisEvent, keystates)))
     {
-        while(SDL_PollEvent(&evenements))
-        {
-            switch(evenements.type)
-            {
-            case SDL_QUIT:
-                modeJeu = 0;
-                break;
-            default:
-                break;
-            }
-        }
-        menu(sprites, boutons, modeMenu, modeJeu, ecran, police, keystates);
-        genererRendu(ecran, sprites);
+        menu(sprites, boutons, modeMenu, modeJeu, ecran, police, keystates, sourisEvent);
+        int sx, sy;
+        sx = sy = 100;
+        genererRendu(ecran, sprites, sx, sy);
     }
     SDL_Quit();
     return EXIT_SUCCESS;
