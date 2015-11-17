@@ -47,7 +47,18 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SDL_Sur
     }
 }
 
-bool testHover(int sx, int sy, Sprite sprite)
+bool testHover(int sx, int sy, Bouton sprite)
 {
-    return((sx < sprite.position.x+sprite.lecture.w)&&(sx > sprite.position.x)&&(sy > sprite.position.y)&&(sy < sprite.position.y+sprite.lecture.h));
+    return((sx < sprite.position.x+sprite.lecture[0].w)&&(sx > sprite.position.x)&&(sy > sprite.position.y)&&(sy < sprite.position.y+sprite.lecture[0].h));
+}
+
+void initBoutons(Boutons boutons)
+{
+    boutons.play.lecture[0].x=0;
+    boutons.play.lecture[0].y=0;
+    boutons.play.lecture[1].x=200;
+    boutons.play.lecture[1].y=0;
+    boutons.play.position.x=100;
+    boutons.play.position.y=100;
+
 }

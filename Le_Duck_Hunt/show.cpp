@@ -18,17 +18,7 @@ void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons boutons, int &modeJeu
     sprites.viseur.position.x=sx-(sprites.viseur.source->w/2);
     sprites.viseur.position.y=sy-(sprites.viseur.source->h/2);
     SDL_BlitSurface(sprites.viseur.source, NULL, ecran, &sprites.viseur.position);
-    boutons.play.position.x=100;
-    boutons.play.position.y=100;
-    boutons.play.lecture.y=0;
-    boutons.play.lecture.w=150;
-    boutons.play.lecture.h=60;
-    if (testHover(sx, sy, boutons)){
-        boutons.play.position.x=200;
-    } else {
-        boutons.play.position.x=0;
-    }
-    SDL_BlitSurface(boutons.source, NULL, ecran, &boutons.play.position);
+    SDL_BlitSurface(boutons.source, boutons.play.lecture, ecran, &boutons.play.position);
     SDL_Flip(ecran);
 
 }

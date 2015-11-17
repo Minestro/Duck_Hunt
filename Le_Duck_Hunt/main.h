@@ -40,7 +40,7 @@ struct Police
 struct Bouton
 {
     SDL_Rect position;
-    SDL_Rect lecture;
+    SDL_Rect lecture[2];
 };
 
 struct Boutons
@@ -52,9 +52,10 @@ struct Boutons
 
 void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SDL_Surface *screen, Police, Uint8 *keystates);
 void showMenu(SDL_Surface *ecran, Sprites, Boutons, int &modeJeu, int &modeMenu, int, int);
-bool testHover(int sx, int sy, Sprite sprite);
+bool testHover(int, int, Bouton);
 void genererRendu(SDL_Surface *ecran, Sprites sprites);
 void chargerImages(Sprites &sprites, Boutons &bouton);
+void initBoutons(Boutons);
 SDL_Surface *loadImage(std::string);
 SDL_Surface *loadImageWithColorKey(std::string, int, int, int);
 
