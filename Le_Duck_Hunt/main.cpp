@@ -16,6 +16,11 @@ int main()
 
     ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE);
 
+
+    int fpsTime = (1/(FPS_MAX*1.0)*1000);    //Calcule en ms le temps entre chaque actualisation d'image à partir de la constante FPS_LIMIT.
+    Uint32 currentTime, cycleRefresh, cycleEvents;
+    currentTime = cycleRefresh = cycleEvents = 0;
+
     int modeJeu = 0;    //Le mode de jeu.
     int modeMenu = 1;   //Détermine la page du menu à afficher.
 
@@ -29,10 +34,13 @@ int main()
     menu(sprites, boutons, modeMenu, modeJeu, ecran, police, keystates, sourisEvent);
     while ((modeJeu!=0)&&!(getEvents(sourisEvent, keystates)))
     {
+        currentTime = SDL_GetTicks();
         menu(sprites, boutons, modeMenu, modeJeu, ecran, police, keystates, sourisEvent);
-        int sx, sy;
-        sx = sy = 100;
-        genererRendu(ecran, sprites, sourisEvent);
+        if (currentTime>=cycleRefresh+fpsTime)
+        {
+            genererRendu(ecran, sprites, sourisEvent);
+            cycleRefresh = currentTime;
+        }
     }
     SDL_Quit();
     return EXIT_SUCCESS;
