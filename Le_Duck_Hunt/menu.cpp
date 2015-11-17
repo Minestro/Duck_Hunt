@@ -50,6 +50,7 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SDL_Sur
                 }
             break;
         }
+        SDL_Delay(10);
     }
 }
 
