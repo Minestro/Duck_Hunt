@@ -14,7 +14,7 @@ int main()
     ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE);
 
     int modeJeu = 0;    //Le mode de jeu.
-    int modeMenu = 0;   //Détermine la page du menu à afficher.
+    int modeMenu = 1;   //Détermine la page du menu à afficher.
 
     Uint8 *keystates = SDL_GetKeyState(NULL);
 

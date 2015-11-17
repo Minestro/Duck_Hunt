@@ -3,7 +3,7 @@
 using namespace std;
 
 
-void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons boutons, int &modeJeu, int &modeMenu, int sx, int sy)
+void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons boutons, int &modeMenu, int sx, int sy)
 {
     SDL_ShowCursor(0);
     SDL_BlitSurface(sprites.background_menu.source, NULL, ecran, &sprites.background.position);

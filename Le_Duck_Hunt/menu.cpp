@@ -36,7 +36,20 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SDL_Sur
             }
         }
         keystates = SDL_GetKeyState(NULL);
-        showMenu(ecran, sprites, boutons, modeJeu, modeMenu, sx, sy);
+        switch (modeMenu)
+        {
+            case 0:
+                sortir = true;
+            break;
+            case 1 :
+                showMenu(ecran, sprites, boutons, modeMenu, sx, sy);
+                if ((testHoverBouton(sx, sy, boutons.quit))&&bl)
+                {
+                    modeMenu = 0;
+
+                }
+            break;
+        }
     }
 }
 

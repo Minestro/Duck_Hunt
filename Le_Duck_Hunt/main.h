@@ -51,7 +51,7 @@ struct Boutons
 };
 
 void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SDL_Surface *screen, Police, Uint8 *keystates);
-void showMenu(SDL_Surface *ecran, Sprites, Boutons, int &modeJeu, int &modeMenu, int, int);
+void showMenu(SDL_Surface *ecran, Sprites, Boutons, int &modeMenu, int, int);
 bool testHoverBouton(int, int, Bouton);
 void genererRendu(SDL_Surface *ecran, Sprites sprites);
 void chargerImages(Sprites &sprites, Boutons &bouton);
