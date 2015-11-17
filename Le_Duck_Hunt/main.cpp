@@ -16,7 +16,7 @@ int main()
     IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
     SDL_WM_SetCaption("DuckHunt", NULL);
 
-    ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_FULLSCREEN);
+    ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE);
 
     bool continuer = true;
     int modeJeu = 0;    //Le mode de jeu.
@@ -42,7 +42,7 @@ int main()
             break;
         }
         menu(sprites.background_menu, bouton, modeMenu, modeJeu, ecran, police);
-        afficherImage(ecran, sprites);
+        genererRendu(ecran, sprites);
     }
     SDL_Quit();
     return EXIT_SUCCESS;

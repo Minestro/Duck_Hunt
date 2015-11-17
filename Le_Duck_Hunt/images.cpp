@@ -1,33 +1,25 @@
 #include "main.h"
 
-SDL_Surface *loadImage(std::string nomFichier)
+SDL_Surface *load_image( std::string filename )
 {
-    SDL_Surface *image = NULL;
-    SDL_Surface *imageOptimisee = NULL;
-    /* Ouverture de l'image */
-    image = IMG_Load(nomFichier.c_str());
-    if(image == NULL)
-    {
-        cerr << "Erreur IMG_Load" << endl;
-        exit(EXIT_FAILURE);
-    }
-    if(image->flags & SDL_SRCALPHA)
-    {
-        imageOptimisee = SDL_DisplayFormatAlpha(image);
-    }
-    else
-    {
-        imageOptimisee = SDL_DisplayFormat(image);
-    }
+    //Temporary storage for the image that's loaded
+    SDL_Surface* loadedImage = NULL;
 
-    if(imageOptimisee == NULL)
+    //The optimized image that will be used
+    SDL_Surface* optimizedImage = NULL;
+    //Load the image
+    loadedImage = SDL_LoadBMP( filename.c_str() );
+    //If nothing went wrong in loading the image
+    if( loadedImage != NULL )
     {
-        cerr << "Erreur impossible d'optimiser l'image" << endl;
+        //Create an optimized image
+        optimizedImage = SDL_DisplayFormat( loadedImage );
+
+        //Free the old image
+        SDL_FreeSurface( loadedImage );
     }
-
-    SDL_FreeSurface(image);
-
-    return imageOptimisee;
+    //Return the optimized image
+    return optimizedImage;
 }
 
 // -- loadImageWithColorKey ---------------------
@@ -40,7 +32,7 @@ SDL_Surface *loadImage(std::string nomFichier)
 //   l'image.
 // ----------------------------------------------
 
-SDL_Surface *loadImageWithColorKey(string filename, int r, int g, int b)
+SDL_Surface *loadImageWithColorKey(std::string filename, int r, int g, int b)
 {
     //The image that's loaded
     SDL_Surface* loadedImage = NULL;
@@ -66,26 +58,28 @@ SDL_Surface *loadImageWithColorKey(string filename, int r, int g, int b)
             //Map the color key
             Uint32 colorkey = SDL_MapRGB( optimizedImage->format, r, g, b );
 
-             //Set all pixels of color R 0, G 0xFF, B 0xFF to be transparent
+            //Set all pixels of color R 0, G 0xFF, B 0xFF to be transparent
             SDL_SetColorKey( optimizedImage, SDL_SRCCOLORKEY, colorkey );
         }
-     }
+
+
+    }
     //Return the optimized image
     return optimizedImage;
 }
 
 
 /*** fonction qui charge les images ***/
-void chargerImages(Sprites &sprites, Bouton &bouton)
+void chargerImages(Sprites &sprites, Boutons &bouton)
 {
     bouton.source=loadImageWithColorKey("sprites/boutons.bmp",0,0,0);
-    sprites.background.source=loadImage("sprites/backGame.png");
-    sprites.background_blit.source=loadImage("sprites/backGameBlit.png");
-    sprites.background_menu.source=loadImage("sprites/menu.png");
+    sprites.background.source=load_image("sprites/backGame.png");
+    sprites.background_blit.source=load_image("sprites/backGameBlit.png");
+    sprites.background_menu.source=load_image("sprites/menu.png");
     sprites.viseur.source=loadImageWithColorKey("sprites/viseur.png",0,0,0);
 }
 
-void libererImages(Images i)
+/*void libererImages(Sprites i)
 {
-    //A faire
-}
+   //A faire
+}*/

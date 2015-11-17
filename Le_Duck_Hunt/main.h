@@ -47,7 +47,7 @@ struct Boutons
 void menu(Sprite, Boutons, int &modeMenu, int &modeJeu, SDL_Surface *screen, Police);
 void showMenu(SDL_Surface *ecran, Sprite, Boutons, int &modeJeu, int &modeMenu);
 bool testHover(int, int, Boutons bouton);
-void afficherImage(SDL_Surface *ecran, Sprites);
+void genererRendu(SDL_Surface *ecran, Sprites sprites);
 void chargerImages(Sprites &sprites, Boutons &bouton);
 SDL_Surface *loadImage(std::string);
 SDL_Surface *loadImageWithColorKey(std::string, int, int, int);
