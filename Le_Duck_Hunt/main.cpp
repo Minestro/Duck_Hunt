@@ -6,17 +6,18 @@ int main()
 {
     SDL_Surface *ecran;
     SourisEvent sourisEvent;
+    Uint8 *keystates = SDL_GetKeyState(NULL);
 
     SDL_Init(SDL_INIT_VIDEO);
     IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
+
     SDL_WM_SetCaption("DuckHunt", NULL);
+    SDL_WM_SetIcon(SDL_LoadBMP("sprites/icon.bmp"), NULL);
 
     ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE);
 
     int modeJeu = 0;    //Le mode de jeu.
     int modeMenu = 1;   //Détermine la page du menu à afficher.
-
-    Uint8 *keystates = SDL_GetKeyState(NULL);
 
     Boutons boutons;
     Sprites sprites;
@@ -31,7 +32,7 @@ int main()
         menu(sprites, boutons, modeMenu, modeJeu, ecran, police, keystates, sourisEvent);
         int sx, sy;
         sx = sy = 100;
-        genererRendu(ecran, sprites, sx, sy);
+        genererRendu(ecran, sprites, sourisEvent);
     }
     SDL_Quit();
     return EXIT_SUCCESS;

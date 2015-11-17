@@ -74,7 +74,7 @@ void chargerImages(Sprites &sprites, Boutons &boutons)
 {
     boutons.source=loadImageWithColorKey("sprites/bouton.bmp",0,0,0);
     sprites.background.source=load_image("sprites/backGame.png");
-    sprites.background_blit.source=load_image("sprites/backGameBlit.png");
+    sprites.background_blit.source=loadImageWithColorKey("sprites/backGameBlit.png",0,0,0);
     sprites.background_menu.source=load_image("sprites/menu.png");
     sprites.viseur.source=loadImageWithColorKey("sprites/viseur.png",0,0,0);
     sprites.background_menu.position.x=0;
