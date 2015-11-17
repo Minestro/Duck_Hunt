@@ -11,8 +11,8 @@
 #include <sstream>
 
 const int NB_BOUTON = 2;
-const int HAUTEUR = 750;
-const int LARGEUR = 761;
+const int HAUTEUR = 761;
+const int LARGEUR = 750;
 
 struct Sprite
 {
@@ -44,8 +44,8 @@ struct Boutons
     SDL_Rect lecture[2];
 };
 
-void menu(Sprite, Boutons, int &modeMenu, int &modeJeu, SDL_Surface *screen, Police);
-void showMenu(SDL_Surface *ecran, Sprite, Boutons, int &modeJeu, int &modeMenu);
+void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SDL_Surface *screen, Police, Uint8 *keystates);
+void showMenu(SDL_Surface *ecran, Sprites, Boutons, int &modeJeu, int &modeMenu, int, int);
 bool testHover(int, int, Boutons bouton);
 void genererRendu(SDL_Surface *ecran, Sprites sprites);
 void chargerImages(Sprites &sprites, Boutons &bouton);

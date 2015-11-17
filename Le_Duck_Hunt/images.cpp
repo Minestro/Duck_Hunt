@@ -8,7 +8,7 @@ SDL_Surface *load_image( std::string filename )
     //The optimized image that will be used
     SDL_Surface* optimizedImage = NULL;
     //Load the image
-    loadedImage = SDL_LoadBMP( filename.c_str() );
+    loadedImage = IMG_Load( filename.c_str() );
     //If nothing went wrong in loading the image
     if( loadedImage != NULL )
     {
@@ -77,6 +77,12 @@ void chargerImages(Sprites &sprites, Boutons &bouton)
     sprites.background_blit.source=load_image("sprites/backGameBlit.png");
     sprites.background_menu.source=load_image("sprites/menu.png");
     sprites.viseur.source=loadImageWithColorKey("sprites/viseur.png",0,0,0);
+    sprites.background_menu.position.x=0;
+    sprites.background_menu.position.y=0;
+    sprites.background.position.x=0;
+    sprites.background.position.y=0;
+    sprites.background_blit.position.x=0;
+    sprites.background_blit.position.y=0;
 }
 
 /*void libererImages(Sprites i)

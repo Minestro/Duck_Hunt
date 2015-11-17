@@ -22,15 +22,16 @@ int main()
     int modeJeu = 0;    //Le mode de jeu.
     int modeMenu = 0;   //Détermine la page du menu à afficher.
 
-    // Uint8 *keystates = SDL_GetKeyState(NULL);
+    Uint8 *keystates = SDL_GetKeyState(NULL);
 
-    Boutons bouton;
+    Boutons boutons;
     Sprites sprites;
-    chargerImages(sprites, bouton);
-
     Police police;
+    chargerImages(sprites, boutons);
 
-    menu(sprites.background_menu, bouton, modeMenu, modeJeu, ecran, police);
+    menu(sprites, boutons, modeMenu, modeJeu, ecran, police, keystates);
+    while (modeJeu!=0)
+    {
     while(SDL_PollEvent(&evenements))
     {
         switch(evenements.type)
@@ -41,7 +42,8 @@ int main()
         default:
             break;
         }
-        menu(sprites.background_menu, bouton, modeMenu, modeJeu, ecran, police);
+    }
+        menu(sprites, boutons, modeMenu, modeJeu, ecran, police, keystates);
         genererRendu(ecran, sprites);
     }
     SDL_Quit();

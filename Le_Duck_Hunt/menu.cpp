@@ -10,13 +10,12 @@
 
 using namespace std;
 
-void menu(Sprite background, Boutons bouton, int &modeMenu, int &modeJeu, SDL_Surface *ecran, Police police)
+void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SDL_Surface *ecran, Police police, Uint8 *keystates)
 {
     bool sortir = false;
     bool bl = false;
     int sx, sy;
     SDL_Event event;
-    Uint8 *keystates = SDL_GetKeyState(NULL);
     while (sortir==false)
     {
         switch (event.type) {
@@ -41,15 +40,9 @@ void menu(Sprite background, Boutons bouton, int &modeMenu, int &modeJeu, SDL_Su
         default:
             break;
         }
-        showMenu(ecran, background, bouton, modeJeu, modeMenu);
+        showMenu(ecran, sprites, boutons, modeJeu, modeMenu, sx, sy);
+        SDL_Delay(20);
     }
-}
-
-
-void showMenu(SDL_Surface *ecran, Sprite background, Boutons bouton, int &modeJeu, int &modeMenu)
-{
-    SDL_BlitSurface(background.source, NULL, ecran, &background.position);
-
 }
 
 bool testHover(int sx, int sy, Sprite sprite)
