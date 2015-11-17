@@ -72,7 +72,7 @@ SDL_Surface *loadImageWithColorKey(std::string filename, int r, int g, int b)
 /*** fonction qui charge les images ***/
 void chargerImages(Sprites &sprites, Boutons &boutons)
 {
-    boutons.source=loadImageWithColorKey("sprites/boutons.bmp",0,0,0);
+    boutons.source=loadImageWithColorKey("sprites/bouton.bmp",0,0,0);
     sprites.background.source=load_image("sprites/backGame.png");
     sprites.background_blit.source=load_image("sprites/backGameBlit.png");
     sprites.background_menu.source=load_image("sprites/menu.png");

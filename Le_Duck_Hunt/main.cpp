@@ -1,9 +1,4 @@
-#include <iostream>
-#include <cstdlib>
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
 #include "main.h"
-#define BPP 32
 
 using namespace std;
 
@@ -27,6 +22,7 @@ int main()
     Sprites sprites;
     Police police;
     chargerImages(sprites, boutons);
+    initBouton(boutons.quit);
 
     menu(sprites, boutons, modeMenu, modeJeu, ecran, police, keystates);
     while (modeJeu!=0)

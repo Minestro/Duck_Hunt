@@ -1,11 +1,3 @@
-#include <iostream>
-#include <ctime>
-#include <cstdlib>
-#include <string>
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
-#include <SDL/SDL_ttf.h>
-#include <sstream>
 #include "main.h"
 
 using namespace std;
@@ -17,8 +9,8 @@ void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons boutons, int &modeJeu
     SDL_BlitSurface(sprites.background_menu.source, NULL, ecran, &sprites.background.position);
     sprites.viseur.position.x=sx-(sprites.viseur.source->w/2);
     sprites.viseur.position.y=sy-(sprites.viseur.source->h/2);
+    SDL_BlitSurface(boutons.source, &boutons.quit.lecture[testHoverBouton(sx, sy, boutons.quit)], ecran, &boutons.quit.position);
     SDL_BlitSurface(sprites.viseur.source, NULL, ecran, &sprites.viseur.position);
-    SDL_BlitSurface(boutons.source, boutons.play.lecture, ecran, &boutons.play.position);
     SDL_Flip(ecran);
 
 }

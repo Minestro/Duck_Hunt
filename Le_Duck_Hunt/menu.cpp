@@ -1,11 +1,3 @@
-#include <iostream>
-#include <ctime>
-#include <cstdlib>
-#include <string>
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
-#include <SDL/SDL_ttf.h>
-#include <sstream>
 #include "main.h"
 
 using namespace std;
@@ -20,45 +12,35 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SDL_Sur
     {
         while(SDL_PollEvent(&event))
         {
-        switch (event.type) {
-        case SDL_QUIT:
-            modeJeu=0;
-            sortir=true;
-            break;
-        case SDL_MOUSEMOTION:
-            sx = event.motion.x;
-            sy = event.motion.y;
-        case SDL_MOUSEBUTTONDOWN :
-            if(event.button.button==SDL_BUTTON_LEFT)
-            {
-                bl = true;
+            switch (event.type) {
+            case SDL_QUIT:
+                modeJeu=0;
+                sortir=true;
+                break;
+            case SDL_MOUSEMOTION:
+                sx = event.motion.x;
+                sy = event.motion.y;
+            case SDL_MOUSEBUTTONDOWN :
+                if(event.button.button==SDL_BUTTON_LEFT)
+                {
+                    bl = true;
+                }
+                break;
+            case SDL_MOUSEBUTTONUP :
+                if(event.button.button==SDL_BUTTON_LEFT)
+                {
+                    bl = false;
+                }
+            default:
+                break;
             }
-            break;
-        case SDL_MOUSEBUTTONUP :
-            if(event.button.button==SDL_BUTTON_LEFT)
-            {
-                bl = false;
-            }
-        default:
-            break;
         }
-        }
+        keystates = SDL_GetKeyState(NULL);
         showMenu(ecran, sprites, boutons, modeJeu, modeMenu, sx, sy);
     }
 }
 
-bool testHover(int sx, int sy, Bouton sprite)
+bool testHoverBouton(int sx, int sy, Bouton sprite)
 {
     return((sx < sprite.position.x+sprite.lecture[0].w)&&(sx > sprite.position.x)&&(sy > sprite.position.y)&&(sy < sprite.position.y+sprite.lecture[0].h));
-}
-
-void initBoutons(Boutons boutons)
-{
-    boutons.play.lecture[0].x=0;
-    boutons.play.lecture[0].y=0;
-    boutons.play.lecture[1].x=200;
-    boutons.play.lecture[1].y=0;
-    boutons.play.position.x=100;
-    boutons.play.position.y=100;
-
 }

@@ -10,9 +10,9 @@
 #include <SDL/SDL_ttf.h>
 #include <sstream>
 
-const int NB_BOUTON = 2;
 const int HAUTEUR = 761;
 const int LARGEUR = 750;
+const int BPP = 32;
 
 struct Sprite
 {
@@ -52,10 +52,10 @@ struct Boutons
 
 void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SDL_Surface *screen, Police, Uint8 *keystates);
 void showMenu(SDL_Surface *ecran, Sprites, Boutons, int &modeJeu, int &modeMenu, int, int);
-bool testHover(int, int, Bouton);
+bool testHoverBouton(int, int, Bouton);
 void genererRendu(SDL_Surface *ecran, Sprites sprites);
 void chargerImages(Sprites &sprites, Boutons &bouton);
-void initBoutons(Boutons);
+void initBouton(Bouton &bouton);
 SDL_Surface *loadImage(std::string);
 SDL_Surface *loadImageWithColorKey(std::string, int, int, int);
 
