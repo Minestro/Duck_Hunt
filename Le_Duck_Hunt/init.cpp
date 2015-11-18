@@ -14,3 +14,15 @@ void initBouton(Bouton &bouton, int ligne)
     bouton.lecture[1].h=60;
 
 }
+
+void initSourisEvent(SourisEvent &sourisEvent)
+{
+    sourisEvent.bl = sourisEvent.bm = sourisEvent.br = 0;
+}
+
+void initTime(Time &time)
+{
+    time.fpsTime = (1/(FPS_MAX*1.0)*1000);    //Calcule en ms le temps entre chaque actualisation d'image à partir de la constante FPS_LIMIT.
+    time.eventsTime = 999;
+    time.currentTime = time.timeRefresh = time.timeEvents = 0;
+}

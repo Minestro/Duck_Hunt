@@ -60,14 +60,25 @@ struct SourisEvent
     int sy;
 };
 
-void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SDL_Surface *screen, Police, Uint8 *keystates, SourisEvent &sourisEvent);
+struct Time
+{
+    Uint32 currentTime;
+    Uint32 timeRefresh;
+    int fpsTime;
+    Uint32 timeEvents;
+    int eventsTime;
+};
+
+void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SDL_Surface *screen, Police, Uint8 *keystates, SourisEvent &sourisEvent, Time &time);
 void showMenu(SDL_Surface *ecran, Sprites, Boutons, int &modeMenu, int, int);
 bool testHoverBouton(int, int, Bouton);
 void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent);
 void chargerImages(Sprites &sprites, Boutons &bouton);
 void initBouton(Bouton &bouton, int);
+void initSourisEvent(SourisEvent &SourisEvent);
+void initTime(Time &time);
 SDL_Surface *loadImage(std::string);
 SDL_Surface *loadImageWithColorKey(std::string, int, int, int);
-bool getEvents (SourisEvent &sourisEvent, Uint8 *keystates);
+bool getEvents (SourisEvent &sourisEvent, Uint8 *keystates, Time &time);
 
 #endif // HEADER_H

@@ -6,6 +6,7 @@ int main()
 {
     SDL_Surface *ecran;
     SourisEvent sourisEvent;
+    initSourisEvent(sourisEvent);
     Uint8 *keystates = SDL_GetKeyState(NULL);
 
     SDL_Init(SDL_INIT_VIDEO);
@@ -16,10 +17,8 @@ int main()
 
     ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE);
 
-
-    int fpsTime = (1/(FPS_MAX*1.0)*1000);    //Calcule en ms le temps entre chaque actualisation d'image à partir de la constante FPS_LIMIT.
-    Uint32 currentTime, cycleRefresh, cycleEvents;
-    currentTime = cycleRefresh = cycleEvents = 0;
+    Time time;
+    initTime(time);
 
     int modeJeu = 0;    //Le mode de jeu.
     int modeMenu = 1;   //Détermine la page du menu à afficher.
@@ -31,15 +30,15 @@ int main()
     initBouton(boutons.quit, 0);
     initBouton(boutons.play, 1);
 
-    menu(sprites, boutons, modeMenu, modeJeu, ecran, police, keystates, sourisEvent);
-    while ((modeJeu!=0)&&!(getEvents(sourisEvent, keystates)))
+    menu(sprites, boutons, modeMenu, modeJeu, ecran, police, keystates, sourisEvent, time);
+    while ((modeJeu!=0)&&!(getEvents(sourisEvent, keystates, time)))
     {
-        currentTime = SDL_GetTicks();
-        menu(sprites, boutons, modeMenu, modeJeu, ecran, police, keystates, sourisEvent);
-        if (currentTime>=cycleRefresh+fpsTime)
+        time.currentTime = SDL_GetTicks();
+        menu(sprites, boutons, modeMenu, modeJeu, ecran, police, keystates, sourisEvent, time);
+        if (time.currentTime>=time.timeRefresh+time.fpsTime)
         {
             genererRendu(ecran, sprites, sourisEvent);
-            cycleRefresh = currentTime;
+            time.timeRefresh = time.currentTime;
         }
     }
     SDL_Quit();

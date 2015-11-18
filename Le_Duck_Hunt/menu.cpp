@@ -2,12 +2,12 @@
 
 using namespace std;
 
-void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SDL_Surface *ecran, Police police, Uint8 *keystates, SourisEvent &sourisEvent)
+void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SDL_Surface *ecran, Police police, Uint8 *keystates, SourisEvent &sourisEvent, Time &time)
 {
     bool sortir = false;;
     while (sortir==false)
     {
-        if (getEvents(sourisEvent, keystates))
+        if (getEvents(sourisEvent, keystates, time))
         {
             sortir = true;
         }
