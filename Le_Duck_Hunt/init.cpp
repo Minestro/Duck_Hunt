@@ -23,8 +23,8 @@ void initSourisEvent(SourisEvent &sourisEvent)
 void initTime(Time &time)
 {
     time.fpsTime = (1/(FPS_MAX*1.0)*1000); // Calcule en ms le temps entre chaque actualisation d'image à partir de la constante FPS_LIMIT.
-    time.eventsTime = 999;
-    time.currentTime = time.timeRefresh = time.timeEvents = 0;
+    time.eventsTime = 10;
+    time.vitesseCanard = 16;
 }
 
 void initCanard(Canard &cn)
@@ -36,6 +36,7 @@ void initCanard(Canard &cn)
     cn.image.lecture.h = 70;
     cn.image.position.x = SDL_GetTicks() * SDL_GetTicks() % (LARGEUR - cn.image.lecture.w);
     cn.image.position.y = SDL_GetTicks() * SDL_GetTicks() % (HAUTEUR - cn.image.lecture.h - 360);
+    cn.cycleSprite = 0;
 
     cn.vecteurPositionX = SDL_GetTicks() % 10 - 5;
     if(cn.vecteurPositionX >= 0)
@@ -46,7 +47,4 @@ void initCanard(Canard &cn)
     {
         cn.vecteurPositionY = 5 + cn.vecteurPositionX;
     }
-
-    std::cout << cn.vecteurPositionX << std::endl;
-    std::cout << cn.vecteurPositionY << std::endl;
 }

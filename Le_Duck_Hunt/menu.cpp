@@ -28,6 +28,11 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SDL_Sur
                     modeJeu = 1;
                     modeMenu = 0;
                 }
+                SDL_Delay(10);
+                break;
+            case 5 :
+
+                SDL_Delay(10);
                 break;
             default:
                 break;

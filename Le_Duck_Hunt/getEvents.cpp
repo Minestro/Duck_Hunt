@@ -3,9 +3,9 @@
 bool getEvents(SourisEvent &sourisEvent, Time &time)
 {
     bool sdlQuit = false;
-    time.currentTime = SDL_GetTicks();
-    if (time.currentTime>=time.timeEvents+time.eventsTime)
-    {
+    //time.currentTime=SDL_GetTicks();
+    //if (time.currentTime%time.eventsTime==0)
+    //{
         SDL_Event event;
         while(SDL_PollEvent(&event))
         {
@@ -50,7 +50,6 @@ bool getEvents(SourisEvent &sourisEvent, Time &time)
                 break;
             }
         }
-        time.eventsTime = time.currentTime;
-    }
+    //}
     return sdlQuit;
 }

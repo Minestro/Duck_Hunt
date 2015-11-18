@@ -23,6 +23,14 @@ struct Sprite
     SDL_Rect lecture;
 };
 
+struct Canard
+{
+    Sprite image;
+    int cycleSprite;
+    int vecteurPositionY;
+    int vecteurPositionX;
+};
+
 struct Sprites
 {
     Sprite background;
@@ -34,6 +42,8 @@ struct Sprites
     Sprite chienMoqueur;
     Sprite chienContentSimple;
     Sprite chienContentDouble;
+
+    Canard canard;
 
     Sprite viseur;
 };
@@ -71,23 +81,13 @@ struct SourisEvent
 struct Time
 {
     Uint32 currentTime;
-    Uint32 timeRefresh;
-    int fpsTime;
-    Uint32 timeEvents;
-    int eventsTime;
-};
-
-struct Canard
-{
-    Sprite image;
-    int vecteurPositionY;
-    int vecteurPositionX;
+    int fpsTime, eventsTime, vitesseCanard;
 };
 
 void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SDL_Surface *screen, SourisEvent &sourisEvent, Time &time);
 void showMenu(SDL_Surface *ecran, Sprites, Boutons, int &modeMenu, int, int);
 bool testHoverBouton(int, int, Bouton);
-void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, Canard canard);
+void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent);
 void chargerImages(Sprites &sprites, Boutons &bouton);
 void initBouton(Bouton &bouton, int);
 void initSourisEvent(SourisEvent &SourisEvent);
