@@ -7,7 +7,7 @@ int main()
     SDL_Surface *ecran;
     SourisEvent sourisEvent;
     initSourisEvent(sourisEvent);
-    Uint8 *keystates = SDL_GetKeyState(NULL);
+    static Uint8 *keystates = SDL_GetKeyState(NULL);
 
     SDL_Init(SDL_INIT_VIDEO);
     IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
