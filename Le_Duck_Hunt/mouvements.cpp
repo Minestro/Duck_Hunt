@@ -1,24 +1,13 @@
 #include "main.h"
 
-void mouvementsCanard(CanardNoir &canard)
+void mouvementsCanard(Canard &canard)
 {
     canard.image.position.x += canard.vecteurPositionX;
     canard.image.position.y += canard.vecteurPositionY;
 }
 
-void changementDirection(CanardNoir &canard, SDL_Event *ev)
+void changementDirection(Canard &canard)
 {
-    if(ev->motion.x > canard.image.position.x and ev->motion.x < canard.image.position.x + canard.image.source->w
-            and ev->motion.y > canard.image.position.y and ev->motion.y < canard.image.position.y + canard.image.source->h)
-    {
-        if(ev->type == SDL_MOUSEBUTTONDOWN)
-        {
-            exit(EXIT_SUCCESS);
-
-        }
-    }
-
-
     if(SDL_GetTicks() % 222 == 0)
     {
         canard.vecteurPositionX = ((SDL_GetTicks() % 17) % 10) - 5;

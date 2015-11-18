@@ -41,7 +41,12 @@ SDL_Surface *loadImageWithColorKey(std::string filename, int r, int g, int b)
     SDL_Surface* optimizedImage = NULL;
 
     //Load the image
-    loadedImage = IMG_Load( filename.c_str() );
+    loadedImage = IMG_Load(filename.c_str());
+    if(loadedImage == NULL)
+    {
+        std::cout << "problem !" << std::endl;
+        exit(0);
+    }
 
     //If the image loaded
     if( loadedImage != NULL )
@@ -70,19 +75,34 @@ SDL_Surface *loadImageWithColorKey(std::string filename, int r, int g, int b)
 
 
 /*** fonction qui charge les images ***/
-void chargerImages(Sprites &sprites, Boutons &boutons)
+
+void chargerImages(Sprites &sprites, Boutons &bouton)
 {
-    boutons.source=loadImageWithColorKey("sprites/bouton.bmp",0,0,0);
+    sprites.background_menu.source=load_image("sprites/menu.png");
+    bouton.source = loadImageWithColorKey("sprites/bouton.bmp",0,0,0);
+
     sprites.background.source=load_image("sprites/backGame.png");
-    sprites.background_blit.source=loadImageWithColorKey("sprites/backGameBlit.png",0,0,0);
+    sprites.background.position.x = 0;
+    sprites.background.position.y = 0;
+
+    sprites.background_blit.source=loadImageWithColorKey("sprites/backGameBlit.png", 0, 0, 0);
+    sprites.background_blit.position.x = 0;
+    sprites.background_blit.position.y = 0;
+
+    sprites.chienContentSimple.source = loadImageWithColorKey("sprites/chienContentSimple.png", 228, 255, 0);
+    sprites.chienContentSimple.lecture.x = 0;
+    sprites.chienContentSimple.lecture.y = 0;
+    sprites.chienContentSimple.lecture.w = 90;
+    sprites.chienContentSimple.lecture.h = 80;
+    sprites.chienContentSimple.position.x = 333;
+    sprites.chienContentSimple.position.y = 425;
+
+    sprites.chienSaute.source = loadImageWithColorKey("sprites/chienSaute.png", 228, 255, 0);
+    sprites.chienMoqueur.source = loadImageWithColorKey("sprites/chienMoqueur.png", 228, 255, 0);
+
+
     sprites.background_menu.source=load_image("sprites/menu.png");
     sprites.viseur.source=loadImageWithColorKey("sprites/viseur.png",0,0,0);
-    sprites.background_menu.position.x=0;
-    sprites.background_menu.position.y=0;
-    sprites.background.position.x=0;
-    sprites.background.position.y=0;
-    sprites.background_blit.position.x=0;
-    sprites.background_blit.position.y=0;
 }
 
 /*void libererImages(Sprites i)

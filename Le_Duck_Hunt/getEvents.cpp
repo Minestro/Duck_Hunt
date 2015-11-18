@@ -1,6 +1,6 @@
 #include "main.h"
 
-bool getEvents(SourisEvent &sourisEvent, Uint8 *keystates, Time &time)
+bool getEvents(SourisEvent &sourisEvent, Time &time)
 {
     bool sdlQuit = false;
     time.currentTime = SDL_GetTicks();
@@ -50,7 +50,6 @@ bool getEvents(SourisEvent &sourisEvent, Uint8 *keystates, Time &time)
                 break;
             }
         }
-        keystates = SDL_GetKeyState(NULL);
         time.eventsTime = time.currentTime;
     }
     return sdlQuit;

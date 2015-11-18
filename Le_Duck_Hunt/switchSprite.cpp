@@ -1,6 +1,6 @@
 #include "main.h"
 
-void switchSprite(CanardNoir &cn)
+void switchSprite(Canard &cn)
 {
     if(cn.vecteurPositionY < 0)
     {

@@ -2,20 +2,17 @@
 
 using namespace std;
 
-void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SDL_Surface *ecran, Police police, Uint8 *keystates, SourisEvent &sourisEvent, Time &time)
+void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SDL_Surface *ecran, SourisEvent &sourisEvent, Time &time)
 {
-    bool sortir = false;;
-    while (sortir==false)
+    bool sortir = false;
+    while (sortir == false)
     {
-        if (getEvents(sourisEvent, keystates, time))
-        {
-            sortir = true;
-        }
+        sortir = getEvents(sourisEvent, time);
         switch (modeMenu)
         {
             case 0:
                 sortir = true;
-            break;
+                break;
             case 1 :
                 boutons.play.position.x=(LARGEUR/2)-(boutons.play.lecture[0].w/2);
                 boutons.play.position.y=200;
@@ -31,9 +28,10 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SDL_Sur
                     modeJeu = 1;
                     modeMenu = 0;
                 }
-            break;
+                break;
+            default:
+                break;
         }
-        SDL_Delay(10);
     }
 }
 

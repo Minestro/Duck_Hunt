@@ -15,6 +15,7 @@ const int LARGEUR = 750;
 const int BPP = 32;
 const int FPS_MAX = 60;
 
+
 struct Sprite
 {
     SDL_Surface *source;
@@ -27,6 +28,13 @@ struct Sprites
     Sprite background;
     Sprite background_blit;
     Sprite background_menu;
+
+    Sprite chienMarche;
+    Sprite chienSaute;
+    Sprite chienMoqueur;
+    Sprite chienContentSimple;
+    Sprite chienContentDouble;
+
     Sprite viseur;
 };
 
@@ -69,16 +77,27 @@ struct Time
     int eventsTime;
 };
 
-void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SDL_Surface *screen, Police, Uint8 *keystates, SourisEvent &sourisEvent, Time &time);
+struct Canard
+{
+    Sprite image;
+    int vecteurPositionY;
+    int vecteurPositionX;
+};
+
+void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SDL_Surface *screen, SourisEvent &sourisEvent, Time &time);
 void showMenu(SDL_Surface *ecran, Sprites, Boutons, int &modeMenu, int, int);
 bool testHoverBouton(int, int, Bouton);
-void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent);
+void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, Canard canard);
 void chargerImages(Sprites &sprites, Boutons &bouton);
 void initBouton(Bouton &bouton, int);
 void initSourisEvent(SourisEvent &SourisEvent);
 void initTime(Time &time);
+void initCanard(Canard &cn);
 SDL_Surface *loadImage(std::string);
 SDL_Surface *loadImageWithColorKey(std::string, int, int, int);
-bool getEvents (SourisEvent &sourisEvent, Uint8 *keystates, Time &time);
+bool getEvents (SourisEvent &sourisEvent, Time &time);
+void changementDirection(Canard &canard);
+void mouvementsCanard(Canard &canard);
+void switchSprite(Canard &cn);
 
 #endif // HEADER_H
