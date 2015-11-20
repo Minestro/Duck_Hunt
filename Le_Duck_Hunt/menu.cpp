@@ -31,7 +31,7 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SDL_Sur
                 SDL_Delay(10);
                 break;
             case 5 :
-
+                std::cout << "jeu en pause" << std::endl;
                 SDL_Delay(10);
                 break;
             default:

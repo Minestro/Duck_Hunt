@@ -27,8 +27,8 @@ void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent)
     sprites.viseur.position.x=sourisEvent.sx-(sprites.viseur.source->w/2);
     sprites.viseur.position.y=sourisEvent.sy-(sprites.viseur.source->h/2);
     SDL_BlitSurface(sprites.background.source, NULL, ecran, &sprites.background.position);
-    SDL_BlitSurface(sprites.canard.image.source, &sprites.canard.image.lecture, ecran, &sprites.canard.image.position);
     SDL_BlitSurface(sprites.background_blit.source, NULL, ecran, &sprites.background.position);
+    SDL_BlitSurface(sprites.canard.image.source, &sprites.canard.image.lecture, ecran, &sprites.canard.image.position);
     SDL_BlitSurface(sprites.viseur.source, NULL, ecran, &sprites.viseur.position);
     SDL_Flip(ecran);
 }

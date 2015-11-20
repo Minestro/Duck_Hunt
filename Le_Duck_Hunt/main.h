@@ -26,9 +26,22 @@ struct Sprite
 struct Canard
 {
     Sprite image;
+    int vitesseAnimation;
+    Uint32 vitesseAnimationTime;
+    int vitesse;
+    Uint32 vitesseTime;
+    int type;
+    int typeAnimation; //Vol, tombe ou bat des ailes
+    int nbFrames;
+    int pxParFrame;
     int cycleSprite;
     int vecteurPositionY;
     int vecteurPositionX;
+};
+
+struct Chien
+{
+    // a remplir sur le modèle de canard
 };
 
 struct Sprites
@@ -37,12 +50,7 @@ struct Sprites
     Sprite background_blit;
     Sprite background_menu;
 
-    Sprite chienMarche;
-    Sprite chienSaute;
-    Sprite chienMoqueur;
-    Sprite chienContentSimple;
-    Sprite chienContentDouble;
-
+    Chien chien;
     Canard canard;
 
     Sprite viseur;
@@ -81,7 +89,7 @@ struct SourisEvent
 struct Time
 {
     Uint32 currentTime;
-    int fpsTime, eventsTime, vitesseCanard;
+    int fpsTime, eventsTime;
 };
 
 void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SDL_Surface *screen, SourisEvent &sourisEvent, Time &time);
@@ -98,6 +106,6 @@ SDL_Surface *loadImageWithColorKey(std::string, int, int, int);
 bool getEvents (SourisEvent &sourisEvent, Time &time);
 void changementDirection(Canard &canard);
 void mouvementsCanard(Canard &canard);
-void switchSprite(Canard &cn);
+void switchSprite(Sprite &sprite, int, int, int &cycleSprite);
 
 #endif // HEADER_H

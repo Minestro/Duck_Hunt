@@ -44,7 +44,7 @@ SDL_Surface *loadImageWithColorKey(std::string filename, int r, int g, int b)
     loadedImage = IMG_Load(filename.c_str());
     if(loadedImage == NULL)
     {
-        std::cout << "problem !" << std::endl;
+        std::cout << "Problème lors du chargement de l'image " << filename << " !" << std::endl;
         exit(0);
     }
 
@@ -88,18 +88,6 @@ void chargerImages(Sprites &sprites, Boutons &bouton)
     sprites.background_blit.source=loadImageWithColorKey("sprites/backGameBlit.png", 0, 0, 0);
     sprites.background_blit.position.x = 0;
     sprites.background_blit.position.y = 0;
-
-    sprites.chienContentSimple.source = loadImageWithColorKey("sprites/chienContentSimple.png", 228, 255, 0);
-    sprites.chienContentSimple.lecture.x = 0;
-    sprites.chienContentSimple.lecture.y = 0;
-    sprites.chienContentSimple.lecture.w = 90;
-    sprites.chienContentSimple.lecture.h = 80;
-    sprites.chienContentSimple.position.x = 333;
-    sprites.chienContentSimple.position.y = 425;
-
-    sprites.chienSaute.source = loadImageWithColorKey("sprites/chienSaute.png", 228, 255, 0);
-    sprites.chienMoqueur.source = loadImageWithColorKey("sprites/chienMoqueur.png", 228, 255, 0);
-
 
     sprites.background_menu.source=load_image("sprites/menu.png");
     sprites.viseur.source=loadImageWithColorKey("sprites/viseur.png",0,0,0);
