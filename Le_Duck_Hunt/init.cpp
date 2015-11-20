@@ -46,6 +46,7 @@ void initCanard(Canard &cn)
     cn.nbFrames = 3;
     cn.pxParFrame = 70;
     cn.cycleSprite = 0;
+    cn.vitesseAnimation = 16;
     cn.vitesseTime = cn.vitesseAnimationTime = 0;
 
     cn.image.lecture.x = 0;

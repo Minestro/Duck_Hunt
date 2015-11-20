@@ -42,8 +42,8 @@ int main()
         }
         if (time.currentTime >= sprites.canard.vitesseAnimationTime + sprites.canard.vitesse)
         {
-            std::cout << sprites.canard.vitesseAnimationTime << std::endl;
             mouvementsCanard(sprites.canard);
+            std::cout << sprites.canard.image.position.x << std::endl;
             sprites.canard.vitesseTime = time.currentTime;
         }
         if ((time.currentTime >= sprites.canard.vitesseAnimationTime + sprites.canard.vitesseAnimation) && (sprites.canard.vecteurPositionY < 0))
