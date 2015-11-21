@@ -7,9 +7,16 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SDL_Sur
     bool sortir = false;
     while (sortir == false)
     {
-        sortir = getEvents(sourisEvent, time);
-        switch (modeMenu)
+        if (getEvents(sourisEvent))
         {
+            sortir = true;
+            modeJeu = 0;
+        }
+        time.currentTime = SDL_GetTicks();
+        if ((time.currentTime >= time.timeMenu + time.menuTime) || (modeMenu == 0))
+        {
+            switch (modeMenu)
+            {
             case 0:
                 sortir = true;
                 break;
@@ -23,19 +30,20 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SDL_Sur
                 {
                     modeMenu = 0;
 
-                } else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.play))&&sourisEvent.bl)
+                }
+                else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.play))&&sourisEvent.bl)
                 {
                     modeJeu = 1;
                     modeMenu = 0;
                 }
-                SDL_Delay(10);
                 break;
             case 5 :
                 std::cout << "jeu en pause" << std::endl;
-                SDL_Delay(10);
                 break;
             default:
                 break;
+            }
+            time.timeMenu = time.currentTime;
         }
     }
 }

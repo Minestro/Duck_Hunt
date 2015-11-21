@@ -89,7 +89,9 @@ struct SourisEvent
 struct Time
 {
     Uint32 currentTime;
-    int fpsTime, eventsTime;
+    Uint32 timeMenu;
+    Uint32 timeFps;
+    int fpsTime, menuTime;
 };
 
 void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SDL_Surface *screen, SourisEvent &sourisEvent, Time &time);
@@ -103,7 +105,7 @@ void initTime(Time &time);
 void initCanard(Canard &cn);
 SDL_Surface *loadImage(std::string);
 SDL_Surface *loadImageWithColorKey(std::string, int, int, int);
-bool getEvents (SourisEvent &sourisEvent, Time &time);
+bool getEvents (SourisEvent &sourisEvent);
 void changementDirection(Canard &canard);
 void mouvementsCanard(Canard &canard);
 void switchSprite(Sprite &sprite, int, int, int &cycleSprite);

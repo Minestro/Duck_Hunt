@@ -23,7 +23,9 @@ void initSourisEvent(SourisEvent &sourisEvent)
 void initTime(Time &time)
 {
     time.fpsTime = (1/(FPS_MAX*1.0)*1000); // Calcule en ms le temps entre chaque actualisation d'image à partir de la constante FPS_LIMIT.
-    time.eventsTime = 10;
+    time.menuTime = 10;
+    time.timeMenu = 0;
+    time.timeFps = 0;
 }
 
 void initCanard(Canard &cn)
@@ -46,7 +48,7 @@ void initCanard(Canard &cn)
     cn.nbFrames = 3;
     cn.pxParFrame = 70;
     cn.cycleSprite = 0;
-    cn.vitesseAnimation = 16;
+    cn.vitesseAnimation = 50;
     cn.vitesseTime = cn.vitesseAnimationTime = 0;
 
     cn.image.lecture.x = 0;

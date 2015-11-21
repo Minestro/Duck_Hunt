@@ -31,7 +31,7 @@ int main()
     initBouton(boutons.play, 1);
 
     menu(sprites, boutons, modeMenu, modeJeu, ecran, sourisEvent, time);
-    while ((modeJeu!=0)&&!(getEvents(sourisEvent, time)))
+    while (modeJeu!=0)
     {
         Uint8 *keystate = SDL_GetKeyState(NULL);
         time.currentTime = SDL_GetTicks();
@@ -40,22 +40,24 @@ int main()
         {
             modeMenu = 5;
         }
-        if (time.currentTime >= sprites.canard.vitesseAnimationTime + sprites.canard.vitesse)
+        if (time.currentTime >= sprites.canard.vitesseTime + sprites.canard.vitesse)
         {
             mouvementsCanard(sprites.canard);
             std::cout << sprites.canard.image.position.x << std::endl;
             sprites.canard.vitesseTime = time.currentTime;
         }
-        if ((time.currentTime >= sprites.canard.vitesseAnimationTime + sprites.canard.vitesseAnimation) && (sprites.canard.vecteurPositionY < 0))
+        if ((time.currentTime >= sprites.canard.vitesseAnimationTime + sprites.canard.vitesseAnimation)&&(sprites.canard.vecteurPositionY<0))
         {
             switchSprite(sprites.canard.image, sprites.canard.nbFrames, sprites.canard.pxParFrame, sprites.canard.cycleSprite);
             sprites.canard.vitesseAnimationTime = time.currentTime;
         }
-        if (time.currentTime%time.fpsTime==0)
+        if (time.currentTime>=time.timeFps+time.fpsTime)
         {
             genererRendu(ecran, sprites, sourisEvent);
             changementDirection(sprites.canard);
+            time.timeFps = time.currentTime;
         }
+        SDL_Delay(1);
     }
     SDL_Quit();
     //vider les images
