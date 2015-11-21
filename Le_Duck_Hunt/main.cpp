@@ -11,7 +11,7 @@ int main()
     SDL_Init(SDL_INIT_VIDEO);
     IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
 
-    SDL_WM_SetCaption("DuckHunt", NULL);
+    SDL_WM_SetCaption("Duck Hunt", NULL);
     SDL_WM_SetIcon(SDL_LoadBMP("sprites/icon.bmp"), NULL);
 
     ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE);
@@ -43,7 +43,6 @@ int main()
         if (time.currentTime >= sprites.canard.vitesseTime + sprites.canard.vitesse)
         {
             mouvementsCanard(sprites.canard);
-            std::cout << sprites.canard.image.position.x << std::endl;
             sprites.canard.vitesseTime = time.currentTime;
         }
         if ((time.currentTime >= sprites.canard.vitesseAnimationTime + sprites.canard.vitesseAnimation)&&(sprites.canard.vecteurPositionY<0))
