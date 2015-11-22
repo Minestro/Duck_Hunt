@@ -14,6 +14,7 @@ const int HAUTEUR = 761;
 const int LARGEUR = 750;
 const int BPP = 32;
 const int FPS_MAX = 60;
+const int LIMITE_BASSE = 270;
 
 
 struct Sprite
@@ -109,5 +110,7 @@ bool getEvents (SourisEvent &sourisEvent);
 void changementDirection(Canard &canard);
 void mouvementsCanard(Canard &canard);
 void switchSprite(Sprite &sprite, int, int, int &cycleSprite);
+int alea(int, int);
+void detectionBords(Canard &canard);
 
 #endif // HEADER_H

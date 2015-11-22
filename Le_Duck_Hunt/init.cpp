@@ -34,7 +34,7 @@ void initCanard(Canard &cn)
     {
     case 0:
         cn.image.source = loadImageWithColorKey("sprites/canardNoir.png", 228, 255, 0);
-        cn.vitesse = 16;
+        cn.vitesse = 10;
         break;
     case 1:
         cn.image.source = loadImageWithColorKey("sprites/canardMarron.png", 228, 255, 0);
@@ -55,8 +55,8 @@ void initCanard(Canard &cn)
     cn.image.lecture.y = 0;
     cn.image.lecture.w = 70;
     cn.image.lecture.h = 70;
-    cn.image.position.x = SDL_GetTicks() * SDL_GetTicks() % (LARGEUR - cn.image.lecture.w);
-    cn.image.position.y = SDL_GetTicks() * SDL_GetTicks() % (HAUTEUR - cn.image.lecture.h - 360);
+    cn.image.position.x = alea(1,LARGEUR-cn.image.lecture.w);
+    cn.image.position.y = alea(1,HAUTEUR-LIMITE_BASSE-cn.image.lecture.h);
 
     cn.vecteurPositionX = SDL_GetTicks() % 10 - 5;
     if(cn.vecteurPositionX >= 0)

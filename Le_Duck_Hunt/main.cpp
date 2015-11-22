@@ -45,7 +45,7 @@ int main()
             mouvementsCanard(sprites.canard);
             sprites.canard.vitesseTime = time.currentTime;
         }
-        if ((time.currentTime >= sprites.canard.vitesseAnimationTime + sprites.canard.vitesseAnimation)&&(sprites.canard.vecteurPositionY<0))
+        if (time.currentTime >= sprites.canard.vitesseAnimationTime + sprites.canard.vitesseAnimation)
         {
             switchSprite(sprites.canard.image, sprites.canard.nbFrames, sprites.canard.pxParFrame, sprites.canard.cycleSprite);
             sprites.canard.vitesseAnimationTime = time.currentTime;
