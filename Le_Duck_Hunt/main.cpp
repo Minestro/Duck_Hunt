@@ -25,8 +25,15 @@ int main()
     Boutons boutons;
     Sprites sprites;
     chargerImages(sprites, boutons);
-    sprites.canard.type = 0;
-    initCanard(sprites.canard);
+    sprites.canardActifs = 1000;
+    //sprites.canard[0].type = 0;
+    //sprites.canard[1].type = 0;
+    for (int i=0; i<sprites.canardActifs; i++)
+    {
+        sprites.canard[i].type = 0;
+        initCanard(sprites.canard[i]);
+
+    }
     initBouton(boutons.quit, 0);
     initBouton(boutons.play, 1);
 
@@ -40,20 +47,23 @@ int main()
         {
             modeMenu = 5;
         }
-        if (time.currentTime >= sprites.canard.vitesseTime + sprites.canard.vitesse)
+        for (int i=0; i<sprites.canardActifs; i++)
         {
-            mouvementsCanard(sprites.canard);
-            sprites.canard.vitesseTime = time.currentTime;
-        }
-        if (time.currentTime >= sprites.canard.vitesseAnimationTime + sprites.canard.vitesseAnimation)
-        {
-            switchSprite(sprites.canard.image, sprites.canard.nbFrames, sprites.canard.pxParFrame, sprites.canard.cycleSprite);
-            sprites.canard.vitesseAnimationTime = time.currentTime;
+            if (time.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse)
+            {
+                mouvementsCanard(sprites.canard[i]);
+                changementDirection(sprites.canard[i]);
+                sprites.canard[i].vitesseTime = time.currentTime;
+            }
+            if (time.currentTime >= sprites.canard[i].vitesseAnimationTime + sprites.canard[i].vitesseAnimation)
+            {
+                switchSprite(sprites.canard[i].image, sprites.canard[i].nbFrames, sprites.canard[i].pxParFrame, sprites.canard[i].cycleSprite);
+                sprites.canard[i].vitesseAnimationTime = time.currentTime;
+            }
         }
         if (time.currentTime>=time.timeFps+time.fpsTime)
         {
             genererRendu(ecran, sprites, sourisEvent);
-            changementDirection(sprites.canard);
             time.timeFps = time.currentTime;
         }
         SDL_Delay(1);

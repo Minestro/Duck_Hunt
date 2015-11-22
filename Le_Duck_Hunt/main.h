@@ -15,6 +15,7 @@ const int LARGEUR = 750;
 const int BPP = 32;
 const int FPS_MAX = 60;
 const int LIMITE_BASSE = 270;
+const int NB_MAX_CANARDS = 1000;
 
 
 struct Sprite
@@ -52,7 +53,8 @@ struct Sprites
     Sprite background_menu;
 
     Chien chien;
-    Canard canard;
+    int canardActifs;
+    Canard canard[NB_MAX_CANARDS];
 
     Sprite viseur;
 };
