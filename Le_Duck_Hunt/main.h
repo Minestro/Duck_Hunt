@@ -15,7 +15,7 @@ const int LARGEUR = 750;
 const int BPP = 32;
 const int FPS_MAX = 60;
 const int LIMITE_BASSE = 270;
-const int NB_MAX_CANARDS = 1000;
+const int NB_MAX_CANARDS = 10000;
 
 
 struct Sprite
