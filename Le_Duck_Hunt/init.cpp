@@ -45,6 +45,7 @@ void initCanard(Canard &cn)
         cn.vitesse = 8;
         break;
     }
+    cn.vivant = true;
     cn.nbFrames = 3;
     cn.pxParFrame = 70;
     cn.cycleSprite = 0;
@@ -57,14 +58,4 @@ void initCanard(Canard &cn)
     cn.image.lecture.h = 70;
     cn.image.position.x = alea(1,LARGEUR-cn.image.lecture.w);
     cn.image.position.y = alea(1,HAUTEUR-LIMITE_BASSE-cn.image.lecture.h);
-
-    cn.vecteurPositionX = SDL_GetTicks() % 10 - 5;
-    if(cn.vecteurPositionX >= 0)
-    {
-        cn.vecteurPositionY = 5 - cn.vecteurPositionX;
-    }
-    else
-    {
-        cn.vecteurPositionY = 5 + cn.vecteurPositionX;
-    }
 }

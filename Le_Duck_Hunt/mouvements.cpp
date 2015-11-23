@@ -16,7 +16,10 @@ void mouvementsCanard(Canard &canard)
     } else {
         canard.image.lecture.y=0;
     }
-    if
+    if (canard.vecteurPositionX < 0)
+    {
+        canard.image.lecture.y+=210;
+    }
 }
 
 void detectionBords(Canard &canard)
