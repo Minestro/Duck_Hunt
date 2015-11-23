@@ -34,7 +34,7 @@ void initCanard(Canard &cn)
     {
     case 0:
         cn.image.source = loadImageWithColorKey("sprites/canardNoir.png", 228, 255, 0);
-        cn.vitesse = 10;
+        cn.vitesse = 16;
         break;
     case 1:
         cn.image.source = loadImageWithColorKey("sprites/canardMarron.png", 228, 255, 0);
