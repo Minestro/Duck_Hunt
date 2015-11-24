@@ -21,7 +21,7 @@ void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons boutons, int &modeMen
 
 }
 
-void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent)
+void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, int shots)
 {
     SDL_ShowCursor(0);
     sprites.viseur.position.x=sourisEvent.sx-(sprites.viseur.source->w/2);    
