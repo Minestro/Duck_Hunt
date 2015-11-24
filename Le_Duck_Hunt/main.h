@@ -15,7 +15,7 @@ const int LARGEUR = 750;
 const int BPP = 32;
 const int FPS_MAX = 60;
 const int LIMITE_BASSE = 270;
-const int NB_MAX_CANARDS = 10000;
+const int NB_MAX_CANARDS = 100;
 
 
 struct Sprite
@@ -33,17 +33,24 @@ struct Canard
     int vitesse;
     Uint32 vitesseTime;
     int type;
-    int typeAnimation; //Vol, tombe ou bat des ailes
     int nbFrames;
     int pxParFrame;
     int cycleSprite;
     int vecteurPositionY;
     int vecteurPositionX;
+    bool vivant;
 };
 
 struct Chien
 {
-    // a remplir sur le modèle de canard
+    Sprite image;
+    int vitesseAnimation;
+    Uint32 vitesseAnimationTime;
+    int vitesse;
+    Uint32 vitesseTime;
+    int nbFrames;
+    int pxParFrame;
+    int cycleSprite;
 };
 
 struct Sprites
@@ -114,5 +121,7 @@ void mouvementsCanard(Canard &canard);
 void switchSprite(Sprite &sprite, int, int, int &cycleSprite);
 int alea(int, int);
 void detectionBords(Canard &canard);
+bool shot(SourisEvent sourisEvent,Canard &canard);
+bool testShot(SourisEvent sourisEvent, Sprite sprite);
 
 #endif // HEADER_H

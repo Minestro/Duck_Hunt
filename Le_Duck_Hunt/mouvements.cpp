@@ -12,9 +12,13 @@ void mouvementsCanard(Canard &canard)
     canard.image.position.y += canard.vecteurPositionY;
     if (canard.vecteurPositionY>2)
     {
-        canard.image.lecture.y=139;
+        canard.image.lecture.y=140;
     } else {
         canard.image.lecture.y=0;
+    }
+    if (canard.vecteurPositionX < 0)
+    {
+        canard.image.lecture.y+=210;
     }
 }
 

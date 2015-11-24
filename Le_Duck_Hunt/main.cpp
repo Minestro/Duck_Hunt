@@ -25,9 +25,10 @@ int main()
     Boutons boutons;
     Sprites sprites;
     chargerImages(sprites, boutons);
-    sprites.canardActifs = 3;
+    sprites.canardActifs = 2;
     //sprites.canard[0].type = 0;
     //sprites.canard[1].type = 0;
+
     for (int i=0; i<sprites.canardActifs; i++)
     {
         sprites.canard[i].type = 0;
@@ -49,11 +50,12 @@ int main()
         }
         for (int i=0; i<sprites.canardActifs; i++)
         {
-            if (time.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse)
+            if ((time.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse)&&(sprites.canard[i].vivant))
             {
                 mouvementsCanard(sprites.canard[i]);
                 changementDirection(sprites.canard[i]);
                 sprites.canard[i].vitesseTime = time.currentTime;
+                shot(sourisEvent, sprites.canard[i]);
             }
             if (time.currentTime >= sprites.canard[i].vitesseAnimationTime + sprites.canard[i].vitesseAnimation)
             {

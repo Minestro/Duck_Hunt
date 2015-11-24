@@ -30,7 +30,10 @@ void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent)
     SDL_BlitSurface(sprites.background_blit.source, NULL, ecran, &sprites.background.position);
     for (int i=0; i<sprites.canardActifs; i++)
     {
-        SDL_BlitSurface(sprites.canard[i].image.source, &sprites.canard[i].image.lecture, ecran, &sprites.canard[i].image.position);
+        if (sprites.canard[i].vivant)
+        {
+            SDL_BlitSurface(sprites.canard[i].image.source, &sprites.canard[i].image.lecture, ecran, &sprites.canard[i].image.position);
+        }
     }
     SDL_BlitSurface(sprites.viseur.source, NULL, ecran, &sprites.viseur.position);
     SDL_Flip(ecran);
