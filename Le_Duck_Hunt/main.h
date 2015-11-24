@@ -38,7 +38,7 @@ struct Canard
     int cycleSprite;
     int vecteurPositionY;
     int vecteurPositionX;
-    bool vivant;
+    int etat; // 0 : mort, 1 : en chute, 2 : vivant
 };
 
 struct Chien
@@ -121,7 +121,7 @@ void mouvementsCanard(Canard &canard);
 void switchSprite(Sprite &sprite, int, int, int &cycleSprite);
 int alea(int, int);
 void detectionBords(Canard &canard);
-bool shot(SourisEvent sourisEvent,Canard &canard);
+void shot(SourisEvent sourisEvent,Canard &canard);
 bool testShot(SourisEvent sourisEvent, Sprite sprite);
 void chute(Canard &canard);
 
