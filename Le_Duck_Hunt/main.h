@@ -94,6 +94,9 @@ struct SourisEvent
     bool bm;
     int sx;
     int sy;
+    int clicGauche;
+    int clicDroit;
+    int clicMolette;
 };
 
 struct Time

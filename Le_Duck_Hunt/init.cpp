@@ -58,6 +58,4 @@ void initCanard(Canard &cn)
     cn.image.lecture.h = 70;
     cn.image.position.x = alea(1,LARGEUR-cn.image.lecture.w);
     cn.image.position.y = alea(1,HAUTEUR-LIMITE_BASSE-cn.image.lecture.h);
-    std::cout << "cn.image.position.x = " << cn.image.position.x << std::endl;
-    std::cout << "cn.image.position.y = " << cn.image.position.y << std::endl;
 }
