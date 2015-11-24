@@ -1,4 +1,4 @@
-#include "main.h"
+﻿#include "main.h"
 
 using namespace std;
 
@@ -24,13 +24,22 @@ void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons boutons, int &modeMen
 void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent)
 {
     SDL_ShowCursor(0);
-    sprites.viseur.position.x=sourisEvent.sx-(sprites.viseur.source->w/2);
+    sprites.viseur.position.x=sourisEvent.sx-(sprites.viseur.source->w/2);    
     sprites.viseur.position.y=sourisEvent.sy-(sprites.viseur.source->h/2);
     SDL_BlitSurface(sprites.background.source, NULL, ecran, &sprites.background.position);
+    for (int i=0; i<sprites.canardActifs; i++)
+    {
+
+        if (sprites.canard[i].etat == 1)
+        {
+            SDL_BlitSurface(sprites.canard[i].image.source, &sprites.canard[i].image.lecture, ecran, &sprites.canard[i].image.position);
+        }
+    }
     SDL_BlitSurface(sprites.background_blit.source, NULL, ecran, &sprites.background.position);
     for (int i=0; i<sprites.canardActifs; i++)
     {
-        if (sprites.canard[i].vivant)
+
+        if (sprites.canard[i].etat == 2)
         {
             SDL_BlitSurface(sprites.canard[i].image.source, &sprites.canard[i].image.lecture, ecran, &sprites.canard[i].image.position);
         }

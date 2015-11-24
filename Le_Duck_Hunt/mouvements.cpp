@@ -3,7 +3,7 @@
 int alea(int mini, int maxi)
 {
     maxi++;
-    return rand()%(maxi-mini) +mini;
+    return rand()%(maxi-mini) + mini;
 }
 
 void mouvementsCanard(Canard &canard)
@@ -18,7 +18,7 @@ void mouvementsCanard(Canard &canard)
     }
     if (canard.vecteurPositionX < 0)
     {
-        canard.image.lecture.y+=210;
+        canard.image.lecture.y += 210;
     }
 }
 
@@ -47,35 +47,40 @@ void detectionBords(Canard &canard)
 }
 void changementDirection(Canard &canard)
 {
-    if(alea(0,75)==33)
+    if(canard.etat == 2)
     {
-        canard.vecteurPositionX = alea(-5,5);
-        if(canard.vecteurPositionX >= 0)
+        if(alea(0,75)==33)
         {
-            canard.vecteurPositionY = 5 - canard.vecteurPositionX;
+            canard.vecteurPositionX = alea(-5,5);
+            if(canard.vecteurPositionX >= 0)
+            {
+                canard.vecteurPositionY = 5 - canard.vecteurPositionX;
+            }
+            else
+            {
+                canard.vecteurPositionY = 5 + canard.vecteurPositionX;
+            }
         }
-        else
-        {
-            canard.vecteurPositionY = 5 + canard.vecteurPositionX;
-        }
-    }
 
-    if(canard.vecteurPositionX == 0 or canard.vecteurPositionY == 0)
-    {
-        canard.vecteurPositionX = alea(0,5);
-        if(canard.vecteurPositionX >= 0)
+        if(canard.vecteurPositionX == 0 or canard.vecteurPositionY == 0)
         {
-            canard.vecteurPositionY = 5 - canard.vecteurPositionX;
+            canard.vecteurPositionX = alea(0,5);
+            if(canard.vecteurPositionX >= 0)
+            {
+                canard.vecteurPositionY = 5 - canard.vecteurPositionX;
+            }
+            else
+            {
+                canard.vecteurPositionY = 5 + canard.vecteurPositionX;
+            }
         }
-        else
-        {
-            canard.vecteurPositionY = 5 + canard.vecteurPositionX;
-        }
+        detectionBords(canard);
+
     }
-    detectionBords(canard);
 }
 
 void chute(Canard &canard)
 {
-
+    canard.vecteurPositionX = 0;
+    canard.vecteurPositionY = 5;
 }

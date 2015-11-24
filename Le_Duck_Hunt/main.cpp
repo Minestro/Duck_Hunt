@@ -16,8 +16,9 @@ int main()
 
     ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE);
 
-    Time time;
-    initTime(time);
+    Time temps;
+    initTime(temps);
+    srand(time(NULL));
 
     int modeJeu = 0;    //Le mode de jeu.
     int modeMenu = 1;   //Détermine la page du menu à afficher.
@@ -39,34 +40,34 @@ int main()
     initBouton(boutons.play, 1);
     Uint8 *keystate = SDL_GetKeyState(NULL);
 
-    menu(sprites, boutons, modeMenu, modeJeu, ecran, sourisEvent, time);
+    menu(sprites, boutons, modeMenu, modeJeu, ecran, sourisEvent, temps);
     while (modeJeu!=0)
     {
-        time.currentTime = SDL_GetTicks();
-        menu(sprites, boutons, modeMenu, modeJeu, ecran, sourisEvent, time);
+        temps.currentTime = SDL_GetTicks();
+        menu(sprites, boutons, modeMenu, modeJeu, ecran, sourisEvent, temps);
         if (keystate[SDLK_ESCAPE])
         {
             modeMenu = 5;
         }
         for (int i=0; i<sprites.canardActifs; i++)
         {
-            if ((time.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse)&&(sprites.canard[i].vivant))
+            if ((temps.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse)&&(sprites.canard[i].etat > 0))
             {
                 mouvementsCanard(sprites.canard[i]);
                 changementDirection(sprites.canard[i]);
-                sprites.canard[i].vitesseTime = time.currentTime;
+                sprites.canard[i].vitesseTime = temps.currentTime;
                 shot(sourisEvent, sprites.canard[i]);
             }
-            if (time.currentTime >= sprites.canard[i].vitesseAnimationTime + sprites.canard[i].vitesseAnimation)
+            if (temps.currentTime >= sprites.canard[i].vitesseAnimationTime + sprites.canard[i].vitesseAnimation)
             {
                 switchSprite(sprites.canard[i].image, sprites.canard[i].nbFrames, sprites.canard[i].pxParFrame, sprites.canard[i].cycleSprite);
-                sprites.canard[i].vitesseAnimationTime = time.currentTime;
+                sprites.canard[i].vitesseAnimationTime = temps.currentTime;
             }
         }
-        if (time.currentTime>=time.timeFps+time.fpsTime)
+        if (temps.currentTime>=temps.timeFps+temps.fpsTime)
         {
             genererRendu(ecran, sprites, sourisEvent);
-            time.timeFps = time.currentTime;
+            temps.timeFps = temps.currentTime;
         }
         SDL_Delay(1);
     }
