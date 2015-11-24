@@ -37,11 +37,11 @@ int main()
     }
     initBouton(boutons.quit, 0);
     initBouton(boutons.play, 1);
+    Uint8 *keystate = SDL_GetKeyState(NULL);
 
     menu(sprites, boutons, modeMenu, modeJeu, ecran, sourisEvent, time);
     while (modeJeu!=0)
     {
-        Uint8 *keystate = SDL_GetKeyState(NULL);
         time.currentTime = SDL_GetTicks();
         menu(sprites, boutons, modeMenu, modeJeu, ecran, sourisEvent, time);
         if (keystate[SDLK_ESCAPE])

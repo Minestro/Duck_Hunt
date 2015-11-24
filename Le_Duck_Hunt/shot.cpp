@@ -12,6 +12,12 @@ bool shot(SourisEvent sourisEvent,Canard &canard)
             if (testShot(sourisEvent, canard.image))
             {
                 canard.vivant = false;
+
+                return true;
             }
+        }
+        else
+        {
+            return false;
         }
 }
