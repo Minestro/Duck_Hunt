@@ -57,7 +57,7 @@ int main()
                 mouvementsCanard(sprites.canard[i]);
                 changementDirection(sprites.canard[i]);
                 sprites.canard[i].vitesseTime = temps.currentTime;
-                shot(sourisEvent, sprites.canard[i]);
+                shot(sourisEvent, sprites.canard[i], shots);
             }
             if (temps.currentTime >= sprites.canard[i].vitesseAnimationTime + sprites.canard[i].vitesseAnimation)
             {
@@ -67,7 +67,7 @@ int main()
         }
         if (temps.currentTime>=temps.timeFps+temps.fpsTime)
         {
-            genererRendu(ecran, sprites, sourisEvent);
+            genererRendu(ecran, sprites, sourisEvent, shots);
             temps.timeFps = temps.currentTime;
         }
         SDL_Delay(1);

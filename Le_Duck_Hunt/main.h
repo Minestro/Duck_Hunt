@@ -125,7 +125,7 @@ void mouvementsCanard(Canard &canard);
 void switchSprite(Sprite &sprite, int, int, int &cycleSprite);
 int alea(int, int);
 void detectionBords(Canard &canard);
-void shot(SourisEvent sourisEvent,Canard &canard);
+void shot(SourisEvent sourisEvent, Canard &canard, int shots);
 bool testShot(SourisEvent sourisEvent, Sprite sprite);
 void chute(Canard &canard);
 

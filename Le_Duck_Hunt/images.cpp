@@ -93,7 +93,7 @@ void chargerImages(Sprites &sprites, Boutons &bouton)
     sprites.viseur.source=loadImageWithColorKey("sprites/viseur.png",0,0,0);
     sprites.shots.source=load_image("shot.png");
     sprites.shots.position.x=66;
-    sprites.shots.position.x=658;
+    sprites.shots.position.y=658;
     sprites.shots.lecture.w=75;
     sprites.shots.lecture.h=50;
     sprites.shots.lecture.y=0;
