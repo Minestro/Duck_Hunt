@@ -27,7 +27,6 @@ void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, 
     sprites.viseur.position.x=sourisEvent.sx-(sprites.viseur.source->w/2);    
     sprites.viseur.position.y=sourisEvent.sy-(sprites.viseur.source->h/2);
     sprites.shots.lecture.x=0+shots*75;
-    std::cout << sprites.shots.lecture.x << std::endl;
     SDL_BlitSurface(sprites.background.source, NULL, ecran, &sprites.background.position);
     for (int i=0; i<sprites.canardActifs; i++)
     {
