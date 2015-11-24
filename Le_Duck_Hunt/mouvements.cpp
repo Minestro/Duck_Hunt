@@ -74,3 +74,8 @@ void changementDirection(Canard &canard)
     }
     detectionBords(canard);
 }
+
+void chute(Canard &canard)
+{
+
+}

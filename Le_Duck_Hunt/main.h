@@ -123,5 +123,6 @@ int alea(int, int);
 void detectionBords(Canard &canard);
 bool shot(SourisEvent sourisEvent,Canard &canard);
 bool testShot(SourisEvent sourisEvent, Sprite sprite);
+void chute(Canard &canard);
 
 #endif // HEADER_H
