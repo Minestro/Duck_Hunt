@@ -10,12 +10,16 @@ void shot(SourisEvent sourisEvent,Canard &canard, int &shots)
         switch(canard.etat)
         {
             case 2:
-            if (testShot(sourisEvent, canard.image))
+            if (sourisEvent.clicGauche)
             {
-                chute(canard);
-                canard.etat = 1;
+                std::cout << shots << std::endl;
                 shots--;
-            }            
+                if (testShot(sourisEvent, canard.image))
+                {
+                    chute(canard);
+                    canard.etat = 1;
+                }
+            }
             break;
         }
 }
