@@ -3,10 +3,13 @@
 bool getEvents(SourisEvent &sourisEvent)
 {
     bool sdlQuit = false;
+    int bl2, br2, bm2;
+    bl2 = sourisEvent.bl;
+    br2 = sourisEvent.br;
+    bm2 = sourisEvent.bm;
     SDL_Event event;
     while(SDL_PollEvent(&event))
     {
-        sourisEvent.clicGauche = sourisEvent.clicDroit = sourisEvent.clicMolette = false;
         switch (event.type)
         {
         case SDL_QUIT:
@@ -19,23 +22,12 @@ bool getEvents(SourisEvent &sourisEvent)
             switch(event.button.button)
             {
             case SDL_BUTTON_LEFT :
-                if (SDL_BUTTON_LEFT != sourisEvent.bl)
-                {
-                    sourisEvent.clicGauche = true;
-                }
                 sourisEvent.bl = true;
                 break;
             case SDL_BUTTON_RIGHT :
-                if (SDL_BUTTON_RIGHT != sourisEvent.br)
-                {
-                    sourisEvent.clicDroit = true;
-                }
                 sourisEvent.br = true;
+                break;
             case SDL_BUTTON_MIDDLE :
-                if (SDL_BUTTON_RIGHT != sourisEvent.bm)
-                {
-                    sourisEvent.clicMolette = true;
-                }
                 sourisEvent.bm = true;
                 break;
             default:
@@ -46,23 +38,12 @@ bool getEvents(SourisEvent &sourisEvent)
             switch(event.button.button)
             {
             case SDL_BUTTON_LEFT :
-                if (SDL_BUTTON_LEFT != sourisEvent.bl)
-                {
-                    sourisEvent.clicGauche = true;
-                }
                 sourisEvent.bl = false;
                 break;
             case SDL_BUTTON_RIGHT :
-                if (SDL_BUTTON_RIGHT != sourisEvent.br)
-                {
-                    sourisEvent.clicDroit = true;
-                }
                 sourisEvent.br = false;
+                break;
             case SDL_BUTTON_MIDDLE :
-                if (SDL_BUTTON_RIGHT != sourisEvent.bm)
-                {
-                    sourisEvent.clicMolette = true;
-                }
                 sourisEvent.bm = false;
                 break;
             default:
@@ -73,5 +54,18 @@ bool getEvents(SourisEvent &sourisEvent)
             break;
         }
     }
+    if((sourisEvent.bl!=bl2)&&(sourisEvent.bl))
+    {
+        sourisEvent.clicGauche = true;
+    }
+    if((sourisEvent.br!=br2)&&(sourisEvent.br))
+    {
+        sourisEvent.clicDroit = true;
+    }
+    if((sourisEvent.bm!=bm2)&&(sourisEvent.bm))
+    {
+        sourisEvent.clicMolette = true;
+    }
     return sdlQuit;
 }
+

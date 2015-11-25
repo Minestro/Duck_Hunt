@@ -18,6 +18,7 @@ void initBouton(Bouton &bouton, int ligne)
 void initSourisEvent(SourisEvent &sourisEvent)
 {
     sourisEvent.bl = sourisEvent.bm = sourisEvent.br = 0;
+    sourisEvent.clicGauche = sourisEvent.clicDroit = sourisEvent.clicMolette = false;
 }
 
 void initTime(Time &time)
@@ -58,4 +59,17 @@ void initCanard(Canard &cn)
     cn.image.lecture.h = 70;
     cn.image.position.x = alea(1,LARGEUR-cn.image.lecture.w);
     cn.image.position.y = alea(1,HAUTEUR-LIMITE_BASSE-cn.image.lecture.h);
+    do
+    {
+        cn.vecteurPositionX = alea(-5,5);
+        if(cn.vecteurPositionX >= 0)
+        {
+            cn.vecteurPositionY = 5 - cn.vecteurPositionX;
+        }
+        else
+        {
+            cn.vecteurPositionY = 5 + cn.vecteurPositionX;
+        }
+    }
+    while(cn.vecteurPositionX == 0 || cn.vecteurPositionY == 0);
 }

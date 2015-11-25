@@ -125,8 +125,7 @@ void mouvementsCanard(Canard &canard);
 void switchSprite(Sprite &sprite, int, int, int &cycleSprite);
 int alea(int, int);
 void detectionBords(Canard &canard);
-void shot(SourisEvent sourisEvent, Canard &canard, int &shots);
+void shot(SourisEvent &sourisEvent, Canard &canard, int &shots, int i, int canardsActifs);
 bool testShot(SourisEvent sourisEvent, Sprite sprite);
-void chute(Canard &canard);
 
 #endif // HEADER_H
