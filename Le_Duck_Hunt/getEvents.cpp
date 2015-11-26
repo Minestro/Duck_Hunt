@@ -7,7 +7,7 @@ bool getEvents(SourisEvent &sourisEvent)
     br2 = sourisEvent.br;
     bm2 = sourisEvent.bm;
     SDL_Event event;
-    if(SDL_PollEvent(&event))
+    while (SDL_PollEvent(&event))
     {
         switch (event.type)
         {

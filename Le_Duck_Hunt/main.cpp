@@ -55,7 +55,7 @@ int main()
                 shot(sourisEvent, sprites.canard[i], shots, i, sprites.canardActifs);
                 mouvementsCanard(sprites.canard[i]);
                 changementDirection(sprites.canard[i]);
-                controleCanard(sprites.canard[i]);
+                //controleCanard(sprites.canard[i]);
 
                 sprites.canard[i].vitesseTime = temps.currentTime;
             }
