@@ -52,6 +52,8 @@ int main()
                 shot(sourisEvent, sprites.canard[i], shots, i, sprites.canardActifs);
                 mouvementsCanard(sprites.canard[i]);
                 changementDirection(sprites.canard[i]);
+                controleCanard(sprites.canard[i]);
+
                 sprites.canard[i].vitesseTime = temps.currentTime;
             }
             if (temps.currentTime >= sprites.canard[i].vitesseAnimationTime + sprites.canard[i].vitesseAnimation)
@@ -73,7 +75,7 @@ int main()
         }
         SDL_Delay(1);
 
-    } while (modeJeu!=0);
+    } while (modeJeu != 0);
     SDL_Quit();
     //vider les images
     return EXIT_SUCCESS;
