@@ -2,7 +2,9 @@
 
 int alea(int mini, int maxi)
 {
-    return rand()%(++maxi - mini) + mini;
+   return rand() % (++maxi - mini)  + mini;
+
+   // return rand() / (RAND_MAX / (maxi - mini + 1)); NE PAS EFFACER, J'AI PENSE A UN NOUVEAU MODE DE JEU !
 }
 
 void mouvementsCanard(Canard &canard)
@@ -54,7 +56,7 @@ void changementDirection(Canard &canard)
         canard.vecteurPositionY = 5;
         break;
     case 2:
-        if(alea(0,75)==33)
+        if(alea(0,75) == 33)
         {
             do
             {
