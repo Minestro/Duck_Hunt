@@ -58,7 +58,7 @@ int main()
             }
             if (temps.currentTime >= sprites.canard[i].vitesseAnimationTime + sprites.canard[i].vitesseAnimation)
             {
-                switchSprite(sprites.canard[i].image, sprites.canard[i].nbFrames, sprites.canard[i].pxParFrame, sprites.canard[i].cycleSprite);
+                switchSpriteCanard(sprites.canard[i]);
                 sprites.canard[i].vitesseAnimationTime = temps.currentTime;
             }
         }
