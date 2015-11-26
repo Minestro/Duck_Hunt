@@ -12,14 +12,14 @@ void shot(SourisEvent &sourisEvent,Canard &canard, int &shots, int i, int canard
     case 2:
         if (sourisEvent.clicGauche)
         {
-            if (i >= canardsActifs-1)
+            if ((i >= canardsActifs-1)||(testShot(sourisEvent, canard.image)))
             {
                 shots--;
                 sourisEvent.clicGauche = sourisEvent.clicDroit = sourisEvent.clicMolette = false;
-            }
-            if (testShot(sourisEvent, canard.image))
-            {
-                canard.etat = 1;
+                if (testShot(sourisEvent, canard.image))
+                {
+                    canard.etat = 1;
+                }
             }
         }
         break;

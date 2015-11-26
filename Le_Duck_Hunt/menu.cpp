@@ -34,6 +34,7 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SDL_Sur
                 {
                     modeJeu = 1;
                     modeMenu = 0;
+                    sourisEvent.clicGauche = sourisEvent.clicDroit = sourisEvent.clicMolette = false;
                 }
                 break;
             case 5 :
