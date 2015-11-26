@@ -22,7 +22,7 @@ int main()
 
     int modeJeu = 0;    // Le mode de jeu.
     int modeMenu = 1;   // Détermine la page du menu à afficher.
-    int shots = 3;
+    int shots =3;
 
     Boutons boutons;
     Sprites sprites;
@@ -45,9 +45,8 @@ int main()
 
     do
     {
-        temps.currentTime = SDL_GetTicks();
         menu(sprites, boutons, modeMenu, modeJeu, ecran, sourisEvent, temps);
-
+        temps.currentTime = SDL_GetTicks();
         for (int i=0; i<sprites.canardActifs; i++)
         {
             if ((temps.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse)&&(sprites.canard[i].etat > 0))
@@ -55,8 +54,6 @@ int main()
                 shot(sourisEvent, sprites.canard[i], shots, i, sprites.canardActifs);
                 mouvementsCanard(sprites.canard[i]);
                 changementDirection(sprites.canard[i]);
-                //controleCanard(sprites.canard[i]);
-
                 sprites.canard[i].vitesseTime = temps.currentTime;
             }
             if (temps.currentTime >= sprites.canard[i].vitesseAnimationTime + sprites.canard[i].vitesseAnimation)
