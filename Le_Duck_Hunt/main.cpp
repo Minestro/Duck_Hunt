@@ -1,7 +1,5 @@
 #include "main.h"
 
-using namespace std;
-
 int main()
 {
     SDL_Surface *ecran;
@@ -41,17 +39,12 @@ int main()
     initBouton(boutons.play, 1);
     Uint8 *keystate = SDL_GetKeyState(NULL);
 
-    menu(sprites, boutons, modeMenu, modeJeu, ecran, sourisEvent, temps);
     sourisEvent.clicGauche = sourisEvent.clicDroit = sourisEvent.clicMolette = false;
     shots = 3;
-    while (modeJeu!=0)
+    do
     {
         temps.currentTime = SDL_GetTicks();
         menu(sprites, boutons, modeMenu, modeJeu, ecran, sourisEvent, temps);
-        if (keystate[SDLK_ESCAPE])
-        {
-            modeMenu = 5;
-        }
         for (int i=0; i<sprites.canardActifs; i++)
         {
             if ((temps.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse)&&(sprites.canard[i].etat > 0))
@@ -67,13 +60,20 @@ int main()
                 sprites.canard[i].vitesseAnimationTime = temps.currentTime;
             }
         }
+
         if (temps.currentTime>=temps.timeFps+temps.fpsTime)
         {
             genererRendu(ecran, sprites, sourisEvent, shots);
             temps.timeFps = temps.currentTime;
         }
+
+        if (keystate[SDLK_ESCAPE])
+        {
+            modeMenu = 5;
+        }
         SDL_Delay(1);
-    }
+
+    } while (modeJeu!=0);
     SDL_Quit();
     //vider les images
     return EXIT_SUCCESS;

@@ -1,7 +1,5 @@
 #include "main.h"
 
-using namespace std;
-
 void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SDL_Surface *ecran, SourisEvent &sourisEvent, Time &time)
 {
     bool sortir = false;

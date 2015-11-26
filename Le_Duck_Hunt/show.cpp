@@ -1,8 +1,5 @@
 ﻿#include "main.h"
 
-using namespace std;
-
-
 void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons boutons, int &modeMenu, int sx, int sy)
 {
     SDL_ShowCursor(0);

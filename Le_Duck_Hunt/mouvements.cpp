@@ -2,8 +2,7 @@
 
 int alea(int mini, int maxi)
 {
-    maxi++;
-    return rand()%(maxi-mini) + mini;
+    return rand()%(++maxi - mini) + mini;
 }
 
 void mouvementsCanard(Canard &canard)
@@ -12,6 +11,10 @@ void mouvementsCanard(Canard &canard)
     canard.image.position.y += canard.vecteurPositionY;
     switch (canard.etat)
     {
+    case 1:
+        canard.image.lecture.y = 70;
+        canard.nbFrames = 2;
+        break;
     case 2:
         if (canard.vecteurPositionY>2)
         {
@@ -25,9 +28,6 @@ void mouvementsCanard(Canard &canard)
         {
             canard.image.lecture.y += 210;
         }
-        break;
-    case 1:
-        canard.image.lecture.y=70;
         break;
     }
 }
