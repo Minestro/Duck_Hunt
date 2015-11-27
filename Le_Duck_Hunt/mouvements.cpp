@@ -2,8 +2,9 @@
 
 int alea(int mini, int maxi)
 {
-    maxi++;
-    return rand()%(maxi-mini) + mini;
+    return rand() % (++maxi - mini)  + mini;
+
+    // return rand() / (RAND_MAX / (maxi - mini + 1)); NE PAS EFFACER, J'AI PENSE A UN NOUVEAU MODE DE JEU !
 }
 
 void mouvementsCanard(Canard &canard)
@@ -23,11 +24,11 @@ void mouvementsCanard(Canard &canard)
         }
         if (canard.vecteurPositionX < 0)
         {
-            canard.image.lecture.y += 210;
+            canard.image.lecture.y+=210;
         }
         break;
     case 1:
-        canard.image.lecture.y=70;
+        canard.image.lecture.y = 70;
         break;
     }
 }
@@ -36,6 +37,12 @@ void detectionBords(Canard &canard)
 {
     switch(canard.etat)
     {
+    case 1:
+        if (canard.image.position.y > HAUTEUR)
+        {
+            canard.etat = 0;
+        }
+        break;
     case 2:
         if(canard.image.position.x <= 0)
         {
@@ -58,20 +65,18 @@ void detectionBords(Canard &canard)
             canard.vecteurPositionY *= -1;
         }
         break;
-    case 1:
-        if (canard.image.position.y > HAUTEUR)
-        {
-            canard.etat = 0;
-        }
-        break;
     }
 }
 void changementDirection(Canard &canard)
 {
     switch(canard.etat)
     {
+    case 1:
+        canard.vecteurPositionX = 0;
+        canard.vecteurPositionY = 5;
+        break;
     case 2:
-        if(alea(0,75)==33)
+        if(alea(0,75) == 33)
         {
             do
             {
@@ -84,12 +89,9 @@ void changementDirection(Canard &canard)
                 {
                     canard.vecteurPositionY = 5 + canard.vecteurPositionX;
                 }
-            } while(canard.vecteurPositionX == 0 || canard.vecteurPositionY == 0);
+            }
+            while(canard.vecteurPositionX == 0 || canard.vecteurPositionY == 0);
         }
-        break;
-    case 1:
-        canard.vecteurPositionX = 0;
-        canard.vecteurPositionY = 5;
         break;
     }
     detectionBords(canard);

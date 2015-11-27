@@ -2,19 +2,15 @@
 
 bool getEvents(SourisEvent &sourisEvent)
 {
-    bool sdlQuit = false;
     int bl2, br2, bm2;
     bl2 = sourisEvent.bl;
     br2 = sourisEvent.br;
     bm2 = sourisEvent.bm;
     SDL_Event event;
-    while(SDL_PollEvent(&event))
+    while (SDL_PollEvent(&event))
     {
         switch (event.type)
         {
-        case SDL_QUIT:
-            sdlQuit = true;
-            break;
         case SDL_MOUSEMOTION:
             sourisEvent.sx = event.motion.x;
             sourisEvent.sy = event.motion.y;
@@ -54,6 +50,7 @@ bool getEvents(SourisEvent &sourisEvent)
             break;
         }
     }
+
     if((sourisEvent.bl!=bl2)&&(sourisEvent.bl))
     {
         sourisEvent.clicGauche = true;
@@ -66,6 +63,7 @@ bool getEvents(SourisEvent &sourisEvent)
     {
         sourisEvent.clicMolette = true;
     }
-    return sdlQuit;
+
+    return event.type == SDL_QUIT;
 }
 

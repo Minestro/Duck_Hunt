@@ -122,7 +122,7 @@ SDL_Surface *loadImageWithColorKey(std::string, int, int, int);
 bool getEvents (SourisEvent &sourisEvent);
 void changementDirection(Canard &canard);
 void mouvementsCanard(Canard &canard);
-void switchSprite(Sprite &sprite, int, int, int &cycleSprite);
+void switchSpriteCanard(Canard &canard);
 int alea(int, int);
 void detectionBords(Canard &canard);
 void shot(SourisEvent &sourisEvent, Canard &canard, int &shots, int i, int canardsActifs);
