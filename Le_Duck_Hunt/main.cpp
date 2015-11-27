@@ -28,13 +28,9 @@ int main()
     Sprites sprites;
 
     chargerImages(sprites, boutons);
-<<<<<<< HEAD
-    sprites.canardActifs = 10;
+    sprites.canardActifs = 7;
     //sprites.canard[0].type = 0;
     //sprites.canard[1].type = 0;
-=======
-    sprites.canardActifs = 7;
->>>>>>> cccf6517aca72c0811f77a6c5cbd6bc76c628635
 
     for (int i=0; i<sprites.canardActifs; i++)
     {
