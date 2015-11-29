@@ -17,7 +17,7 @@ void initBouton(Bouton &bouton, int ligne)
 
 void initSourisEvent(SourisEvent &sourisEvent)
 {
-    sourisEvent.bl = sourisEvent.bm = sourisEvent.br = 0;
+    sourisEvent.bl = sourisEvent.bm = sourisEvent.br = false;
     sourisEvent.clicGauche = sourisEvent.clicDroit = sourisEvent.clicMolette = false;
 }
 
@@ -31,22 +31,22 @@ void initTime(Time &time)
 
 void initCanard(Canard &cn)
 {
-    switch (cn.type) //type 0 : noir, type 1: marron, type 2: violet
+    cn.etat = ALIVE; // On fait naître le canard.
+    switch (cn.type)
     {
-    case 0:
+    case DARK:
         cn.image.source = loadImageWithColorKey("sprites/canardNoir.png", 228, 255, 0);
         cn.vitesse = VITESSE_N;
         break;
-    case 1:
+    case CHESNUT:
         cn.image.source = loadImageWithColorKey("sprites/canardMarron.png", 228, 255, 0);
         cn.vitesse = VITESSE_M;
         break;
-    case 2:
+    case BLUISH_PURPLE:
         cn.image.source = loadImageWithColorKey("sprites/canardViolet.png", 228, 255, 0);
         cn.vitesse = VITESSE_V;
         break;
     }
-    cn.etat = 2;
     cn.nbFrames = 3;
     cn.pxParFrame = 70;
     cn.cycleSprite = 0;

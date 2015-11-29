@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 
     int modeJeu = 0;    // Le mode de jeu.
     int modeMenu = 1;   // Détermine la page du menu à afficher.
-    int shots =3;
+    int shots = 3;
 
     Boutons boutons;
     Sprites sprites;
@@ -32,9 +32,9 @@ int main(int argc, char* argv[])
     //sprites.canard[0].type = 0;
     //sprites.canard[1].type = 0;
 
-    for (int i=0; i<sprites.canardActifs; i++)
+    for (int i = 0; i<sprites.canardActifs; i++)
     {
-        sprites.canard[i].type = 0;
+        sprites.canard[i].type = DARK;
         initCanard(sprites.canard[i]);
     }
     initBouton(boutons.quit, 0);
@@ -53,7 +53,11 @@ int main(int argc, char* argv[])
         {
             if ((temps.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse)&&(sprites.canard[i].etat > 0))
             {
-                shot(sourisEvent, sprites.canard[i], shots, i, sprites.canardActifs);
+                shoot(sourisEvent, sprites.canard[i], shots, i, sprites.canardActifs);
+                if(sprites.canard[i].etat == TOUCHED)
+                {
+                    touched(sprites.canard[i]);
+                }
                 mouvementsCanard(sprites.canard[i]);
                 changementDirection(sprites.canard[i]);
                 sprites.canard[i].vitesseTime = temps.currentTime;

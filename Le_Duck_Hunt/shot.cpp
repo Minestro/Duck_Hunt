@@ -5,23 +5,24 @@ bool testShot(SourisEvent sourisEvent, Sprite sprite)
     return((sourisEvent.sx < sprite.position.x+sprite.lecture.w)&&(sourisEvent.sx > sprite.position.x)&&(sourisEvent.sy > sprite.position.y)&&(sourisEvent.sy < sprite.position.y+sprite.lecture.h));
 }
 
-void shot(SourisEvent &sourisEvent,Canard &canard, int &shots, int i, int canardsActifs)
+void shoot(SourisEvent &sourisEvent,Canard &canard, int &shots, int i, int canardsActifs)
 {
-    switch(canard.etat)
+    if(canard.etat == ALIVE && sourisEvent.clicGauche && ((i >= canardsActifs-1)||(testShot(sourisEvent, canard.image))))
     {
-    case 2:
-        if (sourisEvent.clicGauche)
+        shots--;
+        sourisEvent.clicGauche = sourisEvent.clicDroit = sourisEvent.clicMolette = false;
+        if (testShot(sourisEvent, canard.image))
         {
-            if ((i >= canardsActifs-1)||(testShot(sourisEvent, canard.image)))
-            {
-                shots--;
-                sourisEvent.clicGauche = sourisEvent.clicDroit = sourisEvent.clicMolette = false;
-                if (testShot(sourisEvent, canard.image))
-                {
-                    canard.etat = 1;
-                }
-            }
+            canard.etat = TOUCHED;
+            canard.tempsDepuisTir = SDL_GetTicks();
         }
-        break;
+    }
+}
+
+void touched(Canard &canard)
+{
+    if(SDL_GetTicks() - canard.tempsDepuisTir > 1000) // Si le temps écoulé depuis le tir est plus de une seconde, le canard passe de ALIVE à FREE_FALLING
+    {
+        canard.etat = FREE_FALLING;
     }
 }

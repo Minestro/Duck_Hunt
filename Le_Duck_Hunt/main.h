@@ -18,6 +18,17 @@
 #endif
 #include <sstream>
 
+// Type du canard
+#define DARK 1 // Sombre, le plus lent : 500 points.
+#define CHESNUT 2 // Noisette, niveau intermédiaire : 1000 points.
+#define BLUISH_PURPLE 3 // Violet bleuâtre, un avion de chasse : 1500 points.
+
+// Etats possibles
+#define ALIVE 3 // En vie : le canard vole.
+#define TOUCHED 2 // Touché : il s'arrête de voler pour dire aurevoir à la vie.
+#define FREE_FALLING 1 // En chute libre : il tombe verticalement.
+#define DEAD 0 // Mort.
+
 const int HAUTEUR = 761;
 const int LARGEUR = 750;
 const int BPP = 32;
@@ -44,13 +55,14 @@ struct Canard
     Uint32 vitesseAnimationTime;
     int vitesse;
     Uint32 vitesseTime;
-    int type; // 0 : noir, 1 : marron, 2 : bleu
+    int type; // 0 : noir, 1 : marron, 2 : violet
     int nbFrames;
     int pxParFrame;
     int cycleSprite;
     int vecteurPositionY;
     int vecteurPositionX;
-    int etat; // 0 : mort, 1 : en chute, 2 : vivant
+    int etat; // 0 : mort, 1 : en chute, 2 : touché, 3 : vivant
+    Uint32 tempsDepuisTir; // On veut savoir combien de ms se sont écoulés depuis le tir pour passer de TOUCHED à FREE_FALLING
 };
 
 struct Chien
@@ -137,7 +149,8 @@ void mouvementsCanard(Canard &canard);
 void switchSpriteCanard(Canard &canard);
 int alea(int, int);
 void detectionBords(Canard &canard);
-void shot(SourisEvent &sourisEvent, Canard &canard, int &shots, int i, int canardsActifs);
+void shoot(SourisEvent &sourisEvent, Canard &canard, int &shots, int i, int canardsActifs);
 bool testShot(SourisEvent sourisEvent, Sprite sprite);
+void touched(Canard &canard);
 
 #endif // HEADER_H

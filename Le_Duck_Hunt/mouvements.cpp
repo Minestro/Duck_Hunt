@@ -13,7 +13,7 @@ void mouvementsCanard(Canard &canard)
     canard.image.position.y += canard.vecteurPositionY;
     switch (canard.etat)
     {
-    case 2:
+    case ALIVE:
         if (canard.vecteurPositionY>2)
         {
             canard.image.lecture.y=140;
@@ -27,7 +27,7 @@ void mouvementsCanard(Canard &canard)
             canard.image.lecture.y+=210;
         }
         break;
-    case 1:
+    case FREE_FALLING:
         canard.image.lecture.y = 70;
         break;
     }
@@ -37,13 +37,13 @@ void detectionBords(Canard &canard)
 {
     switch(canard.etat)
     {
-    case 1:
+    case FREE_FALLING:
         if (canard.image.position.y > HAUTEUR)
         {
             canard.etat = 0;
         }
         break;
-    case 2:
+    case ALIVE:
         if(canard.image.position.x <= 0)
         {
             canard.image.position.x = 0;
@@ -72,11 +72,7 @@ void changementDirection(Canard &canard)
 {
     switch(canard.etat)
     {
-        case 1:
-            canard.vecteurPositionX = 0;
-            canard.vecteurPositionY = 2;
-            break;
-        case 2:
+        case ALIVE:
             if(alea(0,75) == 33)
             {
                 do
@@ -93,6 +89,13 @@ void changementDirection(Canard &canard)
                 }
                 while(canard.vecteurPositionX == 0 || canard.vecteurPositionY == 0);
             }
+            break;
+        case TOUCHED:
+            canard.vecteurPositionX = canard.vecteurPositionY = 0;
+            break;
+        case FREE_FALLING:
+            canard.vecteurPositionX = 0;
+            canard.vecteurPositionY = 2;
             break;
     }
     detectionBords(canard);
