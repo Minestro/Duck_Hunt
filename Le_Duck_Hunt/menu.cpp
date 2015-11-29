@@ -1,6 +1,6 @@
 #include "main.h"
 
-void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SDL_Surface *ecran, SourisEvent &sourisEvent, Time &time)
+void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time)
 {
     bool sortir = false;
     while (sortir == false)
@@ -23,7 +23,7 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SDL_Sur
                 boutons.play.position.y = 200;
                 boutons.quit.position.x = (LARGEUR/2)-(boutons.quit.lecture[0].w/2);
                 boutons.quit.position.y = 400;
-                showMenu(ecran, sprites, boutons, modeMenu, sourisEvent.sx, sourisEvent.sy);
+                showMenu(sprites, boutons, modeMenu, sourisEvent.sx, sourisEvent.sy);
 
                 if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.quit))&&sourisEvent.bl)
                 {

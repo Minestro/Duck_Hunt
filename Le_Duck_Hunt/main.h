@@ -133,10 +133,10 @@ struct Time
     int fpsTime, menuTime;
 };
 
-void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SDL_Surface *screen, SourisEvent &sourisEvent, Time &time);
-void showMenu(SDL_Surface *ecran, Sprites, Boutons, int &modeMenu, int, int);
+void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time);
+void showMenu(Sprites, Boutons, int &modeMenu, int, int);
 bool testHoverBouton(int, int, Bouton);
-void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, int shots);
+void genererRendu(Sprites sprites, SourisEvent sourisEvent, int shots);
 void chargerImages(Sprites &sprites, Boutons &bouton);
 void initBouton(Bouton &bouton, int);
 void initSourisEvent(SourisEvent &SourisEvent);
@@ -154,5 +154,5 @@ void shoot(SourisEvent &sourisEvent, Canard &canard, int &shots, int i, int cana
 bool testShot(SourisEvent sourisEvent, Sprite sprite);
 void touched(Canard &canard, Time temps);
 void showMessageScreen(std::string message, SDL_Rect position,
-          TTF_Font *font,int fontSize,SDL_Color textColor,SDL_Surface* &screen);
+          TTF_Font *font,int fontSize,SDL_Color textColor);
 #endif // HEADER_H

@@ -7,7 +7,10 @@ int main(int argc, char* argv[])
     SDL_Init(SDL_INIT_VIDEO);
 
     /* Création de la surface d'écran */
-    SDL_Surface *ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE);
+
+    SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE);
+    // L'allocation de mémoire statique d'un SDL_Surface n'est pas utile, SDL le fait implicitement.
+    // On appelera l'écran grâce au renvoie de SDL_GetVideoSurface().
 
     /* Titre */
     SDL_WM_SetCaption("Duck Hunt", NULL);
@@ -46,7 +49,7 @@ int main(int argc, char* argv[])
 
     do
     {
-        menu(sprites, boutons, modeMenu, modeJeu, ecran, sourisEvent, temps);
+        menu(sprites, boutons, modeMenu, modeJeu, sourisEvent, temps);
         temps.currentTime = SDL_GetTicks();
         for (int i=0; i<sprites.canardActifs; i++)
         {
@@ -70,7 +73,7 @@ int main(int argc, char* argv[])
 
         if (temps.currentTime >= temps.timeFps + temps.fpsTime)
         {
-            genererRendu(ecran, sprites, sourisEvent, shots);
+            genererRendu(sprites, sourisEvent, shots);
             temps.timeFps = temps.currentTime;
         }
         if (keystate[SDLK_ESCAPE])
