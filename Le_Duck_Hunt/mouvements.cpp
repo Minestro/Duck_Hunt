@@ -7,7 +7,7 @@ int alea(int mini, int maxi)
     // return rand() / (RAND_MAX / (maxi - mini + 1)); NE PAS EFFACER, J'AI PENSE A UN NOUVEAU MODE DE JEU !
 }
 
-void mouvementsCanard(Canard &canard)
+void mouvementsCanard(Canard &canard) // mouvement physique et mouvement au niveau de l'animation
 {
     canard.image.position.x += canard.vecteurPositionX;
     canard.image.position.y += canard.vecteurPositionY;
@@ -31,6 +31,7 @@ void mouvementsCanard(Canard &canard)
             }
             break;
         case TOUCHED:
+            canard.image.lecture.x = 0;
             canard.image.lecture.y = 280;
             break;
         case FREE_FALLING:

@@ -12,7 +12,6 @@ void switchSpriteCanard(Canard &canard)
             }
             else
             {
-
                 canard.image.lecture.x = 0;
             }
             break;

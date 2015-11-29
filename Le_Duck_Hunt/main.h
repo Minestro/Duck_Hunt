@@ -153,5 +153,6 @@ void detectionBords(Canard &canard);
 void shoot(SourisEvent &sourisEvent, Canard &canard, int &shots, int i, int canardsActifs, Time temps);
 bool testShot(SourisEvent sourisEvent, Sprite sprite);
 void touched(Canard &canard, Time temps);
-
+void showMessageScreen(std::string message, SDL_Rect position,
+          TTF_Font *font,int fontSize,SDL_Color textColor,SDL_Surface* &screen);
 #endif // HEADER_H
