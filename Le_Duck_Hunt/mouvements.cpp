@@ -12,6 +12,8 @@ void mouvementsCanard(Canard &canard)
     canard.image.position.x += canard.vecteurPositionX;
     canard.image.position.y += canard.vecteurPositionY;
 
+    /// Il reste à passer le canard de "chute libre" à "mort" pour le SDL_FreeSurface()";
+
     switch (canard.etat)
     {
         case ALIVE:
