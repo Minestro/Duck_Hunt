@@ -38,8 +38,8 @@ const int LIMITE_BASSE = 270;
 const int NB_MAX_CANARDS = 10000;
 
 const unsigned int VITESSE_N = 5;
-const unsigned int VITESSE_M = 8;
-const unsigned int VITESSE_V = 14;
+const unsigned int VITESSE_M = 7;
+const unsigned int VITESSE_V = 8;
 
 
 struct Sprite

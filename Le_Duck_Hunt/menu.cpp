@@ -15,33 +15,33 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisE
         {
             switch (modeMenu)
             {
-            case 0:
-                sortir = true;
-                break;
-            case 1 :
-                boutons.play.position.x = (LARGEUR/2)-(boutons.play.lecture[0].w/2);
-                boutons.play.position.y = 200;
-                boutons.quit.position.x = (LARGEUR/2)-(boutons.quit.lecture[0].w/2);
-                boutons.quit.position.y = 400;
-                showMenu(sprites, boutons, modeMenu, sourisEvent.sx, sourisEvent.sy);
+                case 0:
+                    sortir = true;
+                    break;
+                case 1 :
+                    boutons.play.position.x = (LARGEUR/2)-(boutons.play.lecture[0].w/2);
+                    boutons.play.position.y = 200;
+                    boutons.quit.position.x = (LARGEUR/2)-(boutons.quit.lecture[0].w/2);
+                    boutons.quit.position.y = 400;
+                    showMenu(sprites, boutons, modeMenu, sourisEvent.sx, sourisEvent.sy);
 
-                if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.quit))&&sourisEvent.bl)
-                {
-                    modeMenu = 0;
+                    if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.quit))&&sourisEvent.bl)
+                    {
+                        modeMenu = 0;
 
-                }
-                else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.play))&&sourisEvent.bl)
-                {
-                    modeJeu = 1;
-                    modeMenu = 0;
-                    sourisEvent.clicGauche = sourisEvent.clicDroit = sourisEvent.clicMolette = false;
-                }
-                break;
-            case 5 :
-                std::cout << "jeu en pause" << std::endl;
-                break;
-            default:
-                break;
+                    }
+                    else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.play))&&sourisEvent.bl)
+                    {
+                        modeJeu = 1;
+                        modeMenu = 0;
+                        sourisEvent.clicGauche = sourisEvent.clicDroit = sourisEvent.clicMolette = false;
+                    }
+                    break;
+                case 5 :
+                    std::cout << "jeu en pause" << std::endl;
+                    break;
+                default:
+                    break;
             }
             time.timeMenu = time.currentTime;
         }

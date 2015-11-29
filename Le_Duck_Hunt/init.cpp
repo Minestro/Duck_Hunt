@@ -34,23 +34,23 @@ void initCanard(Canard &cn)
     cn.etat = ALIVE; // On fait naître le canard.
     switch (cn.type)
     {
-    case DARK:
-        cn.image.source = loadImageWithColorKey("sprites/canardNoir.png", 228, 255, 0);
-        cn.vitesse = VITESSE_N;
-        break;
-    case CHESNUT:
-        cn.image.source = loadImageWithColorKey("sprites/canardMarron.png", 228, 255, 0);
-        cn.vitesse = VITESSE_M;
-        break;
-    case BLUISH_PURPLE:
-        cn.image.source = loadImageWithColorKey("sprites/canardViolet.png", 228, 255, 0);
-        cn.vitesse = VITESSE_V;
-        break;
+        case DARK:
+            cn.image.source = loadImageWithColorKey("sprites/canardNoir.png", 228, 255, 0);
+            cn.vitesse = VITESSE_N;
+            break;
+        case CHESNUT:
+            cn.image.source = loadImageWithColorKey("sprites/canardMarron.png", 228, 255, 0);
+            cn.vitesse = VITESSE_M;
+            break;
+        case BLUISH_PURPLE:
+            cn.image.source = loadImageWithColorKey("sprites/canardViolet.png", 228, 255, 0);
+            cn.vitesse = VITESSE_V;
+            break;
     }
     cn.nbFrames = 3;
     cn.pxParFrame = 70;
     cn.cycleSprite = 0;
-    cn.vitesseAnimation = 50;
+    cn.vitesseAnimation = 50; // Plus cette valeur est élevée, plus l'animation est lente...
     cn.vitesseTime = cn.vitesseAnimationTime = 0;
 
     cn.image.lecture.x = 0;

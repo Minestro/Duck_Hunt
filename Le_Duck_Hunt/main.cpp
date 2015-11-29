@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
 
     for (int i = 0; i<sprites.canardActifs; i++)
     {
-        sprites.canard[i].type = DARK;
+        sprites.canard[i].type = alea(1, 3);
         initCanard(sprites.canard[i]);
     }
     initBouton(boutons.quit, 0);
@@ -47,11 +47,15 @@ int main(int argc, char* argv[])
     initSourisEvent(sourisEvent);
     SDL_ShowCursor(SDL_DISABLE);
 
+  //  char niveau = 1;
+
     do
     {
         menu(sprites, boutons, modeMenu, modeJeu, sourisEvent, temps);
         temps.currentTime = SDL_GetTicks();
-        for (int i=0; i<sprites.canardActifs; i++)
+
+
+        for (int i = 0; i < sprites.canardActifs; i++)
         {
             if ((temps.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse)&&(sprites.canard[i].etat > 0))
             {
@@ -80,9 +84,11 @@ int main(int argc, char* argv[])
         {
             modeMenu = 5;
         }
+
         SDL_Delay(10);
 
     } while (modeJeu != 0);
+
     SDL_Quit();
     IMG_Quit();
     TTF_Quit();
