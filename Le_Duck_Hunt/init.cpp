@@ -72,3 +72,4 @@ void initCanard(Canard &cn)
         }
     } while(cn.vecteurPositionX == 0 || cn.vecteurPositionY == 0);
 }
+

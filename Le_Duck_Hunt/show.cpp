@@ -43,32 +43,32 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, int shots)
 }
 
 void showMessageScreen(std::string message, SDL_Rect position,
-          TTF_Font *font,int fontSize,SDL_Color textColor)
+                       TTF_Font *font, int fontSize, SDL_Color textColor)
 {
-  std::string mot="";
-  std::string space=" ";
-  size_t j;
-  int i = 0;
-  SDL_Surface *mes=NULL;
-  int x = position.x;
-  j = message.find(space);
-  while( j != std::string::npos )
-  {
-      mot=message.substr(i,j-i);
-      if(mot != "")
-      {
-         mes=TTF_RenderText_Solid(font,mot.c_str(),textColor);
-         SDL_BlitSurface(mes, NULL, SDL_GetVideoSurface(), &position);
-         x+=mes->w;
-         SDL_FreeSurface(mes);
-      }
-      x+=fontSize;
-      i=j+1;
-      j = message.find(space,i);
-  }
+    std::string mot="";
+    std::string space=" ";
+    size_t j;
+    int i = 0;
+    SDL_Surface *mes=NULL;
+    int x = position.x;
+    j = message.find(space);
+    while( j != std::string::npos )
+    {
+        mot=message.substr(i,j-i);
+        if(mot != "")
+        {
+            mes=TTF_RenderText_Solid(font,mot.c_str(),textColor);
+            SDL_BlitSurface(mes, NULL, SDL_GetVideoSurface(), &position);
+            x+=mes->w;
+            SDL_FreeSurface(mes);
+        }
+        x+=fontSize;
+        i=j+1;
+        j = message.find(space,i);
+    }
 
-  mot=message.substr(i);
-  mes=TTF_RenderText_Solid(font,mot.c_str(),textColor);
-  SDL_BlitSurface(mes, NULL, SDL_GetVideoSurface(), &position);
-  SDL_FreeSurface(mes);
+    mot=message.substr(i);
+    mes=TTF_RenderText_Solid(font,mot.c_str(),textColor);
+    SDL_BlitSurface(mes, NULL, SDL_GetVideoSurface(), &position);
+    SDL_FreeSurface(mes);
 }

@@ -2,13 +2,17 @@
 
 int main(int argc, char* argv[])
 {
-    /* INITIALISATIONS DES BIBLIOTHEQUES : IMG, SDL */
-    IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
+    /* INITIALISATIONS DES BIBLIOTHEQUES : IMG, SDL, TTF */
+    IMG_Init(IMG_INIT_PNG);
     SDL_Init(SDL_INIT_VIDEO);
+    TTF_Init();
+    // fonction chargerPolice dans init.cpp ?
+    TTF_Font *police;
+    TTF_OpenFont("font/duck_hunt.ttf", 80);
 
     /* Création de la surface d'écran */
 
-    SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE);
+    SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF);
     // L'allocation de mémoire statique d'un SDL_Surface n'est pas utile, SDL le fait implicitement.
     // On appelera l'écran grâce au renvoie de SDL_GetVideoSurface().
 
@@ -56,7 +60,7 @@ int main(int argc, char* argv[])
         temps.currentTime = SDL_GetTicks();
 
 
-        for (int i = 0; i < sprites.canardActifs; i++)
+        for (int i = 0 ; i < sprites.canardActifs ; i++)
         {
             if ((temps.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse)&&(sprites.canard[i].etat > 0))
             {

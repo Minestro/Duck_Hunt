@@ -41,6 +41,12 @@ const unsigned int VITESSE_N = 5;
 const unsigned int VITESSE_M = 7;
 const unsigned int VITESSE_V = 8;
 
+struct Message // Une structure pour afficher avec les fontes, par exemple les scores, ou le niveau !
+{
+    std::string message; // Tous ce qu'il faut pour utiliser une fonction d'affichage de fontes
+    SDL_Rect position;
+
+};
 
 struct Sprite
 {
