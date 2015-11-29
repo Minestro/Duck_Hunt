@@ -83,8 +83,9 @@ SDL_Surface *loadImageWithColorKey(std::string filename, int r, int g, int b)
 
 void chargerImages(Sprites &sprites, Boutons &bouton)
 {
-    sprites.background_menu.source=load_image("sprites/menu.png");
+    sprites.hit.source = load_image("sprites/hit.png");
     bouton.source = loadImageWithColorKey("sprites/bouton.bmp",0,0,0);
+    sprites.background_menu.source = load_image("sprites/menu.png");
 
     sprites.background.source=load_image("sprites/backGame.png");
     sprites.background.position.x = 0;

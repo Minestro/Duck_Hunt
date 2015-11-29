@@ -7,12 +7,14 @@ void showMenu(Sprites sprites, Boutons boutons, int &modeMenu, int sx, int sy)
     SDL_BlitSurface(sprites.background_menu.source, NULL, SDL_GetVideoSurface(), &sprites.background.position);
     switch (modeMenu)
     {
-    case 1 :
-        SDL_BlitSurface(boutons.source, &boutons.play.lecture[testHoverBouton(sx, sy, boutons.play)], SDL_GetVideoSurface(), &boutons.play.position);
-        SDL_BlitSurface(boutons.source, &boutons.quit.lecture[testHoverBouton(sx, sy, boutons.quit)], SDL_GetVideoSurface(), &boutons.quit.position);
-        break;
+        case 1 :
+            SDL_BlitSurface(boutons.source, &boutons.play.lecture[testHoverBouton(sx, sy, boutons.play)], SDL_GetVideoSurface(), &boutons.play.position);
+            SDL_BlitSurface(boutons.source, &boutons.quit.lecture[testHoverBouton(sx, sy, boutons.quit)], SDL_GetVideoSurface(), &boutons.quit.position);
+            break;
     }
     SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);
+
+
     SDL_Flip(SDL_GetVideoSurface());
 }
 
@@ -40,8 +42,11 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, int shots, bool jeu)
             }
         }
         SDL_BlitSurface(sprites.shots.source, &sprites.shots.lecture, SDL_GetVideoSurface(), &sprites.shots.position);
+
         SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);
     }
+
+ //   SDL_BlitSurface(sprites.hit.source, NULL, SDL_GetVideoSurface(), &sprites.hit.position); POURQUOI CA NE MARCHE PAS PUTAIN
 
     SDL_Flip(SDL_GetVideoSurface());
 }

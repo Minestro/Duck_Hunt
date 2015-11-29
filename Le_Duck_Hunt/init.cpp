@@ -1,5 +1,11 @@
 #include "main.h"
 
+void initHit(Hit &hit)
+{
+    hit.lecture.x = hit.lecture.y = 0;
+    hit.lecture.w = hit.lecture.h = 27;
+    hit.position.x = hit.position.y = 50;
+}
 
 void initBouton(Bouton &bouton, int ligne)
 {
@@ -13,7 +19,6 @@ void initBouton(Bouton &bouton, int ligne)
     bouton.lecture[1].y = ligne;
     bouton.lecture[1].w = 150;
     bouton.lecture[1].h = 60;
-
 }
 
 void initSourisEvent(SourisEvent &sourisEvent)
@@ -24,7 +29,7 @@ void initSourisEvent(SourisEvent &sourisEvent)
 
 void initTime(Time &time)
 {
-    time.fpsTime = (1/(FPS_MAX*1.0)*1000); // Calcule en ms le temps entre chaque actualisation d'image à partir de la constante FPS_LIMIT.
+    time.fpsTime = (1 / (FPS_MAX * 1.0) * 1000); // Calcule en ms le temps entre chaque actualisation d'image à partir de la constante FPS_LIMIT.
     time.menuTime = 10;
     time.timeMenu = 0;
     time.timeFps = 0;
@@ -54,12 +59,11 @@ void initCanard(Canard &cn)
     cn.vitesseAnimation = 50; // Plus cette valeur est élevée, plus l'animation est lente...
     cn.vitesseTime = cn.vitesseAnimationTime = 0;
 
-    cn.image.lecture.x = 0;
-    cn.image.lecture.y = 0;
-    cn.image.lecture.w = 70;
-    cn.image.lecture.h = 70;
-    cn.image.position.x = alea(1,LARGEUR-cn.image.lecture.w);
-    cn.image.position.y = alea(1,HAUTEUR-LIMITE_BASSE-cn.image.lecture.h);
+    cn.image.lecture.x = cn.image.lecture.y = 0;
+    cn.image.lecture.w = cn.image.lecture.h = 70;
+    cn.image.position.x = alea(1, LARGEUR-cn.image.lecture.w);
+    cn.image.position.y = alea(1, HAUTEUR-LIMITE_BASSE-cn.image.lecture.h);
+
     do
     {
         cn.vecteurPositionX = alea(-cn.vitesse, cn.vitesse);
@@ -71,6 +75,7 @@ void initCanard(Canard &cn)
         {
             cn.vecteurPositionY = cn.vitesse + cn.vecteurPositionX;
         }
+
     } while(cn.vecteurPositionX == 0 || cn.vecteurPositionY == 0);
 }
 

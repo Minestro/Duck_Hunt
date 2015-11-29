@@ -3,7 +3,7 @@
 void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time)
 {
     bool sortir = false;
-    while (sortir == false)
+    while (!sortir)
     {
         if (getEvents(sourisEvent))
         {
