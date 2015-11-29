@@ -67,32 +67,33 @@ void detectionBords(Canard &canard)
         break;
     }
 }
+
 void changementDirection(Canard &canard)
 {
     switch(canard.etat)
     {
-    case 1:
-        canard.vecteurPositionX = 0;
-        canard.vecteurPositionY = 5;
-        break;
-    case 2:
-        if(alea(0,75) == 33)
-        {
-            do
+        case 1:
+            canard.vecteurPositionX = 0;
+            canard.vecteurPositionY = 2;
+            break;
+        case 2:
+            if(alea(0,75) == 33)
             {
-                canard.vecteurPositionX = alea(-5,5);
-                if(canard.vecteurPositionX >= 0)
+                do
                 {
-                    canard.vecteurPositionY = 5 - canard.vecteurPositionX;
+                    canard.vecteurPositionX = alea(-canard.vitesse, canard.vitesse);
+                    if(canard.vecteurPositionX >= 0)
+                    {
+                        canard.vecteurPositionY = canard.vitesse - canard.vecteurPositionX;
+                    }
+                    else
+                    {
+                        canard.vecteurPositionY = canard.vitesse + canard.vecteurPositionX;
+                    }
                 }
-                else
-                {
-                    canard.vecteurPositionY = 5 + canard.vecteurPositionX;
-                }
+                while(canard.vecteurPositionX == 0 || canard.vecteurPositionY == 0);
             }
-            while(canard.vecteurPositionX == 0 || canard.vecteurPositionY == 0);
-        }
-        break;
+            break;
     }
     detectionBords(canard);
 }

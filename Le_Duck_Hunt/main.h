@@ -5,9 +5,17 @@
 #include <ctime>
 #include <cstdlib>
 #include <string>
+
+#define VIETKHANG
+#include "../DuckHunt/include/SDL/SDL.h"
+#include "../DuckHunt/include/SDL/SDL_image.h"
+#include "../DuckHunt/include/SDL/SDL_ttf.h"
+#ifdef VIETKHANG
+#else
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
+#endif
 #include <sstream>
 
 const int HAUTEUR = 761;
@@ -16,6 +24,10 @@ const int BPP = 32;
 const int FPS_MAX = 60;
 const int LIMITE_BASSE = 270;
 const int NB_MAX_CANARDS = 10000;
+
+const unsigned int VITESSE_N = 5;
+const unsigned int VITESSE_M = 8;
+const unsigned int VITESSE_V = 14;
 
 
 struct Sprite
@@ -32,7 +44,7 @@ struct Canard
     Uint32 vitesseAnimationTime;
     int vitesse;
     Uint32 vitesseTime;
-    int type;
+    int type; // 0 : noir, 1 : marron, 2 : bleu
     int nbFrames;
     int pxParFrame;
     int cycleSprite;

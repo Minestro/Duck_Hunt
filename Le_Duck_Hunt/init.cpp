@@ -35,15 +35,15 @@ void initCanard(Canard &cn)
     {
     case 0:
         cn.image.source = loadImageWithColorKey("sprites/canardNoir.png", 228, 255, 0);
-        cn.vitesse = 36;
+        cn.vitesse = VITESSE_N;
         break;
     case 1:
         cn.image.source = loadImageWithColorKey("sprites/canardMarron.png", 228, 255, 0);
-        cn.vitesse = 16;
+        cn.vitesse = VITESSE_M;
         break;
     case 2:
         cn.image.source = loadImageWithColorKey("sprites/canardViolet.png", 228, 255, 0);
-        cn.vitesse = 8;
+        cn.vitesse = VITESSE_V;
         break;
     }
     cn.etat = 2;
@@ -61,14 +61,14 @@ void initCanard(Canard &cn)
     cn.image.position.y = alea(1,HAUTEUR-LIMITE_BASSE-cn.image.lecture.h);
     do
     {
-        cn.vecteurPositionX = alea(-5,5);
+        cn.vecteurPositionX = alea(-cn.vitesse, cn.vitesse);
         if(cn.vecteurPositionX >= 0)
         {
-            cn.vecteurPositionY = 5 - cn.vecteurPositionX;
+            cn.vecteurPositionY = cn.vitesse - cn.vecteurPositionX;
         }
         else
         {
-            cn.vecteurPositionY = 5 + cn.vecteurPositionX;
+            cn.vecteurPositionY = cn.vitesse + cn.vecteurPositionX;
         }
     }
     while(cn.vecteurPositionX == 0 || cn.vecteurPositionY == 0);

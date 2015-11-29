@@ -1,6 +1,6 @@
 #include "main.h"
 
-int main()
+int main(int argc, char* argv[])
 {
     /* INITIALISATIONS DES BIBLIOTHEQUES : IMG, SDL */
     IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
@@ -28,7 +28,7 @@ int main()
     Sprites sprites;
 
     chargerImages(sprites, boutons);
-    sprites.canardActifs = 7;
+    sprites.canardActifs = 2;
     //sprites.canard[0].type = 0;
     //sprites.canard[1].type = 0;
 

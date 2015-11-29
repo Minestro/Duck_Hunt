@@ -11,7 +11,7 @@ void switchSpriteCanard(Canard &canard)
     case 1:
         canard.image.lecture.x=(canard.cycleSprite%canard.nbFrames)*canard.pxParFrame;
         canard.cycleSprite = (canard.cycleSprite+1)%(canard.nbFrames-1);
-        canard.image.lecture.x+=canard.pxParFrame;
+       // canard.image.lecture.x+=canard.pxParFrame;
         break;
     }
 }
