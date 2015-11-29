@@ -53,10 +53,10 @@ int main(int argc, char* argv[])
         {
             if ((temps.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse)&&(sprites.canard[i].etat > 0))
             {
-                shoot(sourisEvent, sprites.canard[i], shots, i, sprites.canardActifs);
+                shoot(sourisEvent, sprites.canard[i], shots, i, sprites.canardActifs, temps);
                 if(sprites.canard[i].etat == TOUCHED)
                 {
-                    touched(sprites.canard[i]);
+                    touched(sprites.canard[i], temps);
                 }
                 mouvementsCanard(sprites.canard[i]);
                 changementDirection(sprites.canard[i]);

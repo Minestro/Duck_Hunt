@@ -36,7 +36,7 @@ const int FPS_MAX = 60;
 const int LIMITE_BASSE = 270;
 const int NB_MAX_CANARDS = 10000;
 
-const unsigned int VITESSE_N = 5;
+const unsigned int VITESSE_N = 3;
 const unsigned int VITESSE_M = 8;
 const unsigned int VITESSE_V = 14;
 
@@ -149,8 +149,8 @@ void mouvementsCanard(Canard &canard);
 void switchSpriteCanard(Canard &canard);
 int alea(int, int);
 void detectionBords(Canard &canard);
-void shoot(SourisEvent &sourisEvent, Canard &canard, int &shots, int i, int canardsActifs);
+void shoot(SourisEvent &sourisEvent, Canard &canard, int &shots, int i, int canardsActifs, Time temps);
 bool testShot(SourisEvent sourisEvent, Sprite sprite);
-void touched(Canard &canard);
+void touched(Canard &canard, Time temps);
 
 #endif // HEADER_H
