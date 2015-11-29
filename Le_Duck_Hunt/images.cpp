@@ -44,8 +44,8 @@ SDL_Surface *loadImageWithColorKey(std::string filename, int r, int g, int b)
     loadedImage = IMG_Load(filename.c_str());
     if(loadedImage == NULL)
     {
-        std::cout << "Problème lors du chargement de l'image " << filename << " !" << std::endl;
-        exit(0);
+        std::cout << "Problème lors d'un chargement d'image : " << filename << std::endl;
+        exit(EXIT_FAILURE);
     }
 
     //If the image loaded
@@ -65,6 +65,11 @@ SDL_Surface *loadImageWithColorKey(std::string filename, int r, int g, int b)
 
             //Set all pixels of color R 0, G 0xFF, B 0xFF to be transparent
             SDL_SetColorKey( optimizedImage, SDL_SRCCOLORKEY, colorkey );
+        }
+        else
+        {
+            std::cout << "Problème lors d'un chargement d'image : " << filename << std::endl;
+            exit(EXIT_FAILURE);
         }
 
 

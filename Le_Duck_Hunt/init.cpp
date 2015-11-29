@@ -39,7 +39,7 @@ void initCanard(Canard &cn)
             cn.vitesse = VITESSE_N;
             break;
         case CHESNUT:
-            cn.image.source = loadImageWithColorKey("sprites/canardMarron.png", 228, 255, 0);
+            cn.image.source = loadImageWithColorKey("sprites/canardRouge.png", 228, 255, 0);
             cn.vitesse = VITESSE_M;
             break;
         case BLUISH_PURPLE:
