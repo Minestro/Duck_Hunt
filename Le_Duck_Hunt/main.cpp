@@ -47,7 +47,8 @@ int main(int argc, char* argv[])
     initSourisEvent(sourisEvent);
     SDL_ShowCursor(SDL_DISABLE);
 
-  //  char niveau = 1;
+    char niveau = 1;
+    bool jeu = false;
 
     do
     {
