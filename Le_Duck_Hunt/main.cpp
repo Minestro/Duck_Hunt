@@ -68,7 +68,7 @@ int main(int argc, char* argv[])
             }
         }
 
-        if (temps.currentTime>=temps.timeFps+temps.fpsTime)
+        if (temps.currentTime >= temps.timeFps + temps.fpsTime)
         {
             genererRendu(ecran, sprites, sourisEvent, shots);
             temps.timeFps = temps.currentTime;
@@ -77,10 +77,9 @@ int main(int argc, char* argv[])
         {
             modeMenu = 5;
         }
-        SDL_Delay(1);
+        SDL_Delay(10);
 
-
-    } while (modeJeu != 0 and sprites.canardActifs != 0);
+    } while (modeJeu != 0);
     SDL_Quit();
     IMG_Quit();
     TTF_Quit();

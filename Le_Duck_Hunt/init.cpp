@@ -70,6 +70,5 @@ void initCanard(Canard &cn)
         {
             cn.vecteurPositionY = cn.vitesse + cn.vecteurPositionX;
         }
-    }
-    while(cn.vecteurPositionX == 0 || cn.vecteurPositionY == 0);
+    } while(cn.vecteurPositionX == 0 || cn.vecteurPositionY == 0);
 }
