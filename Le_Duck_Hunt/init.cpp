@@ -1,5 +1,6 @@
 #include "main.h"
 
+
 void initBouton(Bouton &bouton, int ligne)
 {
     ligne = ligne * 100;

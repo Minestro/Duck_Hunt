@@ -6,15 +6,16 @@ int main(int argc, char* argv[])
     IMG_Init(IMG_INIT_PNG);
     SDL_Init(SDL_INIT_VIDEO);
     TTF_Init();
+
     // fonction chargerPolice dans init.cpp ?
     TTF_Font *police;
-    TTF_OpenFont("font/duck_hunt.ttf", 80);
+    police = TTF_OpenFont("font/duck_hunt.ttf", 80);
 
-    /* Création de la surface d'écran */
-
+    /* Définition de l'écran */
     SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF);
-    // L'allocation de mémoire statique d'un SDL_Surface n'est pas utile, SDL le fait implicitement.
-    // On appelera l'écran grâce au renvoie de SDL_GetVideoSurface().
+
+    // L'allocation de mémoire statique d'un SDL_Surface n'est pas utile, SDL le fait implicitement avec SetVideoMode.
+    // On appelera l'écran grâce au renvoie de sa fonction native GetVideoSurface().
 
     /* Titre */
     SDL_WM_SetCaption("Duck Hunt", NULL);
@@ -35,7 +36,7 @@ int main(int argc, char* argv[])
     Sprites sprites;
 
     chargerImages(sprites, boutons);
-    sprites.canardActifs = 2;
+    sprites.canardActifs = 20;
 
     for (int i = 0; i<sprites.canardActifs; i++)
     {
@@ -54,15 +55,24 @@ int main(int argc, char* argv[])
     char niveau = 1;
     bool jeu = false;
 
+    Message msgNiveau;
+    msgNiveau.message = "Niveau";
+    SDL_Color noir = {0, 0, 0};
+    msgNiveau.couleurTexte = noir;
+    msgNiveau.taille = 80;
+    msgNiveau.tempsDAffichage = 3000;
+    SDL_Rect position;
+    msgNiveau.position.x = 0;
+    msgNiveau.position.y = 0;
+
     do
     {
         menu(sprites, boutons, modeMenu, modeJeu, sourisEvent, temps);
         temps.currentTime = SDL_GetTicks();
 
-
         for (int i = 0 ; i < sprites.canardActifs ; i++)
         {
-            if ((temps.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse)&&(sprites.canard[i].etat > 0))
+            if ((temps.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse)&&(sprites.canard[i].etat != DEAD))
             {
                 shoot(sourisEvent, sprites.canard[i], shots, i, sprites.canardActifs, temps);
                 if(sprites.canard[i].etat == TOUCHED)
@@ -82,7 +92,8 @@ int main(int argc, char* argv[])
 
         if (temps.currentTime >= temps.timeFps + temps.fpsTime)
         {
-            genererRendu(sprites, sourisEvent, shots);
+            showMessageScreen(police, msgNiveau);
+            genererRendu(sprites, sourisEvent, shots, jeu);
             temps.timeFps = temps.currentTime;
         }
         if (keystate[SDLK_ESCAPE])

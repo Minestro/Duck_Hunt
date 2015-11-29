@@ -39,13 +39,16 @@ const int NB_MAX_CANARDS = 10000;
 
 const unsigned int VITESSE_N = 5;
 const unsigned int VITESSE_M = 7;
-const unsigned int VITESSE_V = 8;
+const unsigned int VITESSE_V = 10;
 
 struct Message // Une structure pour afficher avec les fontes, par exemple les scores, ou le niveau !
 {
     std::string message; // Tous ce qu'il faut pour utiliser une fonction d'affichage de fontes
     SDL_Rect position;
-
+    int taille;
+    // ? TTF_Font *police ou on utilise un police pour tout notre jeu ? au quel cas cet attribut est useless
+    SDL_Color couleurTexte;
+    Uint32 tempsDAffichage; // On voudra un certain d'affichage pour le niveau
 };
 
 struct Sprite
@@ -142,7 +145,7 @@ struct Time
 void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time);
 void showMenu(Sprites, Boutons, int &modeMenu, int, int);
 bool testHoverBouton(int, int, Bouton);
-void genererRendu(Sprites sprites, SourisEvent sourisEvent, int shots);
+void genererRendu(Sprites sprites, SourisEvent sourisEvent, int shots, bool jeu);
 void chargerImages(Sprites &sprites, Boutons &bouton);
 void initBouton(Bouton &bouton, int);
 void initSourisEvent(SourisEvent &SourisEvent);
@@ -159,6 +162,6 @@ void detectionBords(Canard &canard);
 void shoot(SourisEvent &sourisEvent, Canard &canard, int &shots, int i, int canardsActifs, Time temps);
 bool testShot(SourisEvent sourisEvent, Sprite sprite);
 void touched(Canard &canard, Time temps);
-void showMessageScreen(std::string message, SDL_Rect position,
-          TTF_Font *font,int fontSize,SDL_Color textColor);
+void showMessageScreen(TTF_Font *font, Message &msg);
+
 #endif // HEADER_H

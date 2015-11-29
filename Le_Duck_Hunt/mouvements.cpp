@@ -4,7 +4,7 @@ int alea(int mini, int maxi)
 {
     return rand() % (++maxi - mini)  + mini;
 
-    // return rand() / (RAND_MAX / (maxi - mini + 1)); NE PAS EFFACER, J'AI PENSE A UN NOUVEAU MODE DE JEU !
+    //return rand() / (RAND_MAX / (maxi - mini + 1)); // NE PAS EFFACER, J'AI PENSE A UN NOUVEAU MODE DE JEU !
 }
 
 void mouvementsCanard(Canard &canard) // mouvement physique et mouvement au niveau de l'animation
