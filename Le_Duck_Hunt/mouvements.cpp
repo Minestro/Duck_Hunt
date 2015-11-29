@@ -27,6 +27,9 @@ void mouvementsCanard(Canard &canard)
             canard.image.lecture.y+=210;
         }
         break;
+    case TOUCHED:
+        canard.image.lecture.y = 280;
+        break;
     case FREE_FALLING:
         canard.image.lecture.y = 70;
         break;

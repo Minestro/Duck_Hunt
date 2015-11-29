@@ -21,7 +21,7 @@ void shoot(SourisEvent &sourisEvent,Canard &canard, int &shots, int i, int canar
 
 void touched(Canard &canard)
 {
-    if(SDL_GetTicks() - canard.tempsDepuisTir > 1000) // Si le temps écoulé depuis le tir est plus de une seconde, le canard passe de ALIVE à FREE_FALLING
+    if(SDL_GetTicks() - canard.tempsDepuisTir > 250) // Si le temps écoulé depuis le tir est plus de un quart de sec, le canard passe de ALIVE à FREE_FALLING
     {
         canard.etat = FREE_FALLING;
     }
