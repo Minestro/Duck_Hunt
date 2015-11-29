@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <string>
 
+// Note ! Mets en commentaire le ce define, moi j'en ai besoin pour chez moi
 #define VIETKHANG
 #include "../DuckHunt/include/SDL/SDL.h"
 #include "../DuckHunt/include/SDL/SDL_image.h"

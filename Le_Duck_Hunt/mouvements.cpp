@@ -33,6 +33,9 @@ void mouvementsCanard(Canard &canard)
     case FREE_FALLING:
         canard.image.lecture.y = 70;
         break;
+    case DEAD:
+        SDL_FreeSurface(canard.image.source);
+        break;
     }
 }
 
@@ -40,12 +43,6 @@ void detectionBords(Canard &canard)
 {
     switch(canard.etat)
     {
-    case FREE_FALLING:
-        if (canard.image.position.y > HAUTEUR)
-        {
-            canard.etat = 0;
-        }
-        break;
     case ALIVE:
         if(canard.image.position.x <= 0)
         {
@@ -66,6 +63,12 @@ void detectionBords(Canard &canard)
         {
             canard.image.position.y = HAUTEUR-LIMITE_BASSE-canard.image.lecture.h;
             canard.vecteurPositionY *= -1;
+        }
+        break;
+    case FREE_FALLING:
+        if (canard.image.position.y > HAUTEUR)
+        {
+            canard.etat = 0;
         }
         break;
     }

@@ -28,9 +28,7 @@ int main(int argc, char* argv[])
     Sprites sprites;
 
     chargerImages(sprites, boutons);
-    sprites.canardActifs = 10;
-    //sprites.canard[0].type = 0;
-    //sprites.canard[1].type = 0;
+    sprites.canardActifs = 2;
 
     for (int i = 0; i<sprites.canardActifs; i++)
     {
@@ -40,6 +38,7 @@ int main(int argc, char* argv[])
     initBouton(boutons.quit, 0);
     initBouton(boutons.play, 1);
     Uint8 *keystate = SDL_GetKeyState(NULL);
+
 
     SourisEvent sourisEvent;
     initSourisEvent(sourisEvent);
@@ -80,8 +79,11 @@ int main(int argc, char* argv[])
         }
         SDL_Delay(1);
 
-    } while (modeJeu != 0);
+
+    } while (modeJeu != 0 and sprites.canardActifs != 0);
     SDL_Quit();
+    IMG_Quit();
+    TTF_Quit();
     //vider les images
     return EXIT_SUCCESS;
 }
