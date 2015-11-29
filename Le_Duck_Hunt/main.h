@@ -51,7 +51,7 @@ struct Message // Une structure pour afficher avec les fontes, par exemple les s
     Uint32 tempsDAffichage; // On voudra un certain d'affichage pour le niveau
 };
 
-struct Hit // voir l'image hit.png, je pense que c'est assez explicite.
+struct Hit // voir l'image hit.png, je pense que c'est assez explicite. EDIT: En fait c'est débile, c'est un sprit comme les autres, je pense.
 {
     SDL_Surface *source;
     SDL_Rect lecture;
@@ -106,6 +106,7 @@ struct Sprites
 
     Sprite shots;
     Sprite viseur;
+    Sprite points;
 
     Hit hit;
 };
@@ -168,9 +169,9 @@ void mouvementsCanard(Canard &canard);
 void switchSpriteCanard(Canard &canard);
 int alea(int, int);
 void detectionBords(Canard &canard);
-void shoot(SourisEvent &sourisEvent, Canard &canard, int &shots, int i, int canardsActifs, Time temps);
+void shoot(SourisEvent &sourisEvent, Canard &canard, int &shots, int i, int canardsActifs, Time temps, Sprite &points);
 bool testShot(SourisEvent sourisEvent, Sprite sprite);
-void touched(Canard &canard, Time temps);
+void touched(Canard &canard, Time temps, Sprite points);
 void showMessageScreen(TTF_Font *font, Message &msg);
 void initHit(Hit &hit);
 

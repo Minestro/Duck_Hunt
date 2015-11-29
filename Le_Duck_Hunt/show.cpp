@@ -38,14 +38,24 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, int shots, bool jeu)
         {
             if (sprites.canard[i].etat != FREE_FALLING)
             {
+                if(sprites.canard[i].etat == TOUCHED)
+                {
+                    sprites.points.lecture.y = (16 * (sprites.canard[i].type) + 1) % 16; /// A CORRIGER
+                    sprites.points.position.x = (sprites.canard[i].image.lecture.w / 2) + sprites.canard[i].image.position.x;
+                    sprites.points.position.y = sprites.canard[i].image.lecture.h + sprites.canard[i].image.position.y;
+
+                    SDL_BlitSurface(sprites.points.source, &sprites.points.lecture, SDL_GetVideoSurface(), &sprites.points.position);
+                }
                 SDL_BlitSurface(sprites.canard[i].image.source, &sprites.canard[i].image.lecture, SDL_GetVideoSurface(), &sprites.canard[i].image.position);
             }
         }
+
+
         SDL_BlitSurface(sprites.shots.source, &sprites.shots.lecture, SDL_GetVideoSurface(), &sprites.shots.position);
 
         SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);
-    }
 
+    }
  //   SDL_BlitSurface(sprites.hit.source, NULL, SDL_GetVideoSurface(), &sprites.hit.position); POURQUOI CA NE MARCHE PAS PUTAIN
 
     SDL_Flip(SDL_GetVideoSurface());
