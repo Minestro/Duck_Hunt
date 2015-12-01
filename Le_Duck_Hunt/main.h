@@ -52,6 +52,16 @@ struct Message // Une structure pour afficher avec les fontes, par exemple les s
     Uint32 tempsDAffichage; // On voudra un certain d'affichage pour le niveau
 };
 
+struct Partie
+{
+    int canardsEnVie;
+    int shots;
+    Uint32 temps; //pour un certain mode de jeu
+    int round;
+    int score;
+    int hits[10];
+};
+
 struct Sprite
 {
     SDL_Surface *source;
@@ -147,7 +157,7 @@ struct Time
 void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time);
 void showMenu(Sprites, Boutons, int &modeMenu, int, int);
 bool testHoverBouton(int, int, Bouton);
-void genererRendu(Sprites sprites, SourisEvent sourisEvent, int shots);
+void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie);
 void chargerImages(Sprites &sprites, Boutons &bouton);
 void initBouton(Bouton &bouton, int);
 void initSourisEvent(SourisEvent &SourisEvent);
@@ -165,5 +175,6 @@ void shoot(SourisEvent &sourisEvent, Canard &canard, int &shots, int i, int cana
 bool testShot(SourisEvent sourisEvent, Sprite sprite);
 void touched(Canard &canard, Time temps);
 void showMessageScreen(TTF_Font *font, Message &msg);
+void initPartie(Partie &partie, int nbCanards);
 
 #endif // HEADER_H

@@ -30,6 +30,17 @@ void initTime(Time &time)
     time.timeFps = 0;
 }
 
+void initPartie(Partie &partie, int nbCanards)
+{
+    partie.shots = 3;
+    partie.canardsEnVie = nbCanards;
+    partie.round = partie.score = 0;
+    for (int i=0; i<10; i++)
+    {
+        partie.hits[i]=0;
+    }
+}
+
 void initCanard(Canard &cn)
 {
     cn.etat = ALIVE; // On fait naître le canard.

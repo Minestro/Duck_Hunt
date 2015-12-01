@@ -30,8 +30,8 @@ int main(int argc, char* argv[])
 
     int modeJeu = 0;    // Le mode de jeu.
     int modeMenu = 1;   // Détermine la page du menu à afficher.
-    int shots = 3;
 
+    Partie partie;
     Boutons boutons;
     Sprites sprites;
 
@@ -45,20 +45,20 @@ int main(int argc, char* argv[])
     }
     initBouton(boutons.quit, 0);
     initBouton(boutons.play, 1);
+    initPartie(partie, sprites.canardActifs);
+
     Uint8 *keystate = SDL_GetKeyState(NULL);
-
-
     SourisEvent sourisEvent;
     initSourisEvent(sourisEvent);
     SDL_ShowCursor(SDL_DISABLE);
 
     Message msgNiveau;
-    msgNiveau.message = "Niveau";
+    /*msgNiveau.message = "Niveau";
     msgNiveau.couleurTexte = {0,0,0};
     msgNiveau.taille = 80;
     msgNiveau.tempsDAffichage = 3000;
     msgNiveau.position.x = 0;
-    msgNiveau.position.y = 0;
+    msgNiveau.position.y = 0;*/
 
     do
     {
@@ -69,7 +69,7 @@ int main(int argc, char* argv[])
             getEvents(sourisEvent);
             if ((temps.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse))
             {
-                shoot(sourisEvent, sprites.canard[i], shots, i, sprites.canardActifs, temps);
+                shoot(sourisEvent, sprites.canard[i], partie.shots, i, sprites.canardActifs, temps);
                 if(sprites.canard[i].etat == TOUCHED)
                 {
                     touched(sprites.canard[i], temps);
@@ -88,7 +88,7 @@ int main(int argc, char* argv[])
         if (temps.currentTime >= temps.timeFps + temps.fpsTime)
         {
             showMessageScreen(police, msgNiveau);
-            genererRendu(sprites, sourisEvent, shots);
+            genererRendu(sprites, sourisEvent, partie);
             temps.timeFps = temps.currentTime;
         }
         if (keystate[SDLK_ESCAPE])
