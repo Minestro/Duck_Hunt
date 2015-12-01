@@ -39,10 +39,10 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie)
     }
     SDL_BlitSurface(sprites.shots.source, &sprites.shots.lecture, SDL_GetVideoSurface(), &sprites.shots.position);
     sprites.shots.lecture.y=0;
-    sprites.hits.position.x=185;
+    sprites.hits.position.x=170;
     for (int i=0; i<10; i++)
     {
-        sprites.hits.position.x+=i*sprites.hits.lecture.w;
+        sprites.hits.position.x+=sprites.hits.lecture.w+3;
         SDL_BlitSurface(sprites.hits.source, &sprites.hits.lecture, SDL_GetVideoSurface(), &sprites.hits.position);
     }
     SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);

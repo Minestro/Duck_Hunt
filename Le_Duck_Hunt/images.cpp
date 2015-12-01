@@ -104,7 +104,7 @@ void chargerImages(Sprites &sprites, Boutons &bouton)
     sprites.hits.lecture.h=27;
     sprites.hits.lecture.y=0;
     sprites.hits.lecture.x=0;
-    sprites.hits.position.y=658;
+    sprites.hits.position.y=670;
 
     sprites.shots.source=load_image("sprites/shot.png");
     sprites.shots.position.x=65;
