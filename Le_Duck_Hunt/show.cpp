@@ -32,7 +32,7 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, int shots)
     SDL_BlitSurface(sprites.background_blit.source, NULL, SDL_GetVideoSurface(), &sprites.background.position);
     for (int i = 0 ; i < sprites.canardActifs ; i++)
     {
-        if (sprites.canard[i].etat != FREE_FALLING)
+        if (sprites.canard[i].etat != FREE_FALLING && sprites.canard[i].etat != DEAD)
         {
             SDL_BlitSurface(sprites.canard[i].image.source, &sprites.canard[i].image.lecture, SDL_GetVideoSurface(), &sprites.canard[i].image.position);
         }

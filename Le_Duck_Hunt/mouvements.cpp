@@ -12,8 +12,6 @@ void mouvementsCanard(Canard &canard) // mouvement physique et mouvement au nive
     canard.image.position.x += canard.vecteurPositionX;
     canard.image.position.y += canard.vecteurPositionY;
 
-    /// Il reste à passer le canard de "chute libre" à "mort" pour le SDL_FreeSurface()";
-
     switch (canard.etat)
     {
         case ALIVE:
@@ -36,9 +34,6 @@ void mouvementsCanard(Canard &canard) // mouvement physique et mouvement au nive
             break;
         case FREE_FALLING:
             canard.image.lecture.y = 70;
-            break;
-        case DEAD:
-            SDL_FreeSurface(canard.image.source);
             break;
     }
 }
@@ -69,6 +64,12 @@ void detectionBords(Canard &canard)
                 canard.vecteurPositionY *= -1;
             }
             break;
+    case FREE_FALLING:
+        if (canard.image.position.y+canard.image.lecture.h > HAUTEUR)
+        {
+            canard.etat = DEAD;
+            SDL_FreeSurface(canard.image.source);
+        }
     }
 }
 
