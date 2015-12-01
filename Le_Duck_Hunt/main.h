@@ -38,9 +38,9 @@ const int FPS_MAX = 60;
 const int LIMITE_BASSE = 270;
 const int NB_MAX_CANARDS = 100;
 
-const unsigned int VITESSE_N = 30;
-const unsigned int VITESSE_M = 30;
-const unsigned int VITESSE_V = 30;
+const unsigned int VITESSE_N = 16;
+const unsigned int VITESSE_M = 16;
+const unsigned int VITESSE_V = 16;
 
 struct Message // Une structure pour afficher avec les fontes, par exemple les scores, ou le niveau !
 {

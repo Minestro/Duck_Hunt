@@ -62,14 +62,14 @@ void initCanard(Canard &cn)
     cn.image.position.y = alea(1,HAUTEUR-LIMITE_BASSE-cn.image.lecture.h);
     do
     {
-        cn.vecteurPositionX = alea(-cn.vitesse, cn.vitesse);
+        cn.vecteurPositionX = alea(-5, 5);
         if(cn.vecteurPositionX >= 0)
         {
-            cn.vecteurPositionY = cn.vitesse - cn.vecteurPositionX;
+            cn.vecteurPositionY = 5 - cn.vecteurPositionX;
         }
         else
         {
-            cn.vecteurPositionY = cn.vitesse + cn.vecteurPositionX;
+            cn.vecteurPositionY = 5 + cn.vecteurPositionX;
         }
     } while(cn.vecteurPositionX == 0 || cn.vecteurPositionY == 0);
 }
