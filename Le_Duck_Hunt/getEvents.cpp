@@ -29,10 +29,6 @@ bool getEvents(SourisEvent &sourisEvent)
             default:
                 break;
             }
-
-            /*sourisEvent.bl = (event.button.button == SDL_BUTTON_LEFT);
-            sourisEvent.br = (event.button.button == SDL_BUTTON_RIGHT);
-            sourisEvent.bm = (event.button.button == SDL_BUTTON_MIDDLE);*/
             break;
         case SDL_MOUSEBUTTONUP :
             switch(event.button.button)

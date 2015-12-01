@@ -7,10 +7,10 @@ bool testShot(SourisEvent sourisEvent, Sprite sprite)
 
 void shoot(SourisEvent &sourisEvent,Canard &canard, int &shots, int i, int canardsActifs, Time temps)
 {
+        sourisEvent.clicGauche = false;
     if(canard.etat == ALIVE && sourisEvent.clicGauche && ((i >= canardsActifs-1)||(testShot(sourisEvent, canard.image))))
     {
         shots--;
-        sourisEvent.clicGauche = sourisEvent.clicDroit = sourisEvent.clicMolette = false;
         if (testShot(sourisEvent, canard.image))
         {
             canard.etat = TOUCHED;
