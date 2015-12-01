@@ -64,10 +64,11 @@ int main(int argc, char* argv[])
     {
         menu(sprites, boutons, modeMenu, modeJeu, sourisEvent, temps);
         temps.currentTime = SDL_GetTicks();
-
+        std::cout << sourisEvent.clicGauche << std::endl;
         for (int i = 0 ; i < sprites.canardActifs ; i++)
         {
-            if ((temps.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse)&&(sprites.canard[i].etat != DEAD))
+            getEvents(sourisEvent);
+            if ((temps.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse))
             {
                 shoot(sourisEvent, sprites.canard[i], shots, i, sprites.canardActifs, temps);
                 if(sprites.canard[i].etat == TOUCHED)

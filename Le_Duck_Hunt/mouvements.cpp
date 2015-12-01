@@ -102,6 +102,10 @@ void changementDirection(Canard &canard)
             canard.vecteurPositionX = 0;
             canard.vecteurPositionY = 2;
             break;
+    case DEAD:
+        canard.vecteurPositionX = 0;
+        canard.vecteurPositionY = 0;
+        break;
     }
     detectionBords(canard);
 }
