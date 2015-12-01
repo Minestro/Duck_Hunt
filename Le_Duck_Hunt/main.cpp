@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
     Sprites sprites;
 
     chargerImages(sprites, boutons);
-    sprites.canardActifs = 20;
+    sprites.canardActifs = 10;
 
     for (int i = 0; i<sprites.canardActifs; i++)
     {
@@ -64,7 +64,6 @@ int main(int argc, char* argv[])
     {
         menu(sprites, boutons, modeMenu, modeJeu, sourisEvent, temps);
         temps.currentTime = SDL_GetTicks();
-        std::cout << sourisEvent.clicGauche << std::endl;
         for (int i = 0 ; i < sprites.canardActifs ; i++)
         {
             getEvents(sourisEvent);

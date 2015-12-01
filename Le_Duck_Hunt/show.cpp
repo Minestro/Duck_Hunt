@@ -38,6 +38,11 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, int shots)
         }
     }
     SDL_BlitSurface(sprites.shots.source, &sprites.shots.lecture, SDL_GetVideoSurface(), &sprites.shots.position);
+    sprites.shots.lecture.y=0;
+    for (int i=0; i<10; i++)
+    {
+
+    }
     SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);
 
     SDL_Flip(SDL_GetVideoSurface());

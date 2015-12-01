@@ -96,6 +96,7 @@ void chargerImages(Sprites &sprites, Boutons &bouton)
 
     sprites.background_menu.source=load_image("sprites/menu.png");
     sprites.viseur.source=loadImageWithColorKey("sprites/viseur.png",0,0,0);
+    sprites.hits.source=loadImageWithColorKey("sprites/hit.png",0,0,0);
     sprites.shots.source=load_image("sprites/shot.png");
     sprites.shots.position.x=65;
     sprites.shots.position.y=658;
