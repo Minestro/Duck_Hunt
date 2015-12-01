@@ -14,7 +14,7 @@ bool getEvents(SourisEvent &sourisEvent)
         case SDL_MOUSEMOTION:
             sourisEvent.sx = event.motion.x;
             sourisEvent.sy = event.motion.y;
-        case SDL_MOUSEBUTTONDOWN :/*
+        case SDL_MOUSEBUTTONDOWN :
             switch(event.button.button)
             {
             case SDL_BUTTON_LEFT :
@@ -29,10 +29,10 @@ bool getEvents(SourisEvent &sourisEvent)
             default:
                 break;
             }
-            */
-            sourisEvent.bl = (event.button.button == SDL_BUTTON_LEFT);
+
+            /*sourisEvent.bl = (event.button.button == SDL_BUTTON_LEFT);
             sourisEvent.br = (event.button.button == SDL_BUTTON_RIGHT);
-            sourisEvent.bm = (event.button.button == SDL_BUTTON_MIDDLE);
+            sourisEvent.bm = (event.button.button == SDL_BUTTON_MIDDLE);*/
             break;
         case SDL_MOUSEBUTTONUP :
             switch(event.button.button)

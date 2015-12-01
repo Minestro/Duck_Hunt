@@ -83,14 +83,8 @@ SDL_Surface *loadImageWithColorKey(std::string filename, int r, int g, int b)
 
 void chargerImages(Sprites &sprites, Boutons &bouton)
 {
-    sprites.points.lecture.w = 32;
-    sprites.points.lecture.h = 16;
-    sprites.points.lecture.x = sprites.points.lecture.y = 0;
-
-    sprites.points.source = loadImageWithColorKey("sprites/points.png", 0, 0, 0);
-    sprites.hit.source = load_image("sprites/hit.png");
-    bouton.source = loadImageWithColorKey("sprites/bouton.bmp", 0, 0, 0);
-    sprites.background_menu.source = load_image("sprites/menu.png");
+    sprites.background_menu.source=load_image("sprites/menu.png");
+    bouton.source = loadImageWithColorKey("sprites/bouton.bmp",0,0,0);
 
     sprites.background.source=load_image("sprites/backGame.png");
     sprites.background.position.x = 0;
@@ -101,7 +95,7 @@ void chargerImages(Sprites &sprites, Boutons &bouton)
     sprites.background_blit.position.y = 0;
 
     sprites.background_menu.source=load_image("sprites/menu.png");
-    sprites.viseur.source=loadImageWithColorKey("sprites/viseur.png", 0, 0, 0);
+    sprites.viseur.source=loadImageWithColorKey("sprites/viseur.png",0,0,0);
     sprites.shots.source=load_image("sprites/shot.png");
     sprites.shots.position.x=65;
     sprites.shots.position.y=658;

@@ -7,26 +7,27 @@
 #include <string>
 
 // Note ! Mets en commentaire le ce define, moi j'en ai besoin pour chez moi
+/*
 #define VIETKHANG
+#ifdef VIETKHANG
 #include "../DuckHunt/include/SDL/SDL.h"
 #include "../DuckHunt/include/SDL/SDL_image.h"
 #include "../DuckHunt/include/SDL/SDL_ttf.h"
-#ifdef VIETKHANG
-#else
+#else*/
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
-#endif
+//#endif
 #include <sstream>
 
 // Type du canard
 #define DARK 1 // Sombre, le plus lent : 500 points.
-#define CHESNUT 2 // Noisette, niveau intermÃ©diaire : 1000 points.
-#define BLUISH_PURPLE 3 // Violet bleuÃ¢tre, un avion de chasse : 1500 points.
+#define CHESNUT 2 // Noisette, niveau intermédiaire : 1000 points.
+#define BLUISH_PURPLE 3 // Violet bleuâtre, un avion de chasse : 1500 points.
 
 // Etats possibles
 #define ALIVE 3 // En vie : le canard vole.
-#define TOUCHED 2 // TouchÃ© : il s'arrÃªte de voler pour dire aurevoir Ã  la vie.
+#define TOUCHED 2 // Touché : il s'arrête de voler pour dire aurevoir à la vie.
 #define FREE_FALLING 1 // En chute libre : il tombe verticalement.
 #define DEAD 0 // Mort.
 
@@ -35,11 +36,11 @@ const int LARGEUR = 750;
 const int BPP = 32;
 const int FPS_MAX = 60;
 const int LIMITE_BASSE = 270;
-const int NB_MAX_CANARDS = 10000;
+const int NB_MAX_CANARDS = 100;
 
-const unsigned int VITESSE_N = 5;
-const unsigned int VITESSE_M = 7;
-const unsigned int VITESSE_V = 10;
+const unsigned int VITESSE_N = 30;
+const unsigned int VITESSE_M = 30;
+const unsigned int VITESSE_V = 30;
 
 struct Message // Une structure pour afficher avec les fontes, par exemple les scores, ou le niveau !
 {
@@ -49,13 +50,6 @@ struct Message // Une structure pour afficher avec les fontes, par exemple les s
     // ? TTF_Font *police ou on utilise un police pour tout notre jeu ? au quel cas cet attribut est useless
     SDL_Color couleurTexte;
     Uint32 tempsDAffichage; // On voudra un certain d'affichage pour le niveau
-};
-
-struct Hit // voir l'image hit.png, je pense que c'est assez explicite. EDIT: En fait c'est dÃ©bile, c'est un sprit comme les autres, je pense.
-{
-    SDL_Surface *source;
-    SDL_Rect lecture;
-    SDL_Rect position;
 };
 
 struct Sprite
@@ -78,8 +72,8 @@ struct Canard
     int cycleSprite;
     int vecteurPositionY;
     int vecteurPositionX;
-    int etat; // 0 : mort, 1 : en chute, 2 : touchÃ©, 3 : vivant
-    Uint32 tempsDepuisTir; // On veut savoir combien de ms se sont Ã©coulÃ©s depuis le tir pour passer de TOUCHED Ã  FREE_FALLING
+    int etat; // 0 : mort, 1 : en chute, 2 : touché, 3 : vivant
+    Uint32 tempsDepuisTir; // On veut savoir combien de ms se sont écoulés depuis le tir pour passer de TOUCHED à FREE_FALLING
 };
 
 struct Chien
@@ -106,9 +100,6 @@ struct Sprites
 
     Sprite shots;
     Sprite viseur;
-    Sprite points;
-
-    Hit hit;
 };
 
 struct Police
@@ -155,13 +146,13 @@ struct Time
 void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time);
 void showMenu(Sprites, Boutons, int &modeMenu, int, int);
 bool testHoverBouton(int, int, Bouton);
-void genererRendu(Sprites sprites, SourisEvent sourisEvent, int shots, bool jeu);
+void genererRendu(Sprites sprites, SourisEvent sourisEvent, int shots);
 void chargerImages(Sprites &sprites, Boutons &bouton);
 void initBouton(Bouton &bouton, int);
 void initSourisEvent(SourisEvent &SourisEvent);
 void initTime(Time &time);
 void initCanard(Canard &cn);
-SDL_Surface *load_image( std::string filename );
+SDL_Surface *loadImage(std::string);
 SDL_Surface *loadImageWithColorKey(std::string, int, int, int);
 bool getEvents (SourisEvent &sourisEvent);
 void changementDirection(Canard &canard);
@@ -169,10 +160,9 @@ void mouvementsCanard(Canard &canard);
 void switchSpriteCanard(Canard &canard);
 int alea(int, int);
 void detectionBords(Canard &canard);
-void shoot(SourisEvent &sourisEvent, Canard &canard, int &shots, int i, int canardsActifs, Time temps, Sprite &points);
+void shoot(SourisEvent &sourisEvent, Canard &canard, int &shots, int i, int canardsActifs, Time temps);
 bool testShot(SourisEvent sourisEvent, Sprite sprite);
-void touched(Canard &canard, Time temps, Sprite points);
+void touched(Canard &canard, Time temps);
 void showMessageScreen(TTF_Font *font, Message &msg);
-void initHit(Hit &hit);
 
 #endif // HEADER_H

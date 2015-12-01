@@ -33,13 +33,7 @@ int main(int argc, char* argv[])
     int shots = 3;
 
     Boutons boutons;
-    initBouton(boutons.quit, 0);
-    initBouton(boutons.play, 1);
-
     Sprites sprites;
-
-    Hit hit;
-    initHit(hit);
 
     chargerImages(sprites, boutons);
     sprites.canardActifs = 20;
@@ -49,6 +43,8 @@ int main(int argc, char* argv[])
         sprites.canard[i].type = alea(1, 3);
         initCanard(sprites.canard[i]);
     }
+    initBouton(boutons.quit, 0);
+    initBouton(boutons.play, 1);
     Uint8 *keystate = SDL_GetKeyState(NULL);
 
 
@@ -56,21 +52,14 @@ int main(int argc, char* argv[])
     initSourisEvent(sourisEvent);
     SDL_ShowCursor(SDL_DISABLE);
 
-    char niveau = 1;
-
-
-    bool jeu = true; // Je t'en parlerai !
-/*
     Message msgNiveau;
     msgNiveau.message = "Niveau";
-    SDL_Color noir = {0, 0, 0};
-    msgNiveau.couleurTexte = noir;
+    msgNiveau.couleurTexte = {0,0,0};
     msgNiveau.taille = 80;
     msgNiveau.tempsDAffichage = 3000;
-    SDL_Rect position;
     msgNiveau.position.x = 0;
     msgNiveau.position.y = 0;
-*/
+
     do
     {
         menu(sprites, boutons, modeMenu, modeJeu, sourisEvent, temps);
@@ -80,10 +69,10 @@ int main(int argc, char* argv[])
         {
             if ((temps.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse)&&(sprites.canard[i].etat != DEAD))
             {
-                shoot(sourisEvent, sprites.canard[i], shots, i, sprites.canardActifs, temps, sprites.points);
+                shoot(sourisEvent, sprites.canard[i], shots, i, sprites.canardActifs, temps);
                 if(sprites.canard[i].etat == TOUCHED)
                 {
-                    touched(sprites.canard[i], temps, sprites.points);
+                    touched(sprites.canard[i], temps);
                 }
                 mouvementsCanard(sprites.canard[i]);
                 changementDirection(sprites.canard[i]);
@@ -98,8 +87,8 @@ int main(int argc, char* argv[])
 
         if (temps.currentTime >= temps.timeFps + temps.fpsTime)
         {
-           // showMessageScreen(police, msgNiveau);
-            genererRendu(sprites, sourisEvent, shots, jeu);
+            showMessageScreen(police, msgNiveau);
+            genererRendu(sprites, sourisEvent, shots);
             temps.timeFps = temps.currentTime;
         }
         if (keystate[SDLK_ESCAPE])
@@ -107,8 +96,7 @@ int main(int argc, char* argv[])
             modeMenu = 5;
         }
 
-
-        SDL_Delay(10);
+        SDL_Delay(1);
 
     } while (modeJeu != 0);
 

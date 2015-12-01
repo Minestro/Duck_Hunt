@@ -7,56 +7,38 @@ void showMenu(Sprites sprites, Boutons boutons, int &modeMenu, int sx, int sy)
     SDL_BlitSurface(sprites.background_menu.source, NULL, SDL_GetVideoSurface(), &sprites.background.position);
     switch (modeMenu)
     {
-        case 1 :
-            SDL_BlitSurface(boutons.source, &boutons.play.lecture[testHoverBouton(sx, sy, boutons.play)], SDL_GetVideoSurface(), &boutons.play.position);
-            SDL_BlitSurface(boutons.source, &boutons.quit.lecture[testHoverBouton(sx, sy, boutons.quit)], SDL_GetVideoSurface(), &boutons.quit.position);
-            break;
+    case 1 :
+        SDL_BlitSurface(boutons.source, &boutons.play.lecture[testHoverBouton(sx, sy, boutons.play)], SDL_GetVideoSurface(), &boutons.play.position);
+        SDL_BlitSurface(boutons.source, &boutons.quit.lecture[testHoverBouton(sx, sy, boutons.quit)], SDL_GetVideoSurface(), &boutons.quit.position);
+        break;
     }
     SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);
-
-
     SDL_Flip(SDL_GetVideoSurface());
 }
 
-void genererRendu(Sprites sprites, SourisEvent sourisEvent, int shots, bool jeu)
+void genererRendu(Sprites sprites, SourisEvent sourisEvent, int shots)
 {
     SDL_BlitSurface(sprites.background.source, NULL, SDL_GetVideoSurface(), &sprites.background.position);
-    if(jeu)
+    sprites.viseur.position.x = sourisEvent.sx - (sprites.viseur.source->w / 2);
+    sprites.viseur.position.y = sourisEvent.sy - (sprites.viseur.source->h / 2);
+    sprites.shots.lecture.x = 0 + shots * 75;
+    for (int i = 0 ; i < sprites.canardActifs ; i++)
     {
-        sprites.viseur.position.x = sourisEvent.sx - (sprites.viseur.source->w / 2);
-        sprites.viseur.position.y = sourisEvent.sy - (sprites.viseur.source->h / 2);
-        sprites.shots.lecture.x = 0 + shots * 75;
-        for (int i = 0 ; i < sprites.canardActifs ; i++)
+        if (sprites.canard[i].etat == FREE_FALLING)
         {
-            if (sprites.canard[i].etat == FREE_FALLING)
-            {
-                SDL_BlitSurface(sprites.canard[i].image.source, &sprites.canard[i].image.lecture, SDL_GetVideoSurface(), &sprites.canard[i].image.position);
-            }
+            SDL_BlitSurface(sprites.canard[i].image.source, &sprites.canard[i].image.lecture, SDL_GetVideoSurface(), &sprites.canard[i].image.position);
         }
-        SDL_BlitSurface(sprites.background_blit.source, NULL, SDL_GetVideoSurface(), &sprites.background.position);
-        for (int i = 0 ; i < sprites.canardActifs ; i++)
-        {
-            if (sprites.canard[i].etat != FREE_FALLING)
-            {
-                if(sprites.canard[i].etat == TOUCHED)
-                {
-                    sprites.points.lecture.y = (16 * (sprites.canard[i].type) + 1) % 16; /// A CORRIGER
-                    sprites.points.position.x = (sprites.canard[i].image.lecture.w / 2) + sprites.canard[i].image.position.x;
-                    sprites.points.position.y = sprites.canard[i].image.lecture.h + sprites.canard[i].image.position.y;
-
-                    SDL_BlitSurface(sprites.points.source, &sprites.points.lecture, SDL_GetVideoSurface(), &sprites.points.position);
-                }
-                SDL_BlitSurface(sprites.canard[i].image.source, &sprites.canard[i].image.lecture, SDL_GetVideoSurface(), &sprites.canard[i].image.position);
-            }
-        }
-
-
-        SDL_BlitSurface(sprites.shots.source, &sprites.shots.lecture, SDL_GetVideoSurface(), &sprites.shots.position);
-
-        SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);
-
     }
- //   SDL_BlitSurface(sprites.hit.source, NULL, SDL_GetVideoSurface(), &sprites.hit.position); POURQUOI CA NE MARCHE PAS PUTAIN
+    SDL_BlitSurface(sprites.background_blit.source, NULL, SDL_GetVideoSurface(), &sprites.background.position);
+    for (int i = 0 ; i < sprites.canardActifs ; i++)
+    {
+        if (sprites.canard[i].etat != FREE_FALLING)
+        {
+            SDL_BlitSurface(sprites.canard[i].image.source, &sprites.canard[i].image.lecture, SDL_GetVideoSurface(), &sprites.canard[i].image.position);
+        }
+    }
+    SDL_BlitSurface(sprites.shots.source, &sprites.shots.lecture, SDL_GetVideoSurface(), &sprites.shots.position);
+    SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);
 
     SDL_Flip(SDL_GetVideoSurface());
 }
@@ -75,7 +57,7 @@ void showMessageScreen(TTF_Font *font, Message &msg)
         mot = msg.message.substr(i, j-i);
         if(mot != "")
         {
-           // mes = TTF_RenderText_Blended(font, mot.c_str(), msg.couleurTexte);
+            // mes = TTF_RenderText_Blended(font, mot.c_str(), msg.couleurTexte);
             mes = TTF_RenderText_Solid(font, mot.c_str(), msg.couleurTexte);
             SDL_BlitSurface(mes, NULL, SDL_GetVideoSurface(), &msg.position);
             x += mes->w;

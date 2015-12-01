@@ -17,7 +17,7 @@ void mouvementsCanard(Canard &canard) // mouvement physique et mouvement au nive
     switch (canard.etat)
     {
         case ALIVE:
-            if (canard.vecteurPositionY > canard.vitesse / 2)
+            if (canard.vecteurPositionY > 2)
             {
                 canard.image.lecture.y = 140;
             }
@@ -77,18 +77,18 @@ void changementDirection(Canard &canard)
     switch(canard.etat)
     {
         case ALIVE:
-            if(alea(0, 100) == 33) // A optimiser je pense, chez moi ça paraît meilleur que l'ancienne formule
+            if(alea(0, 100) == 33)
             {
                 do
                 {
-                    canard.vecteurPositionY = alea(-canard.vitesse, canard.vitesse);
+                    canard.vecteurPositionY = alea(-5, 5);
                     if(canard.vecteurPositionY >= 0)
                     {
-                        canard.vecteurPositionX = canard.vitesse - canard.vecteurPositionY;
+                        canard.vecteurPositionX = 5 - canard.vecteurPositionY;
                     }
                     else
                     {
-                        canard.vecteurPositionX = canard.vitesse + canard.vecteurPositionY;
+                        canard.vecteurPositionX = 5 + canard.vecteurPositionY;
                     }
                 }
                 while(canard.vecteurPositionX == 0 || canard.vecteurPositionY == 0);
