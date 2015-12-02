@@ -99,7 +99,17 @@ int main(int argc, char* argv[])
 
         SDL_Delay(1);
 
-    } while (modeJeu != 0 && partie.canardsEnVie != 0);
+        if(partie.canardsEnVie == 0)
+        {
+            for (int i = 0; i<sprites.canardActifs; i++)
+            {
+                sprites.canard[i].type = alea(1, 3);
+                initCanard(sprites.canard[i]);
+            }
+            partie.canardsEnVie = 2;
+        }
+
+    } while (modeJeu != 0);
 
     SDL_Quit();
     IMG_Quit();
