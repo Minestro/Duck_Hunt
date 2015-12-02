@@ -35,9 +35,9 @@ void initPartie(Partie &partie, int nbCanards)
     partie.shots = 3;
     partie.canardsEnVie = nbCanards;
     partie.round = partie.score = 0;
-    for (int i=0; i<10; i++)
+    for (int i = 0;  i < 10; i++)
     {
-        partie.hits[i]=0;
+        partie.hits[i] = 0;
     }
 }
 
@@ -73,14 +73,14 @@ void initCanard(Canard &cn)
     cn.image.position.y = alea(1,HAUTEUR-LIMITE_BASSE-cn.image.lecture.h);
     do
     {
-        cn.vecteurPositionX = alea(-5, 5);
+        cn.vecteurPositionX = alea(-10, 10);
         if(cn.vecteurPositionX >= 0)
         {
-            cn.vecteurPositionY = 5 - cn.vecteurPositionX;
+            cn.vecteurPositionY = 10 - cn.vecteurPositionX;
         }
         else
         {
-            cn.vecteurPositionY = 5 + cn.vecteurPositionX;
+            cn.vecteurPositionY = 10 + cn.vecteurPositionX;
         }
     } while(cn.vecteurPositionX == 0 || cn.vecteurPositionY == 0);
 }

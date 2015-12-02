@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
     /* Initialisation des variables en rapport avec le temps */
     Time temps;
     initTime(temps);
-    srand(time(NULL));
+    srand((unsigned)time(NULL));
 
     int modeJeu = 0;    // Le mode de jeu.
     int modeMenu = 1;   // Détermine la page du menu à afficher.
@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
     Sprites sprites;
 
     chargerImages(sprites, boutons);
-    sprites.canardActifs = 10;
+    sprites.canardActifs = 2;
 
     for (int i = 0; i<sprites.canardActifs; i++)
     {
@@ -75,6 +75,7 @@ int main(int argc, char* argv[])
                     touched(sprites.canard[i], temps);
                 }
                 mouvementsCanard(sprites.canard[i]);
+                detectionBords(sprites.canard[i], partie);
                 changementDirection(sprites.canard[i]);
                 sprites.canard[i].vitesseTime = temps.currentTime;
             }
@@ -98,7 +99,7 @@ int main(int argc, char* argv[])
 
         SDL_Delay(1);
 
-    } while (modeJeu != 0);
+    } while (modeJeu != 0 && partie.canardsEnVie != 0);
 
     SDL_Quit();
     IMG_Quit();

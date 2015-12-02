@@ -2,7 +2,7 @@
 
 int alea(int mini, int maxi)
 {
-    return rand() % (++maxi - mini)  + mini;
+    return (rand() % (++maxi - mini))  + mini;
 
     //return rand() / (RAND_MAX / (maxi - mini + 1)); // NE PAS EFFACER, J'AI PENSE A UN NOUVEAU MODE DE JEU !
 }
@@ -38,7 +38,7 @@ void mouvementsCanard(Canard &canard) // mouvement physique et mouvement au nive
     }
 }
 
-void detectionBords(Canard &canard)
+void detectionBords(Canard &canard, Partie &partie)
 {
     switch(canard.etat)
     {
@@ -65,10 +65,11 @@ void detectionBords(Canard &canard)
             }
             break;
     case FREE_FALLING:
-        if (canard.image.position.y+canard.image.lecture.h > HAUTEUR)
+        if (canard.image.position.y+canard.image.lecture.h > HAUTEUR - LIMITE_BASSE + canard.image.lecture.h)
         {
             canard.etat = DEAD;
             SDL_FreeSurface(canard.image.source);
+            partie.canardsEnVie--;
         }
     }
 }
@@ -82,14 +83,14 @@ void changementDirection(Canard &canard)
             {
                 do
                 {
-                    canard.vecteurPositionY = alea(-5, 5);
+                    canard.vecteurPositionY = alea(-10, 10);
                     if(canard.vecteurPositionY >= 0)
                     {
-                        canard.vecteurPositionX = 5 - canard.vecteurPositionY;
+                        canard.vecteurPositionX = 10 - canard.vecteurPositionY;
                     }
                     else
                     {
-                        canard.vecteurPositionX = 5 + canard.vecteurPositionY;
+                        canard.vecteurPositionX = 10 + canard.vecteurPositionY;
                     }
                 }
                 while(canard.vecteurPositionX == 0 || canard.vecteurPositionY == 0);
@@ -100,12 +101,11 @@ void changementDirection(Canard &canard)
             break;
         case FREE_FALLING:
             canard.vecteurPositionX = 0;
-            canard.vecteurPositionY = 2;
+            canard.vecteurPositionY = 5;
             break;
     case DEAD:
         canard.vecteurPositionX = 0;
         canard.vecteurPositionY = 0;
         break;
     }
-    detectionBords(canard);
 }

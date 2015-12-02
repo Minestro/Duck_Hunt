@@ -40,7 +40,7 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie)
     SDL_BlitSurface(sprites.shots.source, &sprites.shots.lecture, SDL_GetVideoSurface(), &sprites.shots.position);
     sprites.shots.lecture.y=0;
     sprites.hits.position.x=170;
-    for (int i=0; i<10; i++)
+    for (int i = 0; i < 10; i++)
     {
         sprites.hits.position.x+=sprites.hits.lecture.w+3;
         SDL_BlitSurface(sprites.hits.source, &sprites.hits.lecture, SDL_GetVideoSurface(), &sprites.hits.position);

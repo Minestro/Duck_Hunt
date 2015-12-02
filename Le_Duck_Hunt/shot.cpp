@@ -7,7 +7,7 @@ bool testShot(SourisEvent sourisEvent, Sprite sprite)
 
 void shoot(SourisEvent &sourisEvent,Canard &canard, int &shots, int i, int canardsActifs, Time temps)
 {
-    if(canard.etat == ALIVE && sourisEvent.clicGauche && ((i >= canardsActifs-1)||(testShot(sourisEvent, canard.image))))
+    if(canard.etat == ALIVE && sourisEvent.clicGauche && ((i >= canardsActifs - 1)||(testShot(sourisEvent, canard.image))))
     {
         sourisEvent.clicGauche = false;
         shots--;

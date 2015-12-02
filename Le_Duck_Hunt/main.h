@@ -5,20 +5,20 @@
 #include <ctime>
 #include <cstdlib>
 #include <string>
+#include <sstream>
 
 // Note ! Mets en commentaire le ce define, moi j'en ai besoin pour chez moi
-/*
-#define VIETKHANG
+
+//#define VIETKHANG
 #ifdef VIETKHANG
 #include "../DuckHunt/include/SDL/SDL.h"
 #include "../DuckHunt/include/SDL/SDL_image.h"
 #include "../DuckHunt/include/SDL/SDL_ttf.h"
-#else*/
+#else
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
-//#endif
-#include <sstream>
+#endif
 
 // Type du canard
 #define DARK 1 // Sombre, le plus lent : 500 points.
@@ -36,10 +36,10 @@ const int LARGEUR = 750;
 const int BPP = 32;
 const int FPS_MAX = 60;
 const int LIMITE_BASSE = 270;
-const int NB_MAX_CANARDS = 100;
+const int NB_MAX_CANARDS = 1000;
 
-const unsigned int VITESSE_N = 25;
-const unsigned int VITESSE_M = 25;
+const unsigned int VITESSE_N = 35;
+const unsigned int VITESSE_M = 30;
 const unsigned int VITESSE_V = 25;
 
 struct Message // Une structure pour afficher avec les fontes, par exemple les scores, ou le niveau !
@@ -141,9 +141,9 @@ struct SourisEvent
     bool bm;
     int sx;
     int sy;
-    int clicGauche;
-    int clicDroit;
-    int clicMolette;
+    bool clicGauche;
+    bool clicDroit;
+    bool clicMolette;
 };
 
 struct Time
@@ -170,7 +170,7 @@ void changementDirection(Canard &canard);
 void mouvementsCanard(Canard &canard);
 void switchSpriteCanard(Canard &canard);
 int alea(int, int);
-void detectionBords(Canard &canard);
+void detectionBords(Canard &canard, Partie &partie);
 void shoot(SourisEvent &sourisEvent, Canard &canard, int &shots, int i, int canardsActifs, Time temps);
 bool testShot(SourisEvent sourisEvent, Sprite sprite);
 void touched(Canard &canard, Time temps);
