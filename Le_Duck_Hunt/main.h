@@ -9,16 +9,16 @@
 
 // Note ! Mets en commentaire le ce define, moi j'en ai besoin pour chez moi
 
-#define VIETKHANG
+/*#define VIETKHANG
 #ifdef VIETKHANG
 #include "../DuckHunt/include/SDL/SDL.h"
 #include "../DuckHunt/include/SDL/SDL_image.h"
 #include "../DuckHunt/include/SDL/SDL_ttf.h"
-#else
+#else*/
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
-#endif
+//#endif
 
 // Type du canard
 #define DARK 1 // Sombre, le plus lent : 500 points.
@@ -49,12 +49,12 @@ const unsigned int VITESSE_V = 25;
 
 struct Message // Une structure pour afficher avec les fontes, par exemple les scores, ou le niveau !
 {
-    std::string message; // Tous ce qu'il faut pour utiliser une fonction d'affichage de fontes
-    SDL_Rect position;
-    int taille;
-    // ? TTF_Font *police ou on utilise un police pour tout notre jeu ? au quel cas cet attribut est useless
-    SDL_Color couleurTexte;
-    Uint32 tempsDAffichage; // On voudra un certain d'affichage pour le niveau
+    TTF_Font *font;    //La police
+    SDL_Color textColor;    //couleur du texte
+    int fontSize;   //taille de la police
+    std::string police; //chemin de la police en relatif
+    std::ostringstream message; // le contenu du texte
+    int x,y; //position de l'affichage tu texte
 };
 
 struct Partie
@@ -163,7 +163,7 @@ struct Time
 void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time);
 void showMenu(Sprites, Boutons, int &modeMenu, int, int);
 bool testHoverBouton(int, int, Bouton);
-void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie);
+void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, SDL_Surface *screen);
 void chargerImages(Sprites &sprites, Boutons &bouton);
 void initBouton(Bouton &bouton, int);
 void initSourisEvent(SourisEvent &SourisEvent);
@@ -180,10 +180,8 @@ void detectionBords(Canard &canard, Partie &partie);
 void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, int i, int canardsActifs, Time temps);
 bool testShot(SourisEvent sourisEvent, Sprite sprite);
 void touched(Canard &canard, Time temps);
-//void showMessageScreen(TTF_Font *font, Message &msg);
-void
-showMessageScreen(std::string message,int x,int y,
-          TTF_Font *font,int fontSize,SDL_Color textColor);
+void showMsg(int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip);
+void showMessageScreen(std::string message,int x,int y, TTF_Font *font,int fontSize,SDL_Color textColor,SDL_Surface* &screen);
 void initPartie(Partie &partie, int nbCanards);
 bool partieTerminee(const Partie partie);
 void relancerPartie(Partie &partie, Sprites &sprites);
