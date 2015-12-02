@@ -182,6 +182,7 @@ bool testShot(SourisEvent sourisEvent, Sprite sprite);
 void touched(Canard &canard, Time temps);
 void showMessageScreen(TTF_Font *font, Message &msg);
 void initPartie(Partie &partie, int nbCanards);
+bool partieTerminee(const Partie partie);
 void relancerPartie(Partie &partie, Sprites &sprites);
 
 #endif // HEADER_H

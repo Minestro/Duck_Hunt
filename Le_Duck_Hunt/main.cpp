@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
     Sprites sprites;
 
     chargerImages(sprites, boutons);
-    sprites.canardActifs = 20;
+    sprites.canardActifs = 2;
 
     for (int i = 0; i<sprites.canardActifs; i++)
     {
@@ -95,6 +95,11 @@ int main(int argc, char* argv[])
         if (keystate[SDLK_ESCAPE])
         {
             modeMenu = 5;
+        }
+
+        if(partieTerminee(partie))
+        {
+            relancerPartie(partie, sprites);
         }
 
         SDL_Delay(1);
