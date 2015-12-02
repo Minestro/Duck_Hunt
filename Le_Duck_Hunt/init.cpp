@@ -37,7 +37,7 @@ void initPartie(Partie &partie, int nbCanards)
     partie.round = partie.score = 0;
     for (int i = 0;  i < 10; i++)
     {
-        partie.hits[i] = 0;
+        partie.hit[i] = HIT_NOT_PLAYED;
     }
 }
 

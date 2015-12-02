@@ -69,7 +69,7 @@ int main(int argc, char* argv[])
             getEvents(sourisEvent);
             if ((temps.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse))
             {
-                shoot(sourisEvent, sprites.canard[i], partie.shots, i, sprites.canardActifs, temps);
+                shoot(sourisEvent, sprites.canard[i], partie, i, sprites.canardActifs, temps);
                 if(sprites.canard[i].etat == TOUCHED)
                 {
                     touched(sprites.canard[i], temps);
@@ -97,17 +97,45 @@ int main(int argc, char* argv[])
             modeMenu = 5;
         }
 
-        SDL_Delay(1);
+
+        // Je pense qu'il faut regrouper ces conditions dans une fonction relancerPartie(Partie &partie);
+        // Beaucoup de simplification de code à faire à mon avis.
 
         if(partie.canardsEnVie == 0)
         {
+            for (int i = 0; i < sprites.canardActifs; i++)
+            {
+                sprites.canard[i].type = alea(1, 3);
+                initCanard(sprites.canard[i]);
+            }
+            partie.canardsEnVie = 2;
+            partie.shots = 3;
+            partie.round++;
+        }
+
+        if(partie.shots == 0)
+        {
+            for (int i = 0; i<sprites.canardActifs; i++)
+            {
+                if(sprites.canard[i].etat != DEAD)
+                {
+                    SDL_FreeSurface(sprites.canard[i].image.source);
+                }
+            }
+            partie.shots = 3;
+
             for (int i = 0; i<sprites.canardActifs; i++)
             {
                 sprites.canard[i].type = alea(1, 3);
                 initCanard(sprites.canard[i]);
             }
             partie.canardsEnVie = 2;
+            partie.shots = 3;
+            partie.round++;
         }
+
+
+        SDL_Delay(1);
 
     } while (modeJeu != 0);
 

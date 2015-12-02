@@ -4,7 +4,7 @@ int alea(int mini, int maxi)
 {
     return (rand() % (++maxi - mini))  + mini;
 
-    //return rand() / (RAND_MAX / (maxi - mini + 1)); // NE PAS EFFACER, J'AI PENSE A UN NOUVEAU MODE DE JEU !
+   // return rand() / (RAND_MAX / (maxi - mini + 1)); // NE PAS EFFACER, J'AI PENSE A UN NOUVEAU MODE DE JEU !
 }
 
 void mouvementsCanard(Canard &canard) // mouvement physique et mouvement au niveau de l'animation
@@ -64,13 +64,16 @@ void detectionBords(Canard &canard, Partie &partie)
                 canard.vecteurPositionY *= -1;
             }
             break;
-    case FREE_FALLING:
-        if (canard.image.position.y+canard.image.lecture.h > HAUTEUR - LIMITE_BASSE + canard.image.lecture.h)
-        {
-            canard.etat = DEAD;
-            SDL_FreeSurface(canard.image.source);
-            partie.canardsEnVie--;
-        }
+        case FREE_FALLING:
+            if (canard.image.position.y+canard.image.lecture.h > HAUTEUR - LIMITE_BASSE + canard.image.lecture.h)
+            {
+                canard.etat = DEAD;
+                SDL_FreeSurface(canard.image.source);
+                partie.canardsEnVie--;
+            }
+            break;
+               default:
+                break;
     }
 }
 
@@ -101,11 +104,11 @@ void changementDirection(Canard &canard)
             break;
         case FREE_FALLING:
             canard.vecteurPositionX = 0;
-            canard.vecteurPositionY = 5;
+            canard.vecteurPositionY = 7;
             break;
-    case DEAD:
-        canard.vecteurPositionX = 0;
-        canard.vecteurPositionY = 0;
-        break;
+        case DEAD: // Inutile puisqu'on SDL_FreeSurface à leur mort ?
+            canard.vecteurPositionX = 0;
+            canard.vecteurPositionY = 0;
+            break;
     }
 }

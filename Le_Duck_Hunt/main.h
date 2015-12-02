@@ -31,6 +31,11 @@
 #define FREE_FALLING 1 // En chute libre : il tombe verticalement.
 #define DEAD 0 // Mort.
 
+// Hit
+#define HIT_OK 2
+#define HIT_FAILED 1
+#define HIT_NOT_PLAYED 0
+
 const int HAUTEUR = 761;
 const int LARGEUR = 750;
 const int BPP = 32;
@@ -59,7 +64,7 @@ struct Partie
     Uint32 temps; //pour un certain mode de jeu
     int round;
     int score;
-    int hits[10];
+    int hit[10];
 };
 
 struct Sprite
@@ -171,7 +176,7 @@ void mouvementsCanard(Canard &canard);
 void switchSpriteCanard(Canard &canard);
 int alea(int, int);
 void detectionBords(Canard &canard, Partie &partie);
-void shoot(SourisEvent &sourisEvent, Canard &canard, int &shots, int i, int canardsActifs, Time temps);
+void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, int i, int canardsActifs, Time temps);
 bool testShot(SourisEvent sourisEvent, Sprite sprite);
 void touched(Canard &canard, Time temps);
 void showMessageScreen(TTF_Font *font, Message &msg);
