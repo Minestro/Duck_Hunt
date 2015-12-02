@@ -28,6 +28,7 @@ void initTime(Time &time)
     time.menuTime = 10;
     time.timeMenu = 0;
     time.timeFps = 0;
+    time.currentTime = SDL_GetTicks();
 }
 
 void initPartie(Partie &partie, int nbCanards)
@@ -37,7 +38,11 @@ void initPartie(Partie &partie, int nbCanards)
     partie.round = partie.score = 0;
     for (int i = 0;  i < 10; i++)
     {
-        partie.hit[i] = HIT_NOT_PLAYED;
+        partie.hit[i] = HIT_EMPTY;
+    }
+    for (int i = 0 ; i < 5 ; i++)
+    {
+        partie.roundJoue[i] = false;
     }
 }
 

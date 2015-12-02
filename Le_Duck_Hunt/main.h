@@ -9,7 +9,7 @@
 
 // Note ! Mets en commentaire le ce define, moi j'en ai besoin pour chez moi
 
-//#define VIETKHANG
+#define VIETKHANG
 #ifdef VIETKHANG
 #include "../DuckHunt/include/SDL/SDL.h"
 #include "../DuckHunt/include/SDL/SDL_image.h"
@@ -34,7 +34,7 @@
 // Hit
 #define HIT_OK 2
 #define HIT_FAILED 1
-#define HIT_NOT_PLAYED 0
+#define HIT_EMPTY 0
 
 const int HAUTEUR = 761;
 const int LARGEUR = 750;
@@ -65,6 +65,7 @@ struct Partie
     int round;
     int score;
     int hit[10];
+    bool roundJoue[5];
 };
 
 struct Sprite
