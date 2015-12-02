@@ -52,13 +52,18 @@ int main(int argc, char* argv[])
     initSourisEvent(sourisEvent);
     SDL_ShowCursor(SDL_DISABLE);
 
+/*!
+    HELP POUR L'AFFICHAGE DES FONTES STP :'(
+
     Message msgNiveau;
-    /*msgNiveau.message = "Niveau";
-    msgNiveau.couleurTexte = {0,0,0};
+    msgNiveau.message = "Niveau";
+    msgNiveau.couleurTexte = {255, 255, 255};
     msgNiveau.taille = 80;
     msgNiveau.tempsDAffichage = 3000;
-    msgNiveau.position.x = 0;
-    msgNiveau.position.y = 0;*/
+    msgNiveau.position.x = 50;
+    msgNiveau.position.y = 50;
+
+*/
 
     do
     {
@@ -88,7 +93,7 @@ int main(int argc, char* argv[])
 
         if (temps.currentTime >= temps.timeFps + temps.fpsTime)
         {
-            showMessageScreen(police, msgNiveau);
+           // showMessageScreen(message, 50, 50, police, 50, msgNiveau.couleurTexte);
             genererRendu(sprites, sourisEvent, partie);
             temps.timeFps = temps.currentTime;
         }
@@ -104,8 +109,7 @@ int main(int argc, char* argv[])
 
         SDL_Delay(1);
 
-
-    } while (modeJeu != 0);
+    } while (modeJeu != 0 && partie.round != 5);
 
     SDL_Quit();
     IMG_Quit();

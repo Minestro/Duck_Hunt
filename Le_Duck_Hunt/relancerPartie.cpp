@@ -15,6 +15,7 @@ void relancerPartie(Partie &partie, Sprites &sprites)
             partie.hit[i] = HIT_FAILED;
         }
     }
+
     for (int i = 0; i<sprites.canardActifs; i++)
     {
         if(sprites.canard[i].etat != DEAD)

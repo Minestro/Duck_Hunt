@@ -180,7 +180,10 @@ void detectionBords(Canard &canard, Partie &partie);
 void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, int i, int canardsActifs, Time temps);
 bool testShot(SourisEvent sourisEvent, Sprite sprite);
 void touched(Canard &canard, Time temps);
-void showMessageScreen(TTF_Font *font, Message &msg);
+//void showMessageScreen(TTF_Font *font, Message &msg);
+void
+showMessageScreen(std::string message,int x,int y,
+          TTF_Font *font,int fontSize,SDL_Color textColor);
 void initPartie(Partie &partie, int nbCanards);
 bool partieTerminee(const Partie partie);
 void relancerPartie(Partie &partie, Sprites &sprites);
