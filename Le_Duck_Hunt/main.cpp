@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
     Sprites sprites;
 
     chargerImages(sprites, boutons);
-    sprites.canardActifs = 2;
+    sprites.canardActifs = 20;
 
     for (int i = 0; i<sprites.canardActifs; i++)
     {
@@ -142,8 +142,8 @@ int main(int argc, char* argv[])
             partie.round++;
         }
 
-
         SDL_Delay(1);
+
 
     } while (modeJeu != 0);
 
