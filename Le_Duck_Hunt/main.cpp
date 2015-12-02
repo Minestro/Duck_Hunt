@@ -115,6 +115,8 @@ int main(int argc, char* argv[])
 
         if(partie.shots == 0)
         {
+            partie.hit[partie.round * 2] = partie.hit[partie.round * 2 + 1] = HIT_FAILED;
+
             for (int i = 0; i<sprites.canardActifs; i++)
             {
                 if(sprites.canard[i].etat != DEAD)

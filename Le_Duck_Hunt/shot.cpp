@@ -16,11 +16,7 @@ void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, int i, int c
             canard.etat = TOUCHED;
             partie.score += canard.type * 500;
             canard.tempsDepuisTir = temps.currentTime;
-            partie.hit[partie.round + (partie.shots % 2)] = HIT_OK;
-        }
-        else
-        {
-            partie.hit[partie.round + (partie.shots % 2)] = HIT_FAILED;
+            partie.hit[partie.round * 2 + (partie.shots % 2)] = HIT_OK;
         }
     }
 }
