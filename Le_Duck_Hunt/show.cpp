@@ -51,34 +51,36 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie)
 
 void showPoints(Message &msg, TTF_Font *font, int points)
 {
-    msg.message.flush();
-    msg.message.str("");
-    msg.message << points;
+    static std::ostringstream message;
+    message.flush();
+    message.str("");
+    message << points;
+    msg.message = message.str();
 
     std::string mot="";
     std::string space=" ";
-    int i = 0, x = msg.position.x;
+    int i = 0;
     size_t j;
-    SDL_Surface *mes=NULL;
+    SDL_Surface *mes = NULL;
 
-    j = msg.message.str().find(space);
+    j = msg.message.find(space);
     while( j != std::string::npos )
     {
-        mot = msg.message.str().substr(i,j-i);
+        mot = msg.message.substr(i,j-i);
         if(mot != "")
         {
-            mes = TTF_RenderText_Solid(font, mot.c_str(), msg.textColor);
-            SDL_BlitSurface(mes, NULL, SDL_GetVideoSurface(), &msg.position);
-            x += mes->w;
-            SDL_FreeSurface(mes);
+           mes = TTF_RenderText_Solid(font, mot.c_str(), msg.textColor);
+           SDL_BlitSurface(mes, NULL, SDL_GetVideoSurface(),  &msg.position);
+           msg.position.x += mes->w;
+           SDL_FreeSurface(mes);
         }
-        x += msg.fontSize;
+        msg.position.x += msg.fontSize;
         i = j+1;
-        j = msg.message.str().find(space,i);
+        j = msg.message.find(space,i);
     }
 
-    mot = msg.message.str().substr(i);
+    mot = msg.message.substr(i);
     mes = TTF_RenderText_Solid(font, mot.c_str(), msg.textColor);
-    SDL_BlitSurface(mes, NULL, SDL_GetVideoSurface(), &msg.position);
+    SDL_BlitSurface(mes, NULL, SDL_GetVideoSurface(),  &msg.position);
     SDL_FreeSurface(mes);
 }

@@ -2,7 +2,7 @@
 
 void initMessage(Message &message)
 {
-    message.fontSize = 20;
+  //  message.fontSize = 1; ?
     message.textColor.r = 255;
     message.textColor.g = 255;
     message.textColor.b = 255;

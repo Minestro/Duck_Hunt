@@ -51,7 +51,7 @@ struct Message // Une structure pour afficher avec les fontes, par exemple les s
 {
     SDL_Color textColor;    //couleur du texte
     int fontSize;   //taille de la police
-    std::ostringstream message; // le contenu du texte
+    std::string message; // le contenu du texte
     SDL_Rect position; //position de l'affichage tu texte
 };
 
