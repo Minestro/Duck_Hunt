@@ -11,9 +11,7 @@ int main(int argc, char* argv[])
     TTF_Font *police;
     police = TTF_OpenFont("font/duck_hunt.ttf", 80);
 
-    /* Définition de l'écran */
-    SDL_Surface *screen;
-    screen = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF);
+    SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF);
     //SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF);
 
     // L'allocation de mémoire statique d'un SDL_Surface n'est pas utile, SDL le fait implicitement avec SetVideoMode.
@@ -55,13 +53,8 @@ int main(int argc, char* argv[])
     SDL_ShowCursor(SDL_DISABLE);
 
     Message msgScore;
-    msgScore.police = "font/duck_hunt.ttf";
-    msgScore.fontSize = 20;
-    msgScore.font = TTF_OpenFont(msgScore.police.c_str(),msgScore.fontSize);
-    msgScore.textColor = {255, 255, 255};
-    msgScore.x = 200;
-    msgScore.y = 200;
-    msgScore.message.flush();
+    initMessage(msgScore);
+
 
     do
     {
@@ -91,10 +84,14 @@ int main(int argc, char* argv[])
 
         if (temps.currentTime >= temps.timeFps + temps.fpsTime)
         {
-            msgScore.message.str("");
-            msgScore.message << "yoloo";
-            showMessageScreen(msgScore.message.str(), msgScore.x, msgScore.y, msgScore.font, msgScore.fontSize, msgScore.textColor, screen);
-            genererRendu(sprites, sourisEvent, partie, screen);
+            genererRendu(sprites, sourisEvent, partie);
+            showPoints(msgScore, police, partie.score);
+
+            // J'ai déplacé SDL_Flip du genererRendu jusqu'ici
+            // En fait, si l'utilise dans genererRendu puis dans showPoints, on perd des frames
+            // Cela s'explique par une durée du changement de blit non nulle, du double buffer
+            SDL_Flip(SDL_GetVideoSurface());
+
             temps.timeFps = temps.currentTime;
         }
         if (keystate[SDLK_ESCAPE])

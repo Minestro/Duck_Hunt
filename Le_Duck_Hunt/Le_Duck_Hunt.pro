@@ -11,7 +11,8 @@ SOURCES += main.cpp \
     getEvents.cpp \
     switchSprite.cpp \
     mouvements.cpp \
-    shot.cpp
+    shot.cpp \
+    relancerPartie.cpp
 
 LIBS+=`sdl-config --libs` -lSDL -lSDL_image -lSDL_ttf
 INCLUDEPATH+=-I/usr/include/SDL/

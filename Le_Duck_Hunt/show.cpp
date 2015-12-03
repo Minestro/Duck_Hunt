@@ -16,9 +16,9 @@ void showMenu(Sprites sprites, Boutons boutons, int &modeMenu, int sx, int sy)
     SDL_Flip(SDL_GetVideoSurface());
 }
 
-void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, SDL_Surface *screen)
+void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie)
 {
-    SDL_BlitSurface(sprites.background.source, NULL, screen, &sprites.background.position);
+    SDL_BlitSurface(sprites.background.source, NULL, SDL_GetVideoSurface(), &sprites.background.position);
     sprites.viseur.position.x = sourisEvent.sx - (sprites.viseur.source->w / 2);
     sprites.viseur.position.y = sourisEvent.sy - (sprites.viseur.source->h / 2);
     sprites.shots.lecture.x = 0 + partie.shots * 75;
@@ -26,64 +26,59 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, SDL_S
     {
         if (sprites.canard[i].etat == FREE_FALLING)
         {
-            SDL_BlitSurface(sprites.canard[i].image.source, &sprites.canard[i].image.lecture, screen, &sprites.canard[i].image.position);
+            SDL_BlitSurface(sprites.canard[i].image.source, &sprites.canard[i].image.lecture, SDL_GetVideoSurface(), &sprites.canard[i].image.position);
         }
     }
-    SDL_BlitSurface(sprites.background_blit.source, NULL, screen, &sprites.background.position);
+    SDL_BlitSurface(sprites.background_blit.source, NULL, SDL_GetVideoSurface(), &sprites.background.position);
     for (int i = 0 ; i < sprites.canardActifs ; i++)
     {
         if (sprites.canard[i].etat != FREE_FALLING && sprites.canard[i].etat != DEAD)
         {
-            SDL_BlitSurface(sprites.canard[i].image.source, &sprites.canard[i].image.lecture, screen, &sprites.canard[i].image.position);
+            SDL_BlitSurface(sprites.canard[i].image.source, &sprites.canard[i].image.lecture, SDL_GetVideoSurface(), &sprites.canard[i].image.position);
         }
     }
-    SDL_BlitSurface(sprites.shots.source, &sprites.shots.lecture, screen, &sprites.shots.position);
+    SDL_BlitSurface(sprites.shots.source, &sprites.shots.lecture, SDL_GetVideoSurface(), &sprites.shots.position);
     sprites.shots.lecture.y=0;
     sprites.hits.position.x=170;
     for (int i = 0; i < 10; i++)
     {
         sprites.hits.lecture.x = partie.hit[i] * 27;
         sprites.hits.position.x += sprites.hits.lecture.w + 3;
-        SDL_BlitSurface(sprites.hits.source, &sprites.hits.lecture, screen, &sprites.hits.position);
+        SDL_BlitSurface(sprites.hits.source, &sprites.hits.lecture, SDL_GetVideoSurface(), &sprites.hits.position);
     }
-    SDL_BlitSurface(sprites.viseur.source, NULL, screen, &sprites.viseur.position);
-
-    SDL_Flip(screen);
+    SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);
 }
 
-void showMsg(int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip)
+void showPoints(Message &msg, TTF_Font *font, int points)
 {
-    SDL_Rect position;
-    position.x = x;
-    position.y = y;
-    SDL_BlitSurface( source, clip, destination, &position );
-}
+    msg.message.flush();
+    msg.message.str("");
+    msg.message << points;
 
-void showMessageScreen(std::string message,int x,int y, TTF_Font *font,int fontSize,SDL_Color textColor,SDL_Surface* &screen)
-{
     std::string mot="";
     std::string space=" ";
-    int i=0,j;
+    int i = 0, x = msg.position.x;
+    size_t j;
     SDL_Surface *mes=NULL;
 
-    j = message.find(space);
+    j = msg.message.str().find(space);
     while( j != std::string::npos )
     {
-        mot=message.substr(i,j-i);
+        mot = msg.message.str().substr(i,j-i);
         if(mot != "")
         {
-            mes=TTF_RenderText_Solid(font,mot.c_str(),textColor);
-            showMsg(x,y,mes,screen,NULL);
-            x+=mes->w;
+            mes = TTF_RenderText_Solid(font, mot.c_str(), msg.textColor);
+            SDL_BlitSurface(mes, NULL, SDL_GetVideoSurface(), &msg.position);
+            x += mes->w;
             SDL_FreeSurface(mes);
         }
-        x+=fontSize;
-        i=j+1;
-        j = message.find(space,i);
+        x += msg.fontSize;
+        i = j+1;
+        j = msg.message.str().find(space,i);
     }
 
-    mot=message.substr(i);
-    mes=TTF_RenderText_Solid(font,mot.c_str(),textColor);
-    showMsg(x,y,mes,screen,NULL);
+    mot = msg.message.str().substr(i);
+    mes = TTF_RenderText_Solid(font, mot.c_str(), msg.textColor);
+    SDL_BlitSurface(mes, NULL, SDL_GetVideoSurface(), &msg.position);
     SDL_FreeSurface(mes);
 }

@@ -1,5 +1,14 @@
 #include "main.h"
 
+void initMessage(Message &message)
+{
+    message.fontSize = 20;
+    message.textColor.r = 255;
+    message.textColor.g = 255;
+    message.textColor.b = 255;
+    message.position.x = 550;
+    message.position.y = 650;
+}
 
 void initBouton(Bouton &bouton, int ligne)
 {
