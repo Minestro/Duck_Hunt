@@ -8,8 +8,10 @@ int main(int argc, char* argv[])
     TTF_Init();
 
     // fonction chargerPolice dans init.cpp ?
-    TTF_Font *police;
-    police = TTF_OpenFont("font/duck_hunt.ttf", 80);
+    Message msgScore;
+    initMessage(msgScore);
+    TTF_Font *police ;
+    police = TTF_OpenFont("font/duck_hunt.ttf", msgScore.fontSize);
 
     SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF);
     //SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF);
@@ -52,9 +54,6 @@ int main(int argc, char* argv[])
     initSourisEvent(sourisEvent);
     SDL_ShowCursor(SDL_DISABLE);
 
-    Message msgScore;
-    initMessage(msgScore);
-
 
     do
     {
@@ -86,10 +85,6 @@ int main(int argc, char* argv[])
         {
             genererRendu(sprites, sourisEvent, partie);
             showPoints(msgScore, police, partie.score);
-
-            // J'ai déplacé SDL_Flip du genererRendu jusqu'ici
-            // En fait, si l'utilise dans genererRendu puis dans showPoints, on perd des frames
-            // Cela s'explique par une durée du changement de blit non nulle, du double buffer
             SDL_Flip(SDL_GetVideoSurface());
 
             temps.timeFps = temps.currentTime;

@@ -2,12 +2,12 @@
 
 void initMessage(Message &message)
 {
-  //  message.fontSize = 1; ?
+    message.fontSize = 35;
     message.textColor.r = 255;
     message.textColor.g = 255;
     message.textColor.b = 255;
-    message.position.x = 550;
-    message.position.y = 650;
+    message.position.x = 580;
+    message.position.y = 667;
 }
 
 void initBouton(Bouton &bouton, int ligne)
