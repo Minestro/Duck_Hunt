@@ -9,7 +9,7 @@
 
 // Note ! Mets en commentaire le ce define, moi j'en ai besoin pour chez moi
 
-#define VIETKHANG
+//#define VIETKHANG
 #ifdef VIETKHANG
 #include "../DuckHunt/include/SDL/SDL.h"
 #include "../DuckHunt/include/SDL/SDL_image.h"
@@ -49,12 +49,10 @@ const unsigned int VITESSE_V = 25;
 
 struct Message // Une structure pour afficher avec les fontes, par exemple les scores, ou le niveau !
 {
-    std::string message; // Tous ce qu'il faut pour utiliser une fonction d'affichage de fontes
-    SDL_Rect position;
-    int taille;
-    // ? TTF_Font *police ou on utilise un police pour tout notre jeu ? au quel cas cet attribut est useless
-    SDL_Color couleurTexte;
-    Uint32 tempsDAffichage; // On voudra un certain d'affichage pour le niveau
+    SDL_Color textColor;    //couleur du texte
+    int fontSize;   //taille de la police
+    std::string message; // le contenu du texte
+    SDL_Rect position; //position de l'affichage tu texte
 };
 
 struct Partie
@@ -169,6 +167,7 @@ void initBouton(Bouton &bouton, int);
 void initSourisEvent(SourisEvent &SourisEvent);
 void initTime(Time &time);
 void initCanard(Canard &cn);
+void initMessage(Message &message);
 SDL_Surface *loadImage(std::string);
 SDL_Surface *loadImageWithColorKey(std::string, int, int, int);
 bool getEvents (SourisEvent &sourisEvent);
@@ -180,10 +179,7 @@ void detectionBords(Canard &canard, Partie &partie);
 void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, int i, int canardsActifs, Time temps);
 bool testShot(SourisEvent sourisEvent, Sprite sprite);
 void touched(Canard &canard, Time temps);
-//void showMessageScreen(TTF_Font *font, Message &msg);
-void
-showMessageScreen(std::string message,int x,int y,
-          TTF_Font *font,int fontSize,SDL_Color textColor);
+void showPoints(Message &msg, TTF_Font *font, int points);
 void initPartie(Partie &partie, int nbCanards);
 bool partieTerminee(const Partie partie);
 void relancerPartie(Partie &partie, Sprites &sprites);

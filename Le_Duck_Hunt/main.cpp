@@ -8,11 +8,13 @@ int main(int argc, char* argv[])
     TTF_Init();
 
     // fonction chargerPolice dans init.cpp ?
-    TTF_Font *police;
-    police = TTF_OpenFont("font/duck_hunt.ttf", 80);
+    Message msgScore;
+    initMessage(msgScore);
+    TTF_Font *police ;
+    police = TTF_OpenFont("font/duck_hunt.ttf", msgScore.fontSize);
 
-    /* Définition de l'écran */
     SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF);
+    //SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF);
 
     // L'allocation de mémoire statique d'un SDL_Surface n'est pas utile, SDL le fait implicitement avec SetVideoMode.
     // On appelera l'écran grâce au renvoie de sa fonction native GetVideoSurface().
@@ -52,18 +54,6 @@ int main(int argc, char* argv[])
     initSourisEvent(sourisEvent);
     SDL_ShowCursor(SDL_DISABLE);
 
-/*!
-    HELP POUR L'AFFICHAGE DES FONTES STP :'(
-
-    Message msgNiveau;
-    msgNiveau.message = "Niveau";
-    msgNiveau.couleurTexte = {255, 255, 255};
-    msgNiveau.taille = 80;
-    msgNiveau.tempsDAffichage = 3000;
-    msgNiveau.position.x = 50;
-    msgNiveau.position.y = 50;
-
-*/
 
     do
     {
@@ -93,8 +83,10 @@ int main(int argc, char* argv[])
 
         if (temps.currentTime >= temps.timeFps + temps.fpsTime)
         {
-           // showMessageScreen(message, 50, 50, police, 50, msgNiveau.couleurTexte);
             genererRendu(sprites, sourisEvent, partie);
+            showPoints(msgScore, police, partie.score);
+            SDL_Flip(SDL_GetVideoSurface());
+
             temps.timeFps = temps.currentTime;
         }
         if (keystate[SDLK_ESCAPE])
@@ -108,8 +100,7 @@ int main(int argc, char* argv[])
         }
 
         SDL_Delay(1);
-
-    } while (modeJeu != 0 && partie.round != 5);
+    } while (modeJeu != 0);
 
     SDL_Quit();
     IMG_Quit();
