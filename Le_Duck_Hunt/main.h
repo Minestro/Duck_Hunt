@@ -9,7 +9,7 @@
 
 // Note ! Mets en commentaire le ce define, moi j'en ai besoin pour chez moi
 
-//#define VIETKHANG
+#define VIETKHANG
 #ifdef VIETKHANG
 #include "../DuckHunt/include/SDL/SDL.h"
 #include "../DuckHunt/include/SDL/SDL_image.h"
@@ -35,6 +35,19 @@
 #define HIT_OK 2
 #define HIT_FAILED 1
 #define HIT_EMPTY 0
+
+// Tableau d'images pour les diverses animations du chien
+#define CHIEN_MARCHE 0
+#define CHIEN_CONTENT 1
+#define CHIEN_SAUTE_1 2
+#define CHIEN_SAUTE_2 3
+#define CHIEN_RIGOLE 4
+#define CHIEN_CONTENT_SIMPLE 5
+#define CHIEN_CONTENT_DOUBLE 6
+#define NOMBRE_IMAGES_CHIEN 7
+// Position en Y en fonction de l'état du jeu
+#define Y_INTRO_CHIEN 500
+#define Y_JEU_CHIEN 440
 
 const int HAUTEUR = 761;
 const int LARGEUR = 750;
@@ -64,9 +77,11 @@ struct Partie
     int score;
     int hit[10];
     bool roundJoue[5];
+    bool canardAbbatu;
+    bool chienCheck;
 };
 
-struct Sprite
+struct Sprite // Peut représenter une image comme une feuille de sprites
 {
     SDL_Surface *source;
     SDL_Rect position;
@@ -92,23 +107,29 @@ struct Canard
 
 struct Chien
 {
-    Sprite image;
+    int vecteurPositionX;
+    int vecteurPositionY;
+    int etat;
+    Sprite image[NOMBRE_IMAGES_CHIEN]; // On va utiliser des feuilles de sprite différentes
+    int nbFrames;
     int vitesseAnimation;
     Uint32 vitesseAnimationTime;
     int vitesse;
     Uint32 vitesseTime;
-    int nbFrames;
     int pxParFrame;
     int cycleSprite;
+    Uint32 tempsDepuisEtat; // Même principe que tempsDepuisTir mais depuis un certain etat;
+    bool devantHerbe; // si on le blit avant ou après les herbes hautes
 };
 
-struct Sprites
+struct Sprites // Rassemble toutes les images et les feuilles de sprite
 {
     Sprite background;
     Sprite background_blit;
     Sprite background_menu;
 
     Chien chien;
+
     int canardActifs;
     Canard canard[NB_MAX_CANARDS];
 
@@ -161,21 +182,23 @@ struct Time
 void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time);
 void showMenu(Sprites, Boutons, int &modeMenu, int, int);
 bool testHoverBouton(int, int, Bouton);
-void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie);
-void chargerImages(Sprites &sprites, Boutons &bouton);
-void initBouton(Bouton &bouton, int);
+void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien chien);
+void chargerImages(Sprites &sprites);
+void initBouton(Boutons &boutons);
 void initSourisEvent(SourisEvent &SourisEvent);
 void initTime(Time &time);
 void initCanard(Canard &cn);
+void initChien(Chien &chien);
 void initMessage(Message &message);
 SDL_Surface *loadImage(std::string);
 SDL_Surface *loadImageWithColorKey(std::string, int, int, int);
 bool getEvents (SourisEvent &sourisEvent);
 void changementDirection(Canard &canard);
+void detectionBordsChien(Chien &chien);
 void mouvementsCanard(Canard &canard);
 void switchSpriteCanard(Canard &canard);
 int alea(int, int);
-void detectionBords(Canard &canard, Partie &partie);
+void detectionBordsCanard(Canard &canard, Partie &partie);
 void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, int i, int canardsActifs, Time temps);
 bool testShot(SourisEvent sourisEvent, Sprite sprite);
 void touched(Canard &canard, Time temps);
@@ -183,5 +206,8 @@ void showPoints(Message &msg, TTF_Font *font, int points);
 void initPartie(Partie &partie, int nbCanards);
 bool partieTerminee(const Partie partie);
 void relancerPartie(Partie &partie, Sprites &sprites);
+void controlesChien(Chien &chien, Partie &partie);
+void switchSpriteChien(Chien &chien, Partie &partie);
+void afficherChien(Chien chien);
 
 #endif // HEADER_H

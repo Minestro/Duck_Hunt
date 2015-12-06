@@ -1,5 +1,29 @@
 #include "main.h"
 
+void switchSpriteChien(Chien &chien, Partie &partie)
+{
+    controlesChien(chien, partie);
+    switch(chien.etat)
+    {
+        case CHIEN_MARCHE:
+            chien.image[CHIEN_MARCHE].lecture.x = (chien.cycleSprite % chien.nbFrames) * chien.pxParFrame;
+            chien.cycleSprite = (chien.cycleSprite + 1) % chien.nbFrames;
+            break;
+        case CHIEN_CONTENT:
+            if(chien.vecteurPositionX < 0)
+            {
+                chien.image[CHIEN_CONTENT].lecture.y = 100;
+            }
+            else
+            {
+                chien.image[CHIEN_CONTENT].lecture.y = 0;
+            }
+            break;
+        default:
+            break;
+    }
+}
+
 void switchSpriteCanard(Canard &canard)
 {
     switch (canard.etat)

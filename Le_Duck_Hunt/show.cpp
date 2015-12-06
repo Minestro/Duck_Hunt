@@ -1,5 +1,10 @@
 ﻿#include "main.h"
 
+void afficherChien(Chien chien)
+{
+    SDL_BlitSurface(chien.image[chien.etat].source, &chien.image[chien.etat].lecture, SDL_GetVideoSurface(), &chien.image[chien.etat].position);
+}
+
 void showMenu(Sprites sprites, Boutons boutons, int &modeMenu, int sx, int sy)
 {
     sprites.viseur.position.x=sx-(sprites.viseur.source->w/2);
@@ -7,21 +12,26 @@ void showMenu(Sprites sprites, Boutons boutons, int &modeMenu, int sx, int sy)
     SDL_BlitSurface(sprites.background_menu.source, NULL, SDL_GetVideoSurface(), &sprites.background.position);
     switch (modeMenu)
     {
-    case 1 :
-        SDL_BlitSurface(boutons.source, &boutons.play.lecture[testHoverBouton(sx, sy, boutons.play)], SDL_GetVideoSurface(), &boutons.play.position);
-        SDL_BlitSurface(boutons.source, &boutons.quit.lecture[testHoverBouton(sx, sy, boutons.quit)], SDL_GetVideoSurface(), &boutons.quit.position);
-        break;
+        case 1 :
+            SDL_BlitSurface(boutons.source, &boutons.play.lecture[testHoverBouton(sx, sy, boutons.play)], SDL_GetVideoSurface(), &boutons.play.position);
+            SDL_BlitSurface(boutons.source, &boutons.quit.lecture[testHoverBouton(sx, sy, boutons.quit)], SDL_GetVideoSurface(), &boutons.quit.position);
+            break;
     }
+
     SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);
     SDL_Flip(SDL_GetVideoSurface());
 }
 
-void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie)
+void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien chien)
 {
     SDL_BlitSurface(sprites.background.source, NULL, SDL_GetVideoSurface(), &sprites.background.position);
     sprites.viseur.position.x = sourisEvent.sx - (sprites.viseur.source->w / 2);
     sprites.viseur.position.y = sourisEvent.sy - (sprites.viseur.source->h / 2);
     sprites.shots.lecture.x = 0 + partie.shots * 75;
+    if(!chien.devantHerbe)
+    {
+        afficherChien(chien);
+    }
     for (int i = 0 ; i < sprites.canardActifs ; i++)
     {
         if (sprites.canard[i].etat == FREE_FALLING)
@@ -30,6 +40,10 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie)
         }
     }
     SDL_BlitSurface(sprites.background_blit.source, NULL, SDL_GetVideoSurface(), &sprites.background.position);
+    if(chien.devantHerbe)
+    {
+        afficherChien(chien);
+    }
     for (int i = 0 ; i < sprites.canardActifs ; i++)
     {
         if (sprites.canard[i].etat != FREE_FALLING && sprites.canard[i].etat != DEAD)
@@ -38,8 +52,8 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie)
         }
     }
     SDL_BlitSurface(sprites.shots.source, &sprites.shots.lecture, SDL_GetVideoSurface(), &sprites.shots.position);
-    sprites.shots.lecture.y=0;
-    sprites.hits.position.x=170;
+    sprites.shots.lecture.y = 0;
+    sprites.hits.position.x = 170;
     for (int i = 0; i < 10; i++)
     {
         sprites.hits.lecture.x = partie.hit[i] * 27;
@@ -48,6 +62,7 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie)
     }
     SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);
 }
+
 
 void showPoints(Message &msg, TTF_Font *font, int points)
 {

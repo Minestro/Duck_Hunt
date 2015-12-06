@@ -7,7 +7,6 @@ int main(int argc, char* argv[])
     SDL_Init(SDL_INIT_VIDEO);
     TTF_Init();
 
-    // fonction chargerPolice dans init.cpp ?
     Message msgScore;
     initMessage(msgScore);
     TTF_Font *police ;
@@ -34,19 +33,24 @@ int main(int argc, char* argv[])
     int modeMenu = 1;   // Détermine la page du menu à afficher.
 
     Partie partie;
-    Boutons boutons;
     Sprites sprites;
 
-    chargerImages(sprites, boutons);
-    sprites.canardActifs = 20;
+    chargerImages(sprites);
+
+    Boutons boutons;
+    initBouton(boutons);
+
+    Chien chien;
+    initChien(chien);
+
+    sprites.canardActifs = 2;
 
     for (int i = 0; i<sprites.canardActifs; i++)
     {
         sprites.canard[i].type = alea(1, 3);
         initCanard(sprites.canard[i]);
     }
-    initBouton(boutons.quit, 0);
-    initBouton(boutons.play, 1);
+
     initPartie(partie, sprites.canardActifs);
 
     Uint8 *keystate = SDL_GetKeyState(NULL);
@@ -70,7 +74,7 @@ int main(int argc, char* argv[])
                     touched(sprites.canard[i], temps);
                 }
                 mouvementsCanard(sprites.canard[i]);
-                detectionBords(sprites.canard[i], partie);
+                detectionBordsCanard(sprites.canard[i], partie);
                 changementDirection(sprites.canard[i]);
                 sprites.canard[i].vitesseTime = temps.currentTime;
             }
@@ -80,15 +84,22 @@ int main(int argc, char* argv[])
                 sprites.canard[i].vitesseAnimationTime = temps.currentTime;
             }
         }
+        if (temps.currentTime >= chien.vitesseAnimationTime + chien.vitesseAnimation)
+        {
+            switchSpriteChien(chien, partie);
+            chien.vitesseAnimationTime = temps.currentTime;
+        }
 
         if (temps.currentTime >= temps.timeFps + temps.fpsTime)
         {
-            genererRendu(sprites, sourisEvent, partie);
+            genererRendu(sprites, sourisEvent, partie, chien);
             showPoints(msgScore, police, partie.score);
+
             SDL_Flip(SDL_GetVideoSurface());
 
             temps.timeFps = temps.currentTime;
         }
+
         if (keystate[SDLK_ESCAPE])
         {
             modeMenu = 5;
@@ -98,8 +109,8 @@ int main(int argc, char* argv[])
         {
             relancerPartie(partie, sprites);
         }
-
         SDL_Delay(1);
+
     } while (modeJeu != 0);
 
     SDL_Quit();

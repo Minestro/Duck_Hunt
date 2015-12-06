@@ -81,10 +81,9 @@ SDL_Surface *loadImageWithColorKey(std::string filename, int r, int g, int b)
 
 /*** fonction qui charge les images ***/
 
-void chargerImages(Sprites &sprites, Boutons &bouton)
+void chargerImages(Sprites &sprites)
 {
     sprites.background_menu.source=load_image("sprites/menu.png");
-    bouton.source = loadImageWithColorKey("sprites/bouton.bmp",0,0,0);
 
     sprites.background.source=load_image("sprites/backGame.png");
     sprites.background.position.x = 0;
@@ -98,20 +97,20 @@ void chargerImages(Sprites &sprites, Boutons &bouton)
     sprites.background_menu.position.x = 0;
     sprites.background_menu.position.y = 0;
 
-    sprites.viseur.source=loadImageWithColorKey("sprites/viseur.png",0,0,0);
-    sprites.hits.source=loadImageWithColorKey("sprites/hit.png",0,0,0);
+    sprites.viseur.source=loadImageWithColorKey("sprites/viseur.png", 0, 0, 0);
+    sprites.hits.source=loadImageWithColorKey("sprites/hit.png", 0, 0, 0);
     sprites.hits.lecture.w = 27;
     sprites.hits.lecture.h = 27;
     sprites.hits.lecture.y = 0;
     sprites.hits.lecture.x = 0;
     sprites.hits.position.y = 670;
 
-    sprites.shots.source=load_image("sprites/shot.png");
-    sprites.shots.position.x=65;
-    sprites.shots.position.y=658;
-    sprites.shots.lecture.w=75;
-    sprites.shots.lecture.h=50;
-    sprites.shots.lecture.y=0;
+    sprites.shots.source = load_image("sprites/shot.png");
+    sprites.shots.position.x = 65;
+    sprites.shots.position.y = 658;
+    sprites.shots.lecture.w = 75;
+    sprites.shots.lecture.h = 50;
+    sprites.shots.lecture.y = 0;
 }
 
 /*void libererImages(Sprites i)
