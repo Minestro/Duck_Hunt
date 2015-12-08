@@ -14,7 +14,8 @@ void initMessage(Message msgs[])
     msgs[MSG_SCORE].fontSize = 35;
     msgs[MSG_SCORE].font = TTF_OpenFont("font/duck_hunt.ttf", msgs[MSG_SCORE].fontSize);
 
-    //msgMenu.font = TTF_OpenFont("font/duck_hunt.ttf", msgMenu.fontSize);
+    msgs[MSG_BOUTONS].fontSize = 40;
+    msgs[MSG_BOUTONS].font = TTF_OpenFont("font/duck_hunt.ttf", msgs[MSG_BOUTONS].fontSize);
 }
 
 void initBouton(Boutons &boutons)

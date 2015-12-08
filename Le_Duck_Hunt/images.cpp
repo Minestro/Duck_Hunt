@@ -107,7 +107,7 @@ void chargerImages(Sprites &sprites)
     sprites.hits.lecture = initializer;
     sprites.hits.lecture.w = 27;
     sprites.hits.lecture.h = 27;
-    sprites.hits.position.y = 670;
+    sprites.hits.position.y = 665;
 
     sprites.shots.source = load_image("sprites/shot.png");
     sprites.shots.lecture = initializer;
