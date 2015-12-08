@@ -38,7 +38,10 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisE
                     }
                     break;
                 case 5 :
-
+                        message.position.x=210;
+                        message.position.y=250;
+                        showMenu(sprites, boutons, modeMenu, sourisEvent.sx, sourisEvent.sy);
+                        showMessage(message, "Jeu en Pause");
                     break;
                 case 6:
 
@@ -48,6 +51,7 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisE
             }
             time.timeMenu = time.currentTime;
         }
+        SDL_Flip(SDL_GetVideoSurface());
     }
 }
 

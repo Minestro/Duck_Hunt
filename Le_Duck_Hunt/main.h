@@ -203,13 +203,19 @@ int alea(int, int);
 void detectionBordsCanard(Canard &canard, Partie &partie);
 void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, int i, int canardsActifs, Time temps);
 bool testShot(SourisEvent sourisEvent, Sprite sprite);
+<<<<<<< HEAD
 void touched(Canard &canard, Time temps, Sprite &points);
 void showPoints(Message &msg, TTF_Font *font, int &points);
+=======
+void touched(Canard &canard, Time temps);
+void showMessage(Message &msg, std::string contenuMessage);
+>>>>>>> 5ce7d9f27eeed40c0cf865842caf5b028311b185
 void initPartie(Partie &partie, int nbCanards);
 bool partieTerminee(const Partie partie);
 void relancerPartie(Partie &partie, Sprites &sprites);
 void controlesChien(Chien &chien, Partie &partie);
 void switchSpriteChien(Chien &chien, Partie &partie);
 void afficherChien(Chien chien);
+std::string intToString (int number);
 
 #endif // HEADER_H
