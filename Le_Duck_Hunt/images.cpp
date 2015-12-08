@@ -91,7 +91,7 @@ void chargerImages(Sprites &sprites)
     sprites.points.lecture.h = 17;
     sprites.points.lecture.w = 32;
 
-    sprites.background_menu.source=load_image("sprites/menu.png");
+    sprites.background_menu.source = load_image("sprites/menu.png");
 
     sprites.background.source=load_image("sprites/backGame.png");
     sprites.background.position = initializer;

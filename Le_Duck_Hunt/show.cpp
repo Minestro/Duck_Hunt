@@ -26,7 +26,6 @@ void showMenu(Sprites sprites, Boutons boutons, int &modeMenu, Message message, 
             SDL_BlitSurface(boutons.source, &boutons.lecture[testHoverBouton(sx, sy, boutons.quit, boutons.lecture[0])], SDL_GetVideoSurface(), &boutons.quit.position);
             break;
     }
-
     SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);
 }
 
@@ -75,17 +74,17 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien
         sprites.hits.position.x += sprites.hits.lecture.w + 3;
         SDL_BlitSurface(sprites.hits.source, &sprites.hits.lecture, SDL_GetVideoSurface(), &sprites.hits.position);
     }
-
-    SDL_BlitSurface(sprites.points.source, NULL, SDL_GetVideoSurface(), &sprites.points.position);
     SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);
 }
 
 void showPointsCanard(Sprite &points, Canard canard)
 {
-    points.lecture.y = 32 * canard.type;
+    points.lecture.y = 32 * (canard.type - 1);
+    points.lecture.h = 17;
+    points.lecture.w = 32;
     points.position.x = canard.image.position.x + canard.image.lecture.w / 2;
     points.position.y = canard.image.position.y + canard.image.lecture.h / 2;
-    SDL_BlitSurface(points.source, &points.position, SDL_GetVideoSurface(), &points.lecture);
+    SDL_BlitSurface(points.source, &points.lecture, SDL_GetVideoSurface(), &points.position);
 }
 
 
