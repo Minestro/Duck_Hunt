@@ -9,11 +9,13 @@ int main(int argc, char* argv[])
 
     Message msgScore;
     initMessage(msgScore);
-    TTF_Font *police ;
-    police = TTF_OpenFont("font/duck_hunt.ttf", msgScore.fontSize);
+    Message msgMenu;
+    initMessage(msgMenu);
+    msgMenu.fontSize = 45;
+    msgScore.font = TTF_OpenFont("font/duck_hunt.ttf", msgScore.fontSize);
+    msgMenu.font = TTF_OpenFont("font/duck_hunt.ttf", msgMenu.fontSize);
 
     SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF);
-    //SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF);
 
     // L'allocation de mémoire statique d'un SDL_Surface n'est pas utile, SDL le fait implicitement avec SetVideoMode.
     // On appelera l'écran grâce au renvoie de sa fonction native GetVideoSurface().
@@ -61,7 +63,7 @@ int main(int argc, char* argv[])
 
     do
     {
-        menu(sprites, boutons, modeMenu, modeJeu, sourisEvent, temps);
+        menu(sprites, boutons, modeMenu, modeJeu, sourisEvent, temps, msgMenu);
         temps.currentTime = SDL_GetTicks();
         for (int i = 0 ; i < sprites.canardActifs ; i++)
         {

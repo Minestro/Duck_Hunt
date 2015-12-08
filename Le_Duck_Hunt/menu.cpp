@@ -1,6 +1,6 @@
 #include "main.h"
 
-void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time)
+void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message message)
 {
     bool sortir = false;
     while (!sortir)
@@ -38,7 +38,10 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisE
                     }
                     break;
                 case 5 :
-                    std::cout << "jeu en pause" << std::endl;
+
+                    break;
+                case 6:
+
                     break;
                 default:
                     break;

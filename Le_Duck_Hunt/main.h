@@ -9,16 +9,16 @@
 
 // Note ! Mets en commentaire le ce define, moi j'en ai besoin pour chez moi
 
-#define VIETKHANG
+/*#define VIETKHANG
 #ifdef VIETKHANG
 #include "../DuckHunt/include/SDL/SDL.h"
 #include "../DuckHunt/include/SDL/SDL_image.h"
 #include "../DuckHunt/include/SDL/SDL_ttf.h"
-#else
+#else*/
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
-#endif
+//#endif
 
 // Type du canard
 #define DARK 1 // Sombre, le plus lent : 500 points.
@@ -66,6 +66,7 @@ struct Message // Une structure pour afficher avec les fontes, par exemple les s
     int fontSize;   //taille de la police
     std::string message; // le contenu du texte
     SDL_Rect position; //position de l'affichage tu texte
+    TTF_Font *font;
 };
 
 struct Partie
@@ -179,7 +180,7 @@ struct Time
     int fpsTime, menuTime;
 };
 
-void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time);
+void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message message);
 void showMenu(Sprites, Boutons, int &modeMenu, int, int);
 bool testHoverBouton(int, int, Bouton);
 void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien chien);
