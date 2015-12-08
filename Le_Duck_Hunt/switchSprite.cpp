@@ -12,11 +12,11 @@ void switchSpriteChien(Chien &chien, Partie &partie)
         case CHIEN_CONTENT:
             if(chien.vecteurPositionX < 0)
             {
-                chien.image[CHIEN_CONTENT].lecture.y = 100;
+                chien.image[CHIEN_CONTENT].lecture.y = 0;
             }
             else
             {
-                chien.image[CHIEN_CONTENT].lecture.y = 0;
+                chien.image[CHIEN_CONTENT].lecture.y = 96;
             }
             break;
         default:

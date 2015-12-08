@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
 
     for (int i = 0; i<sprites.canardActifs; i++)
     {
-        sprites.canard[i].type = alea(1, 3);
+        sprites.canard[i].type = alea(1, 2);
         initCanard(sprites.canard[i]);
     }
 
@@ -95,7 +95,7 @@ int main(int argc, char* argv[])
         if (temps.currentTime >= temps.timeFps + temps.fpsTime)
         {
             genererRendu(sprites, sourisEvent, partie, chien);
-            showPoints(msgScore, police, partie.score);
+            showPoints(msgScore, msgScore.font, partie.score);
 
             SDL_Flip(SDL_GetVideoSurface());
 
