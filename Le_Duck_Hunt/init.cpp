@@ -141,5 +141,10 @@ void initCanard(Canard &cn)
             cn.vecteurPositionY = 10 + cn.vecteurPositionX;
         }
     } while(cn.vecteurPositionX == 0 || cn.vecteurPositionY == 0);
+
+    cn.points.source = loadImageWithColorKey("sprites/points.png", 0, 0, 0);
+
+    cn.points.lecture.h = 17;
+    cn.points.lecture.w = 32;
 }
 

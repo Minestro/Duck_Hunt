@@ -75,7 +75,7 @@ int main(int argc, char* argv[])
                 shoot(sourisEvent, sprites.canard[i], partie, i, sprites.canardActifs, temps);
                 if(sprites.canard[i].etat == TOUCHED)
                 {
-                    touched(sprites.canard[i], temps, sprites.points);
+                    touched(sprites.canard[i], temps);
                 }
                 mouvementsCanard(sprites.canard[i]);
                 detectionBordsCanard(sprites.canard[i], partie);

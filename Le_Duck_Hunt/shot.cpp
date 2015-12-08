@@ -28,7 +28,7 @@ void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, int i, int c
     }
 }
 
-void touched(Canard &canard, Time temps, Sprite &points)
+void touched(Canard &canard, Time temps)
 {
     if(temps.currentTime - canard.tempsDepuisTir > 250) // Si le temps écoulé depuis le tir est plus de un quart de sec, le canard passe de ALIVE à FREE_FALLING
     {

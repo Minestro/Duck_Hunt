@@ -158,6 +158,7 @@ void detectionBordsCanard(Canard &canard, Partie &partie)
             {
                 canard.etat = DEAD;
                 SDL_FreeSurface(canard.image.source);
+                SDL_FreeSurface(canard.points.source);
                 partie.canardsEnVie--;
                 partie.canardAbbatu = true;
             }

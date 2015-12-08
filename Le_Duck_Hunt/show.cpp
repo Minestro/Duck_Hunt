@@ -8,7 +8,9 @@ void afficherChien(Chien chien)
 std::string intToString (int number)
 {
     std::ostringstream oss;
-    oss<< number;
+    oss.flush();
+    oss.str("");
+    oss << number;
     return oss.str();
 }
 
@@ -57,14 +59,12 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien
         {
             SDL_BlitSurface(sprites.canard[i].image.source, &sprites.canard[i].image.lecture, SDL_GetVideoSurface(), &sprites.canard[i].image.position);
         }
-    }
-    for (int i = 0 ; i < sprites.canardActifs ; i++)
-    {
         if (sprites.canard[i].etat == TOUCHED)
         {
-            showPointsCanard(sprites.points, sprites.canard[i]);
+            showPointsCanard(sprites.canard[i]);
         }
     }
+
     SDL_BlitSurface(sprites.shots.source, &sprites.shots.lecture, SDL_GetVideoSurface(), &sprites.shots.position);
     sprites.shots.lecture.y = 0;
     sprites.hits.position.x = 170;
@@ -77,14 +77,19 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien
     SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);
 }
 
-void showPointsCanard(Sprite &points, Canard canard)
+void showPointsCanard(Canard &canard)
 {
-    points.lecture.y = 32 * (canard.type - 1);
-    points.lecture.h = 17;
-    points.lecture.w = 32;
-    points.position.x = canard.image.position.x + canard.image.lecture.w / 2;
-    points.position.y = canard.image.position.y + canard.image.lecture.h / 2;
-    SDL_BlitSurface(points.source, &points.lecture, SDL_GetVideoSurface(), &points.position);
+    // fonction en mode debug
+    Message msg;
+    msg.position.x = canard.points.position.x = canard.image.position.x + canard.image.lecture.w / 2;
+    msg.position.y = canard.points.position.y = canard.image.position.y + canard.image.lecture.h;
+    canard.points.lecture.y = 17 * (canard.type - 1);
+    SDL_BlitSurface(canard.points.source, &canard.points.lecture, SDL_GetVideoSurface(), &canard.points.position);
+    msg.fontSize = 100;
+    msg.font = TTF_OpenFont("font/duck_hunt.ttf", msg.fontSize);
+    msg.message = intToString(canard.points.lecture.y);
+    msg.textColor.r = msg.textColor.g = msg.textColor.b = 255;
+    showMessage(msg, msg.message);
 }
 
 
