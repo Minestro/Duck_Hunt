@@ -5,6 +5,13 @@ void afficherChien(Chien chien)
     SDL_BlitSurface(chien.image[chien.etat].source, &chien.image[chien.etat].lecture, SDL_GetVideoSurface(), &chien.image[chien.etat].position);
 }
 
+std::string intToString (int number)
+{
+    std::ostringstream oss;
+    oss<< number;
+    return oss.str();
+}
+
 void showMenu(Sprites sprites, Boutons boutons, int &modeMenu, int sx, int sy)
 {
     sprites.viseur.position.x=sx-(sprites.viseur.source->w/2);
@@ -19,7 +26,6 @@ void showMenu(Sprites sprites, Boutons boutons, int &modeMenu, int sx, int sy)
     }
 
     SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);
-    SDL_Flip(SDL_GetVideoSurface());
 }
 
 void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien chien)
@@ -64,12 +70,12 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien
 }
 
 
-void showPoints(Message &msg, TTF_Font *font, int points)
+void showMessage(Message &msg, std::string contenuMessage)
 {
     static std::ostringstream message;
     message.flush();
     message.str("");
-    message << points;
+    message << contenuMessage;
     msg.message = message.str();
 
     std::string mot="";
@@ -79,12 +85,12 @@ void showPoints(Message &msg, TTF_Font *font, int points)
     SDL_Surface *mes = NULL;
 
     j = msg.message.find(space);
-    while( j != std::string::npos )
+    while(j != std::string::npos)
     {
         mot = msg.message.substr(i,j-i);
         if(mot != "")
         {
-           mes = TTF_RenderText_Solid(font, mot.c_str(), msg.textColor);
+           mes = TTF_RenderText_Solid(msg.font, mot.c_str(), msg.textColor);
            SDL_BlitSurface(mes, NULL, SDL_GetVideoSurface(),  &msg.position);
            msg.position.x += mes->w;
            SDL_FreeSurface(mes);
@@ -95,7 +101,7 @@ void showPoints(Message &msg, TTF_Font *font, int points)
     }
 
     mot = msg.message.substr(i);
-    mes = TTF_RenderText_Solid(font, mot.c_str(), msg.textColor);
+    mes = TTF_RenderText_Solid(msg.font, mot.c_str(), msg.textColor);
     SDL_BlitSurface(mes, NULL, SDL_GetVideoSurface(),  &msg.position);
     SDL_FreeSurface(mes);
 }

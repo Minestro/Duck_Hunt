@@ -95,7 +95,7 @@ int main(int argc, char* argv[])
         if (temps.currentTime >= temps.timeFps + temps.fpsTime)
         {
             genererRendu(sprites, sourisEvent, partie, chien);
-            showPoints(msgScore, police, partie.score);
+            showMessage(msgScore, intToString(partie.score));
 
             SDL_Flip(SDL_GetVideoSurface());
 
