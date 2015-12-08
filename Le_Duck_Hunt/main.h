@@ -9,16 +9,16 @@
 
 // Note ! Mets en commentaire le ce define, moi j'en ai besoin pour chez moi
 
-/*#define VIETKHANG
+#define VIETKHANG
 #ifdef VIETKHANG
 #include "../DuckHunt/include/SDL/SDL.h"
 #include "../DuckHunt/include/SDL/SDL_image.h"
 #include "../DuckHunt/include/SDL/SDL_ttf.h"
-#else*/
+#else
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
-//#endif
+#endif
 
 // Type du canard
 #define DARK 1 // Sombre, le plus lent : 500 points.
