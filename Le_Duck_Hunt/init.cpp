@@ -76,7 +76,7 @@ void initChien(Chien &chien)
     chien.image[CHIEN_MARCHE].lecture.h = 87;
     chien.image[CHIEN_MARCHE].lecture.w = 120;
     chien.image[CHIEN_MARCHE].lecture.x = 0;
-    chien.image[CHIEN_MARCHE].lecture.y = 0;
+    chien.image[CHIEN_MARCHE].lecture.y = 87;
     chien.image[CHIEN_MARCHE].position.x = 0;
     chien.image[CHIEN_MARCHE].position.y = Y_INTRO_CHIEN;
 
