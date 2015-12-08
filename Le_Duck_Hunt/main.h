@@ -213,5 +213,6 @@ void controlesChien(Chien &chien, Partie &partie);
 void switchSpriteChien(Chien &chien, Partie &partie);
 void afficherChien(Chien chien);
 std::string intToString (int number);
+void showPointsCanard(Sprite &points, Canard canard);
 
 #endif // HEADER_H

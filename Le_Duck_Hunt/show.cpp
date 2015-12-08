@@ -57,8 +57,13 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien
         if (sprites.canard[i].etat != FREE_FALLING && sprites.canard[i].etat != DEAD)
         {
             SDL_BlitSurface(sprites.canard[i].image.source, &sprites.canard[i].image.lecture, SDL_GetVideoSurface(), &sprites.canard[i].image.position);
-
-            SDL_BlitSurface(sprites.points.source, &sprites.points.lecture, SDL_GetVideoSurface(), &sprites.points.position);
+        }
+    }
+    for (int i = 0 ; i < sprites.canardActifs ; i++)
+    {
+        if (sprites.canard[i].etat == TOUCHED)
+        {
+            showPointsCanard(sprites.points, sprites.canard[i]);
         }
     }
     SDL_BlitSurface(sprites.shots.source, &sprites.shots.lecture, SDL_GetVideoSurface(), &sprites.shots.position);
@@ -71,9 +76,16 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien
         SDL_BlitSurface(sprites.hits.source, &sprites.hits.lecture, SDL_GetVideoSurface(), &sprites.hits.position);
     }
 
-    SDL_BlitSurface(sprites.points.source, &sprites.points.lecture, SDL_GetVideoSurface(), &sprites.points.position);
-
+    SDL_BlitSurface(sprites.points.source, NULL, SDL_GetVideoSurface(), &sprites.points.position);
     SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);
+}
+
+void showPointsCanard(Sprite &points, Canard canard)
+{
+    points.lecture.y = 32 * canard.type;
+    points.position.x = canard.image.position.x + canard.image.lecture.w / 2;
+    points.position.y = canard.image.position.y + canard.image.lecture.h / 2;
+    SDL_BlitSurface(points.source, &points.position, SDL_GetVideoSurface(), &points.lecture);
 }
 
 
@@ -106,7 +118,6 @@ void showMessage(Message &msg, std::string contenuMessage)
         i = j+1;
         j = msg.message.find(space,i);
     }
-
     mot = msg.message.substr(i);
     mes = TTF_RenderText_Solid(msg.font, mot.c_str(), msg.textColor);
     SDL_BlitSurface(mes, NULL, SDL_GetVideoSurface(),  &msg.position);
