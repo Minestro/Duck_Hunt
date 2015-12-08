@@ -77,7 +77,7 @@ void initChien(Chien &chien)
     chien.image[CHIEN_MARCHE].position.y = Y_INTRO_CHIEN;
 
     chien.image[CHIEN_CONTENT].source = loadImageWithColorKey("sprites/chienContent.png", 0, 255, 0);
-    chien.image[CHIEN_CONTENT].lecture.h = 96;
+    chien.image[CHIEN_CONTENT].lecture.h = 100;
     chien.image[CHIEN_CONTENT].lecture.w = 113;
     chien.image[CHIEN_CONTENT].lecture.x = 0;
     chien.image[CHIEN_CONTENT].lecture.y = 96;

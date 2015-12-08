@@ -87,10 +87,9 @@ void chargerImages(Sprites &sprites)
     initializer.x = initializer.y = 0;
 
     sprites.points.source = loadImageWithColorKey("sprites/points.png", 0, 0, 0);
+    sprites.points.lecture = initializer;
     sprites.points.lecture.h = 17;
     sprites.points.lecture.w = 32;
-    sprites.points.position = initializer;
-
 
     sprites.background_menu.source=load_image("sprites/menu.png");
 
@@ -105,18 +104,17 @@ void chargerImages(Sprites &sprites)
 
     sprites.viseur.source=loadImageWithColorKey("sprites/viseur.png", 0, 0, 0);
     sprites.hits.source=loadImageWithColorKey("sprites/hit.png", 0, 0, 0);
+    sprites.hits.lecture = initializer;
     sprites.hits.lecture.w = 27;
     sprites.hits.lecture.h = 27;
-    sprites.hits.lecture.y = 0;
-    sprites.hits.lecture.x = 0;
     sprites.hits.position.y = 670;
 
     sprites.shots.source = load_image("sprites/shot.png");
+    sprites.shots.lecture = initializer;
     sprites.shots.position.x = 65;
     sprites.shots.position.y = 658;
     sprites.shots.lecture.w = 75;
     sprites.shots.lecture.h = 50;
-    sprites.shots.lecture.y = 0;
 }
 
 /*void libererImages(Sprites i)

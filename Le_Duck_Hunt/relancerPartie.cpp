@@ -2,7 +2,7 @@
 
 bool partieTerminee(const Partie partie)
 {
-    return (partie.chienCheck || partie.shots == 0);
+    return (partie.canardsEnVie == 0 || partie.shots == 0);
 }
 
 void relancerPartie(Partie &partie, Sprites &sprites)

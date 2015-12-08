@@ -16,7 +16,7 @@ void switchSpriteChien(Chien &chien, Partie &partie)
             }
             else
             {
-                chien.image[CHIEN_CONTENT].lecture.y = 96;
+                chien.image[CHIEN_CONTENT].lecture.y = 100;
             }
             break;
         default:
