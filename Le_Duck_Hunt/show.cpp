@@ -12,7 +12,7 @@ std::string intToString (int number)
     return oss.str();
 }
 
-void showMenu(Sprites sprites, Boutons boutons, int &modeMenu, Message message, int sx, int sy)
+void showMenu(Sprites sprites, Boutons boutons, int &modeMenu, Message msgs[], int sx, int sy)
 {
     sprites.viseur.position.x=sx-(sprites.viseur.source->w/2);
     sprites.viseur.position.y=sy-(sprites.viseur.source->h/2);
@@ -21,9 +21,16 @@ void showMenu(Sprites sprites, Boutons boutons, int &modeMenu, Message message, 
     {
         case 1 :
             SDL_BlitSurface(boutons.source, &boutons.lecture[testHoverBouton(sx, sy, boutons.play, boutons.lecture[0])], SDL_GetVideoSurface(), &boutons.play.position);
-            message.position.x=boutons.play.position.x;
-            showMessage(message, boutons.play.contenu);
+            msgs[MSG_BOUTONS].source = TTF_RenderText_Solid(msgs[MSG_SCORE].font, boutons.play.contenu.c_str(), msgs[MSG_SCORE].textColor);
+            msgs[MSG_BOUTONS].position.x=boutons.play.position.x+(boutons.lecture[0].w - msgs[MSG_BOUTONS].source->w)/2;
+            msgs[MSG_BOUTONS].position.y=boutons.play.position.y+(boutons.lecture[0].h - msgs[MSG_BOUTONS].source->h)/2;
+            SDL_BlitSurface(msgs[MSG_BOUTONS].source, NULL, SDL_GetVideoSurface(), &msgs[MSG_BOUTONS].position);
             SDL_BlitSurface(boutons.source, &boutons.lecture[testHoverBouton(sx, sy, boutons.quit, boutons.lecture[0])], SDL_GetVideoSurface(), &boutons.quit.position);
+            msgs[MSG_BOUTONS].source = TTF_RenderText_Solid(msgs[MSG_SCORE].font, boutons.quit.contenu.c_str(), msgs[MSG_SCORE].textColor);
+            msgs[MSG_BOUTONS].position.x=boutons.quit.position.x+(boutons.lecture[0].w - msgs[MSG_BOUTONS].source->w)/2;
+            msgs[MSG_BOUTONS].position.y=boutons.quit.position.y+(boutons.lecture[0].h - msgs[MSG_BOUTONS].source->h)/2;
+            SDL_BlitSurface(msgs[MSG_BOUTONS].source, NULL, SDL_GetVideoSurface(), &msgs[MSG_BOUTONS].position);
+            SDL_FreeSurface(msgs[MSG_BOUTONS].source);
             break;
     }
 
@@ -86,40 +93,4 @@ void showPointsCanard(Sprite &points, Canard canard)
     points.position.x = canard.image.position.x + canard.image.lecture.w / 2;
     points.position.y = canard.image.position.y + canard.image.lecture.h / 2;
     SDL_BlitSurface(points.source, &points.position, SDL_GetVideoSurface(), &points.lecture);
-}
-
-
-void showMessage(Message &msg, std::string contenuMessage)
-{
-    static std::ostringstream message;
-    message.flush();
-    message.str("");
-    message << contenuMessage;
-    msg.message = message.str();
-
-    std::string mot="";
-    std::string space=" ";
-    int i = 0;
-    size_t j;
-    SDL_Surface *mes = NULL;
-
-    j = msg.message.find(space);
-    while(j != std::string::npos)
-    {
-        mot = msg.message.substr(i,j-i);
-        if(mot != "")
-        {
-           mes = TTF_RenderText_Solid(msg.font, mot.c_str(), msg.textColor);
-           SDL_BlitSurface(mes, NULL, SDL_GetVideoSurface(),  &msg.position);
-           msg.position.x += mes->w;
-           SDL_FreeSurface(mes);
-        }
-        msg.position.x += msg.fontSize;
-        i = j+1;
-        j = msg.message.find(space,i);
-    }
-    mot = msg.message.substr(i);
-    mes = TTF_RenderText_Solid(msg.font, mot.c_str(), msg.textColor);
-    SDL_BlitSurface(mes, NULL, SDL_GetVideoSurface(),  &msg.position);
-    SDL_FreeSurface(mes);
 }

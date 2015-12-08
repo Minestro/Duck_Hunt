@@ -7,15 +7,8 @@ int main(int argc, char* argv[])
     SDL_Init(SDL_INIT_VIDEO);
     TTF_Init();
 
-    Message msgScore;
-    initMessage(msgScore);
-    msgScore.position.x = 580;
-    msgScore.position.y = 667;
-    Message msgMenu;
-    initMessage(msgMenu);
-    msgMenu.fontSize = 45;
-    msgScore.font = TTF_OpenFont("font/duck_hunt.ttf", msgScore.fontSize);
-    msgMenu.font = TTF_OpenFont("font/duck_hunt.ttf", msgMenu.fontSize);
+    Message msgs[5];
+    initMessage(msgs);
 
     SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF);
 
@@ -65,7 +58,7 @@ int main(int argc, char* argv[])
 
     do
     {
-        menu(sprites, boutons, modeMenu, modeJeu, sourisEvent, temps, msgMenu);
+        menu(sprites, boutons, modeMenu, modeJeu, sourisEvent, temps, msgs);
         temps.currentTime = SDL_GetTicks();
         for (int i = 0 ; i < sprites.canardActifs ; i++)
         {
@@ -97,8 +90,8 @@ int main(int argc, char* argv[])
         if (temps.currentTime >= temps.timeFps + temps.fpsTime)
         {
             genererRendu(sprites, sourisEvent, partie, chien);
-            showMessage(msgScore, intToString(partie.score));
-
+            msgs[MSG_SCORE].source = TTF_RenderText_Solid(msgs[MSG_SCORE].font, intToString(partie.score).c_str(), msgs[MSG_SCORE].textColor);
+            SDL_BlitSurface(msgs[MSG_SCORE].source, NULL, SDL_GetVideoSurface(), &msgs[MSG_SCORE].position);
             SDL_Flip(SDL_GetVideoSurface());
 
             temps.timeFps = temps.currentTime;

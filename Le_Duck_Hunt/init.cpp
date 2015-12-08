@@ -1,12 +1,20 @@
 #include "main.h"
 
 
-void initMessage(Message &message)
+void initMessage(Message msgs[])
 {
-    message.fontSize = 35;
-    message.textColor.r = 255;
-    message.textColor.g = 255;
-    message.textColor.b = 255;
+    for (int i=0; i<5; i++)
+    {
+        msgs[i].textColor.r = 255;
+        msgs[i].textColor.g = 255;
+        msgs[i].textColor.b = 255;
+    }
+    msgs[MSG_SCORE].position.x = 580;
+    msgs[MSG_SCORE].position.y = 667;
+    msgs[MSG_SCORE].fontSize = 35;
+    msgs[MSG_SCORE].font = TTF_OpenFont("font/duck_hunt.ttf", msgs[MSG_SCORE].fontSize);
+
+    //msgMenu.font = TTF_OpenFont("font/duck_hunt.ttf", msgMenu.fontSize);
 }
 
 void initBouton(Boutons &boutons)

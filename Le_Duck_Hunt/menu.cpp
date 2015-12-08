@@ -1,6 +1,6 @@
 #include "main.h"
 
-void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message message)
+void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[])
 {
     bool sortir = false;
     while (!sortir)
@@ -24,7 +24,7 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisE
 
                     boutons.quit.position.x = (LARGEUR/2)-(boutons.lecture[0].w/2);
                     boutons.quit.position.y = 400;
-                    showMenu(sprites, boutons, modeMenu, message, sourisEvent.sx, sourisEvent.sy);
+                    showMenu(sprites, boutons, modeMenu, msgs, sourisEvent.sx, sourisEvent.sy);
 
                     if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.quit, boutons.lecture[0]))&&sourisEvent.bl)
                     {
@@ -39,10 +39,7 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisE
                     }
                     break;
                 case 5 :
-                        message.position.x=210;
-                        message.position.y=250;
-                        showMenu(sprites, boutons, modeMenu, message, sourisEvent.sx, sourisEvent.sy);
-                        showMessage(message, "Jeu en Pause");
+                        showMenu(sprites, boutons, modeMenu, msgs, sourisEvent.sx, sourisEvent.sy);
                     break;
                 case 6:
 
