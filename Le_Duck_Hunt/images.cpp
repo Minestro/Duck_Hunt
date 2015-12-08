@@ -83,6 +83,9 @@ SDL_Surface *loadImageWithColorKey(std::string filename, int r, int g, int b)
 
 void chargerImages(Sprites &sprites)
 {
+
+//    sprites.points.source = loadImageWithColorKey("sprites/points.png", 0, 0, 0);
+
     sprites.background_menu.source=load_image("sprites/menu.png");
 
     sprites.background.source=load_image("sprites/backGame.png");

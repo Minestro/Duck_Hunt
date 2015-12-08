@@ -137,6 +137,7 @@ struct Sprites // Rassemble toutes les images et les feuilles de sprite
     Sprite hits;
     Sprite shots;
     Sprite viseur;
+    Sprite points;
 };
 
 struct Police

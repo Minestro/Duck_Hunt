@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
 
     for (int i = 0; i<sprites.canardActifs; i++)
     {
-        sprites.canard[i].type = alea(1, 3);
+        sprites.canard[i].type = alea(1, 2);
         initCanard(sprites.canard[i]);
     }
 

@@ -76,7 +76,7 @@ void initChien(Chien &chien)
     chien.image[CHIEN_MARCHE].lecture.h = 87;
     chien.image[CHIEN_MARCHE].lecture.w = 120;
     chien.image[CHIEN_MARCHE].lecture.x = 0;
-    chien.image[CHIEN_MARCHE].lecture.y = 0;
+    chien.image[CHIEN_MARCHE].lecture.y = 87;
     chien.image[CHIEN_MARCHE].position.x = 0;
     chien.image[CHIEN_MARCHE].position.y = Y_INTRO_CHIEN;
 
@@ -84,7 +84,7 @@ void initChien(Chien &chien)
     chien.image[CHIEN_CONTENT].lecture.h = 96;
     chien.image[CHIEN_CONTENT].lecture.w = 113;
     chien.image[CHIEN_CONTENT].lecture.x = 0;
-    chien.image[CHIEN_CONTENT].lecture.y = 0;
+    chien.image[CHIEN_CONTENT].lecture.y = 96;
 
     chien.image[CHIEN_SAUTE_1].source = loadImageWithColorKey("sprites/chienSaute1.png", 0, 255, 0);
     chien.image[CHIEN_SAUTE_1].lecture.h = 100;
