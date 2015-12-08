@@ -68,6 +68,14 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien
         sprites.hits.position.x += sprites.hits.lecture.w + 3;
         SDL_BlitSurface(sprites.hits.source, &sprites.hits.lecture, SDL_GetVideoSurface(), &sprites.hits.position);
     }
+
+    SDL_BlitSurface(sprites.points.source, &sprites.points.lecture, SDL_GetVideoSurface(), &sprites.points.position);
+    std::cout << "sprites.points.position.x = " << sprites.points.position.x << std::endl;
+    std::cout << "sprites.points.position.y = " << sprites.points.position.y << std::endl;
+    std::cout << "sprites.points.position.x = " << sprites.points.position.x << std::endl;
+    std::cout << "sprites.points.position.y = " << sprites.points.position.y << std::endl;
+
+
     SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);
 }
 

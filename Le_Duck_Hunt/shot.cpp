@@ -28,11 +28,11 @@ void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, int i, int c
     }
 }
 
-void touched(Canard &canard, Time temps)
+void touched(Canard &canard, Time temps, Sprite &points)
 {
-    //points.lecture.y = 32 * canard.etat;
-    //points.position.x = canard.image.lecture.x + canard.image.lecture.w / 2;
-    //points.position.y = canard.image.lecture.y + canard.image.lecture.h / 2;
+    points.lecture.y = 32 * canard.etat;
+    points.position.x = canard.image.position.x + canard.image.lecture.w / 2;
+    points.position.y = canard.image.position.y + canard.image.lecture.h / 2;
 
     if(temps.currentTime - canard.tempsDepuisTir > 250) // Si le temps écoulé depuis le tir est plus de un quart de sec, le canard passe de ALIVE à FREE_FALLING
     {

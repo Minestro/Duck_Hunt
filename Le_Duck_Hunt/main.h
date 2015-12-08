@@ -203,7 +203,7 @@ int alea(int, int);
 void detectionBordsCanard(Canard &canard, Partie &partie);
 void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, int i, int canardsActifs, Time temps);
 bool testShot(SourisEvent sourisEvent, Sprite sprite);
-void touched(Canard &canard, Time temps);
+void touched(Canard &canard, Time temps, Sprite &points);
 void showMessage(Message &msg, std::string contenuMessage);
 void initPartie(Partie &partie, int nbCanards);
 bool partieTerminee(const Partie partie);
