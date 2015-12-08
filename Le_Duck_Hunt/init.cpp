@@ -1,5 +1,6 @@
 #include "main.h"
 
+
 void initMessage(Message &message)
 {
     message.fontSize = 35;

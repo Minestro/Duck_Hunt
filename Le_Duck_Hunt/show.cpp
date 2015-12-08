@@ -49,6 +49,8 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien
         if (sprites.canard[i].etat != FREE_FALLING && sprites.canard[i].etat != DEAD)
         {
             SDL_BlitSurface(sprites.canard[i].image.source, &sprites.canard[i].image.lecture, SDL_GetVideoSurface(), &sprites.canard[i].image.position);
+
+            SDL_BlitSurface(sprites.points.source, &sprites.points.lecture, SDL_GetVideoSurface(), &sprites.points.position);
         }
     }
     SDL_BlitSurface(sprites.shots.source, &sprites.shots.lecture, SDL_GetVideoSurface(), &sprites.shots.position);
