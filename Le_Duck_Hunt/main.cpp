@@ -73,7 +73,7 @@ int main(int argc, char* argv[])
                 shoot(sourisEvent, sprites.canard[i], partie, i, sprites.canardActifs, temps);
                 if(sprites.canard[i].etat == TOUCHED)
                 {
-                    touched(sprites.canard[i], temps, sprites.points);
+                    touched(sprites.canard[i], temps);
                 }
                 mouvementsCanard(sprites.canard[i]);
                 detectionBordsCanard(sprites.canard[i], partie);
@@ -95,11 +95,7 @@ int main(int argc, char* argv[])
         if (temps.currentTime >= temps.timeFps + temps.fpsTime)
         {
             genererRendu(sprites, sourisEvent, partie, chien);
-<<<<<<< HEAD
-        //    showPoints(msgScore, msgScore.font, partie.score);
-=======
             showMessage(msgScore, intToString(partie.score));
->>>>>>> 5ce7d9f27eeed40c0cf865842caf5b028311b185
 
             SDL_Flip(SDL_GetVideoSurface());
 
