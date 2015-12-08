@@ -7,24 +7,19 @@ void initMessage(Message &message)
     message.textColor.r = 255;
     message.textColor.g = 255;
     message.textColor.b = 255;
-    message.position.x = 580;
-    message.position.y = 667;
 }
 
 void initBouton(Boutons &boutons)
 {
-    boutons.source = loadImageWithColorKey("sprites/bouton.bmp", 0, 0, 0);
+    boutons.source = loadImageWithColorKey("sprites/boutons.bmp", 0, 0, 0);
+    boutons.play.contenu = "Jouer";
+    boutons.quit.contenu = "Quitter";
     for(int i = 0 ; i < 2 ; i++)
     {
-        boutons.play.lecture[i].x = i * 200;
-        boutons.play.lecture[i].y = 100;
-        boutons.play.lecture[i].w = 150;
-        boutons.play.lecture[i].h = 60;
-
-        boutons.quit.lecture[i].x = i * 200;
-        boutons.quit.lecture[i].y = 0;
-        boutons.quit.lecture[i].w = 150;
-        boutons.quit.lecture[i].h = 60;
+        boutons.lecture[i].x = i * 226;
+        boutons.lecture[i].y = 0;
+        boutons.lecture[i].w = 216;
+        boutons.lecture[i].h = 74;
     }
 }
 

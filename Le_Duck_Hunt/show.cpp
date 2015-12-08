@@ -12,7 +12,7 @@ std::string intToString (int number)
     return oss.str();
 }
 
-void showMenu(Sprites sprites, Boutons boutons, int &modeMenu, int sx, int sy)
+void showMenu(Sprites sprites, Boutons boutons, int &modeMenu, Message message, int sx, int sy)
 {
     sprites.viseur.position.x=sx-(sprites.viseur.source->w/2);
     sprites.viseur.position.y=sy-(sprites.viseur.source->h/2);
@@ -20,8 +20,10 @@ void showMenu(Sprites sprites, Boutons boutons, int &modeMenu, int sx, int sy)
     switch (modeMenu)
     {
         case 1 :
-            SDL_BlitSurface(boutons.source, &boutons.play.lecture[testHoverBouton(sx, sy, boutons.play)], SDL_GetVideoSurface(), &boutons.play.position);
-            SDL_BlitSurface(boutons.source, &boutons.quit.lecture[testHoverBouton(sx, sy, boutons.quit)], SDL_GetVideoSurface(), &boutons.quit.position);
+            SDL_BlitSurface(boutons.source, &boutons.lecture[testHoverBouton(sx, sy, boutons.play, boutons.lecture[0])], SDL_GetVideoSurface(), &boutons.play.position);
+            message.position.x=boutons.play.position.x;
+            showMessage(message, boutons.play.contenu);
+            SDL_BlitSurface(boutons.source, &boutons.lecture[testHoverBouton(sx, sy, boutons.quit, boutons.lecture[0])], SDL_GetVideoSurface(), &boutons.quit.position);
             break;
     }
 
@@ -70,11 +72,6 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien
     }
 
     SDL_BlitSurface(sprites.points.source, &sprites.points.lecture, SDL_GetVideoSurface(), &sprites.points.position);
-    std::cout << "sprites.points.position.x = " << sprites.points.position.x << std::endl;
-    std::cout << "sprites.points.position.y = " << sprites.points.position.y << std::endl;
-    std::cout << "sprites.points.position.x = " << sprites.points.position.x << std::endl;
-    std::cout << "sprites.points.position.y = " << sprites.points.position.y << std::endl;
-
 
     SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);
 }

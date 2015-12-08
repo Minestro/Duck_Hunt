@@ -151,12 +151,13 @@ struct Police
 struct Bouton
 {
     SDL_Rect position;
-    SDL_Rect lecture[2];
+    std::string contenu;
 };
 
 struct Boutons
 {
     SDL_Surface *source;
+    SDL_Rect lecture[2];
     Bouton play;
     Bouton quit;
 };
@@ -182,8 +183,8 @@ struct Time
 };
 
 void menu(Sprites, Boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message message);
-void showMenu(Sprites, Boutons, int &modeMenu, int, int);
-bool testHoverBouton(int, int, Bouton);
+void showMenu(Sprites sprites, Boutons boutons, int &modeMenu, Message message, int sx, int sy);
+bool testHoverBouton(int, int, Bouton, SDL_Rect lecture);
 void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien chien);
 void chargerImages(Sprites &sprites);
 void initBouton(Boutons &boutons);

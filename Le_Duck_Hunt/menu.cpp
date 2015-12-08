@@ -19,18 +19,19 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisE
                     sortir = true;
                     break;
                 case 1 :
-                    boutons.play.position.x = (LARGEUR/2)-(boutons.play.lecture[0].w/2);
+                    boutons.play.position.x = (LARGEUR/2)-(boutons.lecture[0].w/2);
                     boutons.play.position.y = 200;
-                    boutons.quit.position.x = (LARGEUR/2)-(boutons.quit.lecture[0].w/2);
-                    boutons.quit.position.y = 400;
-                    showMenu(sprites, boutons, modeMenu, sourisEvent.sx, sourisEvent.sy);
 
-                    if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.quit))&&sourisEvent.bl)
+                    boutons.quit.position.x = (LARGEUR/2)-(boutons.lecture[0].w/2);
+                    boutons.quit.position.y = 400;
+                    showMenu(sprites, boutons, modeMenu, message, sourisEvent.sx, sourisEvent.sy);
+
+                    if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.quit, boutons.lecture[0]))&&sourisEvent.bl)
                     {
                         modeMenu = 0;
 
                     }
-                    else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.play))&&sourisEvent.bl)
+                    else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.play, boutons.lecture[0]))&&sourisEvent.bl)
                     {
                         modeJeu = 1;
                         modeMenu = 0;
@@ -40,7 +41,7 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisE
                 case 5 :
                         message.position.x=210;
                         message.position.y=250;
-                        showMenu(sprites, boutons, modeMenu, sourisEvent.sx, sourisEvent.sy);
+                        showMenu(sprites, boutons, modeMenu, message, sourisEvent.sx, sourisEvent.sy);
                         showMessage(message, "Jeu en Pause");
                     break;
                 case 6:
@@ -55,7 +56,7 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisE
     }
 }
 
-bool testHoverBouton(int sx, int sy, Bouton sprite)
+bool testHoverBouton(int sx, int sy, Bouton sprite, SDL_Rect lecture)
 {
-    return((sx < sprite.position.x+sprite.lecture[0].w)&&(sx > sprite.position.x)&&(sy > sprite.position.y)&&(sy < sprite.position.y+sprite.lecture[0].h));
+    return((sx < sprite.position.x+lecture.w)&&(sx > sprite.position.x)&&(sy > sprite.position.y)&&(sy < sprite.position.y+lecture.h));
 }

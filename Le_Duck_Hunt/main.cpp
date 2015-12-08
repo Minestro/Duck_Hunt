@@ -9,6 +9,8 @@ int main(int argc, char* argv[])
 
     Message msgScore;
     initMessage(msgScore);
+    msgScore.position.x = 580;
+    msgScore.position.y = 667;
     Message msgMenu;
     initMessage(msgMenu);
     msgMenu.fontSize = 45;
