@@ -1,14 +1,21 @@
 #include "main.h"
 
-bool partieTerminee(const Partie partie)
+bool roundTerminee(Partie partie, Canard canard[], int canardActifs)
 {
     bool tousMorts = true;
-    int i = 0;
-    while(tousMorts && i < NB_MAX_CANARDS)
+    bool enChute = false;
+    for (int i=0; i<canardActifs; i++)
     {
-        tousMorts = partie.xChute[i++] == TO_RESET;
+        if (canard[i].etat!=DEAD)
+        {
+            tousMorts = false;
+        }
+        if (canard[i].etat==FREE_FALLING)
+        {
+            enChute = true;
+        }
     }
-    return tousMorts;
+    return (tousMorts || ((partie.shots<=0)&&(!enChute)));
 }
 
 

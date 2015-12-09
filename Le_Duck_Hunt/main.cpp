@@ -54,8 +54,6 @@ int main(int argc, char* argv[])
     SourisEvent sourisEvent;
     initSourisEvent(sourisEvent);
     SDL_ShowCursor(SDL_DISABLE);
-
-
     do
     {
         menu(sprites, boutons, modeMenu, modeJeu, sourisEvent, temps, msgs);
@@ -73,6 +71,10 @@ int main(int argc, char* argv[])
                 mouvementsCanard(sprites.canard[i]);
                 detectionBordsCanard(sprites.canard[i], partie);
                 changementDirection(sprites.canard[i]);
+                if(roundTerminee(partie, sprites.canard, sprites.canardActifs))
+                {
+                    //relancerPartie(partie, sprites);
+                }
                 sprites.canard[i].vitesseTime = temps.currentTime;
             }
             if (temps.currentTime >= sprites.canard[i].vitesseAnimationTime + sprites.canard[i].vitesseAnimation)
@@ -83,7 +85,7 @@ int main(int argc, char* argv[])
         }
         if (temps.currentTime >= chien.vitesseAnimationTime + chien.vitesseAnimation)
         {
-            switchSpriteChien(chien, partie);
+            //switchSpriteChien(chien, partie);
             chien.vitesseAnimationTime = temps.currentTime;
         }
 
@@ -92,6 +94,7 @@ int main(int argc, char* argv[])
             genererRendu(sprites, sourisEvent, partie, chien);
             msgs[MSG_SCORE].source = TTF_RenderText_Solid(msgs[MSG_SCORE].font, intToString(partie.score).c_str(), msgs[MSG_SCORE].textColor);
             SDL_BlitSurface(msgs[MSG_SCORE].source, NULL, SDL_GetVideoSurface(), &msgs[MSG_SCORE].position);
+            SDL_FreeSurface(msgs[MSG_SCORE].source);
             SDL_Flip(SDL_GetVideoSurface());
 
             temps.timeFps = temps.currentTime;
@@ -101,14 +104,10 @@ int main(int argc, char* argv[])
         {
             modeMenu = 5;
         }
-
-        if(partieTerminee(partie))
-        {
-            relancerPartie(partie, sprites);
-        }
         SDL_Delay(1);
 
-    } while (modeJeu != 0);
+    }
+    while (modeJeu != 0);
 
     SDL_Quit();
     IMG_Quit();

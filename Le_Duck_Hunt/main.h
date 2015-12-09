@@ -88,6 +88,7 @@ struct Partie
     int shots;
     Uint32 temps; //pour un certain mode de jeu
     int round;
+    int niveau;
     int score;
     int hit[10];
     bool roundJoue[5];
@@ -219,7 +220,7 @@ bool testShot(SourisEvent sourisEvent, Sprite sprite);
 void touched(Canard &canard, Time temps);
 void showMessage(Message &msg, std::string contenuMessage);
 void initPartie(Partie &partie, int nbCanards);
-bool partieTerminee(const Partie partie);
+bool roundTerminee(Partie partie, Canard canard[], int canardActifs);
 void relancerPartie(Partie &partie, Sprites &sprites);
 void controlesChien(Chien &chien, Partie &partie);
 void switchSpriteChien(Chien &chien, Partie &partie);
