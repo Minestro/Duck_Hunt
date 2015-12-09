@@ -89,6 +89,8 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien
 void showPointsCanard(Canard &canard)
 {
     canard.points.lecture.y = 17 * (canard.type - 1);
+    std::cout << canard.points.lecture.y << std::endl;
+    std::cout << canard.type - 1 << std::endl;
     canard.points.position.x = canard.image.position.x + canard.image.lecture.w / 2;
     canard.points.position.y = canard.image.position.y + canard.image.lecture.h;
     SDL_BlitSurface(canard.points.source, &canard.points.lecture, SDL_GetVideoSurface(), &canard.points.position);
