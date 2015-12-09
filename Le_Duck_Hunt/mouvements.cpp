@@ -103,31 +103,31 @@ void controlesChien(Chien &chien, Partie &partie)
 
 void mouvementsCanard(Canard &canard) // mouvement physique et mouvement au niveau de l'animation
 {
-    canard.image.position.x += canard.vecteurPositionX;
-    canard.image.position.y += canard.vecteurPositionY;
+    canard.position.x += canard.vecteurPositionX;
+    canard.position.y += canard.vecteurPositionY;
 
     switch (canard.etat)
     {
         case ALIVE:
             if (canard.vecteurPositionY > 2)
             {
-                canard.image.lecture.y = 140;
+                canard.lecture.y = 140;
             }
             else
             {
-                canard.image.lecture.y = 0;
+                canard.lecture.y = 0;
             }
             if (canard.vecteurPositionX < 0)
             {
-                canard.image.lecture.y += 210;
+                canard.lecture.y += 210;
             }
             break;
         case TOUCHED:
-            canard.image.lecture.x = 0;
-            canard.image.lecture.y = 280;
+            canard.lecture.x = 0;
+            canard.lecture.y = 280;
             break;
         case FREE_FALLING:
-            canard.image.lecture.y = 70;
+            canard.lecture.y = 70;
             break;
     }
 }
@@ -150,41 +150,41 @@ void detectionBordsChien(Chien &chien)
 
 
 
-void detectionBordsCanard(Canard &canard, Partie &partie)
+void detectionBordsCanard(Canard &canard, Partie &partie, SDL_Surface *canardSprite[])
 {
     switch(canard.etat)
     {
         case ALIVE:
-            if(canard.image.position.x <= 0)
+            if(canard.position.x <= 0)
             {
-                canard.image.position.x = 0;
+                canard.position.x = 0;
                 canard.vecteurPositionX *= -1;
             }
-            else if (canard.image.position.x + canard.image.lecture.w >= LARGEUR)
+            else if (canard.position.x + canard.lecture.w >= LARGEUR)
             {
-                canard.image.position.x = LARGEUR - canard.image.lecture.w;
+                canard.position.x = LARGEUR - canard.lecture.w;
                 canard.vecteurPositionX *= -1;
             }
-            if(canard.image.position.y <= 0 )
+            if(canard.position.y <= 0 )
             {
-                canard.image.position.y = 0;
+                canard.position.y = 0;
                 canard.vecteurPositionY *= -1;
             }
-            else if (canard.image.position.y + canard.image.lecture.h >= HAUTEUR - LIMITE_BASSE)
+            else if (canard.position.y + canard.lecture.h >= HAUTEUR - LIMITE_BASSE)
             {
-                canard.image.position.y = HAUTEUR-LIMITE_BASSE-canard.image.lecture.h;
+                canard.position.y = HAUTEUR-LIMITE_BASSE-canard.lecture.h;
                 canard.vecteurPositionY *= -1;
             }
             break;
         case FREE_FALLING:
-            if (canard.image.position.y + canard.image.lecture.h > HAUTEUR - LIMITE_BASSE + canard.image.lecture.h)
+            if (canard.position.y + canard.lecture.h > HAUTEUR - LIMITE_BASSE + canard.lecture.h)
             {
                 canard.etat = DEAD;
                 partie.canardsEnVie--;
                 partie.canardAbbatu = true;
                 partie.chienEnChasse = true;
                 sauvegarderPositionX(partie, canard);
-                SDL_FreeSurface(canard.image.source);
+                SDL_FreeSurface(canardSprite[canard.type]);
                 SDL_FreeSurface(canard.points.source);
             }
             break;
@@ -203,7 +203,7 @@ void sauvegarderPositionX(Partie &partie, Canard canard) // On sauvegarde la pos
         sauvegarde = partie.xChute[i] == NOT_SET;
     }
 
-    partie.xChute[i] = canard.image.position.x + canard.image.lecture.w / 2;
+    partie.xChute[i] = canard.position.x + canard.lecture.w / 2;
 }
 
 void changementDirection(Canard &canard)

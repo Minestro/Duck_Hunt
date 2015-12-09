@@ -69,7 +69,7 @@ int main(int argc, char* argv[])
                     touched(sprites.canard[i], temps);
                 }
                 mouvementsCanard(sprites.canard[i]);
-                detectionBordsCanard(sprites.canard[i], partie);
+                detectionBordsCanard(sprites.canard[i], partie, sprites.canardSprite);
                 changementDirection(sprites.canard[i]);
                 if(roundTerminee(partie, sprites.canard, sprites.canardActifs))
                 {

@@ -31,11 +31,6 @@ void relancerPartie(Partie &partie, Sprites &sprites)
 
     for (int i = 0; i < sprites.canardActifs; i++)
     {
-        if(sprites.canard[i].etat != DEAD)
-        {
-            SDL_FreeSurface(sprites.canard[i].image.source);
-            SDL_FreeSurface(sprites.canard[i].points.source);
-        }
         sprites.canard[i].type = alea(1, 3);
         initCanard(sprites.canard[i]);
     }

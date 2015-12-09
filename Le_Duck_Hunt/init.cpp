@@ -122,15 +122,12 @@ void initCanard(Canard &cn)
     switch (cn.type)
     {
         case DARK:
-            cn.image.source = loadImageWithColorKey("sprites/canardNoir.png", 228, 255, 0);
             cn.vitesse = VITESSE_N;
             break;
         case CHESNUT:
-            cn.image.source = loadImageWithColorKey("sprites/canardRouge.png", 228, 255, 0);
             cn.vitesse = VITESSE_M;
             break;
         case BLUISH_PURPLE:
-            cn.image.source = loadImageWithColorKey("sprites/canardViolet.png", 228, 255, 0);
             cn.vitesse = VITESSE_V;
             break;
     }
@@ -140,12 +137,12 @@ void initCanard(Canard &cn)
     cn.vitesseAnimation = 40; // Plus cette valeur est élevée, plus l'animation est lente...
     cn.vitesseTime = cn.vitesseAnimationTime = 0;
 
-    cn.image.lecture.x = 0;
-    cn.image.lecture.y = 0;
-    cn.image.lecture.w = 70;
-    cn.image.lecture.h = 70;
-    cn.image.position.x = alea(1,LARGEUR-cn.image.lecture.w);
-    cn.image.position.y = alea(1,HAUTEUR-LIMITE_BASSE - cn.image.lecture.h);
+    cn.lecture.x = 0;
+    cn.lecture.y = 0;
+    cn.lecture.w = 70;
+    cn.lecture.h = 70;
+    cn.position.x = alea(1,LARGEUR-cn.lecture.w);
+    cn.position.y = alea(1,HAUTEUR-LIMITE_BASSE - cn.lecture.h);
     do
     {
         cn.vecteurPositionX = alea(-10, 10);

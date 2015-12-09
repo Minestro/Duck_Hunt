@@ -105,8 +105,9 @@ struct Sprite // Peut représenter une image comme une feuille de sprites
 
 struct Canard
 {
-    Sprite image;
     Sprite points;
+    SDL_Rect lecture;
+    SDL_Rect position;
     int vitesseAnimation;
     Uint32 vitesseAnimationTime;
     int vitesse;
@@ -150,6 +151,7 @@ struct Sprites // Rassemble toutes les images et les feuilles de sprite
     Sprite hits;
     Sprite shots;
     Sprite viseur;
+    SDL_Surface *canardSprite[3];
 };
 
 struct Police
@@ -214,9 +216,9 @@ void detectionBordsChien(Chien &chien);
 void mouvementsCanard(Canard &canard);
 void switchSpriteCanard(Canard &canard);
 int alea(int, int);
-void detectionBordsCanard(Canard &canard, Partie &partie);
+void detectionBordsCanard(Canard &canard, Partie &partie, SDL_Surface *canardSprite[]);
 void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, int i, int canardsActifs, Time temps);
-bool testShot(SourisEvent sourisEvent, Sprite sprite);
+bool testShot(SourisEvent sourisEvent, SDL_Rect lecture, SDL_Rect position);
 void touched(Canard &canard, Time temps);
 void showMessage(Message &msg, std::string contenuMessage);
 void initPartie(Partie &partie, int nbCanards);

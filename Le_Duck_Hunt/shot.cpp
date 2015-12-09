@@ -1,17 +1,17 @@
 #include "main.h"
 
-bool testShot(SourisEvent sourisEvent, Sprite sprite)
+bool testShot(SourisEvent sourisEvent, SDL_Rect lecture, SDL_Rect position)
 {
-    return((sourisEvent.sx < sprite.position.x+sprite.lecture.w)&&(sourisEvent.sx > sprite.position.x)&&(sourisEvent.sy > sprite.position.y)&&(sourisEvent.sy < sprite.position.y+sprite.lecture.h));
+    return((sourisEvent.sx < position.x+lecture.w)&&(sourisEvent.sx > position.x)&&(sourisEvent.sy > position.y)&&(sourisEvent.sy < position.y+lecture.h));
 }
 
 void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, int i, int canardsActifs, Time temps)
 {
-    if((canard.etat == ALIVE && sourisEvent.clicGauche && ((i >= canardsActifs - 1)||(testShot(sourisEvent, canard.image)))) && partie.shots != 0 && partie.canardsEnVie != 0)
+    if((canard.etat == ALIVE && sourisEvent.clicGauche && ((i >= canardsActifs - 1)||(testShot(sourisEvent, canard.lecture, canard.position)))) && partie.shots != 0 && partie.canardsEnVie != 0)
     {
         sourisEvent.clicGauche = false;
         partie.shots--;
-        if (testShot(sourisEvent, canard.image))
+        if (testShot(sourisEvent, canard.lecture, canard.position))
         {
             canard.etat = TOUCHED;
             partie.score += canard.type * 500;
