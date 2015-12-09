@@ -184,7 +184,6 @@ void detectionBordsCanard(Canard &canard, Partie &partie, SDL_Surface *canardSpr
                 partie.canardAbbatu = true;
                 partie.chienEnChasse = true;
                 sauvegarderPositionX(partie, canard);
-                SDL_FreeSurface(canardSprite[canard.type]);
                 SDL_FreeSurface(canard.points.source);
             }
             break;
