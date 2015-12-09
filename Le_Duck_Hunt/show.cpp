@@ -71,7 +71,7 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien
     {
         if (sprites.canard[i].etat == FREE_FALLING)
         {
-            SDL_BlitSurface(sprites.canardSprite[sprites.canard[i].type], &sprites.canard[i].lecture, SDL_GetVideoSurface(), &sprites.canard[i].position);
+            SDL_BlitSurface(sprites.canardSprite[sprites.canard[i].type-1], &sprites.canard[i].lecture, SDL_GetVideoSurface(), &sprites.canard[i].position);
         }
     }
     SDL_BlitSurface(sprites.background_blit.source, NULL, SDL_GetVideoSurface(), &sprites.background.position);
@@ -83,11 +83,11 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien
     {
         if (sprites.canard[i].etat != FREE_FALLING && sprites.canard[i].etat != DEAD)
         {
-            SDL_BlitSurface(sprites.canardSprite[sprites.canard[i].type], &sprites.canard[i].lecture, SDL_GetVideoSurface(), &sprites.canard[i].position);
+            SDL_BlitSurface(sprites.canardSprite[sprites.canard[i].type-1], &sprites.canard[i].lecture, SDL_GetVideoSurface(), &sprites.canard[i].position);
         }
         if (sprites.canard[i].etat == TOUCHED)
         {
-            showPointsCanard(sprites.canard[i]);
+            showPointsCanard(sprites.canard[i], sprites.points);
         }
     }
 
@@ -104,12 +104,12 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien
     SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);
 }
 
-void showPointsCanard(Canard &canard)
+void showPointsCanard(Canard canard, Sprite &points)
 {
-    canard.points.position.x = canard.position.x + canard.lecture.w / 2;
-    canard.points.position.y = canard.position.y + canard.lecture.h;
-    canard.points.lecture.y = 17 * (canard.type - 1);
-    SDL_BlitSurface(canard.points.source, &canard.points.lecture, SDL_GetVideoSurface(), &canard.points.position);
+    points.position.x = canard.position.x + canard.lecture.w / 2;
+    points.position.y = canard.position.y + canard.lecture.h;
+    points.lecture.y = 17 * (canard.type - 1);
+    SDL_BlitSurface(points.source, &points.lecture, SDL_GetVideoSurface(), &points.position);
 }
 
 
