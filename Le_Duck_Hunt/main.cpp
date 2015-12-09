@@ -58,8 +58,6 @@ int main(int argc, char* argv[])
 
     do
     {
-        std::cout << partie.xChute[0] << std::endl;
-        std::cout << partie.xChute[1] << std::endl;
         menu(sprites, boutons, modeMenu, modeJeu, sourisEvent, temps, msgs);
         temps.currentTime = SDL_GetTicks();
         for (int i = 0 ; i < sprites.canardActifs ; i++)

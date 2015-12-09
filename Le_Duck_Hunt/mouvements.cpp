@@ -7,6 +7,7 @@ int alea(int mini, int maxi)
    // return rand() / (RAND_MAX / (maxi - mini + 1)); // NE PAS EFFACER, J'AI PENSE A UN NOUVEAU MODE DE JEU !
 }
 
+
 void controlesChien(Chien &chien, Partie &partie)
 {
     switch (chien.etat)
@@ -18,7 +19,7 @@ void controlesChien(Chien &chien, Partie &partie)
             if((((chien.image[CHIEN_MARCHE].position.x > (LARGEUR - chien.image[CHIEN_MARCHE].lecture.h * 2) / 2) && chien.devantHerbe))
                 || (partie.canardAbbatu && chien.image[CHIEN_MARCHE].position.y == Y_JEU_CHIEN))
             {
-                chien.etat++;
+                chien.etat = CHIEN_CONTENT;
                 chien.image[CHIEN_CONTENT].position = chien.image[CHIEN_MARCHE].position;
                 chien.image[CHIEN_CONTENT].position.y -= 8;
                 chien.tempsDepuisEtat = SDL_GetTicks();
@@ -29,11 +30,11 @@ void controlesChien(Chien &chien, Partie &partie)
             {
                 if(chien.devantHerbe)
                 {
-                    chien.etat++;
+                    chien.etat = CHIEN_SAUTE_1;
                 }
                 else
                 {
-                    chien.etat--;
+                    chien.etat  = CHIEN_MARCHE;
                 }
                 chien.image[CHIEN_SAUTE_1].position.x = chien.image[CHIEN_CONTENT].position.x + chien.image[CHIEN_SAUTE_1].lecture.w / 2;
                 chien.image[CHIEN_SAUTE_1].position.y = chien.image[CHIEN_CONTENT].position.y - chien.image[CHIEN_SAUTE_1].lecture.h / 2;
@@ -126,6 +127,11 @@ void detectionBordsChien(Chien &chien)
         chien.image[CHIEN_MARCHE].lecture.y = chien.image[CHIEN_MARCHE].lecture.h;
     }
 }
+/*
+void ramasserCanard(Chien &chien, Partie &partie)
+{
+
+}*/
 
 void detectionBordsCanard(Canard &canard, Partie &partie)
 {

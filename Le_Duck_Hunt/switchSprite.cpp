@@ -12,11 +12,11 @@ void switchSpriteChien(Chien &chien, Partie &partie)
         case CHIEN_CONTENT:
             if(!chien.devantHerbe)
             {
-                if(chien.image[CHIEN_CONTENT].position.x > partie.xChute[partie.canardsEnVie % NB_MAX_CANARDS])
+                if(chien.image[CHIEN_CONTENT].position.x > partie.xChute[(partie.canardsEnVie + 1) % NB_MAX_CANARDS])
                 {
                     chien.image[CHIEN_CONTENT].lecture.y = 0;
                 }
-                else
+                else if(chien.image[CHIEN_CONTENT].position.x + chien.image[CHIEN_CONTENT].lecture.w <= partie.xChute[(partie.canardsEnVie + 1) % NB_MAX_CANARDS])
                 {
                     chien.image[CHIEN_CONTENT].lecture.y = 100;
                 }
