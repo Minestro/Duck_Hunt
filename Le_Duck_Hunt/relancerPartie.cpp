@@ -5,6 +5,7 @@ bool partieTerminee(const Partie partie)
     return (partie.canardsEnVie == 0 || partie.shots == 0);
 }
 
+
 void relancerPartie(Partie &partie, Sprites &sprites)
 {
     for(int i = partie.round * 2 ; i < partie.round * 2 + 2 ; i++)

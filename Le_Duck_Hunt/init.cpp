@@ -52,7 +52,7 @@ void initPartie(Partie &partie, int nbCanards)
 {
     for(int i = 0 ; i < nbCanards ; i++)
     {
-        partie.yChute[i] = 0;
+        partie.xChute[i] = -1;
     }
     partie.canardAbbatu = false;
     partie.shots = 3;
