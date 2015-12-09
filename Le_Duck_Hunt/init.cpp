@@ -163,5 +163,6 @@ void initCanard(Canard &cn)
     cn.points.source = loadImageWithColorKey("sprites/points.png", 0, 0, 0);
     cn.points.lecture.h = 17;
     cn.points.lecture.w = 32;
+    cn.points.lecture.x = 0;
 }
 
