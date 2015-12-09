@@ -154,19 +154,28 @@ void detectionBordsCanard(Canard &canard, Partie &partie)
             }
             break;
         case FREE_FALLING:
-            if (canard.image.position.y+canard.image.lecture.h > HAUTEUR - LIMITE_BASSE + canard.image.lecture.h)
+            if (canard.image.position.y + canard.image.lecture.h > HAUTEUR - LIMITE_BASSE + canard.image.lecture.h)
             {
                 canard.etat = DEAD;
-                SDL_FreeSurface(canard.points.source);
-                SDL_FreeSurface(canard.image.source);
                 partie.canardsEnVie--;
                 partie.canardAbbatu = true;
+                SDL_FreeSurface(canard.points.source);
+                SDL_FreeSurface(canard.image.source);
             }
             break;
-               default:
-                break;
+        default:
+            break;
     }
 }
+
+void sauvegarderPositionY(Partie &partie, Canard, canard) // On se sauvegarde la position Y à la mort d'un canard pour que le chien puisse le retrouver
+{
+
+
+}
+
+
+
 
 void changementDirection(Canard &canard)
 {

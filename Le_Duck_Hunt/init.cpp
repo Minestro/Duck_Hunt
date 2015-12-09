@@ -50,7 +50,10 @@ void initTime(Time &time)
 
 void initPartie(Partie &partie, int nbCanards)
 {
-    partie.chienCheck = false;
+    for(int i = 0 ; i < nbCanards ; i++)
+    {
+        partie.yChute[i] = 0;
+    }
     partie.canardAbbatu = false;
     partie.shots = 3;
     partie.canardsEnVie = nbCanards;
@@ -67,6 +70,7 @@ void initPartie(Partie &partie, int nbCanards)
 
 void initChien(Chien &chien)
 {
+    chien.enChasse = false;
     chien.devantHerbe = true;
     chien.vecteurPositionX = 10;
     chien.vecteurPositionY = 0;

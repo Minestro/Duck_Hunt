@@ -87,7 +87,7 @@ struct Partie
     int hit[10];
     bool roundJoue[5];
     bool canardAbbatu;
-    bool chienCheck;
+    int yChute[NB_MAX_CANARDS];
 };
 
 struct Sprite // Peut représenter une image comme une feuille de sprites
@@ -117,6 +117,7 @@ struct Canard
 
 struct Chien
 {
+    bool enChasse;
     int vecteurPositionX;
     int vecteurPositionY;
     int etat;
@@ -222,5 +223,6 @@ void switchSpriteChien(Chien &chien, Partie &partie);
 void afficherChien(Chien chien);
 std::string intToString (int number);
 void showPointsCanard(Canard &canard);
+void sauvegarderPositionY(Partie &partie, Canard, canard);
 
 #endif // HEADER_H
