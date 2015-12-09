@@ -27,7 +27,14 @@ void relancerPartie(Partie &partie, Sprites &sprites)
         initCanard(sprites.canard[i]);
     }
 
+    for (int i = 0 ; i < NB_MAX_CANARDS ; i++)
+    {
+        partie.xChute[i] = -1;
+    }
+
     partie.canardsEnVie = 2;
     partie.shots = 3;
     partie.round++;
 }
+
+

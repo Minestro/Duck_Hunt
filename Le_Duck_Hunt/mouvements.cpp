@@ -159,6 +159,7 @@ void detectionBordsCanard(Canard &canard, Partie &partie)
                 canard.etat = DEAD;
                 partie.canardsEnVie--;
                 partie.canardAbbatu = true;
+                sauvegarderPositionX(partie, canard);
                 SDL_FreeSurface(canard.points.source);
                 SDL_FreeSurface(canard.image.source);
             }
@@ -170,14 +171,14 @@ void detectionBordsCanard(Canard &canard, Partie &partie)
 
 void sauvegarderPositionX(Partie &partie, Canard canard) // On se sauvegarde la position Y à la mort d'un canard pour que le chien puisse le retrouver
 {
-    bool trouve = partie.xChute[0] == -1;
-    int i = 1;
-    while(!trouve && i < NB_MAX_CANARDS)
+    int i = 0;
+    bool sauvegarde = partie.xChute[i] == -1;
+    while(!sauvegarde && i < NB_MAX_CANARDS)
     {
         i++;
-        trouve = partie.xChute[i] == -1;
+        sauvegarde = partie.xChute[i] == -1;
     }
-    partie.xChute[i] = canard.image.lecture.x;
+    partie.xChute[i] = canard.image.position.x;
 }
 
 
