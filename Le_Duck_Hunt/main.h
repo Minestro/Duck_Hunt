@@ -168,6 +168,7 @@ struct Boutons
     SDL_Rect lecture[2];
     Bouton play;
     Bouton quit;
+    Bouton reprendre;
 };
 
 struct SourisEvent
