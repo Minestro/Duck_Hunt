@@ -23,6 +23,7 @@ void initBouton(Boutons &boutons)
     boutons.source = loadImageWithColorKey("sprites/boutons.bmp", 0, 0, 0);
     boutons.play.contenu = "Jouer";
     boutons.quit.contenu = "Quitter";
+    boutons.reprendre.contenu = "Reprendre";
     for(int i = 0 ; i < 2 ; i++)
     {
         boutons.lecture[i].x = i * 226;
