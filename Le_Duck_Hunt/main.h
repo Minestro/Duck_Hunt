@@ -56,6 +56,10 @@
 #define MSG_NIVEAU 2
 #define MSG_BOUTONS 3
 
+//Pour les valeurs d'un tableau
+#define NOT_SET -1
+#define TO_RESET -2
+
 const int HAUTEUR = 761;
 const int LARGEUR = 750;
 const int BPP = 32;

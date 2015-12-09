@@ -3,7 +3,6 @@
 int alea(int mini, int maxi)
 {
     return (rand() % (++maxi - mini))  + mini;
-
    // return rand() / (RAND_MAX / (maxi - mini + 1)); // NE PAS EFFACER, J'AI PENSE A UN NOUVEAU MODE DE JEU !
 }
 
@@ -19,6 +18,17 @@ void controlesChien(Chien &chien, Partie &partie)
             if(partie.chienEnChasse)
             {
                 chien.vitesseAnimation = 50;
+                if(
+                    (
+                        (chien.image[CHIEN_MARCHE].position.x + chien.image[CHIEN_MARCHE].lecture.w / 2) - (partie.xChute[(partie.canardsEnVie + 1) % 2]) < 10
+                        && (partie.xChute[(partie.canardsEnVie + 1 % 2)] - (chien.image[CHIEN_MARCHE].position.x + chien.image[CHIEN_MARCHE].lecture.w / 2) < 10)
+                    )
+                  )
+                {
+                    exit(0);
+                    partie.xChute[(partie.canardsEnVie + 1) % 2] = TO_RESET;
+                    partie.chienEnChasse = false;
+                }
             }
             else
             {
@@ -85,6 +95,8 @@ void controlesChien(Chien &chien, Partie &partie)
         case CHIEN_CONTENT_SIMPLE:
             break;
         case CHIEN_CONTENT_DOUBLE:
+            break;
+        default:
             break;
     }
 }
@@ -185,12 +197,13 @@ void detectionBordsCanard(Canard &canard, Partie &partie)
 void sauvegarderPositionX(Partie &partie, Canard canard) // On sauvegarde la position Y à la mort d'un canard pour que le chien puisse le retrouver
 {
     int i = 0;
-    bool sauvegarde = partie.xChute[i] == -1;
+    bool sauvegarde = partie.xChute[i] == NOT_SET;
     while(!sauvegarde && i < NB_MAX_CANARDS - 1)
     {
         i++;
-        sauvegarde = partie.xChute[i] == -1;
+        sauvegarde = partie.xChute[i] == NOT_SET;
     }
+
     partie.xChute[i] = canard.image.position.x + canard.image.lecture.w / 2;
 }
 

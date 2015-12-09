@@ -2,7 +2,13 @@
 
 bool partieTerminee(const Partie partie)
 {
-    return (partie.canardsEnVie == 0 || partie.shots == 0);
+    bool tousMorts = true;
+    int i = 0;
+    while(tousMorts && i < NB_MAX_CANARDS)
+    {
+        tousMorts = partie.xChute[i++] == TO_RESET;
+    }
+    return tousMorts;
 }
 
 
