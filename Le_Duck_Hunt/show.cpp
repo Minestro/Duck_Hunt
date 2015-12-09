@@ -35,16 +35,23 @@ void showMenu(Sprites sprites, Boutons boutons, int &modeMenu, Message msgs[], i
         SDL_FreeSurface(msgs[MSG_BOUTONS].source);
         break;
     case 5:
+        msgs[MSG_PAUSE].source = TTF_RenderText_Solid(msgs[MSG_PAUSE].font, "Jeu en pause", msgs[MSG_PAUSE].textColor);
+        msgs[MSG_PAUSE].position.x = (LARGEUR/2) - (msgs[MSG_PAUSE].source->w/2);
+        SDL_BlitSurface(msgs[MSG_PAUSE].source, NULL, SDL_GetVideoSurface(), &msgs[MSG_PAUSE].position);
+
         SDL_BlitSurface(boutons.source, &boutons.lecture[testHoverBouton(sx, sy, boutons.reprendre, boutons.lecture[0])], SDL_GetVideoSurface(), &boutons.reprendre.position);
         msgs[MSG_BOUTONS].source = TTF_RenderText_Solid(msgs[MSG_BOUTONS].font, boutons.reprendre.contenu.c_str(), msgs[MSG_BOUTONS].textColor);
-        msgs[MSG_BOUTONS].position.x=boutons.play.position.x+(boutons.lecture[0].w - msgs[MSG_BOUTONS].source->w)/2;
-        msgs[MSG_BOUTONS].position.y=boutons.play.position.y+(boutons.lecture[0].h - msgs[MSG_BOUTONS].source->h)/2;
+        msgs[MSG_BOUTONS].position.x=boutons.reprendre.position.x+(boutons.lecture[0].w - msgs[MSG_BOUTONS].source->w)/2;
+        msgs[MSG_BOUTONS].position.y=boutons.reprendre.position.y+(boutons.lecture[0].h - msgs[MSG_BOUTONS].source->h)/2;
         SDL_BlitSurface(msgs[MSG_BOUTONS].source, NULL, SDL_GetVideoSurface(), &msgs[MSG_BOUTONS].position);
+
+        SDL_BlitSurface(boutons.source, &boutons.lecture[testHoverBouton(sx, sy, boutons.quit, boutons.lecture[0])], SDL_GetVideoSurface(), &boutons.quit.position);
         msgs[MSG_BOUTONS].source = TTF_RenderText_Solid(msgs[MSG_BOUTONS].font, boutons.quit.contenu.c_str(), msgs[MSG_BOUTONS].textColor);
-        msgs[MSG_BOUTONS].position.x=boutons.play.position.x+(boutons.lecture[0].w - msgs[MSG_BOUTONS].source->w)/2;
-        msgs[MSG_BOUTONS].position.y=boutons.play.position.y+(boutons.lecture[0].h - msgs[MSG_BOUTONS].source->h)/2;
+        msgs[MSG_BOUTONS].position.x=boutons.quit.position.x+(boutons.lecture[0].w - msgs[MSG_BOUTONS].source->w)/2;
+        msgs[MSG_BOUTONS].position.y=boutons.quit.position.y+(boutons.lecture[0].h - msgs[MSG_BOUTONS].source->h)/2;
         SDL_BlitSurface(msgs[MSG_BOUTONS].source, NULL, SDL_GetVideoSurface(), &msgs[MSG_BOUTONS].position);
         SDL_FreeSurface(msgs[MSG_BOUTONS].source);
+        SDL_FreeSurface(msgs[MSG_PAUSE].source);
         break;
     }
     SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);
