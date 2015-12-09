@@ -14,19 +14,38 @@ std::string intToString (int number)
     return oss.str();
 }
 
-void showMenu(Sprites sprites, Boutons boutons, int &modeMenu, Message message, int sx, int sy)
+void showMenu(Sprites sprites, Boutons boutons, int &modeMenu, Message msgs[], int sx, int sy)
 {
     sprites.viseur.position.x=sx-(sprites.viseur.source->w/2);
     sprites.viseur.position.y=sy-(sprites.viseur.source->h/2);
     SDL_BlitSurface(sprites.background_menu.source, NULL, SDL_GetVideoSurface(), &sprites.background.position);
     switch (modeMenu)
     {
-        case 1 :
-            SDL_BlitSurface(boutons.source, &boutons.lecture[testHoverBouton(sx, sy, boutons.play, boutons.lecture[0])], SDL_GetVideoSurface(), &boutons.play.position);
-            message.position.x=boutons.play.position.x;
-            showMessage(message, boutons.play.contenu);
-            SDL_BlitSurface(boutons.source, &boutons.lecture[testHoverBouton(sx, sy, boutons.quit, boutons.lecture[0])], SDL_GetVideoSurface(), &boutons.quit.position);
-            break;
+    case 1 :
+        SDL_BlitSurface(boutons.source, &boutons.lecture[testHoverBouton(sx, sy, boutons.play, boutons.lecture[0])], SDL_GetVideoSurface(), &boutons.play.position);
+        msgs[MSG_BOUTONS].source = TTF_RenderText_Solid(msgs[MSG_BOUTONS].font, boutons.play.contenu.c_str(), msgs[MSG_BOUTONS].textColor);
+        msgs[MSG_BOUTONS].position.x=boutons.play.position.x+(boutons.lecture[0].w - msgs[MSG_BOUTONS].source->w)/2;
+        msgs[MSG_BOUTONS].position.y=boutons.play.position.y+(boutons.lecture[0].h - msgs[MSG_BOUTONS].source->h)/2;
+        SDL_BlitSurface(msgs[MSG_BOUTONS].source, NULL, SDL_GetVideoSurface(), &msgs[MSG_BOUTONS].position);
+        SDL_BlitSurface(boutons.source, &boutons.lecture[testHoverBouton(sx, sy, boutons.quit, boutons.lecture[0])], SDL_GetVideoSurface(), &boutons.quit.position);
+        msgs[MSG_BOUTONS].source = TTF_RenderText_Solid(msgs[MSG_BOUTONS].font, boutons.quit.contenu.c_str(), msgs[MSG_BOUTONS].textColor);
+        msgs[MSG_BOUTONS].position.x=boutons.quit.position.x+(boutons.lecture[0].w - msgs[MSG_BOUTONS].source->w)/2;
+        msgs[MSG_BOUTONS].position.y=boutons.quit.position.y+(boutons.lecture[0].h - msgs[MSG_BOUTONS].source->h)/2;
+        SDL_BlitSurface(msgs[MSG_BOUTONS].source, NULL, SDL_GetVideoSurface(), &msgs[MSG_BOUTONS].position);
+        SDL_FreeSurface(msgs[MSG_BOUTONS].source);
+        break;
+    case 5:
+        SDL_BlitSurface(boutons.source, &boutons.lecture[testHoverBouton(sx, sy, boutons.reprendre, boutons.lecture[0])], SDL_GetVideoSurface(), &boutons.reprendre.position);
+        msgs[MSG_BOUTONS].source = TTF_RenderText_Solid(msgs[MSG_BOUTONS].font, boutons.reprendre.contenu.c_str(), msgs[MSG_BOUTONS].textColor);
+        msgs[MSG_BOUTONS].position.x=boutons.play.position.x+(boutons.lecture[0].w - msgs[MSG_BOUTONS].source->w)/2;
+        msgs[MSG_BOUTONS].position.y=boutons.play.position.y+(boutons.lecture[0].h - msgs[MSG_BOUTONS].source->h)/2;
+        SDL_BlitSurface(msgs[MSG_BOUTONS].source, NULL, SDL_GetVideoSurface(), &msgs[MSG_BOUTONS].position);
+        msgs[MSG_BOUTONS].source = TTF_RenderText_Solid(msgs[MSG_BOUTONS].font, boutons.quit.contenu.c_str(), msgs[MSG_BOUTONS].textColor);
+        msgs[MSG_BOUTONS].position.x=boutons.play.position.x+(boutons.lecture[0].w - msgs[MSG_BOUTONS].source->w)/2;
+        msgs[MSG_BOUTONS].position.y=boutons.play.position.y+(boutons.lecture[0].h - msgs[MSG_BOUTONS].source->h)/2;
+        SDL_BlitSurface(msgs[MSG_BOUTONS].source, NULL, SDL_GetVideoSurface(), &msgs[MSG_BOUTONS].position);
+        SDL_FreeSurface(msgs[MSG_BOUTONS].source);
+        break;
     }
     SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);
 }
@@ -74,22 +93,16 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien
         sprites.hits.position.x += sprites.hits.lecture.w + 3;
         SDL_BlitSurface(sprites.hits.source, &sprites.hits.lecture, SDL_GetVideoSurface(), &sprites.hits.position);
     }
+
     SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);
 }
 
 void showPointsCanard(Canard &canard)
 {
-    // fonction en mode debug
-    Message msg;
-    msg.position.x = canard.points.position.x = canard.image.position.x + canard.image.lecture.w / 2;
-    msg.position.y = canard.points.position.y = canard.image.position.y + canard.image.lecture.h;
+    canard.points.position.x = canard.image.position.x + canard.image.lecture.w / 2;
+    canard.points.position.y = canard.image.position.y + canard.image.lecture.h;
     canard.points.lecture.y = 17 * (canard.type - 1);
     SDL_BlitSurface(canard.points.source, &canard.points.lecture, SDL_GetVideoSurface(), &canard.points.position);
-    msg.fontSize = 100;
-    msg.font = TTF_OpenFont("font/duck_hunt.ttf", msg.fontSize);
-    msg.message = intToString(canard.points.lecture.y);
-    msg.textColor.r = msg.textColor.g = msg.textColor.b = 255;
-    showMessage(msg, msg.message);
 }
 
 

@@ -87,7 +87,6 @@ void chargerImages(Sprites &sprites)
     initializer.x = initializer.y = 0;
 
     sprites.background_menu.source = load_image("sprites/menu.png");
-
     sprites.background.source=load_image("sprites/backGame.png");
     sprites.background.position = initializer;
 
@@ -103,7 +102,7 @@ void chargerImages(Sprites &sprites)
     sprites.hits.lecture.y = 5;
     sprites.hits.lecture.w = 27;
     sprites.hits.lecture.h = 27;
-    sprites.hits.position.y = 670;
+    sprites.hits.position.y = 665;
 
     sprites.shots.source = load_image("sprites/shot.png");
     sprites.shots.lecture = initializer;

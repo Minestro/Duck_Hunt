@@ -1,12 +1,21 @@
 #include "main.h"
 
 
-void initMessage(Message &message)
+void initMessage(Message msgs[])
 {
-    message.fontSize = 35;
-    message.textColor.r = 255;
-    message.textColor.g = 255;
-    message.textColor.b = 255;
+    for (int i=0; i<5; i++)
+    {
+        msgs[i].textColor.r = 255;
+        msgs[i].textColor.g = 255;
+        msgs[i].textColor.b = 255;
+    }
+    msgs[MSG_SCORE].position.x = 580;
+    msgs[MSG_SCORE].position.y = 667;
+    msgs[MSG_SCORE].fontSize = 35;
+    msgs[MSG_SCORE].font = TTF_OpenFont("font/duck_hunt.ttf", msgs[MSG_SCORE].fontSize);
+
+    msgs[MSG_BOUTONS].fontSize = 40;
+    msgs[MSG_BOUTONS].font = TTF_OpenFont("font/duck_hunt.ttf", msgs[MSG_BOUTONS].fontSize);
 }
 
 void initBouton(Boutons &boutons)
@@ -14,6 +23,7 @@ void initBouton(Boutons &boutons)
     boutons.source = loadImageWithColorKey("sprites/boutons.bmp", 0, 0, 0);
     boutons.play.contenu = "Jouer";
     boutons.quit.contenu = "Quitter";
+    boutons.reprendre.contenu = "Reprendre";
     for(int i = 0 ; i < 2 ; i++)
     {
         boutons.lecture[i].x = i * 226;
@@ -40,7 +50,11 @@ void initTime(Time &time)
 
 void initPartie(Partie &partie, int nbCanards)
 {
-    partie.chienCheck = false;
+    partie.chienEnChasse = false;
+    for(int i = 0 ; i < nbCanards ; i++)
+    {
+        partie.xChute[i] = -1;
+    }
     partie.canardAbbatu = false;
     partie.shots = 3;
     partie.canardsEnVie = nbCanards;
@@ -63,8 +77,7 @@ void initChien(Chien &chien)
     chien.pxParFrame = 120;
     chien.cycleSprite = 0;
     chien.vitesseAnimation = 100; // Plus cette valeur est élevée, plus l'animation est lente...
-    chien.vitesseTime = chien.vitesseAnimationTime = 0;
-    chien.vitesse = 1000;
+    chien.vitesseAnimationTime = 0;
 
     chien.etat = CHIEN_MARCHE;
     chien.nbFrames = 5;
@@ -140,10 +153,10 @@ void initCanard(Canard &cn)
         {
             cn.vecteurPositionY = 10 + cn.vecteurPositionX;
         }
+
     } while(cn.vecteurPositionX == 0 || cn.vecteurPositionY == 0);
 
     cn.points.source = loadImageWithColorKey("sprites/points.png", 0, 0, 0);
-
     cn.points.lecture.h = 17;
     cn.points.lecture.w = 32;
 }

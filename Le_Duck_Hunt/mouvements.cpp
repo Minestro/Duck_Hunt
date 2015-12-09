@@ -7,6 +7,7 @@ int alea(int mini, int maxi)
    // return rand() / (RAND_MAX / (maxi - mini + 1)); // NE PAS EFFACER, J'AI PENSE A UN NOUVEAU MODE DE JEU !
 }
 
+
 void controlesChien(Chien &chien, Partie &partie)
 {
     switch (chien.etat)
@@ -15,10 +16,19 @@ void controlesChien(Chien &chien, Partie &partie)
             detectionBordsChien(chien);
             chien.image[CHIEN_MARCHE].position.x += chien.vecteurPositionX;
             chien.image[CHIEN_MARCHE].position.y += chien.vecteurPositionY;
+            if(partie.chienEnChasse)
+            {
+                chien.vitesseAnimation = 50;
+            }
+            else
+            {
+                chien.vitesseAnimation = 100;
+            }
+
             if((((chien.image[CHIEN_MARCHE].position.x > (LARGEUR - chien.image[CHIEN_MARCHE].lecture.h * 2) / 2) && chien.devantHerbe))
                 || (partie.canardAbbatu && chien.image[CHIEN_MARCHE].position.y == Y_JEU_CHIEN))
             {
-                chien.etat++;
+                chien.etat = CHIEN_CONTENT;
                 chien.image[CHIEN_CONTENT].position = chien.image[CHIEN_MARCHE].position;
                 chien.image[CHIEN_CONTENT].position.y -= 8;
                 chien.tempsDepuisEtat = SDL_GetTicks();
@@ -29,11 +39,11 @@ void controlesChien(Chien &chien, Partie &partie)
             {
                 if(chien.devantHerbe)
                 {
-                    chien.etat++;
+                    chien.etat = CHIEN_SAUTE_1;
                 }
                 else
                 {
-                    chien.etat--;
+                    chien.etat  = CHIEN_MARCHE;
                 }
                 chien.image[CHIEN_SAUTE_1].position.x = chien.image[CHIEN_CONTENT].position.x + chien.image[CHIEN_SAUTE_1].lecture.w / 2;
                 chien.image[CHIEN_SAUTE_1].position.y = chien.image[CHIEN_CONTENT].position.y - chien.image[CHIEN_SAUTE_1].lecture.h / 2;
@@ -119,13 +129,15 @@ void detectionBordsChien(Chien &chien)
         chien.image[CHIEN_MARCHE].position.x = LARGEUR - chien.image[CHIEN_MARCHE].lecture.w;
         chien.image[CHIEN_MARCHE].lecture.y = 0;
     }
-    if(chien.image[CHIEN_MARCHE].position.x < 0)
+    else if(chien.image[CHIEN_MARCHE].position.x < 0)
     {
         chien.vecteurPositionX *= -1;
         chien.image[CHIEN_MARCHE].position.x = 0;
         chien.image[CHIEN_MARCHE].lecture.y = chien.image[CHIEN_MARCHE].lecture.h;
     }
 }
+
+
 
 void detectionBordsCanard(Canard &canard, Partie &partie)
 {
@@ -154,18 +166,34 @@ void detectionBordsCanard(Canard &canard, Partie &partie)
             }
             break;
         case FREE_FALLING:
-            if (canard.image.position.y+canard.image.lecture.h > HAUTEUR - LIMITE_BASSE + canard.image.lecture.h)
+            if (canard.image.position.y + canard.image.lecture.h > HAUTEUR - LIMITE_BASSE + canard.image.lecture.h)
             {
                 canard.etat = DEAD;
                 SDL_FreeSurface(canard.image.source);
                 SDL_FreeSurface(canard.points.source);
                 partie.canardsEnVie--;
                 partie.canardAbbatu = true;
+                partie.chienEnChasse = true;
+                sauvegarderPositionX(partie, canard);
+                SDL_FreeSurface(canard.points.source);
+                SDL_FreeSurface(canard.image.source);
             }
             break;
-               default:
-                break;
+        default:
+            break;
     }
+}
+
+void sauvegarderPositionX(Partie &partie, Canard canard) // On sauvegarde la position Y à la mort d'un canard pour que le chien puisse le retrouver
+{
+    int i = 0;
+    bool sauvegarde = partie.xChute[i] == -1;
+    while(!sauvegarde && i < NB_MAX_CANARDS - 1)
+    {
+        i++;
+        sauvegarde = partie.xChute[i] == -1;
+    }
+    partie.xChute[i] = canard.image.position.x + canard.image.lecture.w / 2;
 }
 
 void changementDirection(Canard &canard)
