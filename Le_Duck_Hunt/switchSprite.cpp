@@ -10,9 +10,16 @@ void switchSpriteChien(Chien &chien, Partie &partie)
             chien.cycleSprite = (chien.cycleSprite + 1) % chien.nbFrames;
             break;
         case CHIEN_CONTENT:
-            if(chien.vecteurPositionX < 0)
+            if(!chien.devantHerbe)
             {
-                chien.image[CHIEN_CONTENT].lecture.y = 0;
+                if(chien.image[CHIEN_CONTENT].position.x > partie.xChute[partie.canardsEnVie % NB_MAX_CANARDS])
+                {
+                    chien.image[CHIEN_CONTENT].lecture.y = 0;
+                }
+                else
+                {
+                    chien.image[CHIEN_CONTENT].lecture.y = 100;
+                }
             }
             else
             {

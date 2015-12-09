@@ -169,7 +169,7 @@ void detectionBordsCanard(Canard &canard, Partie &partie)
     }
 }
 
-void sauvegarderPositionX(Partie &partie, Canard canard) // On se sauvegarde la position Y à la mort d'un canard pour que le chien puisse le retrouver
+void sauvegarderPositionX(Partie &partie, Canard canard) // On sauvegarde la position Y à la mort d'un canard pour que le chien puisse le retrouver
 {
     int i = 0;
     bool sauvegarde = partie.xChute[i] == -1;
@@ -178,7 +178,7 @@ void sauvegarderPositionX(Partie &partie, Canard canard) // On se sauvegarde la 
         i++;
         sauvegarde = partie.xChute[i] == -1;
     }
-    partie.xChute[i] = canard.image.position.x;
+    partie.xChute[i] = canard.image.position.x + canard.image.lecture.w / 2;
 }
 
 
