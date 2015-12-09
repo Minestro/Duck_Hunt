@@ -16,6 +16,10 @@ void initMessage(Message msgs[])
 
     msgs[MSG_BOUTONS].fontSize = 40;
     msgs[MSG_BOUTONS].font = TTF_OpenFont("font/duck_hunt.ttf", msgs[MSG_BOUTONS].fontSize);
+
+    msgs[MSG_PAUSE].position.y = 100;
+    msgs[MSG_PAUSE].fontSize = 40;
+    msgs[MSG_PAUSE].font = TTF_OpenFont("font/duck_hunt.ttf", msgs[MSG_PAUSE].fontSize);
 }
 
 void initBouton(Boutons &boutons)
