@@ -61,7 +61,7 @@ const int LARGEUR = 750;
 const int BPP = 32;
 const int FPS_MAX = 60;
 const int LIMITE_BASSE = 270;
-const int NB_MAX_CANARDS = 1000;
+const int NB_MAX_CANARDS = 2;
 
 const unsigned int VITESSE_N = 35;
 const unsigned int VITESSE_M = 30;
@@ -100,6 +100,7 @@ struct Sprite // Peut représenter une image comme une feuille de sprites
 struct Canard
 {
     Sprite image;
+    Sprite points;
     int vitesseAnimation;
     Uint32 vitesseAnimationTime;
     int vitesse;
@@ -145,7 +146,6 @@ struct Sprites // Rassemble toutes les images et les feuilles de sprite
     Sprite hits;
     Sprite shots;
     Sprite viseur;
-    Sprite points;
 };
 
 struct Police
@@ -212,7 +212,7 @@ int alea(int, int);
 void detectionBordsCanard(Canard &canard, Partie &partie);
 void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, int i, int canardsActifs, Time temps);
 bool testShot(SourisEvent sourisEvent, Sprite sprite);
-void touched(Canard &canard, Time temps, Sprite &points);
+void touched(Canard &canard, Time temps);
 void initPartie(Partie &partie, int nbCanards);
 bool partieTerminee(const Partie partie);
 void relancerPartie(Partie &partie, Sprites &sprites);
@@ -220,6 +220,6 @@ void controlesChien(Chien &chien, Partie &partie);
 void switchSpriteChien(Chien &chien, Partie &partie);
 void afficherChien(Chien chien);
 std::string intToString (int number);
-void showPointsCanard(Sprite &points, Canard canard);
+void showPointsCanard(Canard &canard);
 
 #endif // HEADER_H

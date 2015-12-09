@@ -157,6 +157,7 @@ void detectionBordsCanard(Canard &canard, Partie &partie)
             if (canard.image.position.y+canard.image.lecture.h > HAUTEUR - LIMITE_BASSE + canard.image.lecture.h)
             {
                 canard.etat = DEAD;
+                SDL_FreeSurface(canard.points.source);
                 SDL_FreeSurface(canard.image.source);
                 partie.canardsEnVie--;
                 partie.canardAbbatu = true;

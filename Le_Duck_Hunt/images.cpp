@@ -86,11 +86,6 @@ void chargerImages(Sprites &sprites)
     SDL_Rect initializer;
     initializer.x = initializer.y = 0;
 
-    sprites.points.source = loadImageWithColorKey("sprites/points.png", 0, 0, 0);
-    sprites.points.lecture = initializer;
-    sprites.points.lecture.h = 17;
-    sprites.points.lecture.w = 32;
-
     sprites.background_menu.source=load_image("sprites/menu.png");
 
     sprites.background.source=load_image("sprites/backGame.png");
