@@ -50,6 +50,7 @@ void initTime(Time &time)
 
 void initPartie(Partie &partie, int nbCanards)
 {
+    partie.chienEnChasse = false;
     for(int i = 0 ; i < nbCanards ; i++)
     {
         partie.xChute[i] = -1;
@@ -70,15 +71,13 @@ void initPartie(Partie &partie, int nbCanards)
 
 void initChien(Chien &chien)
 {
-    chien.enChasse = false;
     chien.devantHerbe = true;
     chien.vecteurPositionX = 10;
     chien.vecteurPositionY = 0;
     chien.pxParFrame = 120;
     chien.cycleSprite = 0;
     chien.vitesseAnimation = 100; // Plus cette valeur est élevée, plus l'animation est lente...
-    chien.vitesseTime = chien.vitesseAnimationTime = 0;
-    chien.vitesse = 1000;
+    chien.vitesseAnimationTime = 0;
 
     chien.etat = CHIEN_MARCHE;
     chien.nbFrames = 5;

@@ -14,10 +14,21 @@ void switchSpriteChien(Chien &chien, Partie &partie)
             {
                 if(chien.image[CHIEN_CONTENT].position.x > partie.xChute[(partie.canardsEnVie + 1) % NB_MAX_CANARDS])
                 {
+                    if(chien.vecteurPositionX > 0)
+                    {
+                        chien.vecteurPositionX *= -1;
+                        chien.image[CHIEN_MARCHE].lecture.y = 0;
+                    }
                     chien.image[CHIEN_CONTENT].lecture.y = 0;
                 }
                 else if(chien.image[CHIEN_CONTENT].position.x + chien.image[CHIEN_CONTENT].lecture.w <= partie.xChute[(partie.canardsEnVie + 1) % NB_MAX_CANARDS])
                 {
+                    if(chien.vecteurPositionX < 0)
+                    {
+                        chien.vecteurPositionX *= -1;
+                        chien.image[CHIEN_MARCHE].lecture.y = chien.image[CHIEN_MARCHE].lecture.h;
+
+                    }
                     chien.image[CHIEN_CONTENT].lecture.y = 100;
                 }
             }

@@ -79,6 +79,7 @@ struct Message // Une structure pour afficher avec les fontes, par exemple les s
 
 struct Partie
 {
+    bool chienEnChasse;
     int canardsEnVie;
     int shots;
     Uint32 temps; //pour un certain mode de jeu
@@ -117,7 +118,6 @@ struct Canard
 
 struct Chien
 {
-    bool enChasse;
     int vecteurPositionX;
     int vecteurPositionY;
     int etat;
@@ -125,8 +125,6 @@ struct Chien
     int nbFrames;
     int vitesseAnimation;
     Uint32 vitesseAnimationTime;
-    int vitesse;
-    Uint32 vitesseTime;
     int pxParFrame;
     int cycleSprite;
     Uint32 tempsDepuisEtat; // Même principe que tempsDepuisTir mais depuis un certain etat;

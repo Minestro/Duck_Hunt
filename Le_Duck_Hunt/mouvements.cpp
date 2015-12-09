@@ -16,6 +16,15 @@ void controlesChien(Chien &chien, Partie &partie)
             detectionBordsChien(chien);
             chien.image[CHIEN_MARCHE].position.x += chien.vecteurPositionX;
             chien.image[CHIEN_MARCHE].position.y += chien.vecteurPositionY;
+            if(partie.chienEnChasse)
+            {
+                chien.vitesseAnimation = 50;
+            }
+            else
+            {
+                chien.vitesseAnimation = 100;
+            }
+
             if((((chien.image[CHIEN_MARCHE].position.x > (LARGEUR - chien.image[CHIEN_MARCHE].lecture.h * 2) / 2) && chien.devantHerbe))
                 || (partie.canardAbbatu && chien.image[CHIEN_MARCHE].position.y == Y_JEU_CHIEN))
             {
@@ -120,18 +129,15 @@ void detectionBordsChien(Chien &chien)
         chien.image[CHIEN_MARCHE].position.x = LARGEUR - chien.image[CHIEN_MARCHE].lecture.w;
         chien.image[CHIEN_MARCHE].lecture.y = 0;
     }
-    if(chien.image[CHIEN_MARCHE].position.x < 0)
+    else if(chien.image[CHIEN_MARCHE].position.x < 0)
     {
         chien.vecteurPositionX *= -1;
         chien.image[CHIEN_MARCHE].position.x = 0;
         chien.image[CHIEN_MARCHE].lecture.y = chien.image[CHIEN_MARCHE].lecture.h;
     }
 }
-/*
-void ramasserCanard(Chien &chien, Partie &partie)
-{
 
-}*/
+
 
 void detectionBordsCanard(Canard &canard, Partie &partie)
 {
@@ -165,6 +171,7 @@ void detectionBordsCanard(Canard &canard, Partie &partie)
                 canard.etat = DEAD;
                 partie.canardsEnVie--;
                 partie.canardAbbatu = true;
+                partie.chienEnChasse = true;
                 sauvegarderPositionX(partie, canard);
                 SDL_FreeSurface(canard.points.source);
                 SDL_FreeSurface(canard.image.source);
@@ -179,16 +186,13 @@ void sauvegarderPositionX(Partie &partie, Canard canard) // On sauvegarde la pos
 {
     int i = 0;
     bool sauvegarde = partie.xChute[i] == -1;
-    while(!sauvegarde && i < NB_MAX_CANARDS)
+    while(!sauvegarde && i < NB_MAX_CANARDS - 1)
     {
         i++;
         sauvegarde = partie.xChute[i] == -1;
     }
     partie.xChute[i] = canard.image.position.x + canard.image.lecture.w / 2;
 }
-
-
-
 
 void changementDirection(Canard &canard)
 {
