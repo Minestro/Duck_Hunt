@@ -173,8 +173,8 @@ void detectionBordsCanard(Canard &canard, Partie &partie)
                 partie.canardAbbatu = true;
                 partie.chienEnChasse = true;
                 sauvegarderPositionX(partie, canard);
-                SDL_FreeSurface(canard.points.source);
                 SDL_FreeSurface(canard.image.source);
+                SDL_FreeSurface(canard.points.source);
             }
             break;
         default:

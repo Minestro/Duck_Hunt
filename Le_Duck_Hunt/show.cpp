@@ -8,7 +8,9 @@ void afficherChien(Chien chien)
 std::string intToString (int number)
 {
     std::ostringstream oss;
-    oss<< number;
+    oss.flush();
+    oss.str("");
+    oss << number;
     return oss.str();
 }
 
@@ -52,7 +54,6 @@ void showMenu(Sprites sprites, Boutons boutons, int &modeMenu, Message msgs[], i
         SDL_FreeSurface(msgs[MSG_PAUSE].source);
         break;
     }
-
     SDL_BlitSurface(sprites.viseur.source, NULL, SDL_GetVideoSurface(), &sprites.viseur.position);
 }
 
@@ -84,14 +85,12 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien
         {
             SDL_BlitSurface(sprites.canard[i].image.source, &sprites.canard[i].image.lecture, SDL_GetVideoSurface(), &sprites.canard[i].image.position);
         }
-    }
-    for (int i = 0 ; i < sprites.canardActifs ; i++)
-    {
         if (sprites.canard[i].etat == TOUCHED)
         {
             showPointsCanard(sprites.canard[i]);
         }
     }
+
     SDL_BlitSurface(sprites.shots.source, &sprites.shots.lecture, SDL_GetVideoSurface(), &sprites.shots.position);
     sprites.shots.lecture.y = 0;
     sprites.hits.position.x = 170;
@@ -107,8 +106,44 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien
 
 void showPointsCanard(Canard &canard)
 {
-    canard.points.lecture.y = 17 * (canard.type - 1);
     canard.points.position.x = canard.image.position.x + canard.image.lecture.w / 2;
     canard.points.position.y = canard.image.position.y + canard.image.lecture.h;
+    canard.points.lecture.y = 17 * (canard.type - 1);
     SDL_BlitSurface(canard.points.source, &canard.points.lecture, SDL_GetVideoSurface(), &canard.points.position);
+}
+
+
+void showMessage(Message &msg, std::string contenuMessage)
+{
+    static std::ostringstream message;
+    message.flush();
+    message.str("");
+    message << contenuMessage;
+    msg.message = message.str();
+
+    std::string mot="";
+    std::string space=" ";
+    int i = 0;
+    size_t j;
+    SDL_Surface *mes = NULL;
+
+    j = msg.message.find(space);
+    while(j != std::string::npos)
+    {
+        mot = msg.message.substr(i,j-i);
+        if(mot != "")
+        {
+           mes = TTF_RenderText_Solid(msg.font, mot.c_str(), msg.textColor);
+           SDL_BlitSurface(mes, NULL, SDL_GetVideoSurface(),  &msg.position);
+           msg.position.x += mes->w;
+           SDL_FreeSurface(mes);
+        }
+        msg.position.x += msg.fontSize;
+        i = j+1;
+        j = msg.message.find(space,i);
+    }
+    mot = msg.message.substr(i);
+    mes = TTF_RenderText_Solid(msg.font, mot.c_str(), msg.textColor);
+    SDL_BlitSurface(mes, NULL, SDL_GetVideoSurface(),  &msg.position);
+    SDL_FreeSurface(mes);
 }

@@ -86,8 +86,7 @@ void chargerImages(Sprites &sprites)
     SDL_Rect initializer;
     initializer.x = initializer.y = 0;
 
-    sprites.background_menu.source=load_image("sprites/menu.png");
-
+    sprites.background_menu.source = load_image("sprites/menu.png");
     sprites.background.source=load_image("sprites/backGame.png");
     sprites.background.position = initializer;
 
@@ -99,7 +98,8 @@ void chargerImages(Sprites &sprites)
 
     sprites.viseur.source=loadImageWithColorKey("sprites/viseur.png", 0, 0, 0);
     sprites.hits.source=loadImageWithColorKey("sprites/hit.png", 0, 0, 0);
-    sprites.hits.lecture = initializer;
+    sprites.hits.lecture.x = 5;
+    sprites.hits.lecture.y = 5;
     sprites.hits.lecture.w = 27;
     sprites.hits.lecture.h = 27;
     sprites.hits.position.y = 665;
