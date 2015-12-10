@@ -16,11 +16,11 @@ void controlesChien(Chien &chien, Partie &partie)
             chien.image[CHIEN_MARCHE].position.y += chien.vecteurPositionY;
             if(partie.chienEnChasse)
             {
-                chien.vitesseAnimation = FREQ_ANIMATION_CHIEN / 2;
+                chien.vitesseAnimation = 40;
             }
             else
             {
-                chien.vitesseAnimation = FREQ_ANIMATION_CHIEN;
+                chien.vitesseAnimation = 80;
             }
 
 

@@ -10,6 +10,7 @@ void switchSpriteChien(Chien &chien, Partie &partie)
             chien.cycleSprite = (chien.cycleSprite + 1) % chien.nbFrames;
             if(partie.chienEnChasse)
             {
+                std::cout << (chien.image[CHIEN_MARCHE].position.x + chien.image[CHIEN_MARCHE].lecture.w / 2) - (partie.xChute[(partie.canardsEnVie + 1) % NB_MAX_CANARDS]) << std::endl;
                 if(
                     (
                         abs((chien.image[CHIEN_MARCHE].position.x + chien.image[CHIEN_MARCHE].lecture.w / 2) - (partie.xChute[(partie.canardsEnVie + 1) % NB_MAX_CANARDS])) < 10

@@ -80,7 +80,7 @@ void initChien(Chien &chien)
     chien.vecteurPositionY = 0;
     chien.pxParFrame = 120;
     chien.cycleSprite = 0;
-    chien.vitesseAnimation = FREQ_ANIMATION_CHIEN; // Plus cette valeur est élevée, plus l'animation est lente... #pas logique
+    chien.vitesseAnimation = 100; // Plus cette valeur est élevée, plus l'animation est lente...
     chien.vitesseAnimationTime = 0;
 
     chien.etat = CHIEN_MARCHE;
@@ -106,8 +106,8 @@ void initChien(Chien &chien)
     chien.image[CHIEN_SAUTE_1].lecture.y = 0;
 
     chien.image[CHIEN_SAUTE_2].source = loadImageWithColorKey("sprites/chienSaute2.png", 0, 255, 0);
-    chien.image[CHIEN_SAUTE_2].lecture.h = 95;
-    chien.image[CHIEN_SAUTE_2].lecture.w = 110;
+    chien.image[CHIEN_SAUTE_2].lecture.h = 100;
+    chien.image[CHIEN_SAUTE_2].lecture.w = 94;
     chien.image[CHIEN_SAUTE_2].lecture.x = 0;
     chien.image[CHIEN_SAUTE_2].lecture.y = 0;
 

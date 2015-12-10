@@ -1,4 +1,4 @@
-#include "main.h"
+ #include "main.h"
 
 bool roundTerminee(Partie partie, Canard canard[], int canardActifs)
 {
