@@ -2,12 +2,6 @@
 
 void switchSpriteChien(Chien &chien, Partie &partie)
 {
-    static char indice;
-    if(indice < 0 || indice > NB_MAX_CANARDS)
-    {
-        indice = -1;
-    }
-
     controlesChien(chien, partie);
     switch(chien.etat)
     {
@@ -16,18 +10,15 @@ void switchSpriteChien(Chien &chien, Partie &partie)
             chien.cycleSprite = (chien.cycleSprite + 1) % chien.nbFrames;
             if(partie.chienEnChasse)
             {
-                std::cout << (chien.image[CHIEN_MARCHE].position.x + chien.image[CHIEN_MARCHE].lecture.w / 2) - (partie.xChute[(partie.canardsEnVie + 1) % NB_MAX_CANARDS]) << std::endl;
                 if(
                     (
                         abs((chien.image[CHIEN_MARCHE].position.x + chien.image[CHIEN_MARCHE].lecture.w / 2) - (partie.xChute[(partie.canardsEnVie + 1) % NB_MAX_CANARDS])) < 10
                     )
                   )
                 {
-                    std::cout << abs((chien.image[CHIEN_MARCHE].position.x + chien.image[CHIEN_MARCHE].lecture.w / 2) - (partie.xChute[(partie.canardsEnVie + 1) % NB_MAX_CANARDS])) << std::endl;
-                    partie.xChute[(partie.canardsEnVie + 1) % NB_MAX_CANARDS] = TO_RESET;
                     partie.chienEnChasse = false;
-                    indice++;
-                    partie.canardRamasse[indice];
+                    partie.canardRamasse[0] = true; // LOURD CODE DE VEUJ
+                    partie.canardRamasse[(partie.canardsEnVie + 1) % NB_MAX_CANARDS] = true;
                 }
             }
             break;
