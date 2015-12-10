@@ -45,6 +45,7 @@
 #define CHIEN_CONTENT_SIMPLE 5
 #define CHIEN_CONTENT_DOUBLE 6
 #define NOMBRE_IMAGES_CHIEN 7
+#define FREQ_ANIMATION_CHIEN 80
 
 // Position en Y en fonction de l'état du jeu
 #define Y_INTRO_CHIEN 500
