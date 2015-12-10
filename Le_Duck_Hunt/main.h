@@ -94,6 +94,7 @@ struct Partie
     bool roundJoue[5];
     bool canardAbbatu;
     int xChute[NB_MAX_CANARDS];
+    bool canardRamasse[NB_MAX_CANARDS];
 };
 
 struct Sprite // Peut représenter une image comme une feuille de sprites

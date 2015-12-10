@@ -57,6 +57,7 @@ void initPartie(Partie &partie, int nbCanards)
     partie.chienEnChasse = false;
     for(int i = 0 ; i < nbCanards ; i++)
     {
+        partie.canardRamasse[i] = false;
         partie.xChute[i] = NOT_SET;
     }
     partie.canardAbbatu = false;

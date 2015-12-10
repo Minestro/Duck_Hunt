@@ -15,7 +15,13 @@ bool roundTerminee(Partie partie, Canard canard[], int canardActifs)
             enChute = true;
         }
     }
-    return (tousMorts || ((partie.shots<=0)&&(!enChute)));
+    bool tousRamasses = true;
+    int i = 0;
+    while(tousRamasses && i < NB_MAX_CANARDS)
+    {
+        tousRamasses = partie.canardRamasse[i++];
+    }
+    return ((tousMorts || ((partie.shots<=0)&&(!enChute))) && tousRamasses);
 }
 
 
