@@ -1,27 +1,20 @@
  #include "main.h"
 
 bool roundTerminee(Partie partie, Canard canard[], int canardActifs)
-{
-    bool tousMorts = true;
-    bool enChute = false;
-    for (int i = 0; i < canardActifs; i++)
-    {
-        if (canard[i].etat != DEAD)
-        {
-            tousMorts = false;
-        }
-        if (canard[i].etat == FREE_FALLING)
-        {
-            enChute = true;
-        }
-    }
+{    
     bool tousRamasses = true;
     int i = 0;
     while(tousRamasses && i < NB_MAX_CANARDS)
     {
         tousRamasses = partie.canardRamasse[i++];
     }
-    return ((tousMorts || ((partie.shots<=0)&&(!enChute))) && tousRamasses);
+    for(int f = 0 ; f < NB_MAX_CANARDS ; f++)
+    {
+        std::cout << f << " : " << partie.canardRamasse[f] << std::endl;
+    }
+
+
+    return tousRamasses;
 }
 
 
@@ -29,6 +22,7 @@ void relancerPartie(Partie &partie, Sprites &sprites)
 {
     for(int i = 0 ; i < NB_MAX_CANARDS ; i++)
     {
+        partie.canardRamasse[i] = false;
         partie.xChute[i] = NOT_SET;
     }
 
@@ -51,6 +45,8 @@ void relancerPartie(Partie &partie, Sprites &sprites)
         partie.xChute[i] = -1;
     }
 
+    partie.chienEnChasse = false;
+    partie.canardAbbatu = false;
     partie.canardsEnVie = 2;
     partie.shots = 3;
     partie.round++;

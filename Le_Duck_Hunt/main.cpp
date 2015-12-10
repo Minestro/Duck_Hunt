@@ -2,6 +2,7 @@
 
 int main(int argc, char* argv[])
 {
+
     /* INITIALISATIONS DES BIBLIOTHEQUES : IMG, SDL, TTF */
     IMG_Init(IMG_INIT_PNG);
     SDL_Init(SDL_INIT_VIDEO);
