@@ -3,16 +3,23 @@
 void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[])
 {
     bool sortir = false;
-    while (!sortir)
+    bool clicGaucheTemp;
+    while (!sortir && modeMenu!=0)
     {
-        if (getEvents(sourisEvent))
+        clicGaucheTemp = false;
+        if (getEvents(sourisEvent, 1))
         {
             modeMenu = 0;
             modeJeu = 0;
         }
+        if (sourisEvent.clicGauche)
+        {
+            clicGaucheTemp = true;
+        }
         time.currentTime = SDL_GetTicks();
         if ((time.currentTime >= time.timeMenu + time.menuTime)||modeMenu==0)
         {
+            sourisEvent.clicGauche = clicGaucheTemp;
             switch (modeMenu)
             {
                 case 0:
@@ -30,14 +37,12 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisE
                     {
                         modeMenu = 0;
                         modeJeu = 0;
-                        sourisEvent.clicGauche = sourisEvent.clicDroit = sourisEvent.clicMolette = false;
 
                     }
                     else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.play, boutons.lecture[0]))&&sourisEvent.clicGauche)
                     {
                         modeJeu = 1;
                         modeMenu = 0;
-                        sourisEvent.clicGauche = sourisEvent.clicDroit = sourisEvent.clicMolette = false;
                     }
                     break;
                 case 5 :
@@ -50,13 +55,11 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisE
                         if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.quit, boutons.lecture[0]))&&sourisEvent.clicGauche)
                         {
                             modeMenu = 1;
-                            sourisEvent.clicGauche = sourisEvent.clicDroit = sourisEvent.clicMolette = false;
 
                         }
                         else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.reprendre, boutons.lecture[0]))&&sourisEvent.clicGauche)
                         {
                             modeMenu = 0;
-                            sourisEvent.clicGauche = sourisEvent.clicDroit = sourisEvent.clicMolette = false;
                         }
 
                         showMenu(sprites, boutons, modeMenu, msgs, sourisEvent.sx, sourisEvent.sy);

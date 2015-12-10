@@ -1,11 +1,14 @@
 ﻿#include "main.h"
 
-bool getEvents(SourisEvent &sourisEvent)
+bool getEvents(SourisEvent &sourisEvent, bool testClic)
 {
     int bl2, br2, bm2;
-    bl2 = sourisEvent.bl;
-    br2 = sourisEvent.br;
-    bm2 = sourisEvent.bm;
+    if (testClic)
+    {
+        sourisEvent.bl2 = sourisEvent.bl;
+        sourisEvent.br2 = sourisEvent.br;
+        sourisEvent.bm2 = sourisEvent.bm;
+    }
     SDL_Event event;
     while (SDL_PollEvent(&event))
     {
@@ -51,19 +54,33 @@ bool getEvents(SourisEvent &sourisEvent)
         }
     }
 
-    if((sourisEvent.bl!=bl2)&&(sourisEvent.bl))
+    if (testClic)
     {
-        sourisEvent.clicGauche = true;
+        if((sourisEvent.bl!=sourisEvent.bl2)&&(sourisEvent.bl))
+        {
+            sourisEvent.clicGauche = true;
+        }
+        else
+        {
+            sourisEvent.clicGauche = false;
+        }
+        if((sourisEvent.br!=sourisEvent.br2)&&(sourisEvent.br))
+        {
+            sourisEvent.clicDroit = true;
+        }
+        else
+        {
+            sourisEvent.clicDroit = false;
+        }
+        if((sourisEvent.bm!=sourisEvent.bm2)&&(sourisEvent.bm))
+        {
+            sourisEvent.clicMolette = true;
+        }
+        else
+        {
+            sourisEvent.clicMolette = false;
+        }
     }
-    if((sourisEvent.br!=br2)&&(sourisEvent.br))
-    {
-        sourisEvent.clicDroit = true;
-    }
-    if((sourisEvent.bm!=bm2)&&(sourisEvent.bm))
-    {
-        sourisEvent.clicMolette = true;
-    }
-
     return event.type == SDL_QUIT;
 }
 

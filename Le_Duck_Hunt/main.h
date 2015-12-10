@@ -65,7 +65,7 @@ const int LARGEUR = 750;
 const int BPP = 32;
 const int FPS_MAX = 60;
 const int LIMITE_BASSE = 270;
-const int NB_MAX_CANARDS = 2;
+const int NB_MAX_CANARDS = 10;
 
 const unsigned int VITESSE_N = 35;
 const unsigned int VITESSE_M = 30;
@@ -92,6 +92,9 @@ struct Partie
     int score;
     int hit[10];
     bool roundJoue[5];
+    bool alreadyShot;
+    bool alreadyGetEvent;
+    bool alreadyClic;
     bool canardAbbatu;
     int xChute[NB_MAX_CANARDS];
     bool canardRamasse[NB_MAX_CANARDS];
@@ -180,9 +183,9 @@ struct Boutons
 
 struct SourisEvent
 {
-    bool bl;
-    bool br;
-    bool bm;
+    bool bl, bl2;
+    bool br, br2;
+    bool bm, bm2;
     int sx;
     int sy;
     bool clicGauche;
@@ -211,14 +214,14 @@ void initChien(Chien &chien);
 void initMessage(Message msgs[]);
 SDL_Surface *loadImage(std::string);
 SDL_Surface *loadImageWithColorKey(std::string, int, int, int);
-bool getEvents (SourisEvent &sourisEvent);
+bool getEvents (SourisEvent &sourisEvent, bool);
 void changementDirection(Canard &canard);
 void detectionBordsChien(Chien &chien);
 void mouvementsCanard(Canard &canard);
 void switchSpriteCanard(Canard &canard);
 int alea(int, int);
 void detectionBordsCanard(Canard &canard, Partie &partie, SDL_Surface *canardSprite[]);
-void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, int i, int canardsActifs, Time temps);
+void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, Time temps, int &modeJeu);
 bool testShot(SourisEvent sourisEvent, SDL_Rect lecture, SDL_Rect position);
 void touched(Canard &canard, Time temps);
 void showMessage(Message &msg, std::string contenuMessage);

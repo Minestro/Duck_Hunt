@@ -1,7 +1,7 @@
  #include "main.h"
 
 bool roundTerminee(Partie partie, Canard canard[], int canardActifs)
-{    
+{
     bool tousRamasses = true;
     int i = 0;
     while(tousRamasses && i < NB_MAX_CANARDS)
@@ -10,7 +10,7 @@ bool roundTerminee(Partie partie, Canard canard[], int canardActifs)
     }
     for(int f = 0 ; f < NB_MAX_CANARDS ; f++)
     {
-        std::cout << f << " : " << partie.canardRamasse[f] << std::endl;
+        //std::cout << f << " : " << partie.canardRamasse[f] << std::endl;
     }
 
 

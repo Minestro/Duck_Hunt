@@ -57,24 +57,27 @@ int main(int argc, char* argv[])
     SDL_ShowCursor(SDL_DISABLE);
     do
     {
-        menu(sprites, boutons, modeMenu, modeJeu, sourisEvent, temps, msgs);
+        if (modeMenu!=0)
+        {
+            menu(sprites, boutons, modeMenu, modeJeu, sourisEvent, temps, msgs);
+        }
         temps.currentTime = SDL_GetTicks();
+        partie.alreadyShot = partie.alreadyGetEvent = partie.alreadyClic = false;
         for (int i = 0 ; i < sprites.canardActifs ; i++)
         {
-            getEvents(sourisEvent);
+            shoot(sourisEvent, sprites.canard[i], partie, temps, modeJeu);
+            if(roundTerminee(partie, sprites.canard, sprites.canardActifs))
+                {
+                     relancerPartie(partie, sprites);
+                }
             if ((temps.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse))
             {
-                shoot(sourisEvent, sprites.canard[i], partie, i, sprites.canardActifs, temps);
-                if(sprites.canard[i].etat == TOUCHED)
-                {
-                    touched(sprites.canard[i], temps);
-                }
                 mouvementsCanard(sprites.canard[i]);
                 detectionBordsCanard(sprites.canard[i], partie, sprites.canardSprite);
                 changementDirection(sprites.canard[i]);
-                if(roundTerminee(partie, sprites.canard, sprites.canardActifs))
+                if(sprites.canard[i].etat == TOUCHED)
                 {
-                     relancerPartie(partie, sprites);
+                    touched(sprites.canard[i], temps);
                 }
                 sprites.canard[i].vitesseTime = temps.currentTime;
             }
@@ -106,7 +109,6 @@ int main(int argc, char* argv[])
             modeMenu = 5;
         }
         SDL_Delay(1);
-
     }
     while (modeJeu != 0);
 

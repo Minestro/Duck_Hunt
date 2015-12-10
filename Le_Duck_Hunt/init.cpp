@@ -39,7 +39,7 @@ void initBouton(Boutons &boutons)
 
 void initSourisEvent(SourisEvent &sourisEvent)
 {
-    sourisEvent.bl = sourisEvent.bm = sourisEvent.br = false;
+    sourisEvent.bl = sourisEvent.bm = sourisEvent.br = sourisEvent.bl2 = sourisEvent.bm2 = sourisEvent.br2 = false;
     sourisEvent.clicGauche = sourisEvent.clicDroit = sourisEvent.clicMolette = false;
 }
 
@@ -64,6 +64,9 @@ void initPartie(Partie &partie, int nbCanards)
     partie.shots = 3;
     partie.canardsEnVie = nbCanards;
     partie.round = partie.score = 0;
+    partie.alreadyShot = false;
+    partie.alreadyGetEvent = false;
+    partie.alreadyClic = false;
     for (int i = 0;  i < 10; i++)
     {
         partie.hit[i] = HIT_EMPTY;

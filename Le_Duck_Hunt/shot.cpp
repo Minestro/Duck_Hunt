@@ -5,14 +5,26 @@ bool testShot(SourisEvent sourisEvent, SDL_Rect lecture, SDL_Rect position)
     return((sourisEvent.sx < position.x+lecture.w)&&(sourisEvent.sx > position.x)&&(sourisEvent.sy > position.y)&&(sourisEvent.sy < position.y+lecture.h));
 }
 
-void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, int i, int canardsActifs, Time temps)
+void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, Time temps, int &modeJeu)
 {
-    if((canard.etat == ALIVE && sourisEvent.clicGauche && ((i >= canardsActifs - 1)||(testShot(sourisEvent, canard.lecture, canard.position)))) && partie.shots != 0 && partie.canardsEnVie != 0)
+    if (!partie.alreadyGetEvent)
     {
-        sourisEvent.clicGauche = false;
-        partie.shots--;
-        if (testShot(sourisEvent, canard.lecture, canard.position))
+        if(getEvents(sourisEvent, 1))
         {
+            modeJeu = 0;
+        }
+        partie.alreadyGetEvent = true;
+    }
+    if (sourisEvent.clicGauche && (partie.shots >= 0))
+    {
+        if (!partie.alreadyClic)
+        {
+            partie.shots--;
+            partie.alreadyClic = true;
+        }
+        if (testShot(sourisEvent, canard.lecture, canard.position)&&(!partie.alreadyShot)&&(canard.etat==ALIVE))
+        {
+            partie.alreadyShot = true;
             canard.etat = TOUCHED;
             partie.score += canard.type * 500;
             canard.tempsDepuisTir = temps.currentTime;

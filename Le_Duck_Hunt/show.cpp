@@ -66,6 +66,7 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien
     sprites.viseur.position.x = sourisEvent.sx - (sprites.viseur.source->w / 2);
     sprites.viseur.position.y = sourisEvent.sy - (sprites.viseur.source->h / 2);
     sprites.shots.lecture.x = 0 + partie.shots * 75;
+    sprites.shots.lecture.y = 0;
     if(!chien.devantHerbe)
     {
         afficherChien(chien);
@@ -95,7 +96,6 @@ void genererRendu(Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien
     }
 
     SDL_BlitSurface(sprites.shots.source, &sprites.shots.lecture, SDL_GetVideoSurface(), &sprites.shots.position);
-    sprites.shots.lecture.y = 0;
     sprites.hits.position.x = 170;
     for (int i = 0; i < 10; i++)
     {
