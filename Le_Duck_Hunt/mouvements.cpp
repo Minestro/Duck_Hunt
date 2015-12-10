@@ -16,23 +16,13 @@ void controlesChien(Chien &chien, Partie &partie)
             chien.image[CHIEN_MARCHE].position.y += chien.vecteurPositionY;
             if(partie.chienEnChasse)
             {
-                chien.vitesseAnimation = 50;
-                if(
-                    (
-                        (chien.image[CHIEN_MARCHE].position.x + chien.image[CHIEN_MARCHE].lecture.w / 2) - (partie.xChute[(partie.canardsEnVie + 1) % 2]) < 10
-                        && (partie.xChute[(partie.canardsEnVie + 1 % 2)] - (chien.image[CHIEN_MARCHE].position.x + chien.image[CHIEN_MARCHE].lecture.w / 2) < 10)
-                    )
-                  )
-                {
-                    exit(0);
-                    partie.xChute[(partie.canardsEnVie + 1) % 2] = TO_RESET;
-                    partie.chienEnChasse = false;
-                }
+                chien.vitesseAnimation = 40;
             }
             else
             {
-                chien.vitesseAnimation = 100;
+                chien.vitesseAnimation = 80;
             }
+
 
             if((((chien.image[CHIEN_MARCHE].position.x > (LARGEUR - chien.image[CHIEN_MARCHE].lecture.h * 2) / 2) && chien.devantHerbe))
                 || (partie.canardAbbatu && chien.image[CHIEN_MARCHE].position.y == Y_JEU_CHIEN))
@@ -193,15 +183,7 @@ void detectionBordsCanard(Canard &canard, Partie &partie, SDL_Surface *canardSpr
 
 void sauvegarderPositionX(Partie &partie, Canard canard) // On sauvegarde la position Y à la mort d'un canard pour que le chien puisse le retrouver
 {
-    int i = 0;
-    bool sauvegarde = partie.xChute[i] == NOT_SET;
-    while(!sauvegarde && i < NB_MAX_CANARDS - 1)
-    {
-        i++;
-        sauvegarde = partie.xChute[i] == NOT_SET;
-    }
-
-    partie.xChute[i] = canard.position.x + canard.lecture.w / 2;
+    partie.xChute[(partie.canardsEnVie + 1) % NB_MAX_CANARDS] = canard.position.x + canard.lecture.w / 2;
 }
 
 void changementDirection(Canard &canard)
@@ -232,10 +214,6 @@ void changementDirection(Canard &canard)
         case FREE_FALLING:
             canard.vecteurPositionX = 0;
             canard.vecteurPositionY = 7;
-            break;
-        case DEAD: // Inutile puisqu'on SDL_FreeSurface à leur mort ?
-            canard.vecteurPositionX = 0;
-            canard.vecteurPositionY = 0;
             break;
     }
 }

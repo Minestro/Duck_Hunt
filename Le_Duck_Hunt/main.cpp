@@ -73,7 +73,7 @@ int main(int argc, char* argv[])
                 changementDirection(sprites.canard[i]);
                 if(roundTerminee(partie, sprites.canard, sprites.canardActifs))
                 {
-                    //relancerPartie(partie, sprites);
+          //          relancerPartie(partie, sprites);
                 }
                 sprites.canard[i].vitesseTime = temps.currentTime;
             }
@@ -85,7 +85,7 @@ int main(int argc, char* argv[])
         }
         if (temps.currentTime >= chien.vitesseAnimationTime + chien.vitesseAnimation)
         {
-            //switchSpriteChien(chien, partie);
+            switchSpriteChien(chien, partie);
             chien.vitesseAnimationTime = temps.currentTime;
         }
 

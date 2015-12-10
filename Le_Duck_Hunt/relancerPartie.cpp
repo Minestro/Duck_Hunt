@@ -4,13 +4,13 @@ bool roundTerminee(Partie partie, Canard canard[], int canardActifs)
 {
     bool tousMorts = true;
     bool enChute = false;
-    for (int i=0; i<canardActifs; i++)
+    for (int i = 0; i < canardActifs; i++)
     {
-        if (canard[i].etat!=DEAD)
+        if (canard[i].etat != DEAD)
         {
             tousMorts = false;
         }
-        if (canard[i].etat==FREE_FALLING)
+        if (canard[i].etat == FREE_FALLING)
         {
             enChute = true;
         }
@@ -21,6 +21,11 @@ bool roundTerminee(Partie partie, Canard canard[], int canardActifs)
 
 void relancerPartie(Partie &partie, Sprites &sprites)
 {
+    for(int i = 0 ; i < NB_MAX_CANARDS ; i++)
+    {
+        partie.xChute[i] = NOT_SET;
+    }
+
     for(int i = partie.round * 2 ; i < partie.round * 2 + 2 ; i++)
     {
         if(partie.hit[i] == HIT_EMPTY)

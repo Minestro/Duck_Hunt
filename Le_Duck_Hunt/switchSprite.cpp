@@ -8,11 +8,34 @@ void switchSpriteChien(Chien &chien, Partie &partie)
         case CHIEN_MARCHE:
             chien.image[CHIEN_MARCHE].lecture.x = (chien.cycleSprite % chien.nbFrames) * chien.pxParFrame;
             chien.cycleSprite = (chien.cycleSprite + 1) % chien.nbFrames;
+            if(partie.chienEnChasse)
+            {
+                if(
+                    (
+                        abs((chien.image[CHIEN_MARCHE].position.x + chien.image[CHIEN_MARCHE].lecture.w / 2) - (partie.xChute[(partie.canardsEnVie + 1) % NB_MAX_CANARDS])) < 10
+                    )
+                  )
+                {
+                    std::cout << abs((chien.image[CHIEN_MARCHE].position.x + chien.image[CHIEN_MARCHE].lecture.w / 2) - (partie.xChute[(partie.canardsEnVie + 1) % NB_MAX_CANARDS])) << std::endl;
+                    partie.xChute[(partie.canardsEnVie + 1) % NB_MAX_CANARDS] = TO_RESET;
+                    partie.chienEnChasse = false;
+                    std::cout << "yolo" << std::endl;
+                }
+            }
             break;
         case CHIEN_CONTENT:
             if(!chien.devantHerbe)
             {
-                if(chien.image[CHIEN_CONTENT].position.x > partie.xChute[(partie.canardsEnVie + 1) % NB_MAX_CANARDS])
+                if(chien.image[CHIEN_CONTENT].position.x + chien.image[CHIEN_CONTENT].lecture.w <= partie.xChute[(partie.canardsEnVie + 1) % NB_MAX_CANARDS])
+                {
+                    if(chien.vecteurPositionX < 0)
+                    {
+                        chien.vecteurPositionX *= -1;
+                        chien.image[CHIEN_MARCHE].lecture.y = chien.image[CHIEN_MARCHE].lecture.h;
+                    }
+                    chien.image[CHIEN_CONTENT].lecture.y = 100;
+                }
+                else if(chien.image[CHIEN_CONTENT].position.x > partie.xChute[(partie.canardsEnVie + 1) % NB_MAX_CANARDS])
                 {
                     if(chien.vecteurPositionX > 0)
                     {
@@ -20,16 +43,6 @@ void switchSpriteChien(Chien &chien, Partie &partie)
                         chien.image[CHIEN_MARCHE].lecture.y = 0;
                     }
                     chien.image[CHIEN_CONTENT].lecture.y = 0;
-                }
-                else if(chien.image[CHIEN_CONTENT].position.x + chien.image[CHIEN_CONTENT].lecture.w <= partie.xChute[(partie.canardsEnVie + 1) % NB_MAX_CANARDS])
-                {
-                    if(chien.vecteurPositionX < 0)
-                    {
-                        chien.vecteurPositionX *= -1;
-                        chien.image[CHIEN_MARCHE].lecture.y = chien.image[CHIEN_MARCHE].lecture.h;
-
-                    }
-                    chien.image[CHIEN_CONTENT].lecture.y = 100;
                 }
             }
             else
@@ -54,13 +67,12 @@ void switchSpriteCanard(Canard &canard)
             }
             else
             {
-                canard.lecture.x = 0;
+                canard.lecture.x = canard.pxParFrame;
             }
             break;
         case TOUCHED: // pas besoin de changer de frame car il n'y a qu'une seule image (pour l'instant)
             break;
         case FREE_FALLING:
-           // if(SDL_GetTicks() % 1000 < 500) /// Il faudra que tu m'aides à implémenter ça : je veux que l'animation de la chute du canard soit plus lente
             {
                 canard.lecture.x = (canard.cycleSprite % canard.nbFrames) * canard.pxParFrame;
                 canard.cycleSprite = (canard.cycleSprite + 1) % (canard.nbFrames - 1);
