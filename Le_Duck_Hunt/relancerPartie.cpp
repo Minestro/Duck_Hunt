@@ -42,6 +42,11 @@ bool roundTerminee(Sprites sprites, Partie partie)
     return canardsMortsRamasses(partie) || escaped(sprites, partie);
 }
 
+bool joueurMaladroit(Partie partie)
+{
+    return partie.shots == 0 && partie.canardsEnVie == NB_MAX_CANARDS;
+}
+
 
 void relancerPartie(Partie &partie, Sprites &sprites)
 {

@@ -223,6 +223,7 @@ bool munitionsEpuisees(Partie partie);
 bool escaped(Sprites sprites, Partie partie);
 bool roundTerminee(Sprites sprites, Partie partie);
 bool canardsMortsRamasses(Partie partie);
+bool joueurMaladroit(Partie partie);
 
 void relancerPartie(Partie &partie, Sprites &sprites);
 void initPartie(Partie &partie, int nbCanards);
@@ -248,6 +249,7 @@ void touched(Canard &canard, Time temps);
 void canardSurvivant(Canard &canard);
 
 void controlesChien(Chien &chien, Partie &partie);
+bool chienDevientHeureux(Chien chien, Partie partie);
 void detectionBordsChien(Chien &chien);
 void switchSpriteChien(Chien &chien, Partie &partie);
 

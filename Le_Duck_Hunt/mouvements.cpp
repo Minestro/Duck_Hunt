@@ -6,14 +6,25 @@ int alea(int mini, int maxi)
 }
 
 
+bool chienDevientHeureux(Chien chien, Partie partie)
+{
+    return (
+             (
+              (chien.image[CHIEN_MARCHE].position.x > (LARGEUR - chien.image[CHIEN_MARCHE].lecture.h * 2) / 2)
+               && chien.devantHerbe
+              )
+            || (partie.canardAbbatu && chien.image[CHIEN_MARCHE].position.y == Y_JEU_CHIEN));
+}
+
 void controlesChien(Chien &chien, Partie &partie)
 {
     switch (chien.etat)
     {
         case CHIEN_MARCHE:
-            detectionBordsChien(chien);
+
             chien.image[CHIEN_MARCHE].position.x += chien.vecteurPositionX;
             chien.image[CHIEN_MARCHE].position.y += chien.vecteurPositionY;
+
             if(partie.chienEnChasse)
             {
                 chien.vitesseAnimation = 40;
@@ -23,17 +34,23 @@ void controlesChien(Chien &chien, Partie &partie)
                 chien.vitesseAnimation = 80;
             }
 
-
-            if((((chien.image[CHIEN_MARCHE].position.x > (LARGEUR - chien.image[CHIEN_MARCHE].lecture.h * 2) / 2) && chien.devantHerbe))
-                || (partie.canardAbbatu && chien.image[CHIEN_MARCHE].position.y == Y_JEU_CHIEN))
+            if(chienDevientHeureux(chien, partie))
             {
                 chien.etat = CHIEN_CONTENT;
                 chien.image[CHIEN_CONTENT].position = chien.image[CHIEN_MARCHE].position;
                 chien.image[CHIEN_CONTENT].position.y -= 8;
                 chien.tempsDepuisEtat = SDL_GetTicks();
             }
+            else if(joueurMaladroit(partie))
+            {
+                chien.etat = CHIEN_RIGOLE;
+            }
+
+            detectionBordsChien(chien);
             break;
+
         case CHIEN_CONTENT:
+
             if(SDL_GetTicks() - chien.tempsDepuisEtat > 750 && !partie.canardAbbatu)
             {
                 if(chien.devantHerbe)
@@ -59,7 +76,9 @@ void controlesChien(Chien &chien, Partie &partie)
                 partie.canardAbbatu = false;
             }
             break;
+
         case CHIEN_SAUTE_1:
+
             if(SDL_GetTicks() - chien.tempsDepuisEtat > 100)
             {
                 chien.image[CHIEN_SAUTE_1].position.x += 5;
@@ -68,7 +87,9 @@ void controlesChien(Chien &chien, Partie &partie)
                 chien.tempsDepuisEtat = SDL_GetTicks();
             }
             break;
+
         case CHIEN_SAUTE_2:
+
             if(SDL_GetTicks() - chien.tempsDepuisEtat > 100)
             {
                 chien.image[CHIEN_SAUTE_2].position.y = Y_JEU_CHIEN;
@@ -77,13 +98,21 @@ void controlesChien(Chien &chien, Partie &partie)
                 chien.etat = CHIEN_MARCHE;
                 chien.devantHerbe = false;
             }
+
             break;
+
         case CHIEN_RIGOLE:
+
             break;
+
         case CHIEN_CONTENT_SIMPLE:
+
             break;
+
         case CHIEN_CONTENT_DOUBLE:
+
             break;
+
         default:
             break;
     }
