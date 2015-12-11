@@ -1,21 +1,37 @@
  #include "main.h"
 
+bool escaped(Sprites sprites)
+{
+    bool continuer = true;
+    int i = 0;
+    while(continuer && i < NB_MAX_CANARDS)
+    {
+        continuer = sprites.canard[i].echappe
+                    && (
+                          sprites.canard[i].position.x + sprites.canard[i].lecture.w < 0
+                       || sprites.canard[i].position.x > LARGEUR
+                       || sprites.canard[i].position.y + sprites.canard[i].lecture.h < 0
+                       || sprites.canard[i].position.y > HAUTEUR - LIMITE_BASSE
+
+                            );
+        i++;
+    }
+
+    return continuer;
+}
+
 bool munitionsEpuisees(Partie partie)
 {
     return partie.shots == 0;
 }
 
-bool roundTerminee(Partie partie, Canard canard[], int canardActifs)
+bool roundTerminee(Partie partie)
 {
     bool tousRamasses = true;
     int i = 0;
     while(tousRamasses && i < NB_MAX_CANARDS)
     {
         tousRamasses = partie.canardRamasse[i++];
-    }
-    for(int f = 0 ; f < NB_MAX_CANARDS ; f++)
-    {
-     //   std::cout << f << " : " << partie.canardRamasse[f] << std::endl;
     }
 
 

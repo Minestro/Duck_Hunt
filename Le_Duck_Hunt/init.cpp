@@ -71,10 +71,6 @@ void initPartie(Partie &partie, int nbCanards)
     {
         partie.hit[i] = HIT_EMPTY;
     }
-    for (int i = 0 ; i < 5 ; i++)
-    {
-        partie.roundJoue[i] = false;
-    }
 }
 
 void initChien(Chien &chien)
@@ -110,8 +106,8 @@ void initChien(Chien &chien)
     chien.image[CHIEN_SAUTE_1].lecture.y = 0;
 
     chien.image[CHIEN_SAUTE_2].source = loadImageWithColorKey("sprites/chienSaute2.png", 0, 255, 0);
-    chien.image[CHIEN_SAUTE_2].lecture.h = 100;
-    chien.image[CHIEN_SAUTE_2].lecture.w = 94;
+    chien.image[CHIEN_SAUTE_2].lecture.h = 95;
+    chien.image[CHIEN_SAUTE_2].lecture.w = 110;
     chien.image[CHIEN_SAUTE_2].lecture.x = 0;
     chien.image[CHIEN_SAUTE_2].lecture.y = 0;
 

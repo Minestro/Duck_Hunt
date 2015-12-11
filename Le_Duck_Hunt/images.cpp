@@ -87,17 +87,17 @@ void chargerImages(Sprites &sprites)
     initializer.x = initializer.y = 0;
 
     sprites.background_menu.source = load_image("sprites/menu.png");
-    sprites.background.source=load_image("sprites/backGame.png");
+    sprites.background.source = load_image("sprites/backGame.png");
     sprites.background.position = initializer;
 
-    sprites.background_blit.source=loadImageWithColorKey("sprites/backGameBlit.png", 0, 0, 0);
+    sprites.background_blit.source = loadImageWithColorKey("sprites/backGameBlit.png", 0, 0, 0);
     sprites.background_blit.position = initializer;
 
-    sprites.background_menu.source=load_image("sprites/menu.png");
+    sprites.background_menu.source = load_image("sprites/menu.png");
     sprites.background_menu.position = initializer;
 
-    sprites.viseur.source=loadImageWithColorKey("sprites/viseur.png", 0, 0, 0);
-    sprites.hits.source=loadImageWithColorKey("sprites/hit.png", 0, 0, 0);
+    sprites.viseur.source = loadImageWithColorKey("sprites/viseur.png", 0, 0, 0);
+    sprites.hits.source = loadImageWithColorKey("sprites/hit.png", 0, 0, 0);
     sprites.hits.lecture.x = 5;
     sprites.hits.lecture.y = 5;
     sprites.hits.lecture.w = 27;

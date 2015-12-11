@@ -95,7 +95,6 @@ struct Partie
     int niveau;
     int score;
     int hit[10];
-    bool roundJoue[5];
     bool alreadyShot;
     bool alreadyGetEvent;
     bool alreadyClic;
@@ -218,12 +217,13 @@ void showChien(SDL_Surface *ecran, Chien chien);
 void showPointsCanard(SDL_Surface *ecran, Canard canard, Sprite &points);
 void showMessage(SDL_Surface *ecran, Message &msg, std::string contenuMessage);
 void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons boutons, int &modeMenu, Message msgs[], int sx, int sy);
+
 void menu(SDL_Surface *ecran, Sprites, Boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[]);
-
-
 bool testHoverBouton(int, int, Bouton, SDL_Rect lecture);
+
 bool munitionsEpuisees(Partie partie);
-bool roundTerminee(Partie partie, Canard canard[], int canardActifs);
+bool escaped(Sprites sprites);
+bool roundTerminee(Partie partie);
 
 
 void relancerPartie(Partie &partie, Sprites &sprites);

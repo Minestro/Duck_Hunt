@@ -105,9 +105,14 @@ int main(int argc, char* argv[])
             }
         }
 
+        if(escaped(sprites))
+        {
+            exit(0);
+        }
 
 
-        if(roundTerminee(partie, sprites.canard, sprites.canardActifs))
+
+        if(roundTerminee(partie))
         {
             relancerPartie(partie, sprites);
         }
