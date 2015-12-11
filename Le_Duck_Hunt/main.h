@@ -222,9 +222,9 @@ void menu(SDL_Surface *ecran, Sprites, Boutons, int &modeMenu, int &modeJeu, Sou
 bool testHoverBouton(int, int, Bouton, SDL_Rect lecture);
 
 bool munitionsEpuisees(Partie partie);
-bool escaped(Sprites sprites);
-bool roundTerminee(Partie partie);
-
+bool escaped(Sprites sprites, Partie partie);
+bool roundTerminee(Sprites sprites, Partie partie);
+bool canardsMortsRamasses(Partie partie);
 
 void relancerPartie(Partie &partie, Sprites &sprites);
 void initPartie(Partie &partie, int nbCanards);

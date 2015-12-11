@@ -1,12 +1,12 @@
  #include "main.h"
 
-bool escaped(Sprites sprites)
+bool escaped(Sprites sprites, Partie partie)
 {
     bool continuer = true;
-    int i = 0;
+    int i = partie.canardsEnVie % sprites.canardActifs;
     while(continuer && i < NB_MAX_CANARDS)
     {
-        continuer = sprites.canard[i].echappe
+        continuer = sprites.canard[i].echappe && sprites.canard[i].etat == ALIVE
                     && (
                           sprites.canard[i].position.x + sprites.canard[i].lecture.w < 0
                        || sprites.canard[i].position.x > LARGEUR
@@ -25,7 +25,7 @@ bool munitionsEpuisees(Partie partie)
     return partie.shots == 0;
 }
 
-bool roundTerminee(Partie partie)
+bool canardsMortsRamasses(Partie partie)
 {
     bool tousRamasses = true;
     int i = 0;
@@ -34,8 +34,12 @@ bool roundTerminee(Partie partie)
         tousRamasses = partie.canardRamasse[i++];
     }
 
-
     return tousRamasses;
+}
+
+bool roundTerminee(Sprites sprites, Partie partie)
+{
+    return canardsMortsRamasses(partie) || escaped(sprites, partie);
 }
 
 
@@ -59,11 +63,6 @@ void relancerPartie(Partie &partie, Sprites &sprites)
     {
         sprites.canard[i].type = alea(1, 3);
         initCanard(sprites.canard[i]);
-    }
-
-    for (int i = 0 ; i < NB_MAX_CANARDS ; i++)
-    {
-        partie.xChute[i] = -1;
     }
 
     partie.chienEnChasse = false;

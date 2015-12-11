@@ -105,14 +105,8 @@ int main(int argc, char* argv[])
             }
         }
 
-        if(escaped(sprites))
-        {
-            exit(0);
-        }
 
-
-
-        if(roundTerminee(partie))
+        if(roundTerminee(sprites, partie))
         {
             relancerPartie(partie, sprites);
         }
