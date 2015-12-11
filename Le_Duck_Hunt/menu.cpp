@@ -1,6 +1,6 @@
 #include "main.h"
 
-void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[])
+void menu(SDL_Surface *ecran, Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[])
 {
     bool sortir = false;
     bool clicGaucheTemp;
@@ -31,7 +31,7 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisE
 
                     boutons.quit.position.x = (LARGEUR/2)-(boutons.lecture[0].w/2);
                     boutons.quit.position.y = 400;
-                    showMenu(sprites, boutons, modeMenu, msgs, sourisEvent.sx, sourisEvent.sy);
+                    showMenu(ecran, sprites, boutons, modeMenu, msgs, sourisEvent.sx, sourisEvent.sy);
 
                     if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.quit, boutons.lecture[0]))&&sourisEvent.clicGauche)
                     {
@@ -62,7 +62,7 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisE
                             modeMenu = 0;
                         }
 
-                        showMenu(sprites, boutons, modeMenu, msgs, sourisEvent.sx, sourisEvent.sy);
+                        showMenu(ecran, sprites, boutons, modeMenu, msgs, sourisEvent.sx, sourisEvent.sy);
                     break;
                 case 6:
 

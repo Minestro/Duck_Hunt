@@ -11,10 +11,7 @@ int main(int argc, char* argv[])
     Message msgs[5];
     initMessage(msgs);
 
-    SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF);
-
-    // L'allocation de mémoire statique d'un SDL_Surface n'est pas utile, SDL le fait implicitement avec SetVideoMode.
-    // On appelera l'écran grâce au renvoie de sa fonction native GetVideoSurface().
+    SDL_Surface *ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF);
 
     /* Titre */
     SDL_WM_SetCaption("Duck Hunt", NULL);
@@ -57,9 +54,9 @@ int main(int argc, char* argv[])
     SDL_ShowCursor(SDL_DISABLE);
     do
     {
-        if (modeMenu!=0)
+        if (modeMenu != 0)
         {
-            menu(sprites, boutons, modeMenu, modeJeu, sourisEvent, temps, msgs);
+            menu(ecran, sprites, boutons, modeMenu, modeJeu, sourisEvent, temps, msgs);
         }
         temps.currentTime = SDL_GetTicks();
         partie.alreadyShot = partie.alreadyGetEvent = partie.alreadyClic = false;
@@ -95,9 +92,9 @@ int main(int argc, char* argv[])
 
         if (temps.currentTime >= temps.timeFps + temps.fpsTime)
         {
-            genererRendu(sprites, sourisEvent, partie, chien);
+            genererRendu(ecran, sprites, sourisEvent, partie, chien);
             msgs[MSG_SCORE].source = TTF_RenderText_Solid(msgs[MSG_SCORE].font, intToString(partie.score).c_str(), msgs[MSG_SCORE].textColor);
-            SDL_BlitSurface(msgs[MSG_SCORE].source, NULL, SDL_GetVideoSurface(), &msgs[MSG_SCORE].position);
+            SDL_BlitSurface(msgs[MSG_SCORE].source, NULL, ecran, &msgs[MSG_SCORE].position);
             SDL_FreeSurface(msgs[MSG_SCORE].source);
             SDL_Flip(SDL_GetVideoSurface());
 
