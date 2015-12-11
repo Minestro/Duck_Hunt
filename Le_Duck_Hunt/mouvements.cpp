@@ -6,6 +6,7 @@ int alea(int mini, int maxi)
 }
 
 
+
 bool chienDevientHeureux(Chien chien, Partie partie)
 {
     return (
@@ -13,7 +14,7 @@ bool chienDevientHeureux(Chien chien, Partie partie)
               (chien.image[CHIEN_MARCHE].position.x > (LARGEUR - chien.image[CHIEN_MARCHE].lecture.h * 2) / 2)
                && chien.devantHerbe
               )
-            || (partie.canardAbbatu && chien.image[CHIEN_MARCHE].position.y == Y_JEU_CHIEN));
+            || (partie.canardAbbatu && !chien.devantHerbe));
 }
 
 void controlesChien(Chien &chien, Partie &partie)
