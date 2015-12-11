@@ -63,19 +63,19 @@ void switchSpriteCanard(Canard &canard)
         case ALIVE:
             if(canard.vecteurPositionY < 0)
             {
-                canard.lecture.x = (canard.cycleSprite % canard.nbFrames) * canard.pxParFrame;
+                canard.lecture.x = (canard.cycleSprite % canard.nbFrames) * canard.lecture.w;
                 canard.cycleSprite = (canard.cycleSprite + 1) % canard.nbFrames;
             }
             else
             {
-                canard.lecture.x = canard.pxParFrame;
+                canard.lecture.x = canard.lecture.w;
             }
             break;
         case TOUCHED: // pas besoin de changer de frame car il n'y a qu'une seule image (pour l'instant)
             break;
         case FREE_FALLING:
             {
-                canard.lecture.x = (canard.cycleSprite % canard.nbFrames) * canard.pxParFrame;
+                canard.lecture.x = (canard.cycleSprite % canard.nbFrames) * canard.lecture.w;
                 canard.cycleSprite = (canard.cycleSprite + 1) % (canard.nbFrames - 1);
             }
             break;

@@ -141,7 +141,6 @@ void initCanard(Canard &cn)
             break;
     }
     cn.nbFrames = 3;
-    cn.pxParFrame = 70;
     cn.cycleSprite = 0;
     cn.vitesseAnimation = 40; // Plus cette valeur est élevée, plus l'animation est lente...
     cn.vitesseTime = cn.vitesseAnimationTime = 0;

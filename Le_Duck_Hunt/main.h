@@ -114,6 +114,7 @@ struct Canard
 {
     int type; // 0 : noir, 1 : marron, 2 : violet
     int etat; // 0 : mort, 1 : en chute, 2 : touché, 3 : vivant
+    bool echappe;
 
     int vecteurPositionY;
     int vecteurPositionX;
@@ -128,10 +129,8 @@ struct Canard
     Uint32 vitesseTime;
 
     int nbFrames;
-    int pxParFrame;
     int cycleSprite;
     Uint32 tempsDepuisTir; // On veut savoir combien de ms se sont écoulés depuis le tir pour passer de TOUCHED à FREE_FALLING
-    bool echappe;
 };
 
 struct Chien
