@@ -17,7 +17,7 @@ void switchSpriteChien(Chien &chien, Partie &partie)
                   )
                 {
                     partie.chienEnChasse = false;
-                    partie.canardRamasse[0] = true; // LOURD CODE DE VEUJ
+                    partie.canardRamasse[0] = true; // LOURD CODE DE FEUJ
                     partie.canardRamasse[(partie.canardsEnVie + 1) % NB_MAX_CANARDS] = true;
                 }
             }

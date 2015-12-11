@@ -2,7 +2,7 @@
 
 bool getEvents(SourisEvent &sourisEvent, bool testClic)
 {
-    int bl2, br2, bm2;
+    //int bl2, br2, bm2;
     if (testClic)
     {
         sourisEvent.bl2 = sourisEvent.bl;

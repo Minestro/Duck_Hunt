@@ -65,7 +65,7 @@ const int LARGEUR = 750;
 const int BPP = 32;
 const int FPS_MAX = 60;
 const int LIMITE_BASSE = 270;
-const int NB_MAX_CANARDS = 10;
+const int NB_MAX_CANARDS = 2;
 
 const unsigned int VITESSE_N = 35;
 const unsigned int VITESSE_M = 30;

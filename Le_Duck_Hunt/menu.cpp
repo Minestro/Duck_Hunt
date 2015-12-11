@@ -17,7 +17,7 @@ void menu(Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisE
             clicGaucheTemp = true;
         }
         time.currentTime = SDL_GetTicks();
-        if ((time.currentTime >= time.timeMenu + time.menuTime)||modeMenu==0)
+        if (true)//((time.currentTime >= time.timeMenu + time.menuTime) || modeMenu==0)
         {
             sourisEvent.clicGauche = clicGaucheTemp;
             switch (modeMenu)
