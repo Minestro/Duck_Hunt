@@ -6,8 +6,8 @@ void switchSpriteChien(Chien &chien, Partie &partie)
     switch(chien.etat)
     {
         case CHIEN_MARCHE:
-            chien.image[CHIEN_MARCHE].lecture.x = (chien.cycleSprite % chien.nbFrames) * chien.pxParFrame;
-            chien.cycleSprite = (chien.cycleSprite + 1) % chien.nbFrames;
+            chien.image[CHIEN_MARCHE].lecture.x = (chien.cycleSprite % chien.nbFrames) * chien.image[CHIEN_MARCHE].lecture.w;
+            chien.cycleSprite = (chien.cycleSprite + 1) % chien.image[CHIEN_MARCHE].lecture.w;
             if(partie.chienEnChasse)
             {
                 if(

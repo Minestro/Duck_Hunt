@@ -66,7 +66,7 @@
 
 const int HAUTEUR = 761;
 const int LARGEUR = 750;
-const int BPP = 32;
+const int BPP = 24;
 const int FPS_MAX = 60;
 const int LIMITE_BASSE = 270;
 const int NB_MAX_CANARDS = 2;
@@ -143,7 +143,6 @@ struct Chien
     int nbFrames;
     int vitesseAnimation;
     Uint32 vitesseAnimationTime;
-    int pxParFrame;
     int cycleSprite;
     Uint32 tempsDepuisEtat; // Même principe que tempsDepuisTir mais depuis un certain etat;
     bool devantHerbe; // si on le blit avant ou après les herbes hautes

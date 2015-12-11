@@ -78,7 +78,6 @@ void initChien(Chien &chien)
     chien.devantHerbe = true;
     chien.vecteurPositionX = 10;
     chien.vecteurPositionY = 0;
-    chien.pxParFrame = 120;
     chien.cycleSprite = 0;
     chien.vitesseAnimation = 100; // Plus cette valeur est élevée, plus l'animation est lente...
     chien.vitesseAnimationTime = 0;
@@ -111,9 +110,18 @@ void initChien(Chien &chien)
     chien.image[CHIEN_SAUTE_2].lecture.x = 0;
     chien.image[CHIEN_SAUTE_2].lecture.y = 0;
 
-  /*  chien.image[CHIEN_RIGOLE].source = loadImageWithColorKey("sprites/chienMoqueur.png", 228, 255, 0);
+    chien.image[CHIEN_RIGOLE].source = loadImageWithColorKey("sprites/chienMoqueur.png", 228, 255, 0);
+    chien.image[CHIEN_RIGOLE].lecture.h = 78;
+    chien.image[CHIEN_RIGOLE].lecture.w = 58;
+    chien.image[CHIEN_RIGOLE].lecture.x = 0;
+    chien.image[CHIEN_RIGOLE].lecture.y = 0;
+
     chien.image[CHIEN_CONTENT_SIMPLE].source = loadImageWithColorKey("sprites/chienContentSimple.png", 228, 255, 0);
-    chien.image[CHIEN_CONTENT_DOUBLE].source = loadImageWithColorKey("sprites/chienContentDouble.png", 228, 255, 0);*/
+
+
+    chien.image[CHIEN_CONTENT_DOUBLE].source = loadImageWithColorKey("sprites/chienContentDouble.png", 228, 255, 0);
+
+
 }
 
 void initCanard(Canard &cn)

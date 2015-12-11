@@ -74,7 +74,6 @@ void controlesChien(Chien &chien, Partie &partie)
                 chien.image[CHIEN_SAUTE_2].position.y = Y_JEU_CHIEN;
                 chien.image[CHIEN_MARCHE].position = chien.image[CHIEN_SAUTE_2].position;
                 chien.nbFrames = 4;
-                chien.pxParFrame = chien.image[CHIEN_MARCHE].lecture.w;
                 chien.etat = CHIEN_MARCHE;
                 chien.devantHerbe = false;
             }
