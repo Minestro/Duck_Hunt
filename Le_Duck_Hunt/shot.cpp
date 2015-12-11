@@ -15,7 +15,7 @@ void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, Time temps, 
         }
         partie.alreadyGetEvent = true;
     }
-    if (sourisEvent.clicGauche && (partie.shots >= 0))
+    if (sourisEvent.clicGauche && !munitionsEpuisees(partie))
     {
         if (!partie.alreadyClic)
         {

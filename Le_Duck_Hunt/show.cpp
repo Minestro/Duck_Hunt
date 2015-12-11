@@ -66,7 +66,7 @@ void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, 
     }
     for (int i = 0 ; i < sprites.canardActifs ; i++)
     {
-        if (sprites.canard[i].etat == FREE_FALLING)
+        if (sprites.canard[i].etat == FREE_FALLING || (sprites.canard[i].etat == ALIVE && sprites.canard[i].echappe))
         {
             SDL_BlitSurface(sprites.canardSprite[sprites.canard[i].type-1], &sprites.canard[i].lecture, ecran, &sprites.canard[i].position);
         }
@@ -78,13 +78,13 @@ void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, 
     }
     for (int i = 0 ; i < sprites.canardActifs ; i++)
     {
-        if (sprites.canard[i].etat != FREE_FALLING && sprites.canard[i].etat != DEAD)
+        if ((sprites.canard[i].etat == ALIVE || sprites.canard[i].etat == TOUCHED) && !sprites.canard[i].echappe)
         {
             SDL_BlitSurface(sprites.canardSprite[sprites.canard[i].type-1], &sprites.canard[i].lecture, ecran, &sprites.canard[i].position);
-        }
-        if (sprites.canard[i].etat == TOUCHED)
-        {
-            showPointsCanard(ecran, sprites.canard[i], sprites.points);
+            if (sprites.canard[i].etat == TOUCHED)
+            {
+                showPointsCanard(ecran, sprites.canard[i], sprites.points);
+            }
         }
     }
 

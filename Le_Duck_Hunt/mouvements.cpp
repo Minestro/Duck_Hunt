@@ -90,9 +90,9 @@ void controlesChien(Chien &chien, Partie &partie)
     }
 }
 
-bool canardSurvivant(Canard &canard)
+void canardSurvivant(Canard &canard)
 {
-    return canard.etat == ALIVE;
+    canard.echappe = canard.etat == ALIVE;
 }
 
 
@@ -150,25 +150,28 @@ void detectionBordsCanard(Canard &canard, Partie &partie, SDL_Surface *canardSpr
     switch(canard.etat)
     {
         case ALIVE:
-            if(canard.position.x <= 0)
+            if(!canard.echappe)
             {
-                canard.position.x = 0;
-                canard.vecteurPositionX *= -1;
-            }
-            else if (canard.position.x + canard.lecture.w >= LARGEUR)
-            {
-                canard.position.x = LARGEUR - canard.lecture.w;
-                canard.vecteurPositionX *= -1;
-            }
-            if(canard.position.y <= 0 )
-            {
-                canard.position.y = 0;
-                canard.vecteurPositionY *= -1;
-            }
-            else if (canard.position.y + canard.lecture.h >= HAUTEUR - LIMITE_BASSE)
-            {
-                canard.position.y = HAUTEUR-LIMITE_BASSE-canard.lecture.h;
-                canard.vecteurPositionY *= -1;
+                if(canard.position.x <= 0)
+                {
+                    canard.position.x = 0;
+                    canard.vecteurPositionX *= -1;
+                }
+                else if (canard.position.x + canard.lecture.w >= LARGEUR)
+                {
+                    canard.position.x = LARGEUR - canard.lecture.w;
+                    canard.vecteurPositionX *= -1;
+                }
+                if(canard.position.y <= 0 )
+                {
+                    canard.position.y = 0;
+                    canard.vecteurPositionY *= -1;
+                }
+                else if (canard.position.y + canard.lecture.h >= HAUTEUR - LIMITE_BASSE)
+                {
+                    canard.position.y = HAUTEUR-LIMITE_BASSE-canard.lecture.h;
+                    canard.vecteurPositionY *= -1;
+                }
             }
             break;
         case FREE_FALLING:

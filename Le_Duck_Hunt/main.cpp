@@ -63,10 +63,6 @@ int main(int argc, char* argv[])
         for (int i = 0 ; i < sprites.canardActifs ; i++)
         {
             shoot(sourisEvent, sprites.canard[i], partie, temps, modeJeu);
-            if(roundTerminee(partie, sprites.canard, sprites.canardActifs))
-                {
-                     relancerPartie(partie, sprites);
-                }
             if ((temps.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse))
             {
                 mouvementsCanard(sprites.canard[i]);
@@ -99,6 +95,21 @@ int main(int argc, char* argv[])
             SDL_Flip(SDL_GetVideoSurface());
 
             temps.timeFps = temps.currentTime;
+        }
+
+        if(munitionsEpuisees(partie))
+        {
+            for(int i = 0 ; i < sprites.canardActifs ; i++)
+            {
+                canardSurvivant(sprites.canard[i]);
+            }
+        }
+
+
+
+        if(roundTerminee(partie, sprites.canard, sprites.canardActifs))
+        {
+            relancerPartie(partie, sprites);
         }
 
         if (keystate[SDLK_ESCAPE])

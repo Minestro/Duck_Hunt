@@ -222,7 +222,6 @@ void menu(SDL_Surface *ecran, Sprites, Boutons, int &modeMenu, int &modeJeu, Sou
 
 
 bool testHoverBouton(int, int, Bouton, SDL_Rect lecture);
-bool canardSurvivant(Canard &canard);
 bool munitionsEpuisees(Partie partie);
 bool roundTerminee(Partie partie, Canard canard[], int canardActifs);
 
@@ -248,6 +247,7 @@ void sauvegarderPositionX(Partie &partie, Canard canard);
 void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, Time temps, int &modeJeu);
 bool testShot(SourisEvent sourisEvent, SDL_Rect lecture, SDL_Rect position);
 void touched(Canard &canard, Time temps);
+void canardSurvivant(Canard &canard);
 
 void controlesChien(Chien &chien, Partie &partie);
 void detectionBordsChien(Chien &chien);
