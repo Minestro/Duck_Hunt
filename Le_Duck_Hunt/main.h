@@ -113,19 +113,24 @@ struct Sprite // Peut représenter une image comme une feuille de sprites
 
 struct Canard
 {
+    int type; // 0 : noir, 1 : marron, 2 : violet
+    int etat; // 0 : mort, 1 : en chute, 2 : touché, 3 : vivant
+
+    int vecteurPositionY;
+    int vecteurPositionX;
+
     SDL_Rect lecture;
     SDL_Rect position;
+
     int vitesseAnimation;
     Uint32 vitesseAnimationTime;
+
     int vitesse;
     Uint32 vitesseTime;
-    int type; // 0 : noir, 1 : marron, 2 : violet
+
     int nbFrames;
     int pxParFrame;
     int cycleSprite;
-    int vecteurPositionY;
-    int vecteurPositionX;
-    int etat; // 0 : mort, 1 : en chute, 2 : touché, 3 : vivant
     Uint32 tempsDepuisTir; // On veut savoir combien de ms se sont écoulés depuis le tir pour passer de TOUCHED à FREE_FALLING
     bool echappe;
 };
@@ -206,38 +211,49 @@ struct Time
     int fpsTime, menuTime;
 };
 
+bool getEvents(SourisEvent &sourisEvent, bool);
+
 void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien chien);
 void showChien(SDL_Surface *ecran, Chien chien);
 void showPointsCanard(SDL_Surface *ecran, Canard canard, Sprite &points);
 void showMessage(SDL_Surface *ecran, Message &msg, std::string contenuMessage);
 void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons boutons, int &modeMenu, Message msgs[], int sx, int sy);
 void menu(SDL_Surface *ecran, Sprites, Boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[]);
+
+
 bool testHoverBouton(int, int, Bouton, SDL_Rect lecture);
-void chargerImages(Sprites &sprites);
+bool canardSurvivant(Canard &canard);
+bool munitionsEpuisees(Partie partie);
+bool roundTerminee(Partie partie, Canard canard[], int canardActifs);
+
+
+void relancerPartie(Partie &partie, Sprites &sprites);
+void initPartie(Partie &partie, int nbCanards);
 void initBouton(Boutons &boutons);
 void initSourisEvent(SourisEvent &SourisEvent);
 void initTime(Time &time);
 void initCanard(Canard &cn);
 void initChien(Chien &chien);
 void initMessage(Message msgs[]);
+
 SDL_Surface *loadImage(std::string);
 SDL_Surface *loadImageWithColorKey(std::string, int, int, int);
-bool getEvents (SourisEvent &sourisEvent, bool);
+void chargerImages(Sprites &sprites);
+
 void changementDirection(Canard &canard);
-void detectionBordsChien(Chien &chien);
 void mouvementsCanard(Canard &canard);
-void switchSpriteCanard(Canard &canard);
-int alea(int, int);
 void detectionBordsCanard(Canard &canard, Partie &partie, SDL_Surface *canardSprite[]);
+void switchSpriteCanard(Canard &canard);
+void sauvegarderPositionX(Partie &partie, Canard canard);
 void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, Time temps, int &modeJeu);
 bool testShot(SourisEvent sourisEvent, SDL_Rect lecture, SDL_Rect position);
 void touched(Canard &canard, Time temps);
-void initPartie(Partie &partie, int nbCanards);
-bool roundTerminee(Partie partie, Canard canard[], int canardActifs);
-void relancerPartie(Partie &partie, Sprites &sprites);
+
 void controlesChien(Chien &chien, Partie &partie);
+void detectionBordsChien(Chien &chien);
 void switchSpriteChien(Chien &chien, Partie &partie);
+
+int alea(int mini, int maxi);
 std::string intToString (int number);
-void sauvegarderPositionX(Partie &partie, Canard canard);
 
 #endif // HEADER_H

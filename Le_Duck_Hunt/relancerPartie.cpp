@@ -1,5 +1,10 @@
  #include "main.h"
 
+bool munitionsEpuisees(Partie partie)
+{
+    return partie.shots == 0;
+}
+
 bool roundTerminee(Partie partie, Canard canard[], int canardActifs)
 {
     bool tousRamasses = true;

@@ -90,6 +90,11 @@ void controlesChien(Chien &chien, Partie &partie)
     }
 }
 
+bool canardSurvivant(Canard &canard)
+{
+    return canard.etat == ALIVE;
+}
+
 
 void mouvementsCanard(Canard &canard) // mouvement physique et mouvement au niveau de l'animation
 {
