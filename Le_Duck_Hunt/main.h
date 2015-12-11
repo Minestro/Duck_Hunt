@@ -26,6 +26,10 @@
 #define BLUISH_PURPLE 3 // Violet bleuâtre, un avion de chasse : 1500 points.
 
 // Etats possibles
+
+/*#define ESCAPING 4 // IL s'enfuit !*/
+// J'ai pensé à rajouté un attribut de type booléen dans la structure Canard plutôt :p
+
 #define ALIVE 3 // En vie : le canard vole.
 #define TOUCHED 2 // Touché : il s'arrête de voler pour dire aurevoir à la vie.
 #define FREE_FALLING 1 // En chute libre : il tombe verticalement.
@@ -123,6 +127,7 @@ struct Canard
     int vecteurPositionX;
     int etat; // 0 : mort, 1 : en chute, 2 : touché, 3 : vivant
     Uint32 tempsDepuisTir; // On veut savoir combien de ms se sont écoulés depuis le tir pour passer de TOUCHED à FREE_FALLING
+    bool echappe;
 };
 
 struct Chien

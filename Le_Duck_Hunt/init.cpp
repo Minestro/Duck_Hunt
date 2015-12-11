@@ -123,6 +123,7 @@ void initChien(Chien &chien)
 void initCanard(Canard &cn)
 {
     cn.etat = ALIVE; // On fait naître le canard.
+    cn.echappe = false;
     switch (cn.type)
     {
         case DARK:
