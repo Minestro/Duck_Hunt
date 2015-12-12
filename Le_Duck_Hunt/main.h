@@ -79,6 +79,12 @@ const unsigned int VITESSE_N = 35;
 const unsigned int VITESSE_M = 30;
 const unsigned int VITESSE_V = 25;
 
+struct TableauChasse
+{
+    int typeCanard[NB_MAX_CANARDS]; // pour la valeur des cases, cf DEFINE des types de canards
+    bool recupere[NB_MAX_CANARDS]; // si le chien l'a récupéré
+};
+
 struct Message // Une structure pour afficher avec les fontes, par exemple les scores, ou le niveau !
 {
     SDL_Color textColor;    //couleur du texte
