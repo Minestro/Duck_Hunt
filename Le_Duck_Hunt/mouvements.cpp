@@ -31,7 +31,7 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites, DimensionsEcr
             }
             else
             {
-                chien.vitesseAnimation = 40;
+                chien.vitesseAnimation = 50;
             }
 
             if(chienDevientHeureux(chien, partie, sprites, dim))

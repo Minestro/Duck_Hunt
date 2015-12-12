@@ -168,7 +168,7 @@ void initCanard(Canard &cn, Sprites sprites, DimensionsEcran dim)
     }
     cn.nbFrames = 3;
     cn.cycleSprite = 0;
-    cn.vitesseAnimation = 15; // Plus cette valeur est élevée, plus l'animation est lente...
+    cn.vitesseAnimation = 10; // Plus cette valeur est élevée, plus l'animation est lente...
     cn.vitesseTime = cn.vitesseAnimationTime = 0;
 
     cn.lecture.x = 0;

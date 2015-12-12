@@ -81,10 +81,9 @@ const int LIMITE_BASSE = 270;
 const int NB_MAX_CANARDS = 2;
 const int NB_BOUTONS_DIFFERENTS = 10;
 
-const unsigned int VITESSE_N = 15;
-const unsigned int VITESSE_M = 10;
-const unsigned int VITESSE_V = 5;
-
+const unsigned int VITESSE_N = 10;
+const unsigned int VITESSE_M = 6;
+const unsigned int VITESSE_V = 2;
 
 struct DimensionsEcran
 {

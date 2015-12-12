@@ -18,6 +18,7 @@ void showChien(SDL_Surface *ecran, Chien chien)
 
 void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMenu, Message msgs[], int sx, int sy)
 {
+    SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 0, 136, 255));
     sprites.viseur.position.x = sx - (sprites.viseur.source->w / 2);
     sprites.viseur.position.y = sy - (sprites.viseur.source->h / 2);
     SDL_BlitSurface(sprites.background_menu.source, NULL, ecran, &sprites.background.position);
