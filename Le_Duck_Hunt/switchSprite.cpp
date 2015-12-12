@@ -51,6 +51,11 @@ void switchSpriteChien(Chien &chien, Partie &partie)
                 chien.image[CHIEN_CONTENT].lecture.y = 100;
             }
             break;
+        case CHIEN_RIGOLE:
+            chien.image[CHIEN_RIGOLE].lecture.x = (chien.cycleSprite % 2) * chien.image[CHIEN_RIGOLE].lecture.w;
+            chien.cycleSprite = (chien.cycleSprite + 1) % chien.image[CHIEN_RIGOLE].lecture.w;
+
+            break;
         default:
             break;
     }

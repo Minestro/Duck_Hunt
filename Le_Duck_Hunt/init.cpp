@@ -54,6 +54,7 @@ void initTime(Time &time)
 
 void initPartie(Partie &partie, int nbCanards)
 {
+    partie.relancer = false;
     partie.jeu = false;
     partie.chienEnChasse = false;
     for(int i = 0 ; i < nbCanards ; i++)

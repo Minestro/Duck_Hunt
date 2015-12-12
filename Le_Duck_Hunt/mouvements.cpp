@@ -45,7 +45,7 @@ void controlesChien(Chien &chien, Partie &partie)
             if(joueurMaladroit(partie))
             {
                 chien.etat = CHIEN_RIGOLE;
-                chien.image[CHIEN_RIGOLE].position = chien.image[CHIEN_CONTENT].position;
+                chien.image[CHIEN_RIGOLE].position = chien.image[CHIEN_MARCHE].position;
             }
 
 
@@ -106,6 +106,8 @@ void controlesChien(Chien &chien, Partie &partie)
             break;
 
         case CHIEN_RIGOLE:
+
+
 
             break;
 

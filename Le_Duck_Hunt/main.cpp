@@ -106,7 +106,7 @@ int main(int argc, char* argv[])
 
         if(roundTerminee(sprites, partie))
         {
-            modeMenu = 6;
+
         }
 
 

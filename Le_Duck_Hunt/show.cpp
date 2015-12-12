@@ -66,7 +66,7 @@ void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, 
     }
     for (int i = 0 ; i < sprites.canardActifs ; i++)
     {
-        if ((sprites.canard[i].etat == FREE_FALLING) || sprites.canard[i].etat == ALIVE && sprites.canard[i].echappe && partie.jeu)
+        if (((sprites.canard[i].etat == FREE_FALLING) || ((sprites.canard[i].etat == ALIVE) && (sprites.canard[i].echappe))) && partie.jeu)
         {
             SDL_BlitSurface(sprites.canardSprite[sprites.canard[i].type-1], &sprites.canard[i].lecture, ecran, &sprites.canard[i].position);
         }

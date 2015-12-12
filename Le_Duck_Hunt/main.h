@@ -87,6 +87,7 @@ struct Message // Une structure pour afficher avec les fontes, par exemple les s
 
 struct Partie
 {
+    bool relancer;
     bool jeu;
     bool chienEnChasse;
     int canardsEnVie;
