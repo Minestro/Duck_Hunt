@@ -5,18 +5,21 @@ int alea(int mini, int maxi)
     return (rand() % (++maxi - mini))  + mini;
 }
 
-bool chienDevientHeureux(Chien chien, Partie partie, Sprites sprites, DimensionsEcran dim)
+bool chienDevientHeureux(Chien chien, Partie partie)
 {
     return (
              (
-              (chien.image[CHIEN_MARCHE].position.x > (dim.largeur - chien.image[CHIEN_MARCHE].lecture.h * 2) / 2)
-               && chien.devantHerbe
+              (
+               chien.image[CHIEN_MARCHE].position.x > (LARGEUR - chien.image[CHIEN_MARCHE].lecture.h * 2) / 2
                )
-            || (partie.canardAbbatu && !chien.devantHerbe));
+               && chien.devantHerbe
+              )
+                || (partie.canardAbbatu && !chien.devantHerbe)
+            );
 }
 
 
-void controlesChien(Chien &chien, Partie &partie, Sprites sprites, DimensionsEcran dim)
+void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
 {
     switch (chien.etat)
     {
@@ -27,14 +30,14 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites, DimensionsEcr
 
             if(partie.chienEnChasse)
             {
-                chien.vitesseAnimation = 10;
+                chien.vitesseAnimation = 30;
             }
             else
             {
-                chien.vitesseAnimation = 50;
+                chien.vitesseAnimation = 80;
             }
 
-            if(chienDevientHeureux(chien, partie, sprites, dim))
+            if(chienDevientHeureux(chien, partie))
             {
                 chien.etat = CHIEN_CONTENT;
                 chien.image[CHIEN_CONTENT].position = chien.image[CHIEN_MARCHE].position;
@@ -68,12 +71,12 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites, DimensionsEcr
             }
 
 
-            detectionBordsChien(chien, dim);
+            detectionBordsChien(chien);
             break;
 
         case CHIEN_CONTENT:
 
-            if(SDL_GetTicks() - chien.tempsDepuisEtat > 750 && !partie.canardAbbatu)
+            if(SDL_GetTicks() - chien.tempsDepuisEtat > 600 && !partie.canardAbbatu)
             {
                 if(chien.devantHerbe)
                 {
@@ -92,7 +95,7 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites, DimensionsEcr
                 partie.canardAbbatu = false;
             }
 
-            if(SDL_GetTicks() - chien.tempsDepuisEtat > 750 && partie.canardAbbatu)
+            if(SDL_GetTicks() - chien.tempsDepuisEtat > 200 && partie.canardAbbatu)
             {
                 chien.etat--;
                 partie.canardAbbatu = false;
@@ -114,7 +117,7 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites, DimensionsEcr
 
             if(SDL_GetTicks() - chien.tempsDepuisEtat > 100)
             {
-                chien.image[CHIEN_SAUTE_2].position.y = Y_JEU_CHIEN + sprites.background.position.y;
+                chien.image[CHIEN_SAUTE_2].position.y = Y_JEU_CHIEN;
                 chien.image[CHIEN_MARCHE].position = chien.image[CHIEN_SAUTE_2].position;
                 chien.nbFrames = 4;
                 chien.etat = CHIEN_MARCHE;
@@ -197,12 +200,12 @@ void mouvementsCanard(Canard &canard) // mouvement physique et mouvement au nive
     }
 }
 
-void detectionBordsChien(Chien &chien, DimensionsEcran dim)
+void detectionBordsChien(Chien &chien)
 {
-    if(chien.image[CHIEN_MARCHE].position.x + chien.image[CHIEN_MARCHE].lecture.w > dim.largeur)
+    if(chien.image[CHIEN_MARCHE].position.x + chien.image[CHIEN_MARCHE].lecture.w > LARGEUR)
     {
         chien.vecteurPositionX *= -1;
-        chien.image[CHIEN_MARCHE].position.x = dim.largeur - chien.image[CHIEN_MARCHE].lecture.w;
+        chien.image[CHIEN_MARCHE].position.x = LARGEUR - chien.image[CHIEN_MARCHE].lecture.w;
         chien.image[CHIEN_MARCHE].lecture.y = 0;
     }
     else if(chien.image[CHIEN_MARCHE].position.x < 0)
@@ -215,7 +218,7 @@ void detectionBordsChien(Chien &chien, DimensionsEcran dim)
 
 
 
-void detectionBordsCanard(Canard &canard, Partie &partie, DimensionsEcran dim, Sprites sprites)
+void detectionBordsCanard(Canard &canard, Partie &partie)
 {
     switch(canard.etat)
     {
@@ -227,9 +230,9 @@ void detectionBordsCanard(Canard &canard, Partie &partie, DimensionsEcran dim, S
                     canard.position.x = 0;
                     canard.vecteurPositionX *= -1;
                 }
-                else if (canard.position.x + canard.lecture.w >= dim.largeur)
+                else if (canard.position.x + canard.lecture.w >= LARGEUR)
                 {
-                    canard.position.x = dim.largeur - canard.lecture.w;
+                    canard.position.x = LARGEUR - canard.lecture.w;
                     canard.vecteurPositionX *= -1;
                 }
                 if(canard.position.y <= 0)
@@ -238,14 +241,14 @@ void detectionBordsCanard(Canard &canard, Partie &partie, DimensionsEcran dim, S
                     canard.vecteurPositionY *= -1;
                 }
             }
-            if (canard.position.y + canard.lecture.h >= sprites.background.position.y + sprites.background.source->h - LIMITE_BASSE)
+            if (canard.position.y + canard.lecture.h >= HAUTEUR - LIMITE_BASSE)
             {
-                canard.position.y =sprites.background.position.y + sprites.background.source->h - LIMITE_BASSE - canard.lecture.h;
+                canard.position.y = HAUTEUR-LIMITE_BASSE-canard.lecture.h;
                 canard.vecteurPositionY *= -1;
             }
             break;
         case FREE_FALLING:
-            if (canard.position.y + canard.lecture.h > sprites.background.position.y + sprites.background.source->h - LIMITE_BASSE + canard.lecture.h)
+            if (canard.position.y + canard.lecture.h > HAUTEUR - LIMITE_BASSE + canard.lecture.h)
             {
                 canard.etat = DEAD;
                 partie.canardsEnVie--;

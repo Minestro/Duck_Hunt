@@ -14,43 +14,43 @@ bool getEvents(SourisEvent &sourisEvent, bool testClic)
     {
         switch (event.type)
         {
-        case SDL_MOUSEMOTION:
-            sourisEvent.sx = event.motion.x;
-            sourisEvent.sy = event.motion.y;
-        case SDL_MOUSEBUTTONDOWN :
-            switch(event.button.button)
-            {
-            case SDL_BUTTON_LEFT :
-                sourisEvent.bl = true;
+            case SDL_MOUSEMOTION:
+                sourisEvent.sx = event.motion.x;
+                sourisEvent.sy = event.motion.y;
+            case SDL_MOUSEBUTTONDOWN :
+                switch(event.button.button)
+                {
+                case SDL_BUTTON_LEFT :
+                    sourisEvent.bl = true;
+                    break;
+                case SDL_BUTTON_RIGHT :
+                    sourisEvent.br = true;
+                    break;
+                case SDL_BUTTON_MIDDLE :
+                    sourisEvent.bm = true;
+                    break;
+                default:
+                    break;
+                }
                 break;
-            case SDL_BUTTON_RIGHT :
-                sourisEvent.br = true;
-                break;
-            case SDL_BUTTON_MIDDLE :
-                sourisEvent.bm = true;
+            case SDL_MOUSEBUTTONUP :
+                switch(event.button.button)
+                {
+                case SDL_BUTTON_LEFT :
+                    sourisEvent.bl = false;
+                    break;
+                case SDL_BUTTON_RIGHT :
+                    sourisEvent.br = false;
+                    break;
+                case SDL_BUTTON_MIDDLE :
+                    sourisEvent.bm = false;
+                    break;
+                default:
+                    break;
+                }
                 break;
             default:
                 break;
-            }
-            break;
-        case SDL_MOUSEBUTTONUP :
-            switch(event.button.button)
-            {
-            case SDL_BUTTON_LEFT :
-                sourisEvent.bl = false;
-                break;
-            case SDL_BUTTON_RIGHT :
-                sourisEvent.br = false;
-                break;
-            case SDL_BUTTON_MIDDLE :
-                sourisEvent.bm = false;
-                break;
-            default:
-                break;
-            }
-            break;
-        default:
-            break;
         }
     }
 
