@@ -17,70 +17,74 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
             clicGaucheTemp = true;
         }
         time.currentTime = SDL_GetTicks();
-        if (true)//((time.currentTime >= time.timeMenu + time.menuTime) || modeMenu==0)
+        sourisEvent.clicGauche = clicGaucheTemp;
+        switch (modeMenu)
         {
-            sourisEvent.clicGauche = clicGaucheTemp;
-            switch (modeMenu)
+        case 0:
+            sortir = true;
+            break;
+        case 1 :
+            boutons.bouton[BOUTON_PLAY].position.x = (LARGEUR/2)-(boutons.lecture[0].w/2);
+            boutons.bouton[BOUTON_PLAY].position.y = 200;
+
+            boutons.bouton[BOUTON_QUIT].position.x = (LARGEUR/2) - (boutons.lecture[0].w/2);
+            boutons.bouton[BOUTON_QUIT].position.y = 400;
+            if (time.currentTime >= time.timeFps + time.fpsTime)
             {
-            case 0:
-                sortir = true;
-                break;
-            case 1 :
-                boutons.bouton[BOUTON_PLAY].position.x = (LARGEUR/2)-(boutons.lecture[0].w/2);
-                boutons.bouton[BOUTON_PLAY].position.y = 200;
-
-                boutons.bouton[BOUTON_QUIT].position.x = (LARGEUR/2) - (boutons.lecture[0].w/2);
-                boutons.bouton[BOUTON_QUIT].position.y = 400;
                 showMenu(ecran, sprites, boutons, modeMenu, msgs, sourisEvent.sx, sourisEvent.sy);
-
-                if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_QUIT], boutons.lecture[0]))&&sourisEvent.clicGauche)
-                {
-                    modeMenu = 0;
-                    modeJeu = 0;
-
-                }
-                else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_PLAY], boutons.lecture[0]))&&sourisEvent.clicGauche)
-                {
-                    modeJeu = 1;
-                    modeMenu = 0;
-                    initChien(chien);
-
-                    sprites.canardActifs = 2;
-
-                    for (int i = 0 ; i < sprites.canardActifs ; i++)
-                    {
-                        sprites.canard[i].type = alea(1, 3);
-                        initCanard(sprites.canard[i]);
-                    }
-
-                    initPartie(partie, sprites.canardActifs);
-                }
-                break;
-            case 5 :
-                boutons.bouton[BOUTON_REPRENDRE].position.x = (LARGEUR/2) - (boutons.lecture[0].w/2);
-                boutons.bouton[BOUTON_REPRENDRE].position.y = 200;
-
-                boutons.bouton[BOUTON_QUIT].position.x = (LARGEUR/2) - (boutons.lecture[0].w/2);
-                boutons.bouton[BOUTON_QUIT].position.y = 400;
-
-                if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_QUIT], boutons.lecture[0]))&&sourisEvent.clicGauche)
-                {
-                    modeMenu = 1;
-                }
-                else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_REPRENDRE], boutons.lecture[0]))&&sourisEvent.clicGauche)
-                {
-                    modeMenu = 0;
-                }
-
-                showMenu(ecran, sprites, boutons, modeMenu, msgs, sourisEvent.sx, sourisEvent.sy);
-                break;
-            case 6:
-
-                break;
-            default:
-                break;
+                time.timeFps = time.currentTime;
             }
-            time.timeMenu = time.currentTime;
+
+            if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_QUIT], boutons.lecture[0]))&&sourisEvent.clicGauche)
+            {
+                modeMenu = 0;
+                modeJeu = 0;
+
+            }
+            else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_PLAY], boutons.lecture[0]))&&sourisEvent.clicGauche)
+            {
+                modeJeu = 1;
+                modeMenu = 0;
+                initChien(chien);
+
+                sprites.canardActifs = 2;
+
+                for (int i = 0 ; i < sprites.canardActifs ; i++)
+                {
+                    sprites.canard[i].type = alea(1, 3);
+                    initCanard(sprites.canard[i]);
+                }
+
+                initPartie(partie, sprites.canardActifs);
+            }
+            break;
+        case 5 :
+            boutons.bouton[BOUTON_REPRENDRE].position.x = (LARGEUR/2) - (boutons.lecture[0].w/2);
+            boutons.bouton[BOUTON_REPRENDRE].position.y = 200;
+
+            boutons.bouton[BOUTON_QUIT].position.x = (LARGEUR/2) - (boutons.lecture[0].w/2);
+            boutons.bouton[BOUTON_QUIT].position.y = 400;
+
+            if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_QUIT], boutons.lecture[0]))&&sourisEvent.clicGauche)
+            {
+                modeMenu = 1;
+            }
+            else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_REPRENDRE], boutons.lecture[0]))&&sourisEvent.clicGauche)
+            {
+                modeMenu = 0;
+            }
+
+            if (time.currentTime >= time.timeFps + time.fpsTime)
+            {
+                showMenu(ecran, sprites, boutons, modeMenu, msgs, sourisEvent.sx, sourisEvent.sy);
+                time.timeFps = time.currentTime;
+            }
+            break;
+        case 6:
+
+            break;
+        default:
+            break;
         }
         SDL_Flip(ecran);
     }

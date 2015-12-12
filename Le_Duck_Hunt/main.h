@@ -225,9 +225,8 @@ struct SourisEvent
 struct Time
 {
     Uint32 currentTime;
-    Uint32 timeMenu;
     Uint32 timeFps;
-    int fpsTime, menuTime;
+    int fpsTime;
 };
 
 bool getEvents(SourisEvent &sourisEvent, bool);

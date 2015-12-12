@@ -50,8 +50,6 @@ void initSourisEvent(SourisEvent &sourisEvent)
 void initTime(Time &time)
 {
     time.fpsTime = (1/(FPS_MAX*1.0)*1000); // Calcule en ms le temps entre chaque actualisation d'image à partir de la constante FPS_LIMIT.
-    time.menuTime = 10;
-    time.timeMenu = 0;
     time.timeFps = 0;
     time.currentTime = SDL_GetTicks();
 }
