@@ -1,13 +1,22 @@
 ﻿#include "main.h"
 
-
+void showBouton(SDL_Surface *ecran, Boutons &boutons, Message msgs[], int boutonNom, int sx, int sy)
+{
+    SDL_BlitSurface(boutons.source, &boutons.lecture[testHoverBouton(sx, sy, boutons.bouton[boutonNom], boutons.lecture[0])], ecran, &boutons.bouton[boutonNom].position);
+    msgs[MSG_BOUTONS].source = TTF_RenderText_Solid(msgs[MSG_BOUTONS].font, boutons.bouton[boutonNom].contenu.c_str(), msgs[MSG_BOUTONS].textColor);
+    msgs[MSG_BOUTONS].position.x=boutons.bouton[boutonNom].position.x+(boutons.lecture[0].w - msgs[MSG_BOUTONS].source->w)/2;
+    msgs[MSG_BOUTONS].position.y=boutons.bouton[boutonNom].position.y+(boutons.lecture[0].h - msgs[MSG_BOUTONS].source->h)/2;
+    SDL_BlitSurface(boutons.source, &boutons.lecture[testHoverBouton(sx, sy, boutons.bouton[boutonNom], boutons.lecture[0])], ecran, &boutons.bouton[boutonNom].position);
+    SDL_BlitSurface(msgs[MSG_BOUTONS].source, NULL, ecran, &msgs[MSG_BOUTONS].position);
+    SDL_FreeSurface(msgs[MSG_BOUTONS].source);
+}
 
 void showChien(SDL_Surface *ecran, Chien chien)
 {
     SDL_BlitSurface(chien.image[chien.etat].source, &chien.image[chien.etat].lecture, ecran, &chien.image[chien.etat].position);
 }
 
-void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons boutons, int &modeMenu, Message msgs[], int sx, int sy)
+void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMenu, Message msgs[], int sx, int sy)
 {
     sprites.viseur.position.x=sx-(sprites.viseur.source->w/2);
     sprites.viseur.position.y=sy-(sprites.viseur.source->h/2);
@@ -15,39 +24,17 @@ void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons boutons, int &modeMen
     switch (modeMenu)
     {
     case 1 :
-        SDL_BlitSurface(boutons.source, &boutons.lecture[testHoverBouton(sx, sy, boutons.play, boutons.lecture[0])], ecran, &boutons.play.position);
-        msgs[MSG_BOUTONS].source = TTF_RenderText_Solid(msgs[MSG_BOUTONS].font, boutons.play.contenu.c_str(), msgs[MSG_BOUTONS].textColor);
-        msgs[MSG_BOUTONS].position.x=boutons.play.position.x+(boutons.lecture[0].w - msgs[MSG_BOUTONS].source->w)/2;
-        msgs[MSG_BOUTONS].position.y=boutons.play.position.y+(boutons.lecture[0].h - msgs[MSG_BOUTONS].source->h)/2;
-        SDL_BlitSurface(msgs[MSG_BOUTONS].source, NULL, ecran, &msgs[MSG_BOUTONS].position);
-        SDL_BlitSurface(boutons.source, &boutons.lecture[testHoverBouton(sx, sy, boutons.quit, boutons.lecture[0])], ecran, &boutons.quit.position);
-        SDL_FreeSurface(msgs[MSG_BOUTONS].source);
-
-        msgs[MSG_BOUTONS].source = TTF_RenderText_Solid(msgs[MSG_BOUTONS].font, boutons.quit.contenu.c_str(), msgs[MSG_BOUTONS].textColor);
-        msgs[MSG_BOUTONS].position.x=boutons.quit.position.x+(boutons.lecture[0].w - msgs[MSG_BOUTONS].source->w)/2;
-        msgs[MSG_BOUTONS].position.y=boutons.quit.position.y+(boutons.lecture[0].h - msgs[MSG_BOUTONS].source->h)/2;
-        SDL_BlitSurface(msgs[MSG_BOUTONS].source, NULL, ecran, &msgs[MSG_BOUTONS].position);
-        SDL_FreeSurface(msgs[MSG_BOUTONS].source);
+        showBouton(ecran, boutons, msgs, BOUTON_PLAY, sx, sy);
+        showBouton(ecran, boutons, msgs, BOUTON_QUIT, sx, sy);
         break;
     case 5:
         msgs[MSG_PAUSE].source = TTF_RenderText_Solid(msgs[MSG_PAUSE].font, "Jeu en pause", msgs[MSG_PAUSE].textColor);
         msgs[MSG_PAUSE].position.x = (LARGEUR/2) - (msgs[MSG_PAUSE].source->w/2);
         SDL_BlitSurface(msgs[MSG_PAUSE].source, NULL, ecran, &msgs[MSG_PAUSE].position);
 
-        SDL_BlitSurface(boutons.source, &boutons.lecture[testHoverBouton(sx, sy, boutons.reprendre, boutons.lecture[0])], ecran, &boutons.reprendre.position);
-        msgs[MSG_BOUTONS].source = TTF_RenderText_Solid(msgs[MSG_BOUTONS].font, boutons.reprendre.contenu.c_str(), msgs[MSG_BOUTONS].textColor);
-        msgs[MSG_BOUTONS].position.x=boutons.reprendre.position.x+(boutons.lecture[0].w - msgs[MSG_BOUTONS].source->w)/2;
-        msgs[MSG_BOUTONS].position.y=boutons.reprendre.position.y+(boutons.lecture[0].h - msgs[MSG_BOUTONS].source->h)/2;
-        SDL_BlitSurface(msgs[MSG_BOUTONS].source, NULL, ecran, &msgs[MSG_BOUTONS].position);
-        SDL_FreeSurface(msgs[MSG_BOUTONS].source);
+        showBouton(ecran, boutons, msgs, BOUTON_REPRENDRE, sx, sy);
+        showBouton(ecran, boutons, msgs, BOUTON_QUIT, sx, sy);
 
-        SDL_BlitSurface(boutons.source, &boutons.lecture[testHoverBouton(sx, sy, boutons.quit, boutons.lecture[0])], ecran, &boutons.quit.position);
-        msgs[MSG_BOUTONS].source = TTF_RenderText_Solid(msgs[MSG_BOUTONS].font, boutons.quit.contenu.c_str(), msgs[MSG_BOUTONS].textColor);
-        msgs[MSG_BOUTONS].position.x=boutons.quit.position.x+(boutons.lecture[0].w - msgs[MSG_BOUTONS].source->w)/2;
-        msgs[MSG_BOUTONS].position.y=boutons.quit.position.y+(boutons.lecture[0].h - msgs[MSG_BOUTONS].source->h)/2;
-        SDL_BlitSurface(msgs[MSG_BOUTONS].source, NULL, ecran, &msgs[MSG_BOUTONS].position);
-        SDL_FreeSurface(msgs[MSG_BOUTONS].source);
-        SDL_FreeSurface(msgs[MSG_PAUSE].source);
         break;
     }
     SDL_BlitSurface(sprites.viseur.source, NULL, ecran, &sprites.viseur.position);

@@ -29,9 +29,9 @@ void initMessage(Message msgs[])
 void initBouton(Boutons &boutons)
 {
     boutons.source = loadImageWithColorKey("sprites/boutons.bmp", 0, 0, 0);
-    boutons.play.contenu = "Jouer";
-    boutons.quit.contenu = "Quitter";
-    boutons.reprendre.contenu = "Reprendre";
+    boutons.bouton[BOUTON_PLAY].contenu = "Jouer";
+    boutons.bouton[BOUTON_QUIT].contenu = "Quitter";
+    boutons.bouton[BOUTON_REPRENDRE].contenu = "Reprendre";
     for(int i = 0 ; i < 2 ; i++)
     {
         boutons.lecture[i].x = i * 226;
@@ -50,8 +50,6 @@ void initSourisEvent(SourisEvent &sourisEvent)
 void initTime(Time &time)
 {
     time.fpsTime = (1/(FPS_MAX*1.0)*1000); // Calcule en ms le temps entre chaque actualisation d'image à partir de la constante FPS_LIMIT.
-    time.menuTime = 10;
-    time.timeMenu = 0;
     time.timeFps = 0;
     time.currentTime = SDL_GetTicks();
 }
