@@ -169,8 +169,6 @@ struct Sprites // Rassemble toutes les images et les feuilles de sprite
     Sprite background_blit;
     Sprite background_menu;
 
-    Chien chien;
-
     int canardActifs;
     Canard canard[NB_MAX_CANARDS];
 
@@ -233,7 +231,7 @@ void showMessage(SDL_Surface *ecran, Message &msg);
 void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons boutons, int &modeMenu, Message msgs[], int sx, int sy);
 void showPoints(Message msgs[], SDL_Surface *ecran, Partie partie);
 
-void menu(SDL_Surface *ecran, Sprites, Boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[], Partie partie);
+void menu(SDL_Surface *ecran, Sprites &sprites, Boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[], Partie &partie, Chien &chien);
 bool testHoverBouton(int, int, Bouton, SDL_Rect lecture);
 
 bool munitionsEpuisees(Partie partie);

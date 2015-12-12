@@ -28,34 +28,23 @@ int main(int argc, char* argv[])
 
     Partie partie;
     Sprites sprites;
+    Chien chien;
 
     chargerImages(sprites);
 
     Boutons boutons;
     initBouton(boutons);
 
-    Chien chien;
-    initChien(chien);
-
-    sprites.canardActifs = 2;
-
-    for (int i = 0 ; i < sprites.canardActifs ; i++)
-    {
-        sprites.canard[i].type = alea(1, 3);
-        initCanard(sprites.canard[i]);
-    }
-
-    initPartie(partie, sprites.canardActifs);
-
     Uint8 *keystate = SDL_GetKeyState(NULL);
     SourisEvent sourisEvent;
     initSourisEvent(sourisEvent);
+
     SDL_ShowCursor(SDL_DISABLE);
     do
     {
         if (modeMenu != 0)
         {
-            menu(ecran, sprites, boutons, modeMenu, modeJeu, sourisEvent, temps, msgs, partie);
+            menu(ecran, sprites, boutons, modeMenu, modeJeu, sourisEvent, temps, msgs, partie, chien);
         }
         temps.currentTime = SDL_GetTicks();
         partie.alreadyShot = partie.alreadyGetEvent = partie.alreadyClic = false;

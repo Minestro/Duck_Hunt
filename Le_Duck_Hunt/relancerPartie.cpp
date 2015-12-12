@@ -1,4 +1,4 @@
- #include "main.h"
+#include "main.h"
 
 
 bool escaped(Sprites sprites, Partie partie)
@@ -9,12 +9,12 @@ bool escaped(Sprites sprites, Partie partie)
     {
         continuer = sprites.canard[i].echappe && sprites.canard[i].etat == ALIVE
                     && (
-                          sprites.canard[i].position.x + sprites.canard[i].lecture.w < 0
-                       || sprites.canard[i].position.x > LARGEUR
-                       || sprites.canard[i].position.y + sprites.canard[i].lecture.h < 0
-                       || sprites.canard[i].position.y > HAUTEUR - LIMITE_BASSE
+                        sprites.canard[i].position.x + sprites.canard[i].lecture.w < 0
+                        || sprites.canard[i].position.x > LARGEUR
+                        || sprites.canard[i].position.y + sprites.canard[i].lecture.h < 0
+                        || sprites.canard[i].position.y > HAUTEUR - LIMITE_BASSE
 
-                            );
+                    );
         i++;
     }
 
