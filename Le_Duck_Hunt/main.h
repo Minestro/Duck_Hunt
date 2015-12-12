@@ -66,7 +66,7 @@
 
 const int HAUTEUR = 761;
 const int LARGEUR = 750;
-const int BPP = 24;
+const int BPP = 16;
 const int FPS_MAX = 60;
 const int LIMITE_BASSE = 270;
 const int NB_MAX_CANARDS = 2;
@@ -87,6 +87,7 @@ struct Message // Une structure pour afficher avec les fontes, par exemple les s
 
 struct Partie
 {
+    bool jeu;
     bool chienEnChasse;
     int canardsEnVie;
     int shots;
@@ -138,11 +139,14 @@ struct Chien
     int vecteurPositionX;
     int vecteurPositionY;
     int etat;
+
     Sprite image[NOMBRE_IMAGES_CHIEN]; // On va utiliser des feuilles de sprite différentes
     int nbFrames;
+    int cycleSprite;
+
     int vitesseAnimation;
     Uint32 vitesseAnimationTime;
-    int cycleSprite;
+
     Uint32 tempsDepuisEtat; // Même principe que tempsDepuisTir mais depuis un certain etat;
     bool devantHerbe; // si on le blit avant ou après les herbes hautes
 };
@@ -216,7 +220,7 @@ void showPointsCanard(SDL_Surface *ecran, Canard canard, Sprite &points);
 void showMessage(SDL_Surface *ecran, Message &msg, std::string contenuMessage);
 void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons boutons, int &modeMenu, Message msgs[], int sx, int sy);
 
-void menu(SDL_Surface *ecran, Sprites, Boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[]);
+void menu(SDL_Surface *ecran, Sprites, Boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[], Partie partie);
 bool testHoverBouton(int, int, Bouton, SDL_Rect lecture);
 
 bool munitionsEpuisees(Partie partie);
@@ -225,6 +229,7 @@ bool roundTerminee(Sprites sprites, Partie partie);
 bool canardsMortsRamasses(Partie partie);
 bool joueurMaladroit(Partie partie);
 
+bool transitionRound(Chien &chien);
 void relancerPartie(Partie &partie, Sprites &sprites);
 void initPartie(Partie &partie, int nbCanards);
 void initBouton(Boutons &boutons);

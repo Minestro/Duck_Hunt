@@ -5,8 +5,6 @@ int alea(int mini, int maxi)
     return (rand() % (++maxi - mini))  + mini;
 }
 
-
-
 bool chienDevientHeureux(Chien chien, Partie partie)
 {
     return (
@@ -16,6 +14,7 @@ bool chienDevientHeureux(Chien chien, Partie partie)
               )
             || (partie.canardAbbatu && !chien.devantHerbe));
 }
+
 
 void controlesChien(Chien &chien, Partie &partie)
 {
@@ -42,10 +41,13 @@ void controlesChien(Chien &chien, Partie &partie)
                 chien.image[CHIEN_CONTENT].position.y -= 8;
                 chien.tempsDepuisEtat = SDL_GetTicks();
             }
-            else if(joueurMaladroit(partie))
+
+            if(joueurMaladroit(partie))
             {
                 chien.etat = CHIEN_RIGOLE;
+                chien.image[CHIEN_RIGOLE].position = chien.image[CHIEN_CONTENT].position;
             }
+
 
             detectionBordsChien(chien);
             break;
@@ -98,6 +100,7 @@ void controlesChien(Chien &chien, Partie &partie)
                 chien.nbFrames = 4;
                 chien.etat = CHIEN_MARCHE;
                 chien.devantHerbe = false;
+                partie.jeu = true;
             }
 
             break;

@@ -1,6 +1,6 @@
 #include "main.h"
 
-void menu(SDL_Surface *ecran, Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[])
+void menu(SDL_Surface *ecran, Sprites sprites, Boutons boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[], Partie partie)
 {
     bool sortir = false;
     bool clicGaucheTemp;
@@ -29,7 +29,7 @@ void menu(SDL_Surface *ecran, Sprites sprites, Boutons boutons, int &modeMenu, i
                     boutons.play.position.x = (LARGEUR/2)-(boutons.lecture[0].w/2);
                     boutons.play.position.y = 200;
 
-                    boutons.quit.position.x = (LARGEUR/2)-(boutons.lecture[0].w/2);
+                    boutons.quit.position.x = (LARGEUR/2) - (boutons.lecture[0].w/2);
                     boutons.quit.position.y = 400;
                     showMenu(ecran, sprites, boutons, modeMenu, msgs, sourisEvent.sx, sourisEvent.sy);
 
@@ -46,33 +46,29 @@ void menu(SDL_Surface *ecran, Sprites sprites, Boutons boutons, int &modeMenu, i
                     }
                     break;
                 case 5 :
-                        boutons.reprendre.position.x = (LARGEUR/2)-(boutons.lecture[0].w/2);
-                        boutons.reprendre.position.y = 200;
+                    boutons.reprendre.position.x = (LARGEUR/2) - (boutons.lecture[0].w/2);
+                    boutons.reprendre.position.y = 200;
 
-                        boutons.quit.position.x = (LARGEUR/2)-(boutons.lecture[0].w/2);
-                        boutons.quit.position.y = 400;
+                    boutons.quit.position.x = (LARGEUR/2) - (boutons.lecture[0].w/2);
+                    boutons.quit.position.y = 400;
 
-                        if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.quit, boutons.lecture[0]))&&sourisEvent.clicGauche)
-                        {
-                            modeMenu = 1;
+                    if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.quit, boutons.lecture[0]))&&sourisEvent.clicGauche)
+                    {
+                        modeMenu = 1;
+                    }
+                    else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.reprendre, boutons.lecture[0]))&&sourisEvent.clicGauche)
+                    {
+                        modeMenu = 0;
+                    }
 
-                        }
-                        else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.reprendre, boutons.lecture[0]))&&sourisEvent.clicGauche)
-                        {
-                            modeMenu = 0;
-                        }
-
-                        showMenu(ecran, sprites, boutons, modeMenu, msgs, sourisEvent.sx, sourisEvent.sy);
-                    break;
-                case 6:
-
+                    showMenu(ecran, sprites, boutons, modeMenu, msgs, sourisEvent.sx, sourisEvent.sy);
                     break;
                 default:
                     break;
             }
             time.timeMenu = time.currentTime;
         }
-        SDL_Flip(SDL_GetVideoSurface());
+        SDL_Flip(ecran);
     }
 }
 

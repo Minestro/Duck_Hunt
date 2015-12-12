@@ -2,7 +2,6 @@
 
 int main(int argc, char* argv[])
 {
-
     /* INITIALISATIONS DES BIBLIOTHEQUES : IMG, SDL, TTF */
     IMG_Init(IMG_INIT_PNG);
     SDL_Init(SDL_INIT_VIDEO);
@@ -56,7 +55,7 @@ int main(int argc, char* argv[])
     {
         if (modeMenu != 0)
         {
-            menu(ecran, sprites, boutons, modeMenu, modeJeu, sourisEvent, temps, msgs);
+            menu(ecran, sprites, boutons, modeMenu, modeJeu, sourisEvent, temps, msgs, partie);
         }
         temps.currentTime = SDL_GetTicks();
         partie.alreadyShot = partie.alreadyGetEvent = partie.alreadyClic = false;
@@ -92,7 +91,7 @@ int main(int argc, char* argv[])
             msgs[MSG_SCORE].source = TTF_RenderText_Solid(msgs[MSG_SCORE].font, intToString(partie.score).c_str(), msgs[MSG_SCORE].textColor);
             SDL_BlitSurface(msgs[MSG_SCORE].source, NULL, ecran, &msgs[MSG_SCORE].position);
             SDL_FreeSurface(msgs[MSG_SCORE].source);
-            SDL_Flip(SDL_GetVideoSurface());
+            SDL_Flip(ecran);
 
             temps.timeFps = temps.currentTime;
         }
@@ -107,8 +106,10 @@ int main(int argc, char* argv[])
 
         if(roundTerminee(sprites, partie))
         {
-            relancerPartie(partie, sprites);
+            modeMenu = 6;
         }
+
+
 
         if (keystate[SDLK_ESCAPE])
         {
