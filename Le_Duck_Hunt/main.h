@@ -22,16 +22,16 @@
 
 // Type du canard
 #define DARK 1 // Sombre, le plus lent : 500 points.
-#define CHESNUT 2 // Noisette, niveau intermédiaire : 1000 points.
-#define BLUISH_PURPLE 3 // Violet bleuâtre, un avion de chasse : 1500 points.
+#define CHESNUT 2 // Noisette, niveau intermÃ©diaire : 1000 points.
+#define BLUISH_PURPLE 3 // Violet bleuÃ¢tre, un avion de chasse : 1500 points.
 
 // Etats possibles
 
 /*#define ESCAPING 4 // IL s'enfuit !*/
-// J'ai pensé à rajouté un attribut de type booléen dans la structure Canard plutôt :p
+// J'ai pensÃ© Ã  rajoutÃ© un attribut de type boolÃ©en dans la structure Canard plutÃ´t :p
 
 #define ALIVE 3 // En vie : le canard vole.
-#define TOUCHED 2 // Touché : il s'arrête de voler pour dire aurevoir à la vie.
+#define TOUCHED 2 // TouchÃ© : il s'arrÃªte de voler pour dire aurevoir Ã  la vie.
 #define FREE_FALLING 1 // En chute libre : il tombe verticalement.
 #define DEAD 0 // Mort.
 
@@ -50,7 +50,7 @@
 #define CHIEN_CONTENT_DOUBLE 6
 #define NOMBRE_IMAGES_CHIEN 7
 
-// Position en Y en fonction de l'état du jeu
+// Position en Y en fonction de l'Ã©tat du jeu
 #define Y_INTRO_CHIEN 500
 #define Y_JEU_CHIEN 440
 
@@ -64,7 +64,7 @@
 #define MSG_2_TOUCHE 6
 #define NOMBRE_MESSAGES 7
 
-//Les différents noms des boutons
+//Les diffÃ©rents noms des boutons
 #define BOUTON_PLAY 0
 #define BOUTON_QUIT 1
 #define BOUTON_REPRENDRE 2
@@ -92,7 +92,7 @@ const unsigned int VITESSE_V = 25;
 struct TableauChasse
 {
     int typeCanard[NB_MAX_CANARDS]; // pour la valeur des cases, cf DEFINE des types de canards
-    bool recupere[NB_MAX_CANARDS]; // si le chien l'a récupéré
+    bool recupere[NB_MAX_CANARDS]; // si le chien l'a rÃ©cupÃ©rÃ©
 };
 
 struct Message // Une structure pour afficher avec les fontes, par exemple les scores, ou le niveau !
@@ -102,11 +102,12 @@ struct Message // Une structure pour afficher avec les fontes, par exemple les s
     std::string message; // le contenu du texte
     SDL_Rect position; //position de l'affichage tu texte
     TTF_Font *font; // police
-    SDL_Surface *source; // image-texte à afficher
+    SDL_Surface *source; // image-texte Ã  afficher
 };
 
 struct Partie
 {
+    TableauChasse tableauChasse;
     bool afficherMsgTransition;
     bool relancer;
     bool jeu;
@@ -126,7 +127,7 @@ struct Partie
     bool canardRamasse[NB_MAX_CANARDS];
 };
 
-struct Sprite // Peut représenter une image comme une feuille de sprites
+struct Sprite // Peut reprÃ©senter une image comme une feuille de sprites
 {
     SDL_Surface *source;
     SDL_Rect position;
@@ -136,7 +137,7 @@ struct Sprite // Peut représenter une image comme une feuille de sprites
 struct Canard
 {
     int type; // 0 : noir, 1 : marron, 2 : violet
-    int etat; // 0 : mort, 1 : en chute, 2 : touché, 3 : vivant
+    int etat; // 0 : mort, 1 : en chute, 2 : touchÃ©, 3 : vivant
     bool echappe;
 
     int vecteurPositionY;
@@ -153,7 +154,7 @@ struct Canard
 
     int nbFrames;
     int cycleSprite;
-    Uint32 tempsDepuisTir; // On veut savoir combien de ms se sont écoulés depuis le tir pour passer de TOUCHED à FREE_FALLING
+    Uint32 tempsDepuisTir; // On veut savoir combien de ms se sont Ã©coulÃ©s depuis le tir pour passer de TOUCHED Ã  FREE_FALLING
 };
 
 struct Chien
@@ -162,15 +163,15 @@ struct Chien
     int vecteurPositionY;
     int etat;
 
-    Sprite image[NOMBRE_IMAGES_CHIEN]; // On va utiliser des feuilles de sprite différentes
+    Sprite image[NOMBRE_IMAGES_CHIEN]; // On va utiliser des feuilles de sprite diffÃ©rentes
     int nbFrames;
     int cycleSprite;
 
     int vitesseAnimation;
     Uint32 vitesseAnimationTime;
 
-    Uint32 tempsDepuisEtat; // Même principe que tempsDepuisTir mais depuis un certain etat;
-    bool devantHerbe; // si on le blit avant ou après les herbes hautes
+    Uint32 tempsDepuisEtat; // MÃªme principe que tempsDepuisTir mais depuis un certain etat;
+    bool devantHerbe; // si on le blit avant ou aprÃ¨s les herbes hautes
 };
 
 struct Sprites // Rassemble toutes les images et les feuilles de sprite
@@ -239,7 +240,9 @@ void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMe
 void showPoints(Message msgs[], SDL_Surface *ecran, Partie partie);
 void showBouton(SDL_Surface *ecran, Boutons &boutons, Message msgs[], int boutonNom, int sx, int sy);
 
-void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[], Partie &partie, Chien &chien);
+void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons,
+           int &modeMenu, int &modeJeu, SourisEvent &sourisEvent,
+            Time &time, Message msgs[], Partie &partie, Chien &chien);
 bool testHoverBouton(int, int, Bouton, SDL_Rect lecture);
 
 bool munitionsEpuisees(Partie partie);
@@ -248,7 +251,6 @@ bool roundTerminee(Sprites sprites, Partie partie);
 bool canardsMortsRamasses(Partie partie);
 bool joueurMaladroit(Partie partie);
 
-bool transitionRound(Chien &chien);
 void relancerPartie(Partie &partie, Sprites &sprites);
 void initPartie(Partie &partie, int nbCanards);
 void initBouton(Boutons &boutons);
@@ -257,6 +259,7 @@ void initTime(Time &time);
 void initCanard(Canard &cn);
 void initChien(Chien &chien);
 void initMessage(Message msgs[]);
+void initTableau(TableauChasse &tableau, Sprites sprites);
 
 SDL_Surface *loadImage(std::string);
 SDL_Surface *loadImageWithColorKey(std::string, int, int, int);

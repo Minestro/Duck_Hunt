@@ -54,8 +54,8 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
                     sprites.canard[i].type = alea(1, 3);
                     initCanard(sprites.canard[i]);
                 }
-
                 initPartie(partie, sprites.canardActifs);
+                initTableau(partie.tableauChasse, sprites);
             }
             break;
         case 5 :

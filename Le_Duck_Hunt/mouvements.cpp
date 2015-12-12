@@ -49,7 +49,7 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
                 chien.image[CHIEN_RIGOLE].position = chien.image[CHIEN_MARCHE].position;
                 chien.tempsDepuisEtat = SDL_GetTicks();
             }
-            else if(roundTerminee(sprites, partie) && partie.canardsEnVie == 1)
+            else if(partie.canardsEnVie == 1 && roundTerminee(sprites, partie))
             {
                 partie.afficherMsgTransition = true;
                 chien.etat = CHIEN_CONTENT_SIMPLE;
@@ -57,7 +57,7 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
                 chien.image[CHIEN_CONTENT_SIMPLE].lecture.x = 0;
                 chien.tempsDepuisEtat = SDL_GetTicks();
             }
-            else if(roundTerminee(sprites, partie) && partie.canardsEnVie == 0)
+            else if(partie.canardsEnVie == 0 && roundTerminee(sprites, partie))
             {
                 partie.afficherMsgTransition = true;
                 chien.etat = CHIEN_CONTENT_DOUBLE;
@@ -216,6 +216,8 @@ void detectionBordsChien(Chien &chien)
 
 void detectionBordsCanard(Canard &canard, Partie &partie, SDL_Surface *canardSprite[])
 {
+    bool continuer = true;
+    int i = 0;
     switch(canard.etat)
     {
         case ALIVE:
@@ -253,6 +255,17 @@ void detectionBordsCanard(Canard &canard, Partie &partie, SDL_Surface *canardSpr
                 sauvegarderPositionX(partie, canard);
             }
             break;
+        case DEAD:
+            while(continuer && i < 2)
+            {
+                continuer = partie.tableauChasse.typeCanard[i] != NOT_SET;
+                partie.tableauChasse.recupere[i] = true;
+                if(partie.tableauChasse.recupere[i])
+                {
+                    partie.tableauChasse.typeCanard[i] = canard.type;
+                }
+                i++;
+            }
         default:
             break;
     }

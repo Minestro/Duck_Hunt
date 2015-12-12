@@ -1,5 +1,13 @@
 #include "main.h"
 
+void initTableau(TableauChasse &tableau, Sprites sprites)
+{
+    for(int i = 0 ; i < sprites.canardActifs ; i++)
+    {
+        tableau.typeCanard[i] = NOT_SET;
+        tableau.recupere[i] = false;
+    }
+}
 
 void initMessage(Message msgs[])
 {
@@ -128,13 +136,11 @@ void initChien(Chien &chien)
     chien.image[CHIEN_CONTENT_SIMPLE].lecture.x = 0;
     chien.image[CHIEN_CONTENT_SIMPLE].lecture.y = 0;
 
-    chien.image[CHIEN_CONTENT_DOUBLE].source = loadImageWithColorKey("sprites/chienContentDouble.png", 228, 255, 0);
+    chien.image[CHIEN_CONTENT_DOUBLE].source = loadImageWithColorKey("sprites/chienContentDouble.png", 0, 255, 0);
     chien.image[CHIEN_CONTENT_DOUBLE].lecture.h = 80;
     chien.image[CHIEN_CONTENT_DOUBLE].lecture.w = 112;
     chien.image[CHIEN_CONTENT_DOUBLE].lecture.x = 0;
     chien.image[CHIEN_CONTENT_DOUBLE].lecture.y = 0;
-
-
 }
 
 void initCanard(Canard &cn)

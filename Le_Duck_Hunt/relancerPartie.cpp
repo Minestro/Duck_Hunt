@@ -48,16 +48,9 @@ bool joueurMaladroit(Partie partie)
     return partie.shots == 0 && partie.canardsEnVie == NB_MAX_CANARDS;
 }
 
-
 void relancerPartie(Partie &partie, Sprites &sprites)
 {
     partie.relancer = false;
-
-    for(int i = 0 ; i < NB_MAX_CANARDS ; i++)
-    {
-        partie.canardRamasse[i] = false;
-        partie.xChute[i] = NOT_SET;
-    }
 
     for(int i = partie.round * 2 ; i < partie.round * 2 + 2 ; i++)
     {
@@ -69,13 +62,17 @@ void relancerPartie(Partie &partie, Sprites &sprites)
 
     for (int i = 0; i < sprites.canardActifs; i++)
     {
+        partie.canardRamasse[i] = false;
+        partie.xChute[i] = NOT_SET;
         sprites.canard[i].type = alea(1, 3);
         initCanard(sprites.canard[i]);
     }
 
+    initTableau(partie.tableauChasse, sprites);
+
     partie.chienEnChasse = false;
     partie.canardAbbatu = false;
-    partie.canardsEnVie = 2;
+    partie.canardsEnVie = sprites.canardActifs;
     partie.shots = 3;
     partie.round++;
 }
