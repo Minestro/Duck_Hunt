@@ -64,6 +64,15 @@
 #define MSG_2_TOUCHE 6
 #define NOMBRE_MESSAGES 7
 
+//Les différents noms des boutons
+#define BOUTON_PLAY 0
+#define BOUTON_QUIT 1
+#define BOUTON_REPRENDRE 2
+#define BOUTON_SCORE 3
+#define BOUTON_OPTIONS 4
+#define BOUTON_MODE_CLASSIQUE 5
+#define BOUTON_MODE_DEUX 6
+
 //Pour les valeurs d'un tableau
 #define NOT_SET -1
 #define TO_RESET -2
@@ -74,6 +83,7 @@ const int BPP = 16;
 const int FPS_MAX = 60;
 const int LIMITE_BASSE = 270;
 const int NB_MAX_CANARDS = 2;
+const int NB_BOUTONS_DIFFERENTS = 10;
 
 const unsigned int VITESSE_N = 35;
 const unsigned int VITESSE_M = 30;
@@ -197,9 +207,7 @@ struct Boutons
 {
     SDL_Surface *source;
     SDL_Rect lecture[2];
-    Bouton play;
-    Bouton quit;
-    Bouton reprendre;
+    Bouton bouton[NB_BOUTONS_DIFFERENTS];
 };
 
 struct SourisEvent
@@ -228,10 +236,11 @@ void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, 
 void showChien(SDL_Surface *ecran, Chien chien);
 void showPointsCanard(SDL_Surface *ecran, Canard canard, Sprite &points);
 void showMessage(SDL_Surface *ecran, Message &msg);
-void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons boutons, int &modeMenu, Message msgs[], int sx, int sy);
+void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMenu, Message msgs[], int sx, int sy);
 void showPoints(Message msgs[], SDL_Surface *ecran, Partie partie);
+void showBouton(SDL_Surface *ecran, Boutons &boutons, Message msgs[], int boutonNom, int sx, int sy);
 
-void menu(SDL_Surface *ecran, Sprites &sprites, Boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[], Partie &partie, Chien &chien);
+void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[], Partie &partie, Chien &chien);
 bool testHoverBouton(int, int, Bouton, SDL_Rect lecture);
 
 bool munitionsEpuisees(Partie partie);

@@ -29,9 +29,9 @@ void initMessage(Message msgs[])
 void initBouton(Boutons &boutons)
 {
     boutons.source = loadImageWithColorKey("sprites/boutons.bmp", 0, 0, 0);
-    boutons.play.contenu = "Jouer";
-    boutons.quit.contenu = "Quitter";
-    boutons.reprendre.contenu = "Reprendre";
+    boutons.bouton[BOUTON_PLAY].contenu = "Jouer";
+    boutons.bouton[BOUTON_QUIT].contenu = "Quitter";
+    boutons.bouton[BOUTON_REPRENDRE].contenu = "Reprendre";
     for(int i = 0 ; i < 2 ; i++)
     {
         boutons.lecture[i].x = i * 226;
