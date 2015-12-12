@@ -51,6 +51,8 @@ bool joueurMaladroit(Partie partie)
 
 void relancerPartie(Partie &partie, Sprites &sprites)
 {
+    partie.relancer = false;
+
     for(int i = 0 ; i < NB_MAX_CANARDS ; i++)
     {
         partie.canardRamasse[i] = false;

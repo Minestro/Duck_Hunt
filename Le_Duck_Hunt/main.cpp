@@ -7,7 +7,7 @@ int main(int argc, char* argv[])
     SDL_Init(SDL_INIT_VIDEO);
     TTF_Init();
 
-    Message msgs[5];
+    Message msgs[NOMBRE_MESSAGES];
     initMessage(msgs);
 
     SDL_Surface *ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF);
@@ -81,16 +81,13 @@ int main(int argc, char* argv[])
         }
         if (temps.currentTime >= chien.vitesseAnimationTime + chien.vitesseAnimation)
         {
-            switchSpriteChien(chien, partie);
+            switchSpriteChien(chien, partie, sprites);
             chien.vitesseAnimationTime = temps.currentTime;
         }
 
         if (temps.currentTime >= temps.timeFps + temps.fpsTime)
         {
-            genererRendu(ecran, sprites, sourisEvent, partie, chien);
-            msgs[MSG_SCORE].source = TTF_RenderText_Solid(msgs[MSG_SCORE].font, intToString(partie.score).c_str(), msgs[MSG_SCORE].textColor);
-            SDL_BlitSurface(msgs[MSG_SCORE].source, NULL, ecran, &msgs[MSG_SCORE].position);
-            SDL_FreeSurface(msgs[MSG_SCORE].source);
+            genererRendu(ecran, sprites, sourisEvent, partie, chien, msgs);
             SDL_Flip(ecran);
 
             temps.timeFps = temps.currentTime;
@@ -104,17 +101,18 @@ int main(int argc, char* argv[])
             }
         }
 
-        if(roundTerminee(sprites, partie))
-        {
-
-        }
-
-
-
         if (keystate[SDLK_ESCAPE])
         {
             modeMenu = 5;
         }
+
+        if(partie.relancer)
+        {
+            relancerPartie(partie, sprites);
+        }
+
+
+
         SDL_Delay(1);
     }
     while (modeJeu != 0);

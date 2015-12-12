@@ -1,8 +1,8 @@
 #include "main.h"
 
-void switchSpriteChien(Chien &chien, Partie &partie)
+void switchSpriteChien(Chien &chien, Partie &partie, Sprites sprites)
 {
-    controlesChien(chien, partie);
+    controlesChien(chien, partie, sprites);
     switch(chien.etat)
     {
         case CHIEN_MARCHE:

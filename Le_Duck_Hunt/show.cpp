@@ -53,7 +53,7 @@ void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons boutons, int &modeMen
     SDL_BlitSurface(sprites.viseur.source, NULL, ecran, &sprites.viseur.position);
 }
 
-void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien chien)
+void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien chien, Message msgs[])
 {
     SDL_BlitSurface(sprites.background.source, NULL, ecran, &sprites.background.position);
     sprites.viseur.position.x = sourisEvent.sx - (sprites.viseur.source->w / 2);
@@ -68,7 +68,7 @@ void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, 
     {
         if (((sprites.canard[i].etat == FREE_FALLING) || ((sprites.canard[i].etat == ALIVE) && (sprites.canard[i].echappe))) && partie.jeu)
         {
-            SDL_BlitSurface(sprites.canardSprite[sprites.canard[i].type-1], &sprites.canard[i].lecture, ecran, &sprites.canard[i].position);
+            SDL_BlitSurface(sprites.canardSprite[sprites.canard[i].type - 1], &sprites.canard[i].lecture, ecran, &sprites.canard[i].position);
         }
     }
     SDL_BlitSurface(sprites.background_blit.source, NULL, ecran, &sprites.background.position);
@@ -97,6 +97,13 @@ void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, 
         SDL_BlitSurface(sprites.hits.source, &sprites.hits.lecture, ecran, &sprites.hits.position);
     }
 
+    if(partie.afficherMsgTransition)
+    {
+        showMessage(ecran, msgs[MSG_0_TOUCHE]);
+    }
+
+    showPoints(msgs, ecran, partie);
+
     SDL_BlitSurface(sprites.viseur.source, NULL, ecran, &sprites.viseur.position);
 }
 
@@ -108,13 +115,20 @@ void showPointsCanard(SDL_Surface *ecran, Canard canard, Sprite &points)
     SDL_BlitSurface(points.source, &points.lecture, ecran, &points.position);
 }
 
-
-void showMessage(SDL_Surface *ecran, Message &msg, std::string contenuMessage)
+void showPoints(Message msgs[], SDL_Surface *ecran, Partie partie)
 {
-    static std::ostringstream message;
+    msgs[MSG_SCORE].source = TTF_RenderText_Solid(msgs[MSG_SCORE].font, intToString(partie.score).c_str(), msgs[MSG_SCORE].textColor);
+    SDL_BlitSurface(msgs[MSG_SCORE].source, NULL, ecran, &msgs[MSG_SCORE].position);
+    SDL_FreeSurface(msgs[MSG_SCORE].source);
+}
+
+
+void showMessage(SDL_Surface *ecran, Message &msg)
+{
+    std::ostringstream message;
     message.flush();
     message.str("");
-    message << contenuMessage;
+    message << msg.message;
     msg.message = message.str();
 
     std::string mot="";

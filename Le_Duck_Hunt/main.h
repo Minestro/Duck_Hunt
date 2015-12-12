@@ -59,6 +59,10 @@
 #define MSG_PAUSE 1
 #define MSG_NIVEAU 2
 #define MSG_BOUTONS 3
+#define MSG_0_TOUCHE 4
+#define MSG_1_TOUCHE 5
+#define MSG_2_TOUCHE 6
+#define NOMBRE_MESSAGES 7
 
 //Pour les valeurs d'un tableau
 #define NOT_SET -1
@@ -81,12 +85,13 @@ struct Message // Une structure pour afficher avec les fontes, par exemple les s
     int fontSize;   //taille de la police
     std::string message; // le contenu du texte
     SDL_Rect position; //position de l'affichage tu texte
-    TTF_Font *font;
-    SDL_Surface *source;
+    TTF_Font *font; // police
+    SDL_Surface *source; // image-texte à afficher
 };
 
 struct Partie
 {
+    bool afficherMsgTransition;
     bool relancer;
     bool jeu;
     bool chienEnChasse;
@@ -215,11 +220,12 @@ struct Time
 
 bool getEvents(SourisEvent &sourisEvent, bool);
 
-void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien chien);
+void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien chien, Message msgs[]);
 void showChien(SDL_Surface *ecran, Chien chien);
 void showPointsCanard(SDL_Surface *ecran, Canard canard, Sprite &points);
-void showMessage(SDL_Surface *ecran, Message &msg, std::string contenuMessage);
+void showMessage(SDL_Surface *ecran, Message &msg);
 void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons boutons, int &modeMenu, Message msgs[], int sx, int sy);
+void showPoints(Message msgs[], SDL_Surface *ecran, Partie partie);
 
 void menu(SDL_Surface *ecran, Sprites, Boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[], Partie partie);
 bool testHoverBouton(int, int, Bouton, SDL_Rect lecture);
@@ -254,10 +260,10 @@ bool testShot(SourisEvent sourisEvent, SDL_Rect lecture, SDL_Rect position);
 void touched(Canard &canard, Time temps);
 void canardSurvivant(Canard &canard);
 
-void controlesChien(Chien &chien, Partie &partie);
+void controlesChien(Chien &chien, Partie &partie, Sprites sprites);
 bool chienDevientHeureux(Chien chien, Partie partie);
 void detectionBordsChien(Chien &chien);
-void switchSpriteChien(Chien &chien, Partie &partie);
+void switchSpriteChien(Chien &chien, Partie &partie, Sprites sprites);
 
 int alea(int mini, int maxi);
 std::string intToString (int number);

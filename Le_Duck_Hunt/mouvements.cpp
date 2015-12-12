@@ -16,7 +16,7 @@ bool chienDevientHeureux(Chien chien, Partie partie)
 }
 
 
-void controlesChien(Chien &chien, Partie &partie)
+void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
 {
     switch (chien.etat)
     {
@@ -42,10 +42,12 @@ void controlesChien(Chien &chien, Partie &partie)
                 chien.tempsDepuisEtat = SDL_GetTicks();
             }
 
-            if(joueurMaladroit(partie))
+            if(joueurMaladroit(partie) && roundTerminee(sprites, partie))
             {
+                partie.afficherMsgTransition = true;
                 chien.etat = CHIEN_RIGOLE;
                 chien.image[CHIEN_RIGOLE].position = chien.image[CHIEN_MARCHE].position;
+                chien.tempsDepuisEtat = SDL_GetTicks();
             }
 
 
@@ -107,15 +109,32 @@ void controlesChien(Chien &chien, Partie &partie)
 
         case CHIEN_RIGOLE:
 
-
+            if(SDL_GetTicks() - chien.tempsDepuisEtat > 5000)
+            {
+                partie.afficherMsgTransition = false;
+                partie.relancer = true;
+                chien.etat = CHIEN_MARCHE;
+            }
 
             break;
 
         case CHIEN_CONTENT_SIMPLE:
 
+            if(SDL_GetTicks() - chien.tempsDepuisEtat > 5000)
+            {
+                partie.afficherMsgTransition = false;
+                partie.relancer = true;
+                chien.etat = CHIEN_MARCHE;
+            }
             break;
 
         case CHIEN_CONTENT_DOUBLE:
+            if(SDL_GetTicks() - chien.tempsDepuisEtat > 5000)
+            {
+                partie.afficherMsgTransition = false;
+                partie.relancer = true;
+                chien.etat = CHIEN_MARCHE;
+            }
 
             break;
 
@@ -196,7 +215,7 @@ void detectionBordsCanard(Canard &canard, Partie &partie, SDL_Surface *canardSpr
                     canard.position.x = LARGEUR - canard.lecture.w;
                     canard.vecteurPositionX *= -1;
                 }
-                if(canard.position.y <= 0 )
+                if(canard.position.y <= 0)
                 {
                     canard.position.y = 0;
                     canard.vecteurPositionY *= -1;
@@ -233,7 +252,11 @@ void changementDirection(Canard &canard)
     switch(canard.etat)
     {
         case ALIVE:
-            if(alea(0, 100) == 33)
+            if(alea(0, 100) == 33
+                && canard.position.x <= 0
+                && canard.position.x + canard.lecture.w >= LARGEUR
+                && canard.position.y <= 0
+                && canard.position.y + canard.lecture.h >= HAUTEUR - LIMITE_BASSE)
             {
                 do
                 {
