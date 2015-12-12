@@ -81,33 +81,31 @@ SDL_Surface *loadImageWithColorKey(std::string filename, int r, int g, int b)
 
 /*** fonction qui charge les images ***/
 
-void chargerImages(Sprites &sprites)
+void chargerImages(Sprites &sprites, DimensionsEcran ecran)
 {
-    SDL_Rect initializer;
-    initializer.x = initializer.y = 0;
-
     sprites.background_menu.source = load_image("sprites/menu.png");
     sprites.background.source = load_image("sprites/backGame.png");
-    sprites.background.position = initializer;
-
     sprites.background_blit.source = loadImageWithColorKey("sprites/backGameBlit.png", 0, 0, 0);
-    sprites.background_blit.position = initializer;
 
-    sprites.background_menu.source = load_image("sprites/menu.png");
-    sprites.background_menu.position = initializer;
+    sprites.background.position.x = (ecran.largeur - sprites.background.source->w) / 2;
+    sprites.background.position.y = (ecran.hauteur - sprites.background.source->h) / 2;
+    sprites.background_menu.position = sprites.background_blit.position = sprites.background.position;
 
     sprites.viseur.source = loadImageWithColorKey("sprites/viseur.png", 0, 0, 0);
+    // sa position change tout le temps !
+
     sprites.hits.source = loadImageWithColorKey("sprites/hit.png", 0, 0, 0);
+    sprites.hits.position.x = sprites.background.position.x + 170;
+    sprites.hits.position.y = sprites.background.position.y + 670;
     sprites.hits.lecture.x = 5;
     sprites.hits.lecture.y = 5;
     sprites.hits.lecture.w = 27;
     sprites.hits.lecture.h = 27;
-    sprites.hits.position.y = 665;
 
     sprites.shots.source = load_image("sprites/shot.png");
-    sprites.shots.lecture = initializer;
-    sprites.shots.position.x = 65;
-    sprites.shots.position.y = 658;
+    sprites.shots.lecture.x = sprites.shots.lecture.y = 0;
+    sprites.shots.position.x = sprites.background.position.x + 65;
+    sprites.shots.position.y = sprites.background.position.y + 658;
     sprites.shots.lecture.w = 75;
     sprites.shots.lecture.h = 50;
 

@@ -1,6 +1,6 @@
 #include "main.h"
 
-void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[], Partie &partie, Chien &chien)
+void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[], Partie &partie, Chien &chien, DimensionsEcran dim)
 {
     bool sortir = false;
     bool clicGaucheTemp;
@@ -24,10 +24,10 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
             sortir = true;
             break;
         case 1 :
-            boutons.bouton[BOUTON_PLAY].position.x = (LARGEUR/2)-(boutons.lecture[0].w/2);
+            boutons.bouton[BOUTON_PLAY].position.x = (dim.largeur - boutons.lecture[0].w) /2;
             boutons.bouton[BOUTON_PLAY].position.y = 200;
 
-            boutons.bouton[BOUTON_QUIT].position.x = (LARGEUR/2) - (boutons.lecture[0].w/2);
+            boutons.bouton[BOUTON_QUIT].position.x = (dim.largeur -boutons.lecture[0].w ) /2;
             boutons.bouton[BOUTON_QUIT].position.y = 400;
             if (time.currentTime >= time.timeFps + time.fpsTime)
             {
@@ -45,24 +45,24 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
             {
                 modeJeu = 1;
                 modeMenu = 0;
-                initChien(chien);
+                initChien(chien, sprites);
 
                 sprites.canardActifs = 2;
 
                 for (int i = 0 ; i < sprites.canardActifs ; i++)
                 {
                     sprites.canard[i].type = alea(1, 3);
-                    initCanard(sprites.canard[i]);
+                    initCanard(sprites.canard[i], sprites, dim);
                 }
                 initPartie(partie, sprites.canardActifs);
                 initTableau(partie.tableauChasse, sprites);
             }
             break;
         case 5 :
-            boutons.bouton[BOUTON_REPRENDRE].position.x = (LARGEUR/2) - (boutons.lecture[0].w/2);
+            boutons.bouton[BOUTON_REPRENDRE].position.x = (dim.largeur - boutons.lecture[0].w) /2;
             boutons.bouton[BOUTON_REPRENDRE].position.y = 200;
 
-            boutons.bouton[BOUTON_QUIT].position.x = (LARGEUR/2) - (boutons.lecture[0].w/2);
+            boutons.bouton[BOUTON_QUIT].position.x = (dim.largeur - boutons.lecture[0].w) /2;
             boutons.bouton[BOUTON_QUIT].position.y = 400;
 
             if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_QUIT], boutons.lecture[0]))&&sourisEvent.clicGauche)

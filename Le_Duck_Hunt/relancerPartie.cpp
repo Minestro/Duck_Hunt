@@ -48,7 +48,7 @@ bool joueurMaladroit(Partie partie)
     return partie.shots == 0 && partie.canardsEnVie == NB_MAX_CANARDS;
 }
 
-void relancerPartie(Partie &partie, Sprites &sprites)
+void relancerPartie(Partie &partie, Sprites &sprites, DimensionsEcran dim)
 {
     partie.relancer = false;
 
@@ -65,7 +65,7 @@ void relancerPartie(Partie &partie, Sprites &sprites)
         partie.canardRamasse[i] = false;
         partie.xChute[i] = NOT_SET;
         sprites.canard[i].type = alea(1, 3);
-        initCanard(sprites.canard[i]);
+        initCanard(sprites.canard[i], sprites, dim);
     }
 
     initTableau(partie.tableauChasse, sprites);

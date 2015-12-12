@@ -1,5 +1,13 @@
 #include "main.h"
 
+void chercherDimensions(DimensionsEcran &dimensions)
+{
+    const SDL_VideoInfo informations = *SDL_GetVideoInfo();
+    dimensions.largeur = informations.current_w;
+    dimensions.hauteur = informations.current_h;
+}
+
+
 void initTableau(TableauChasse &tableau, Sprites sprites)
 {
     for(int i = 0 ; i < sprites.canardActifs ; i++)
@@ -8,16 +16,15 @@ void initTableau(TableauChasse &tableau, Sprites sprites)
     }
 }
 
-void initMessage(Message msgs[])
+void initMessage(Message msgs[], Sprites sprites, DimensionsEcran dim)
 {
-    msgs[MSG_SCORE].position.x = 580;
-    msgs[MSG_SCORE].position.y = 667;
-    msgs[MSG_PAUSE].position.y = 100;
+    msgs[MSG_SCORE].position.x = sprites.background.position.x + 580;
+    msgs[MSG_SCORE].position.y = sprites.background.position.y + 667;
 
     msgs[MSG_SCORE].fontSize = 35;
     msgs[MSG_BOUTONS].fontSize = 40;
+
     msgs[MSG_PAUSE].fontSize = 40;
-    msgs[MSG_0_TOUCHE].fontSize = 50;
 
     for (int i = 0 ; i < NOMBRE_MESSAGES; i++)
     {
@@ -27,10 +34,9 @@ void initMessage(Message msgs[])
         msgs[i].font = TTF_OpenFont("font/duck_hunt.ttf", msgs[MSG_SCORE].fontSize);
 
     }
-
-    msgs[MSG_0_TOUCHE].message = "AUCUN_CANARD_MORT";
-    msgs[MSG_0_TOUCHE].position.x = LARGEUR / 2;
-    msgs[MSG_0_TOUCHE].position.y = 20;
+    msgs[MSG_PAUSE].source = TTF_RenderText_Solid(msgs[MSG_PAUSE].font, "Jeu en pause", msgs[MSG_PAUSE].textColor);
+    msgs[MSG_PAUSE].position.x = (dim.largeur - msgs[MSG_PAUSE].source->w) / 2;
+    msgs[MSG_PAUSE].position.y = sprites.background.position.y + 300;
 }
 
 void initBouton(Boutons &boutons)
@@ -56,7 +62,8 @@ void initSourisEvent(SourisEvent &sourisEvent)
 
 void initTime(Time &time)
 {
-    time.fpsTime = (1/(FPS_MAX*1.0)*1000); // Calcule en ms le temps entre chaque actualisation d'image à partir de la constante FPS_LIMIT.
+    time.fpsTime = (1 / (FPS_MAX * 1.0) * 1000); // Calcule en ms le temps entre chaque actualisation
+    // d'image à partir de la constante FPS_LIMIT.
     time.timeFps = 0;
     time.currentTime = SDL_GetTicks();
 }
@@ -85,13 +92,15 @@ void initPartie(Partie &partie, int nbCanards)
     }
 }
 
-void initChien(Chien &chien)
+void initChien(Chien &chien, Sprites sprites)
 {
+    chien.image[CHIEN_MARCHE].position.y = sprites.background.position.y + Y_INTRO_CHIEN;
+    chien.image[CHIEN_MARCHE].position.x = sprites.background.position.x;
+
     chien.devantHerbe = true;
     chien.vecteurPositionX = 10;
     chien.vecteurPositionY = 0;
     chien.cycleSprite = 0;
-    chien.vitesseAnimation = 100; // Plus cette valeur est élevée, plus l'animation est lente...
     chien.vitesseAnimationTime = 0;
 
     chien.etat = CHIEN_MARCHE;
@@ -101,8 +110,6 @@ void initChien(Chien &chien)
     chien.image[CHIEN_MARCHE].lecture.w = 120;
     chien.image[CHIEN_MARCHE].lecture.x = 0;
     chien.image[CHIEN_MARCHE].lecture.y = 87;
-    chien.image[CHIEN_MARCHE].position.x = 0;
-    chien.image[CHIEN_MARCHE].position.y = Y_INTRO_CHIEN;
 
     chien.image[CHIEN_CONTENT].source = loadImageWithColorKey("sprites/chienContent.png", 0, 255, 0);
     chien.image[CHIEN_CONTENT].lecture.h = 100;
@@ -142,7 +149,7 @@ void initChien(Chien &chien)
     chien.image[CHIEN_CONTENT_DOUBLE].lecture.y = 0;
 }
 
-void initCanard(Canard &cn)
+void initCanard(Canard &cn, Sprites sprites, DimensionsEcran dim)
 {
     cn.etat = ALIVE; // On fait naître le canard.
     cn.echappe = false;
@@ -160,15 +167,15 @@ void initCanard(Canard &cn)
     }
     cn.nbFrames = 3;
     cn.cycleSprite = 0;
-    cn.vitesseAnimation = 40; // Plus cette valeur est élevée, plus l'animation est lente...
+    cn.vitesseAnimation = 15; // Plus cette valeur est élevée, plus l'animation est lente...
     cn.vitesseTime = cn.vitesseAnimationTime = 0;
 
     cn.lecture.x = 0;
     cn.lecture.y = 0;
     cn.lecture.w = 70;
     cn.lecture.h = 70;
-    cn.position.x = alea(1,LARGEUR-cn.lecture.w);
-    cn.position.y = alea(1,HAUTEUR-LIMITE_BASSE - cn.lecture.h);
+    cn.position.x = alea(sprites.background.position.x + 1, dim.largeur - cn.lecture.w);
+    cn.position.y = alea(sprites.background.position.y + 1, dim.hauteur -LIMITE_BASSE - cn.lecture.h);
     do
     {
         cn.vecteurPositionX = alea(-10, 10);

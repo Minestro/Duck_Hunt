@@ -80,14 +80,20 @@
 const int HAUTEUR = 761;
 const int LARGEUR = 750;
 const int BPP = 16;
-const int FPS_MAX = 60;
+const int FPS_MAX = 80;
 const int LIMITE_BASSE = 270;
 const int NB_MAX_CANARDS = 2;
 const int NB_BOUTONS_DIFFERENTS = 10;
 
-const unsigned int VITESSE_N = 35;
-const unsigned int VITESSE_M = 30;
-const unsigned int VITESSE_V = 25;
+const unsigned int VITESSE_N = 15;
+const unsigned int VITESSE_M = 10;
+const unsigned int VITESSE_V = 5;
+
+struct DimensionsEcran
+{
+    int largeur;
+    int hauteur;
+};
 
 struct TableauChasse
 {
@@ -243,7 +249,7 @@ void showBouton(SDL_Surface *ecran, Boutons &boutons, Message msgs[], int bouton
 
 void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons,
            int &modeMenu, int &modeJeu, SourisEvent &sourisEvent,
-            Time &time, Message msgs[], Partie &partie, Chien &chien);
+            Time &time, Message msgs[], Partie &partie, Chien &chien, DimensionsEcran dim);
 bool testHoverBouton(int, int, Bouton, SDL_Rect lecture);
 
 bool munitionsEpuisees(Partie partie);
@@ -252,23 +258,24 @@ bool roundTerminee(Sprites sprites, Partie partie);
 bool canardsMortsRamasses(Partie partie);
 bool joueurMaladroit(Partie partie);
 
-void relancerPartie(Partie &partie, Sprites &sprites);
+void chercherDimensions(DimensionsEcran &dimensions);
 void initPartie(Partie &partie, int nbCanards);
 void initBouton(Boutons &boutons);
 void initSourisEvent(SourisEvent &SourisEvent);
 void initTime(Time &time);
-void initCanard(Canard &cn);
-void initChien(Chien &chien);
-void initMessage(Message msgs[]);
+void initCanard(Canard &cn, Sprites sprites, DimensionsEcran dim);
+void initChien(Chien &chien, Sprites sprites);
+void initMessage(Message msgs[], Sprites sprites, DimensionsEcran dim);
 void initTableau(TableauChasse &tableau, Sprites sprites);
+void relancerPartie(Partie &partie, Sprites &sprites, DimensionsEcran dim);
 
 SDL_Surface *loadImage(std::string);
-SDL_Surface *loadImageWithColorKey(std::string, int, int, int);
-void chargerImages(Sprites &sprites);
+SDL_Surface *loadImageWithColorKey(std::string, int r, int g, int b);
+void chargerImages(Sprites &sprites, DimensionsEcran ecran);
 
 void changementDirection(Canard &canard);
 void mouvementsCanard(Canard &canard);
-void detectionBordsCanard(Canard &canard, Partie &partie);
+void detectionBordsCanard(Canard &canard, Partie &partie, DimensionsEcran dim, Sprites sprites);
 void switchSpriteCanard(Canard &canard);
 void sauvegarderPositionX(Partie &partie, Canard canard);
 void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, Time temps, int &modeJeu);
@@ -276,10 +283,10 @@ bool testShot(SourisEvent sourisEvent, SDL_Rect lecture, SDL_Rect position);
 void touched(Canard &canard, Time temps);
 void canardSurvivant(Canard &canard);
 
-void controlesChien(Chien &chien, Partie &partie, Sprites sprites);
-bool chienDevientHeureux(Chien chien, Partie partie);
-void detectionBordsChien(Chien &chien);
-void switchSpriteChien(Chien &chien, Partie &partie, Sprites sprites);
+void controlesChien(Chien &chien, Partie &partie, Sprites sprites, DimensionsEcran dim);
+bool chienDevientHeureux(Chien chien, Partie partie, Sprites sprites, DimensionsEcran dim);
+void detectionBordsChien(Chien &chien, DimensionsEcran dim);
+void switchSpriteChien(Chien &chien, Partie &partie, Sprites sprites, DimensionsEcran dim);
 
 int alea(int mini, int maxi);
 std::string intToString (int number);
