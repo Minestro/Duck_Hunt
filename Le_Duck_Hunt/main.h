@@ -268,7 +268,7 @@ void chargerImages(Sprites &sprites);
 
 void changementDirection(Canard &canard);
 void mouvementsCanard(Canard &canard);
-void detectionBordsCanard(Canard &canard, Partie &partie, SDL_Surface *canardSprite[]);
+void detectionBordsCanard(Canard &canard, Partie &partie);
 void switchSpriteCanard(Canard &canard);
 void sauvegarderPositionX(Partie &partie, Canard canard);
 void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, Time temps, int &modeJeu);

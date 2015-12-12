@@ -54,7 +54,7 @@ int main(int argc, char* argv[])
             if ((temps.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse))
             {
                 mouvementsCanard(sprites.canard[i]);
-                detectionBordsCanard(sprites.canard[i], partie, sprites.canardSprite);
+                detectionBordsCanard(sprites.canard[i], partie);
                 changementDirection(sprites.canard[i]);
                 if(sprites.canard[i].etat == TOUCHED)
                 {
