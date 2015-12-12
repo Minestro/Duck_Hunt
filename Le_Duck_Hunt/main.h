@@ -91,8 +91,9 @@ const unsigned int VITESSE_V = 25;
 
 struct TableauChasse
 {
-    int typeCanard[NB_MAX_CANARDS]; // pour la valeur des cases, cf DEFINE des types de canards
-    bool recupere[NB_MAX_CANARDS]; // si le chien l'a récupéré
+    int typeCanard[NB_MAX_CANARDS];
+    // si le canard n'est pas récupéré alors la case vaut NOT_SET,
+    // sinon, il vaut la valeur de son type
 };
 
 struct Message // Une structure pour afficher avec les fontes, par exemple les scores, ou le niveau !

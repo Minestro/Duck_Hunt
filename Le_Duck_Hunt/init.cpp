@@ -5,7 +5,6 @@ void initTableau(TableauChasse &tableau, Sprites sprites)
     for(int i = 0 ; i < sprites.canardActifs ; i++)
     {
         tableau.typeCanard[i] = NOT_SET;
-        tableau.recupere[i] = false;
     }
 }
 

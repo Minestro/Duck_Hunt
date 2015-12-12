@@ -62,7 +62,8 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
                 partie.afficherMsgTransition = true;
                 chien.etat = CHIEN_CONTENT_DOUBLE;
                 chien.image[CHIEN_CONTENT_DOUBLE].position = chien.image[CHIEN_MARCHE].position;
-                chien.image[CHIEN_CONTENT_DOUBLE].lecture.x = 0;
+                chien.image[CHIEN_CONTENT_DOUBLE].lecture.y = (partie.tableauChasse.typeCanard[0] - 1) * 80;
+                chien.image[CHIEN_CONTENT_DOUBLE].lecture.x = (partie.tableauChasse.typeCanard[1] - 1) * 112;
                 chien.tempsDepuisEtat = SDL_GetTicks();
             }
 
@@ -259,8 +260,7 @@ void detectionBordsCanard(Canard &canard, Partie &partie, SDL_Surface *canardSpr
             while(continuer && i < 2)
             {
                 continuer = partie.tableauChasse.typeCanard[i] != NOT_SET;
-                partie.tableauChasse.recupere[i] = true;
-                if(partie.tableauChasse.recupere[i])
+                if(!continuer)
                 {
                     partie.tableauChasse.typeCanard[i] = canard.type;
                 }
