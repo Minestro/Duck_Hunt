@@ -122,11 +122,13 @@ void initChien(Chien &chien)
     chien.image[CHIEN_RIGOLE].lecture.w = 58;
     chien.image[CHIEN_RIGOLE].lecture.x = 0;
     chien.image[CHIEN_RIGOLE].lecture.y = 0;
-    chien.image[CHIEN_RIGOLE].position.x = LARGEUR / 2;
-    chien.image[CHIEN_RIGOLE].position.y = HAUTEUR / 2;
 
 
     chien.image[CHIEN_CONTENT_SIMPLE].source = loadImageWithColorKey("sprites/chienContentSimple.png", 228, 255, 0);
+    chien.image[CHIEN_CONTENT_SIMPLE].lecture.h = 80;
+    chien.image[CHIEN_CONTENT_SIMPLE].lecture.w = 90;
+    chien.image[CHIEN_CONTENT_SIMPLE].lecture.x = 0;
+    chien.image[CHIEN_CONTENT_SIMPLE].lecture.y = 0;
 
 
     chien.image[CHIEN_CONTENT_DOUBLE].source = loadImageWithColorKey("sprites/chienContentDouble.png", 228, 255, 0);

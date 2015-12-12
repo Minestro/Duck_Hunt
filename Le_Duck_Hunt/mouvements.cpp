@@ -109,7 +109,7 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
 
         case CHIEN_RIGOLE:
 
-            if(SDL_GetTicks() - chien.tempsDepuisEtat > 5000)
+            if(SDL_GetTicks() - chien.tempsDepuisEtat > 2500)
             {
                 partie.afficherMsgTransition = false;
                 partie.relancer = true;
@@ -120,7 +120,7 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
 
         case CHIEN_CONTENT_SIMPLE:
 
-            if(SDL_GetTicks() - chien.tempsDepuisEtat > 5000)
+            if(SDL_GetTicks() - chien.tempsDepuisEtat > 2500)
             {
                 partie.afficherMsgTransition = false;
                 partie.relancer = true;
@@ -129,7 +129,7 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
             break;
 
         case CHIEN_CONTENT_DOUBLE:
-            if(SDL_GetTicks() - chien.tempsDepuisEtat > 5000)
+            if(SDL_GetTicks() - chien.tempsDepuisEtat > 2500)
             {
                 partie.afficherMsgTransition = false;
                 partie.relancer = true;
@@ -253,10 +253,10 @@ void changementDirection(Canard &canard)
     {
         case ALIVE:
             if(alea(0, 100) == 33
-                && canard.position.x <= 0
-                && canard.position.x + canard.lecture.w >= LARGEUR
-                && canard.position.y <= 0
-                && canard.position.y + canard.lecture.h >= HAUTEUR - LIMITE_BASSE)
+                && canard.position.x > 0
+                && canard.position.x + canard.lecture.w < LARGEUR
+                && canard.position.y > 0
+                && canard.position.y + canard.lecture.h < HAUTEUR - LIMITE_BASSE)
             {
                 do
                 {
