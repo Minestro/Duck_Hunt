@@ -7,10 +7,10 @@ int main(int argc, char* argv[])
     SDL_Init(SDL_INIT_VIDEO);
     TTF_Init();
 
-    DimensionsEcran dim;
-    chercherDimensions(dim);
+    Message msgs[NOMBRE_MESSAGES];
+    initMessage(msgs);
 
-    SDL_Surface *ecran = SDL_SetVideoMode(dim.largeur, dim.hauteur, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN);
+    SDL_Surface *ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF);
 
     /* Titre */
     SDL_WM_SetCaption("Duck Hunt", NULL);
@@ -30,11 +30,7 @@ int main(int argc, char* argv[])
     Sprites sprites;
     Chien chien;
 
-    chargerImages(sprites, dim);
-
-    Message msgs[NOMBRE_MESSAGES];
-    initMessage(msgs, sprites, dim);
-
+    chargerImages(sprites);
 
     Boutons boutons;
     initBouton(boutons);
@@ -48,7 +44,7 @@ int main(int argc, char* argv[])
     {
         if (modeMenu != 0)
         {
-            menu(ecran, sprites, boutons, modeMenu, modeJeu, sourisEvent, temps, msgs, partie, chien, dim);
+            menu(ecran, sprites, boutons, modeMenu, modeJeu, sourisEvent, temps, msgs, partie, chien);
         }
         temps.currentTime = SDL_GetTicks();
         partie.alreadyShot = partie.alreadyGetEvent = partie.alreadyClic = false;
@@ -58,7 +54,7 @@ int main(int argc, char* argv[])
             if ((temps.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse))
             {
                 mouvementsCanard(sprites.canard[i]);
-                detectionBordsCanard(sprites.canard[i], partie, dim, sprites);
+                detectionBordsCanard(sprites.canard[i], partie);
                 changementDirection(sprites.canard[i]);
                 if(sprites.canard[i].etat == TOUCHED)
                 {
@@ -74,13 +70,13 @@ int main(int argc, char* argv[])
         }
         if (temps.currentTime >= chien.vitesseAnimationTime + chien.vitesseAnimation)
         {
-            switchSpriteChien(chien, partie, sprites, dim);
+            switchSpriteChien(chien, partie, sprites);
             chien.vitesseAnimationTime = temps.currentTime;
         }
 
         if (temps.currentTime >= temps.timeFps + temps.fpsTime)
         {
-            genererRendu(ecran, sprites, sourisEvent, partie, chien, msgs, dim);
+            genererRendu(ecran, sprites, sourisEvent, partie, chien, msgs);
             SDL_Flip(ecran);
 
             temps.timeFps = temps.currentTime;
@@ -99,14 +95,9 @@ int main(int argc, char* argv[])
             modeMenu = 5;
         }
 
-        if (keystate[SDLK_SPACE])
-        {
-            exit(0);
-        }
-
         if(partie.relancer)
         {
-            relancerPartie(partie, sprites, dim);
+            relancerPartie(partie, sprites);
         }
 
 
