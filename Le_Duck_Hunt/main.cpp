@@ -80,7 +80,7 @@ int main(int argc, char* argv[])
 
         if (temps.currentTime >= temps.timeFps + temps.fpsTime)
         {
-            genererRendu(ecran, sprites, sourisEvent, partie, chien, msgs);
+            genererRendu(ecran, sprites, sourisEvent, partie, chien, msgs, dim);
             SDL_Flip(ecran);
 
             temps.timeFps = temps.currentTime;

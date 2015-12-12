@@ -83,13 +83,20 @@ SDL_Surface *loadImageWithColorKey(std::string filename, int r, int g, int b)
 
 void chargerImages(Sprites &sprites, DimensionsEcran ecran)
 {
+    sprites.extension.herbe.source = loadImageWithColorKey("sprites/deLherbe.png", 255, 0, 0);
+
     sprites.background_menu.source = load_image("sprites/menu.png");
     sprites.background.source = load_image("sprites/backGame.png");
     sprites.background_blit.source = loadImageWithColorKey("sprites/backGameBlit.png", 0, 0, 0);
 
     sprites.background.position.x = (ecran.largeur - sprites.background.source->w) / 2;
     sprites.background.position.y = (ecran.hauteur - sprites.background.source->h) / 2;
-    sprites.background_menu.position = sprites.background_blit.position = sprites.background.position;
+    sprites.extension.herbe.position= sprites.background_menu.position = sprites.background_blit.position = sprites.background.position;
+
+    sprites.extension.positions.aGauche.y = sprites.extension.positions.aDroite.y = sprites.background.position.y;
+
+    sprites.extension.positions.aGauche.x = sprites.extension.herbe.position.x - sprites.extension.herbe.source->w;
+    sprites.extension.positions.aDroite.x = sprites.extension.herbe.position.x + sprites.extension.herbe.source->w;
 
     sprites.viseur.source = loadImageWithColorKey("sprites/viseur.png", 0, 0, 0);
     // sa position change tout le temps !

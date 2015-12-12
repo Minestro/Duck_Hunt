@@ -26,10 +26,6 @@
 #define BLUISH_PURPLE 3 // Violet bleuâtre, un avion de chasse : 1500 points.
 
 // Etats possibles
-
-/*#define ESCAPING 4 // IL s'enfuit !*/
-// J'ai pensé à rajouté un attribut de type booléen dans la structure Canard plutôt :p
-
 #define ALIVE 3 // En vie : le canard vole.
 #define TOUCHED 2 // Touché : il s'arrête de voler pour dire aurevoir à la vie.
 #define FREE_FALLING 1 // En chute libre : il tombe verticalement.
@@ -88,6 +84,7 @@ const int NB_BOUTONS_DIFFERENTS = 10;
 const unsigned int VITESSE_N = 15;
 const unsigned int VITESSE_M = 10;
 const unsigned int VITESSE_V = 5;
+
 
 struct DimensionsEcran
 {
@@ -181,11 +178,25 @@ struct Chien
     bool devantHerbe; // si on le blit avant ou après les herbes hautes
 };
 
+struct PosExtension
+{
+    SDL_Rect aGauche;
+    SDL_Rect aDroite;
+};
+
+struct ExtensionHerbe
+{
+    Sprite herbe;
+    PosExtension positions;
+};
 struct Sprites // Rassemble toutes les images et les feuilles de sprite
 {
+    Sprite deLHerbe;
     Sprite background;
     Sprite background_blit;
     Sprite background_menu;
+
+    ExtensionHerbe extension;
 
     int canardActifs;
     Canard canard[NB_MAX_CANARDS];
@@ -195,7 +206,11 @@ struct Sprites // Rassemble toutes les images et les feuilles de sprite
     Sprite viseur;
     Sprite points;
     SDL_Surface *canardSprite[3];
+
+    SDL_Rect terre;
 };
+
+
 
 struct Police
 {
@@ -239,7 +254,7 @@ struct Time
 
 bool getEvents(SourisEvent &sourisEvent, bool);
 
-void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien chien, Message msgs[]);
+void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien chien, Message msgs[], DimensionsEcran dim);
 void showChien(SDL_Surface *ecran, Chien chien);
 void showPointsCanard(SDL_Surface *ecran, Canard canard, Sprite &points);
 void showMessage(SDL_Surface *ecran, Message &msg);
@@ -269,7 +284,7 @@ void initMessage(Message msgs[], Sprites sprites, DimensionsEcran dim);
 void initTableau(TableauChasse &tableau, Sprites sprites);
 void relancerPartie(Partie &partie, Sprites &sprites, DimensionsEcran dim);
 
-SDL_Surface *loadImage(std::string);
+SDL_Surface *load_image(std::string);
 SDL_Surface *loadImageWithColorKey(std::string, int r, int g, int b);
 void chargerImages(Sprites &sprites, DimensionsEcran ecran);
 

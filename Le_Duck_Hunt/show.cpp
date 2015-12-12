@@ -38,9 +38,16 @@ void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMe
     SDL_BlitSurface(sprites.viseur.source, NULL, ecran, &sprites.viseur.position);
 }
 
-void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien chien, Message msgs[])
+void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien chien, Message msgs[], DimensionsEcran dim)
 {
-    SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 0, 0, 0));
+    static SDL_Rect terre;
+    terre.h = dim.hauteur -  sprites.background.position.y - sprites.background.source->h + 180;
+    terre.w = dim.largeur;
+    terre.x = 0;
+    terre.y = sprites.background.position.y + sprites.background.source->h - 180;
+
+    SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 0, 193, 255));
+    SDL_FillRect(ecran, &terre, SDL_MapRGB(ecran->format, 142, 114, 0));
     SDL_BlitSurface(sprites.background.source, NULL, ecran, &sprites.background.position);
     sprites.viseur.position.x = sourisEvent.sx - (sprites.viseur.source->w / 2);
     sprites.viseur.position.y = sourisEvent.sy - (sprites.viseur.source->h / 2);
@@ -58,6 +65,9 @@ void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, 
         }
     }
     SDL_BlitSurface(sprites.background_blit.source, NULL, ecran, &sprites.background.position);
+    SDL_BlitSurface(sprites.extension.herbe.source, NULL, ecran, &sprites.extension.positions.aGauche);
+    SDL_BlitSurface(sprites.extension.herbe.source, NULL, ecran, &sprites.extension.positions.aDroite);
+
     if(chien.devantHerbe)
     {
         showChien(ecran, chien);

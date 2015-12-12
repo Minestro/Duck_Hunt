@@ -1,5 +1,6 @@
 #include "main.h"
 
+
 void chercherDimensions(DimensionsEcran &dimensions)
 {
     const SDL_VideoInfo informations = *SDL_GetVideoInfo();
