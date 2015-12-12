@@ -236,11 +236,11 @@ void detectionBordsCanard(Canard &canard, Partie &partie, SDL_Surface *canardSpr
                     canard.position.y = 0;
                     canard.vecteurPositionY *= -1;
                 }
-                else if (canard.position.y + canard.lecture.h >= HAUTEUR - LIMITE_BASSE)
-                {
-                    canard.position.y = HAUTEUR-LIMITE_BASSE-canard.lecture.h;
-                    canard.vecteurPositionY *= -1;
-                }
+            }
+            if (canard.position.y + canard.lecture.h >= HAUTEUR - LIMITE_BASSE)
+            {
+                canard.position.y = HAUTEUR-LIMITE_BASSE-canard.lecture.h;
+                canard.vecteurPositionY *= -1;
             }
             break;
         case FREE_FALLING:
