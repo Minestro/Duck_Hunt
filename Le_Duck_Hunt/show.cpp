@@ -99,7 +99,7 @@ void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, 
 
     if(partie.afficherMsgTransition)
     {
-        showMessage(ecran, msgs[MSG_0_TOUCHE]);
+    //    showMessage(...);
     }
 
     showPoints(msgs, ecran, partie);

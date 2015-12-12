@@ -49,6 +49,22 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
                 chien.image[CHIEN_RIGOLE].position = chien.image[CHIEN_MARCHE].position;
                 chien.tempsDepuisEtat = SDL_GetTicks();
             }
+            else if(roundTerminee(sprites, partie) && partie.canardsEnVie == 1)
+            {
+                partie.afficherMsgTransition = true;
+                chien.etat = CHIEN_CONTENT_SIMPLE;
+                chien.image[CHIEN_CONTENT_SIMPLE].position = chien.image[CHIEN_MARCHE].position;
+                chien.image[CHIEN_CONTENT_SIMPLE].lecture.x = 0;
+                chien.tempsDepuisEtat = SDL_GetTicks();
+            }
+            else if(roundTerminee(sprites, partie) && partie.canardsEnVie == 0)
+            {
+                partie.afficherMsgTransition = true;
+                chien.etat = CHIEN_CONTENT_DOUBLE;
+                chien.image[CHIEN_CONTENT_DOUBLE].position = chien.image[CHIEN_MARCHE].position;
+                chien.image[CHIEN_CONTENT_DOUBLE].lecture.x = 0;
+                chien.tempsDepuisEtat = SDL_GetTicks();
+            }
 
 
             detectionBordsChien(chien);
