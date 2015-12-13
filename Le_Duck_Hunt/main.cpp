@@ -27,10 +27,13 @@ int main(int argc, char* argv[])
     int modeMenu = 1;   // Détermine la page du menu à afficher.
 
     Partie partie;
+    partie.score = 0;
+    partie.jeu = false;
+    partie.niveau = 0;
     Sprites sprites;
     Chien chien;
 
-    chargerImages(sprites);
+    chargerImages(sprites, chien);
 
     Boutons boutons;
     initBouton(boutons);
@@ -89,12 +92,6 @@ int main(int argc, char* argv[])
                 canardSurvivant(sprites.canard[i]);
             }
         }
-
-        if (keystate[SDLK_ESCAPE])
-        {
-            modeMenu = 5;
-        }
-
         if(partie.relancer)
         {
             relancerPartie(partie, sprites);
@@ -103,16 +100,18 @@ int main(int argc, char* argv[])
         if(partie.round == 5)
         {
             partie.round = 0;
-            sprites.hits.lecture.x = 5;
-            sprites.hits.lecture.y = 5;
-            sprites.hits.lecture.w = 27;
-            sprites.hits.lecture.h = 27;
-            for(int i = 0 ; i < 10 ; i++)
+            partie.niveau ++;
+            initPartie(partie, sprites.canardActifs);
+            for (int i=0; i<sprites.canardActifs; i++)
             {
-                partie.hit[i] = HIT_EMPTY;
+                initCanard(sprites.canard[i], partie);
             }
+            //modeMenu = 6;
         }
-
+        if (keystate[SDLK_ESCAPE])
+        {
+            modeMenu = 5;
+        }
         SDL_Delay(1);
     }
     while (modeJeu != 0);

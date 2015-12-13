@@ -81,7 +81,7 @@ SDL_Surface *loadImageWithColorKey(std::string filename, int r, int g, int b)
 
 /*** fonction qui charge les images ***/
 
-void chargerImages(Sprites &sprites)
+void chargerImages(Sprites &sprites, Chien &chien)
 {
     SDL_Rect initializer;
     initializer.x = initializer.y = 0;
@@ -112,7 +112,7 @@ void chargerImages(Sprites &sprites)
     sprites.shots.lecture.h = 50;
 
     sprites.canardSprite[DARK] = loadImageWithColorKey("sprites/canardNoir.png", 228, 255, 0);
-    sprites.canardSprite[CHESNUT] = loadImageWithColorKey("sprites/canardMarron.png", 228, 255, 0);
+    sprites.canardSprite[CHESNUT] = loadImageWithColorKey("sprites/canardNoir.png", 228, 255, 0);
     sprites.canardSprite[BLOOD] = loadImageWithColorKey("sprites/canardRouge.png", 228, 255, 0);
     sprites.canardSprite[BLUISH_PURPLE] = loadImageWithColorKey("sprites/canardViolet.png", 228, 255, 0);
 
@@ -120,6 +120,50 @@ void chargerImages(Sprites &sprites)
     sprites.points.lecture.h = 17;
     sprites.points.lecture.w = 32;
     sprites.points.lecture.x = 0;
+
+    chien.image[CHIEN_MARCHE].source = loadImageWithColorKey("sprites/chienMarche.png", 0, 255, 0);
+    chien.image[CHIEN_MARCHE].lecture.h = 87;
+    chien.image[CHIEN_MARCHE].lecture.w = 120;
+    chien.image[CHIEN_MARCHE].lecture.x = 0;
+    chien.image[CHIEN_MARCHE].lecture.y = 87;
+
+    chien.image[CHIEN_CONTENT].source = loadImageWithColorKey("sprites/chienContent.png", 0, 255, 0);
+    chien.image[CHIEN_CONTENT].lecture.h = 100;
+    chien.image[CHIEN_CONTENT].lecture.w = 113;
+    chien.image[CHIEN_CONTENT].lecture.x = 0;
+    chien.image[CHIEN_CONTENT].lecture.y = 96;
+
+    chien.image[CHIEN_SAUTE_1].source = loadImageWithColorKey("sprites/chienSaute1.png", 0, 255, 0);
+    chien.image[CHIEN_SAUTE_1].lecture.h = 100;
+    chien.image[CHIEN_SAUTE_1].lecture.w = 94;
+    chien.image[CHIEN_SAUTE_1].lecture.x = 0;
+    chien.image[CHIEN_SAUTE_1].lecture.y = 0;
+
+    chien.image[CHIEN_SAUTE_2].source = loadImageWithColorKey("sprites/chienSaute2.png", 0, 255, 0);
+    chien.image[CHIEN_SAUTE_2].lecture.h = 95;
+    chien.image[CHIEN_SAUTE_2].lecture.w = 110;
+    chien.image[CHIEN_SAUTE_2].lecture.x = 0;
+    chien.image[CHIEN_SAUTE_2].lecture.y = 0;
+
+    chien.image[CHIEN_RIGOLE].source = loadImageWithColorKey("sprites/chienMoqueur.png", 228, 255, 0);
+    chien.image[CHIEN_RIGOLE].lecture.h = 78;
+    chien.image[CHIEN_RIGOLE].lecture.w = 58;
+    chien.image[CHIEN_RIGOLE].lecture.x = 0;
+    chien.image[CHIEN_RIGOLE].lecture.y = 0;
+
+    chien.image[CHIEN_CONTENT_SIMPLE].source = loadImageWithColorKey("sprites/chienContentSimple.png", 228, 255, 0);
+    chien.image[CHIEN_CONTENT_SIMPLE].lecture.h = 80;
+    chien.image[CHIEN_CONTENT_SIMPLE].lecture.w = 90;
+    chien.image[CHIEN_CONTENT_SIMPLE].lecture.x = 0;
+    chien.image[CHIEN_CONTENT_SIMPLE].lecture.y = 0;
+
+    chien.image[CHIEN_CONTENT_DOUBLE].source = loadImageWithColorKey("sprites/chienContentDouble.png", 0, 255, 0);
+    chien.image[CHIEN_CONTENT_DOUBLE].lecture.h = 80;
+    chien.image[CHIEN_CONTENT_DOUBLE].lecture.w = 112;
+    chien.image[CHIEN_CONTENT_DOUBLE].lecture.x = 0;
+    chien.image[CHIEN_CONTENT_DOUBLE].lecture.y = 0;
+
+
 }
 
 /*void libererImages(Sprites i)

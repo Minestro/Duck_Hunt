@@ -63,7 +63,7 @@ void relancerPartie(Partie &partie, Sprites &sprites)
         partie.canardRamasse[i] = false;
         partie.xChute[i] = NOT_SET;
         sprites.canard[i].type = alea(0, 3);
-        initCanard(sprites.canard[i]);
+        initCanard(sprites.canard[i], partie);
     }
 
     initTableau(partie.tableauChasse, sprites);

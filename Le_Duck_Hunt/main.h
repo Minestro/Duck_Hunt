@@ -245,9 +245,7 @@ void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMe
 void showPoints(Message msgs[], SDL_Surface *ecran, Partie partie);
 void showBouton(SDL_Surface *ecran, Boutons &boutons, Message msgs[], int boutonNom, int sx, int sy);
 
-void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons,
-           int &modeMenu, int &modeJeu, SourisEvent &sourisEvent,
-            Time &time, Message msgs[], Partie &partie, Chien &chien);
+void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[], Partie &partie, Chien &chien);
 bool testHoverBouton(int, int, Bouton, SDL_Rect lecture);
 
 bool munitionsEpuisees(Partie partie);
@@ -261,14 +259,14 @@ void initPartie(Partie &partie, int nbCanards);
 void initBouton(Boutons &boutons);
 void initSourisEvent(SourisEvent &SourisEvent);
 void initTime(Time &time);
-void initCanard(Canard &cn);
+void initCanard(Canard &cn, Partie partie);
 void initChien(Chien &chien);
 void initMessage(Message msgs[]);
 void initTableau(TableauChasse &tableau, Sprites sprites);
 
 SDL_Surface *loadImage(std::string);
 SDL_Surface *loadImageWithColorKey(std::string, int, int, int);
-void chargerImages(Sprites &sprites);
+void chargerImages(Sprites &sprites, Chien &chien);
 
 void changementDirection(Canard &canard);
 void mouvementsCanard(Canard &canard);

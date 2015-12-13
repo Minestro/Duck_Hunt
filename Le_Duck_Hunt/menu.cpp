@@ -52,7 +52,7 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
                 for (int i = 0 ; i < sprites.canardActifs ; i++)
                 {
                     sprites.canard[i].type = alea(0, 3);
-                    initCanard(sprites.canard[i]);
+                    initCanard(sprites.canard[i], partie);
                 }
                 initPartie(partie, sprites.canardActifs);
                 initTableau(partie.tableauChasse, sprites);

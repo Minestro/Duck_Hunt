@@ -62,9 +62,9 @@ void initTime(Time &time)
 
 void initPartie(Partie &partie, int nbCanards)
 {
+    partie.round = 0;
     partie.afficherMsgTransition = false;
     partie.relancer = false;
-    partie.jeu = false;
     partie.chienEnChasse = false;
     for(int i = 0 ; i < nbCanards ; i++)
     {
@@ -74,7 +74,6 @@ void initPartie(Partie &partie, int nbCanards)
     partie.canardAbbatu = false;
     partie.shots = 3;
     partie.canardsEnVie = nbCanards;
-    partie.round = partie.score = 0;
     partie.alreadyShot = false;
     partie.alreadyGetEvent = false;
     partie.alreadyClic = false;
@@ -95,70 +94,32 @@ void initChien(Chien &chien)
 
     chien.etat = CHIEN_MARCHE;
     chien.nbFrames = 5;
-    chien.image[CHIEN_MARCHE].source = loadImageWithColorKey("sprites/chienMarche.png", 0, 255, 0);
-    chien.image[CHIEN_MARCHE].lecture.h = 87;
-    chien.image[CHIEN_MARCHE].lecture.w = 120;
-    chien.image[CHIEN_MARCHE].lecture.x = 0;
-    chien.image[CHIEN_MARCHE].lecture.y = 87;
     chien.image[CHIEN_MARCHE].position.x = 0;
     chien.image[CHIEN_MARCHE].position.y = Y_INTRO_CHIEN;
-
-    chien.image[CHIEN_CONTENT].source = loadImageWithColorKey("sprites/chienContent.png", 0, 255, 0);
-    chien.image[CHIEN_CONTENT].lecture.h = 100;
-    chien.image[CHIEN_CONTENT].lecture.w = 113;
-    chien.image[CHIEN_CONTENT].lecture.x = 0;
-    chien.image[CHIEN_CONTENT].lecture.y = 96;
-
-    chien.image[CHIEN_SAUTE_1].source = loadImageWithColorKey("sprites/chienSaute1.png", 0, 255, 0);
-    chien.image[CHIEN_SAUTE_1].lecture.h = 100;
-    chien.image[CHIEN_SAUTE_1].lecture.w = 94;
-    chien.image[CHIEN_SAUTE_1].lecture.x = 0;
-    chien.image[CHIEN_SAUTE_1].lecture.y = 0;
-
-    chien.image[CHIEN_SAUTE_2].source = loadImageWithColorKey("sprites/chienSaute2.png", 0, 255, 0);
-    chien.image[CHIEN_SAUTE_2].lecture.h = 95;
-    chien.image[CHIEN_SAUTE_2].lecture.w = 110;
-    chien.image[CHIEN_SAUTE_2].lecture.x = 0;
-    chien.image[CHIEN_SAUTE_2].lecture.y = 0;
-
-    chien.image[CHIEN_RIGOLE].source = loadImageWithColorKey("sprites/chienMoqueur.png", 228, 255, 0);
-    chien.image[CHIEN_RIGOLE].lecture.h = 78;
-    chien.image[CHIEN_RIGOLE].lecture.w = 58;
-    chien.image[CHIEN_RIGOLE].lecture.x = 0;
-    chien.image[CHIEN_RIGOLE].lecture.y = 0;
-
-
-    chien.image[CHIEN_CONTENT_SIMPLE].source = loadImageWithColorKey("sprites/chienContentSimple.png", 228, 255, 0);
-    chien.image[CHIEN_CONTENT_SIMPLE].lecture.h = 80;
-    chien.image[CHIEN_CONTENT_SIMPLE].lecture.w = 90;
-    chien.image[CHIEN_CONTENT_SIMPLE].lecture.x = 0;
-    chien.image[CHIEN_CONTENT_SIMPLE].lecture.y = 0;
-
-    chien.image[CHIEN_CONTENT_DOUBLE].source = loadImageWithColorKey("sprites/chienContentDouble.png", 0, 255, 0);
-    chien.image[CHIEN_CONTENT_DOUBLE].lecture.h = 80;
-    chien.image[CHIEN_CONTENT_DOUBLE].lecture.w = 112;
-    chien.image[CHIEN_CONTENT_DOUBLE].lecture.x = 0;
-    chien.image[CHIEN_CONTENT_DOUBLE].lecture.y = 0;
 }
 
-void initCanard(Canard &cn)
+void initCanard(Canard &cn, Partie partie)
 {
     cn.etat = ALIVE; // On fait naître le canard.
     cn.echappe = false;
     switch (cn.type)
     {
         case DARK:
-            cn.vitesse = VITESSE_N;
+            cn.vitesse = VITESSE_N-((partie.niveau-1)*2);
             break;
         case CHESNUT:
-            cn.vitesse = VITESSE_M;
+            cn.vitesse = VITESSE_M-((partie.niveau-1)*2);
             break;
         case BLOOD:
-            cn.vitesse = VITESSE_B;
+            cn.vitesse = VITESSE_B-((partie.niveau-1)*2);
             break;
         case BLUISH_PURPLE:
-            cn.vitesse = VITESSE_V;
+            cn.vitesse = VITESSE_V-((partie.niveau-1)*2);
             break;
+    }
+    if (cn.vitesse<0)
+    {
+        cn.vitesse = 0;
     }
     cn.nbFrames = 3;
     cn.cycleSprite = 0;
