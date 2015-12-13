@@ -55,7 +55,7 @@ void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, 
     {
         if (((sprites.canard[i].etat == FREE_FALLING) || ((sprites.canard[i].etat == ALIVE) && (sprites.canard[i].echappe))) && partie.jeu)
         {
-            SDL_BlitSurface(sprites.canardSprite[sprites.canard[i].type - 1], &sprites.canard[i].lecture, ecran, &sprites.canard[i].position);
+            SDL_BlitSurface(sprites.canardSprite[sprites.canard[i].type], &sprites.canard[i].lecture, ecran, &sprites.canard[i].position);
         }
     }
     SDL_BlitSurface(sprites.background_blit.source, NULL, ecran, &sprites.background.position);
@@ -67,7 +67,7 @@ void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, 
     {
         if ((sprites.canard[i].etat == ALIVE || sprites.canard[i].etat == TOUCHED) && !sprites.canard[i].echappe && partie.jeu)
         {
-            SDL_BlitSurface(sprites.canardSprite[sprites.canard[i].type - 1], &sprites.canard[i].lecture, ecran, &sprites.canard[i].position);
+            SDL_BlitSurface(sprites.canardSprite[sprites.canard[i].type], &sprites.canard[i].lecture, ecran, &sprites.canard[i].position);
             if (sprites.canard[i].etat == TOUCHED)
             {
                 showPointsCanard(ecran, sprites.canard[i], sprites.points);
@@ -98,7 +98,7 @@ void showPointsCanard(SDL_Surface *ecran, Canard canard, Sprite &points)
 {
     points.position.x = canard.position.x + canard.lecture.w / 2;
     points.position.y = canard.position.y + canard.lecture.h;
-    points.lecture.y = 17 * (canard.type - 1);
+    points.lecture.y = 17 * canard.type;
     SDL_BlitSurface(points.source, &points.lecture, ecran, &points.position);
 }
 

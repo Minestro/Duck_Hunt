@@ -24,10 +24,10 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
             sortir = true;
             break;
         case 1 :
-            boutons.bouton[BOUTON_PLAY].position.x = (LARGEUR/2)-(boutons.lecture[0].w/2);
+            boutons.bouton[BOUTON_PLAY].position.x = (LARGEUR - boutons.lecture[0].w) / 2;
             boutons.bouton[BOUTON_PLAY].position.y = 200;
 
-            boutons.bouton[BOUTON_QUIT].position.x = (LARGEUR/2) - (boutons.lecture[0].w/2);
+            boutons.bouton[BOUTON_QUIT].position.x = (LARGEUR - boutons.lecture[0].w) / 2;
             boutons.bouton[BOUTON_QUIT].position.y = 400;
             if (time.currentTime >= time.timeFps + time.fpsTime)
             {
@@ -51,7 +51,7 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
 
                 for (int i = 0 ; i < sprites.canardActifs ; i++)
                 {
-                    sprites.canard[i].type = alea(1, 3);
+                    sprites.canard[i].type = alea(0, 3);
                     initCanard(sprites.canard[i]);
                 }
                 initPartie(partie, sprites.canardActifs);

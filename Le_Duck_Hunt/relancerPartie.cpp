@@ -35,7 +35,6 @@ bool canardsMortsRamasses(Partie partie)
     {
         tousRamasses = partie.canardRamasse[i++];
     }
-
     return tousRamasses;
 }
 
@@ -51,8 +50,6 @@ bool joueurMaladroit(Partie partie)
 
 void relancerPartie(Partie &partie, Sprites &sprites)
 {
-    partie.relancer = false;
-
     for(int i = partie.round * 2 ; i < partie.round * 2 + 2 ; i++)
     {
         if(partie.hit[i] == HIT_EMPTY)
@@ -65,14 +62,13 @@ void relancerPartie(Partie &partie, Sprites &sprites)
     {
         partie.canardRamasse[i] = false;
         partie.xChute[i] = NOT_SET;
-        sprites.canard[i].type = alea(1, 3);
+        sprites.canard[i].type = alea(0, 3);
         initCanard(sprites.canard[i]);
     }
 
     initTableau(partie.tableauChasse, sprites);
 
-    partie.chienEnChasse = false;
-    partie.canardAbbatu = false;
+    partie.chienEnChasse = partie.canardAbbatu = partie.relancer = false;
     partie.canardsEnVie = sprites.canardActifs;
     partie.shots = 3;
     partie.round++;

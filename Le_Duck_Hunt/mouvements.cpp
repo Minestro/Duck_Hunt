@@ -17,7 +17,6 @@ bool chienDevientHeureux(Chien chien, Partie partie)
 
 }
 
-
 void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
 {
     switch (chien.etat)
@@ -56,7 +55,7 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
                 partie.afficherMsgTransition = true;
                 chien.etat = CHIEN_CONTENT_SIMPLE;
                 chien.image[CHIEN_CONTENT_SIMPLE].position = chien.image[CHIEN_MARCHE].position;
-                chien.image[CHIEN_CONTENT_SIMPLE].lecture.x = (partie.tableauChasse.typeCanard[0] - 1) * 90;
+                chien.image[CHIEN_CONTENT_SIMPLE].lecture.x = (partie.tableauChasse.typeCanard[0]) * 90;
                 chien.tempsDepuisEtat = SDL_GetTicks();
             }
             else if(partie.canardsEnVie == 0 && roundTerminee(sprites, partie))
@@ -64,11 +63,10 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
                 partie.afficherMsgTransition = true;
                 chien.etat = CHIEN_CONTENT_DOUBLE;
                 chien.image[CHIEN_CONTENT_DOUBLE].position = chien.image[CHIEN_MARCHE].position;
-                chien.image[CHIEN_CONTENT_DOUBLE].lecture.y = (partie.tableauChasse.typeCanard[0] - 1) * 80;
-                chien.image[CHIEN_CONTENT_DOUBLE].lecture.x = (partie.tableauChasse.typeCanard[1] - 1) * 112;
+                chien.image[CHIEN_CONTENT_DOUBLE].lecture.y = (partie.tableauChasse.typeCanard[0]) * 80;
+                chien.image[CHIEN_CONTENT_DOUBLE].lecture.x = (partie.tableauChasse.typeCanard[1]) * 112;
                 chien.tempsDepuisEtat = SDL_GetTicks();
             }
-
 
             detectionBordsChien(chien);
             break;

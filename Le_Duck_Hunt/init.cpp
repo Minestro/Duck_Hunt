@@ -27,7 +27,6 @@ void initMessage(Message msgs[])
         msgs[i].font = TTF_OpenFont("font/duck_hunt.ttf", msgs[MSG_SCORE].fontSize);
 
     }
-
     msgs[MSG_0_TOUCHE].message = "AUCUN_CANARD_MORT";
     msgs[MSG_0_TOUCHE].position.x = LARGEUR / 2;
     msgs[MSG_0_TOUCHE].position.y = 20;
@@ -56,7 +55,7 @@ void initSourisEvent(SourisEvent &sourisEvent)
 
 void initTime(Time &time)
 {
-    time.fpsTime = (1/(FPS_MAX*1.0)*1000); // Calcule en ms le temps entre chaque actualisation d'image à partir de la constante FPS_LIMIT.
+    time.fpsTime = (1 / (FPS_MAX * 1.0) * 1000); // Calcule en ms le temps entre chaque actualisation d'image à partir de la constante FPS_LIMIT.
     time.timeFps = 0;
     time.currentTime = SDL_GetTicks();
 }
@@ -153,6 +152,9 @@ void initCanard(Canard &cn)
             break;
         case CHESNUT:
             cn.vitesse = VITESSE_M;
+            break;
+        case BLOOD:
+            cn.vitesse = VITESSE_B;
             break;
         case BLUISH_PURPLE:
             cn.vitesse = VITESSE_V;

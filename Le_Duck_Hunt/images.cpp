@@ -111,9 +111,10 @@ void chargerImages(Sprites &sprites)
     sprites.shots.lecture.w = 75;
     sprites.shots.lecture.h = 50;
 
-    sprites.canardSprite[DARK-1] = loadImageWithColorKey("sprites/canardNoir.png", 228, 255, 0);
-    sprites.canardSprite[CHESNUT-1] = loadImageWithColorKey("sprites/canardRouge.png", 228, 255, 0);
-    sprites.canardSprite[BLUISH_PURPLE-1] = loadImageWithColorKey("sprites/canardViolet.png", 228, 255, 0);
+    sprites.canardSprite[DARK] = loadImageWithColorKey("sprites/canardNoir.png", 228, 255, 0);
+    sprites.canardSprite[CHESNUT] = loadImageWithColorKey("sprites/canardMarron.png", 228, 255, 0);
+    sprites.canardSprite[BLOOD] = loadImageWithColorKey("sprites/canardRouge.png", 228, 255, 0);
+    sprites.canardSprite[BLUISH_PURPLE] = loadImageWithColorKey("sprites/canardViolet.png", 228, 255, 0);
 
     sprites.points.source = loadImageWithColorKey("sprites/points.png", 0, 0, 0);
     sprites.points.lecture.h = 17;

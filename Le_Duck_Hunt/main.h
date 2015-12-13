@@ -21,9 +21,11 @@
 //#endif
 
 // Type du canard
-#define DARK 1 // Sombre, le plus lent : 500 points.
-#define CHESNUT 2 // Noisette, niveau intermédiaire : 1000 points.
+#define DARK 0 // Noir, ne pas toucher.
+#define CHESNUT 1 // Noisette, le plus lent : 500 points.
+#define BLOOD 2 // Rouge, niveau intermédiaire : 1000 points.
 #define BLUISH_PURPLE 3 // Violet bleuâtre, un avion de chasse : 1500 points.
+#define NOMBRE_TYPES 4
 
 // Etats possibles
 
@@ -87,7 +89,8 @@ const int NB_BOUTONS_DIFFERENTS = 10;
 
 const unsigned int VITESSE_N = 30;
 const unsigned int VITESSE_M = 25;
-const unsigned int VITESSE_V = 20;
+const unsigned int VITESSE_B = 20;
+const unsigned int VITESSE_V = 15;
 
 struct TableauChasse
 {
@@ -188,7 +191,7 @@ struct Sprites // Rassemble toutes les images et les feuilles de sprite
     Sprite shots;
     Sprite viseur;
     Sprite points;
-    SDL_Surface *canardSprite[3];
+    SDL_Surface *canardSprite[NOMBRE_TYPES];
 };
 
 struct Police

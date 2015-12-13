@@ -11,6 +11,7 @@ int main(int argc, char* argv[])
     initMessage(msgs);
 
     SDL_Surface *ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF);
+
     /* Titre */
     SDL_WM_SetCaption("Duck Hunt", NULL);
 
