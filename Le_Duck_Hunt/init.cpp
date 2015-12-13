@@ -19,6 +19,7 @@ void initMessage(Message msgs[])
     msgs[MSG_BOUTONS].fontSize = 40;
     msgs[MSG_PAUSE].fontSize = 40;
     msgs[MSG_NIVEAU].fontSize = 70;
+    msgs[MSG_TABLEAU_SCORE].fontSize = 50;
     msgs[MSG_0_TOUCHE].fontSize = 50;
 
     for (int i = 0 ; i < NOMBRE_MESSAGES; i++)
@@ -40,6 +41,8 @@ void initBouton(Boutons &boutons)
     boutons.bouton[BOUTON_PLAY].contenu = "Jouer";
     boutons.bouton[BOUTON_QUIT].contenu = "Quitter";
     boutons.bouton[BOUTON_REPRENDRE].contenu = "Reprendre";
+    boutons.bouton[BOUTON_RETOUR].contenu = "Retour";
+    boutons.bouton[BOUTON_SCORE].contenu = "High Score";
     for(int i = 0 ; i < 2 ; i++)
     {
         boutons.lecture[i].x = i * 226;
@@ -172,3 +175,11 @@ void initCanard(Canard &cn, Partie partie)
     } while(cn.vecteurPositionX == 0 || cn.vecteurPositionY == 0);
 }
 
+void initHighScore(HighScore highScore[])
+{
+    for (int i=0; i<NB_HIGH_SCORE; i++)
+    {
+        highScore[i].nom = "";
+        highScore[i].score = 0;
+    }
+}

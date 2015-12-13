@@ -18,6 +18,7 @@ void showChien(SDL_Surface *ecran, Chien chien)
 
 void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMenu, Message msgs[], Partie partie, int sx, int sy)
 {
+    std::string score, score2, mess, nom, ligne;
     sprites.viseur.position.x=sx-(sprites.viseur.source->w/2);
     sprites.viseur.position.y=sy-(sprites.viseur.source->h/2);
     SDL_BlitSurface(sprites.background_menu.source, NULL, ecran, &sprites.background.position);
@@ -26,6 +27,7 @@ void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMe
     case 1 :
         showBouton(ecran, boutons, msgs, BOUTON_PLAY, sx, sy);
         showBouton(ecran, boutons, msgs, BOUTON_QUIT, sx, sy);
+        showBouton(ecran, boutons, msgs, BOUTON_SCORE, sx, sy);
         break;
     case 5:
         msgs[MSG_PAUSE].source = TTF_RenderText_Solid(msgs[MSG_PAUSE].font, "Jeu en pause", msgs[MSG_PAUSE].textColor);
@@ -36,11 +38,25 @@ void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMe
         showBouton(ecran, boutons, msgs, BOUTON_QUIT, sx, sy);
         break;
     case 6:
-        std::string score = intToString(partie.niveau+1);
-        std::string mess = "Niveau " + score;
+        score = intToString(partie.niveau+1);
+        mess = "Niveau " + score;
         msgs[MSG_NIVEAU].source = TTF_RenderText_Solid(msgs[MSG_NIVEAU].font, mess.c_str(), msgs[MSG_NIVEAU].textColor);
         msgs[MSG_NIVEAU].position.x = (LARGEUR/2) - (msgs[MSG_NIVEAU].source->w/2);
         SDL_BlitSurface(msgs[MSG_NIVEAU].source, NULL, ecran, &msgs[MSG_NIVEAU].position);
+        break;
+    case 7:
+        msgs[MSG_TABLEAU_SCORE].position.y = 0;
+        for (int i=1; i<NB_HIGH_SCORE+1; i++)
+        {
+            ligne = "";
+            getScore("scoresClassic", nom, score2, i);
+            ligne = nom + " " + score2;
+            msgs[MSG_TABLEAU_SCORE].source = TTF_RenderText_Solid(msgs[MSG_TABLEAU_SCORE].font, ligne.c_str(), msgs[MSG_TABLEAU_SCORE].textColor);
+            msgs[MSG_TABLEAU_SCORE].position.x = (LARGEUR/2) - (msgs[MSG_TABLEAU_SCORE].source->w/2);
+            msgs[MSG_TABLEAU_SCORE].position.y += i + msgs[MSG_TABLEAU_SCORE].fontSize-10;
+            SDL_BlitSurface(msgs[MSG_TABLEAU_SCORE].source, NULL, ecran, &msgs[MSG_TABLEAU_SCORE].position);
+        }
+        showBouton(ecran, boutons, msgs, BOUTON_RETOUR, sx, sy);
         break;
     }
     SDL_BlitSurface(sprites.viseur.source, NULL, ecran, &sprites.viseur.position);

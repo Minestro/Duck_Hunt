@@ -20,10 +20,14 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
             break;
         case 1 :
             boutons.bouton[BOUTON_PLAY].position.x = (LARGEUR - boutons.lecture[0].w) / 2;
-            boutons.bouton[BOUTON_PLAY].position.y = 200;
+            boutons.bouton[BOUTON_PLAY].position.y = 150;
+
+            boutons.bouton[BOUTON_SCORE].position.x = (LARGEUR - boutons.lecture[0].w) / 2;
+            boutons.bouton[BOUTON_SCORE].position.y = 300;
 
             boutons.bouton[BOUTON_QUIT].position.x = (LARGEUR - boutons.lecture[0].w) / 2;
-            boutons.bouton[BOUTON_QUIT].position.y = 400;
+            boutons.bouton[BOUTON_QUIT].position.y = 450;
+
             if (time.currentTime >= time.timeFps + time.fpsTime)
             {
                 showMenu(ecran, sprites, boutons, modeMenu, msgs, partie, sourisEvent.sx, sourisEvent.sy);
@@ -34,7 +38,6 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
             {
                 modeMenu = 0;
                 modeJeu = 0;
-
             }
             else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_PLAY], boutons.lecture[0]))&&sourisEvent.clicGauche)
             {
@@ -52,6 +55,10 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
                 partie.niveau = 0;
                 initPartie(partie, sprites.canardActifs);
                 initTableau(partie.tableauChasse, sprites);
+            }
+            else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_SCORE], boutons.lecture[0]))&&sourisEvent.clicGauche)
+            {
+                modeMenu = 7;
             }
             break;
         case 5 :
@@ -89,6 +96,20 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
                     showMenu(ecran, sprites, boutons, modeMenu, msgs, partie, sourisEvent.sx, sourisEvent.sy);
                     time.timeFps = time.currentTime;
                 }
+            }
+            break;
+        case 7:
+            boutons.bouton[BOUTON_RETOUR].position.x = (LARGEUR/2) - (boutons.lecture[0].w/2);
+            boutons.bouton[BOUTON_RETOUR].position.y = 600;
+
+            if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_RETOUR], boutons.lecture[0]))&&sourisEvent.clicGauche)
+            {
+                modeMenu = 1;
+            }
+            if (time.currentTime >= time.timeFps + time.fpsTime)
+            {
+                showMenu(ecran, sprites, boutons, modeMenu, msgs, partie, sourisEvent.sx, sourisEvent.sy);
+                time.timeFps = time.currentTime;
             }
             break;
         default:

@@ -29,6 +29,7 @@ int main(int argc, char* argv[])
     Partie partie;
     partie.score = 0;
     partie.niveau = 0;
+    initHighScore(partie.highScore);
     Sprites sprites;
     Chien chien;
 
