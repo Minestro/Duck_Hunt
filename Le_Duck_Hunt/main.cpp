@@ -110,13 +110,6 @@ int main(int argc, char* argv[])
             temps.timeFps = temps.currentTime;
         }
 
-        std::cout << "true = " << true << std::endl;
-        std::cout << "false = " << false << std::endl;
-        std::cout << "1" << sprites.canard[0].echappe << std::endl;
-        std::cout << "2" << sprites.canard[1].echappe << std::endl;
-        std::cout << "round = " << partie.round << std::endl;
-
-
         SDL_Delay(1);
     }
     while (modeJeu != 0);

@@ -6,6 +6,8 @@
 #include <cstdlib>
 #include <string>
 #include <sstream>
+#include <iostream>
+#include <fstream>
 
 // Note ! Mets en commentaire le ce define, moi j'en ai besoin pour chez moi
 
@@ -64,6 +66,7 @@
 #define MSG_0_TOUCHE 4
 #define MSG_1_TOUCHE 5
 #define MSG_2_TOUCHE 6
+#define MSG_TABLEAU_SCORE 7
 
 //Les différents noms des boutons
 #define BOUTON_PLAY 0
@@ -73,6 +76,7 @@
 #define BOUTON_OPTIONS 4
 #define BOUTON_MODE_CLASSIQUE 5
 #define BOUTON_MODE_DEUX 6
+#define BOUTON_RETOUR 7
 
 //Pour les valeurs d'un tableau
 #define NOT_SET -1
@@ -85,12 +89,19 @@ const int FPS_MAX = 60;
 const int LIMITE_BASSE = 270;
 const int NB_MAX_CANARDS = 2;
 const int NB_BOUTONS_DIFFERENTS = 10;
-const int NOMBRE_MESSAGES = 7;
+const int NOMBRE_MESSAGES = 10;
+const int NB_HIGH_SCORE = 10;
 
 const unsigned int VITESSE_N = 30;
 const unsigned int VITESSE_M = 25;
 const unsigned int VITESSE_B = 20;
 const unsigned int VITESSE_V = 15;
+
+
+struct HighScore{
+    std::string nom;
+    int score;
+};
 
 struct TableauChasse
 {
@@ -128,6 +139,7 @@ struct Partie
     bool canardAbbatu;
     int xChute[NB_MAX_CANARDS];
     bool canardRamasse[NB_MAX_CANARDS];
+    HighScore highScore[NB_HIGH_SCORE];
 };
 
 struct Sprite // Peut représenter une image comme une feuille de sprites
@@ -234,6 +246,12 @@ struct Time
     int fpsTime, menuTime;
 };
 
+<<<<<<< HEAD
+=======
+bool testHighScore (std::string fichier, Partie &partie);
+void getScore (std::string fichier, std::string &nom, std::string &score, int ligne);
+
+>>>>>>> 14b8c090207e471bd780127528642bfb482dcf7f
 bool getEvents(SourisEvent &sourisEvent, bool);
 
 void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien chien, Message msgs[]);
@@ -261,6 +279,7 @@ void initCanard(Canard &cn, Partie partie);
 void initChien(Chien &chien);
 void initMessage(Message msgs[]);
 void initTableau(TableauChasse &tableau, Sprites sprites);
+void initHighScore(HighScore highScore[]);
 
 SDL_Surface *loadImage(std::string);
 SDL_Surface *loadImageWithColorKey(std::string, int, int, int);
