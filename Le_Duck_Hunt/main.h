@@ -246,12 +246,9 @@ struct Time
     int fpsTime, menuTime;
 };
 
-<<<<<<< HEAD
-=======
+
 bool testHighScore (std::string fichier, Partie &partie);
 void getScore (std::string fichier, std::string &nom, std::string &score, int ligne);
-
->>>>>>> 14b8c090207e471bd780127528642bfb482dcf7f
 bool getEvents(SourisEvent &sourisEvent, bool);
 
 void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien chien, Message msgs[]);
