@@ -16,6 +16,7 @@ void switchSpriteChien(Chien &chien, Partie &partie, Sprites sprites)
                     )
                   )
                 {
+                    partie.tableauChasse.typeCanard[(partie.canardsEnVie + 1) % 2] = sprites.canard[(partie.canardsEnVie + 1) % 2].type;
                     partie.chienEnChasse = false;
                     for(int i = 0 ; i <= (partie.canardsEnVie + 1) % NB_MAX_CANARDS ; i++)
                     {

@@ -234,7 +234,6 @@ struct Time
     int fpsTime, menuTime;
 };
 
-
 bool getEvents(SourisEvent &sourisEvent, bool);
 
 void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien chien, Message msgs[]);
@@ -275,7 +274,7 @@ void sauvegarderPositionX(Partie &partie, Canard canard);
 void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, Time temps, int &modeJeu);
 bool testShot(SourisEvent sourisEvent, SDL_Rect lecture, SDL_Rect position);
 void touched(Canard &canard, Time temps);
-void canardSurvivant(Canard &canard);
+void canardSurvivant(Sprites &sprites, int numeroCanard);
 
 void controlesChien(Chien &chien, Partie &partie, Sprites sprites);
 bool chienDevientHeureux(Chien chien, Partie partie);

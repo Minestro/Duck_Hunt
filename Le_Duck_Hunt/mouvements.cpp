@@ -154,9 +154,9 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
     }
 }
 
-void canardSurvivant(Canard &canard)
+void canardSurvivant(Sprites &sprites, int numeroCanard)
 {
-    canard.echappe = canard.etat == ALIVE;
+    sprites.canard[numeroCanard].echappe = sprites.canard[numeroCanard].etat == ALIVE;
 }
 
 
@@ -249,7 +249,6 @@ void detectionBordsCanard(Canard &canard, Partie &partie)
             }
             break;
         case DEAD:
-            partie.tableauChasse.typeCanard[(partie.canardsEnVie + 1) % 2] = canard.type;
         default:
             break;
     }
