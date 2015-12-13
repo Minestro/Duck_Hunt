@@ -3,21 +3,14 @@
 void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[], Partie &partie, Chien &chien)
 {
     bool sortir = false;
-    bool clicGaucheTemp;
     while (!sortir && modeMenu!=0)
     {
-        clicGaucheTemp = false;
         if (getEvents(sourisEvent, 1))
         {
             modeMenu = 0;
             modeJeu = 0;
         }
-        if (sourisEvent.clicGauche)
-        {
-            clicGaucheTemp = true;
-        }
         time.currentTime = SDL_GetTicks();
-        sourisEvent.clicGauche = clicGaucheTemp;
         switch (modeMenu)
         {
         case 0:
@@ -31,7 +24,7 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
             boutons.bouton[BOUTON_QUIT].position.y = 400;
             if (time.currentTime >= time.timeFps + time.fpsTime)
             {
-                showMenu(ecran, sprites, boutons, modeMenu, msgs, sourisEvent.sx, sourisEvent.sy);
+                showMenu(ecran, sprites, boutons, modeMenu, msgs, partie, sourisEvent.sx, sourisEvent.sy);
                 time.timeFps = time.currentTime;
             }
 
@@ -44,7 +37,7 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
             else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_PLAY], boutons.lecture[0]))&&sourisEvent.clicGauche)
             {
                 modeJeu = 1;
-                modeMenu = 0;
+                modeMenu = 6;
                 initChien(chien);
 
                 sprites.canardActifs = 2;
@@ -76,12 +69,22 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
 
             if (time.currentTime >= time.timeFps + time.fpsTime)
             {
-                showMenu(ecran, sprites, boutons, modeMenu, msgs, sourisEvent.sx, sourisEvent.sy);
+                showMenu(ecran, sprites, boutons, modeMenu, msgs, partie, sourisEvent.sx, sourisEvent.sy);
                 time.timeFps = time.currentTime;
             }
             break;
         case 6:
-
+            if (time.currentTime >= time.menuTime + time.timeMenu)
+            {
+                modeMenu = 0;
+                time.timeMenu = time.currentTime;
+            } else {
+            if (time.currentTime >= time.timeFps + time.fpsTime)
+            {
+                showMenu(ecran, sprites, boutons, modeMenu, msgs, partie, sourisEvent.sx, sourisEvent.sy);
+                time.timeFps = time.currentTime;
+            }
+            }
             break;
         default:
             break;

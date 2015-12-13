@@ -64,7 +64,6 @@
 #define MSG_0_TOUCHE 4
 #define MSG_1_TOUCHE 5
 #define MSG_2_TOUCHE 6
-#define NOMBRE_MESSAGES 7
 
 //Les différents noms des boutons
 #define BOUTON_PLAY 0
@@ -86,6 +85,7 @@ const int FPS_MAX = 60;
 const int LIMITE_BASSE = 270;
 const int NB_MAX_CANARDS = 2;
 const int NB_BOUTONS_DIFFERENTS = 10;
+const int NOMBRE_MESSAGES = 7;
 
 const unsigned int VITESSE_N = 30;
 const unsigned int VITESSE_M = 25;
@@ -231,7 +231,8 @@ struct Time
 {
     Uint32 currentTime;
     Uint32 timeFps;
-    int fpsTime;
+    Uint32 timeMenu;
+    int fpsTime, menuTime;
 };
 
 
@@ -241,7 +242,7 @@ void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, 
 void showChien(SDL_Surface *ecran, Chien chien);
 void showPointsCanard(SDL_Surface *ecran, Canard canard, Sprite &points);
 void showMessage(SDL_Surface *ecran, Message &msg);
-void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMenu, Message msgs[], int sx, int sy);
+void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMenu, Message msgs[], Partie partie, int sx, int sy);
 void showPoints(Message msgs[], SDL_Surface *ecran, Partie partie);
 void showBouton(SDL_Surface *ecran, Boutons &boutons, Message msgs[], int boutonNom, int sx, int sy);
 

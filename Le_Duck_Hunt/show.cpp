@@ -16,7 +16,7 @@ void showChien(SDL_Surface *ecran, Chien chien)
     SDL_BlitSurface(chien.image[chien.etat].source, &chien.image[chien.etat].lecture, ecran, &chien.image[chien.etat].position);
 }
 
-void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMenu, Message msgs[], int sx, int sy)
+void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMenu, Message msgs[], Partie partie, int sx, int sy)
 {
     sprites.viseur.position.x=sx-(sprites.viseur.source->w/2);
     sprites.viseur.position.y=sy-(sprites.viseur.source->h/2);
@@ -34,7 +34,13 @@ void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMe
 
         showBouton(ecran, boutons, msgs, BOUTON_REPRENDRE, sx, sy);
         showBouton(ecran, boutons, msgs, BOUTON_QUIT, sx, sy);
-
+        break;
+    case 6:
+        std::string score = intToString(partie.niveau);
+        std::string mess = "Niveau " + score;
+        msgs[MSG_NIVEAU].source = TTF_RenderText_Solid(msgs[MSG_NIVEAU].font, mess.c_str(), msgs[MSG_NIVEAU].textColor);
+        msgs[MSG_NIVEAU].position.x = (LARGEUR/2) - (msgs[MSG_NIVEAU].source->w/2);
+        SDL_BlitSurface(msgs[MSG_NIVEAU].source, NULL, ecran, &msgs[MSG_NIVEAU].position);
         break;
     }
     SDL_BlitSurface(sprites.viseur.source, NULL, ecran, &sprites.viseur.position);

@@ -28,7 +28,6 @@ int main(int argc, char* argv[])
 
     Partie partie;
     partie.score = 0;
-    partie.jeu = false;
     partie.niveau = 0;
     Sprites sprites;
     Chien chien;
@@ -106,7 +105,7 @@ int main(int argc, char* argv[])
             {
                 initCanard(sprites.canard[i], partie);
             }
-            //modeMenu = 6;
+            modeMenu = 6;
         }
         if (keystate[SDLK_ESCAPE])
         {

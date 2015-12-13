@@ -13,10 +13,12 @@ void initMessage(Message msgs[])
     msgs[MSG_SCORE].position.x = 580;
     msgs[MSG_SCORE].position.y = 667;
     msgs[MSG_PAUSE].position.y = 100;
+    msgs[MSG_NIVEAU].position.y = HAUTEUR/2;
 
     msgs[MSG_SCORE].fontSize = 35;
     msgs[MSG_BOUTONS].fontSize = 40;
     msgs[MSG_PAUSE].fontSize = 40;
+    msgs[MSG_NIVEAU].fontSize = 70;
     msgs[MSG_0_TOUCHE].fontSize = 50;
 
     for (int i = 0 ; i < NOMBRE_MESSAGES; i++)
@@ -57,12 +59,15 @@ void initTime(Time &time)
 {
     time.fpsTime = (1 / (FPS_MAX * 1.0) * 1000); // Calcule en ms le temps entre chaque actualisation d'image à partir de la constante FPS_LIMIT.
     time.timeFps = 0;
+    time.menuTime = 0;
+    time.timeMenu = 2000;           //temps d'affichage du niveau par exemple.
     time.currentTime = SDL_GetTicks();
 }
 
 void initPartie(Partie &partie, int nbCanards)
 {
     partie.round = 0;
+    partie.jeu = false;
     partie.afficherMsgTransition = false;
     partie.relancer = false;
     partie.chienEnChasse = false;
@@ -96,6 +101,27 @@ void initChien(Chien &chien)
     chien.nbFrames = 5;
     chien.image[CHIEN_MARCHE].position.x = 0;
     chien.image[CHIEN_MARCHE].position.y = Y_INTRO_CHIEN;
+
+    chien.image[CHIEN_MARCHE].lecture.x = 0;
+    chien.image[CHIEN_MARCHE].lecture.y = 87;
+
+    chien.image[CHIEN_CONTENT].lecture.x = 0;
+    chien.image[CHIEN_CONTENT].lecture.y = 96;
+
+    chien.image[CHIEN_SAUTE_1].lecture.x = 0;
+    chien.image[CHIEN_SAUTE_1].lecture.y = 0;
+
+    chien.image[CHIEN_SAUTE_2].lecture.x = 0;
+    chien.image[CHIEN_SAUTE_2].lecture.y = 0;
+
+    chien.image[CHIEN_RIGOLE].lecture.x = 0;
+    chien.image[CHIEN_RIGOLE].lecture.y = 0;
+
+    chien.image[CHIEN_CONTENT_SIMPLE].lecture.x = 0;
+    chien.image[CHIEN_CONTENT_SIMPLE].lecture.y = 0;
+
+    chien.image[CHIEN_CONTENT_DOUBLE].lecture.x = 0;
+    chien.image[CHIEN_CONTENT_DOUBLE].lecture.y = 0;
 }
 
 void initCanard(Canard &cn, Partie partie)
