@@ -85,9 +85,9 @@ const int LIMITE_BASSE = 270;
 const int NB_MAX_CANARDS = 2;
 const int NB_BOUTONS_DIFFERENTS = 10;
 
-const unsigned int VITESSE_N = 35;
-const unsigned int VITESSE_M = 30;
-const unsigned int VITESSE_V = 25;
+const unsigned int VITESSE_N = 30;
+const unsigned int VITESSE_M = 25;
+const unsigned int VITESSE_V = 20;
 
 struct TableauChasse
 {
@@ -231,6 +231,7 @@ struct Time
     int fpsTime;
 };
 
+
 bool getEvents(SourisEvent &sourisEvent, bool);
 
 void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien chien, Message msgs[]);
@@ -283,5 +284,6 @@ void switchSpriteChien(Chien &chien, Partie &partie, Sprites sprites);
 
 int alea(int mini, int maxi);
 std::string intToString (int number);
+
 
 #endif // HEADER_H

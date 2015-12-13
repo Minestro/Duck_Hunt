@@ -11,7 +11,6 @@ int main(int argc, char* argv[])
     initMessage(msgs);
 
     SDL_Surface *ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF);
-
     /* Titre */
     SDL_WM_SetCaption("Duck Hunt", NULL);
 
@@ -100,7 +99,18 @@ int main(int argc, char* argv[])
             relancerPartie(partie, sprites);
         }
 
-
+        if(partie.round == 5)
+        {
+            partie.round = 0;
+            sprites.hits.lecture.x = 5;
+            sprites.hits.lecture.y = 5;
+            sprites.hits.lecture.w = 27;
+            sprites.hits.lecture.h = 27;
+            for(int i = 0 ; i < 10 ; i++)
+            {
+                partie.hit[i] = HIT_EMPTY;
+            }
+        }
 
         SDL_Delay(1);
     }

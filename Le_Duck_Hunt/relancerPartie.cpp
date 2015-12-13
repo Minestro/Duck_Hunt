@@ -1,6 +1,7 @@
 #include "main.h"
 
 
+
 bool escaped(Sprites sprites, Partie partie)
 {
     bool continuer = true;

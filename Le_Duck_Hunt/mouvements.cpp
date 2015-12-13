@@ -9,13 +9,12 @@ bool chienDevientHeureux(Chien chien, Partie partie)
 {
     return (
              (
-              (
-               chien.image[CHIEN_MARCHE].position.x > (LARGEUR - chien.image[CHIEN_MARCHE].lecture.h * 2) / 2
-               )
+
+              (chien.image[CHIEN_MARCHE].position.x > (LARGEUR - chien.image[CHIEN_MARCHE].lecture.h * 2) / 2)
                && chien.devantHerbe
               )
-                || (partie.canardAbbatu && !chien.devantHerbe)
-            );
+            || (partie.canardAbbatu && !chien.devantHerbe));
+
 }
 
 

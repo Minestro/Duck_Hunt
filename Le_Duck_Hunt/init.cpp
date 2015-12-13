@@ -167,8 +167,8 @@ void initCanard(Canard &cn)
     cn.lecture.y = 0;
     cn.lecture.w = 70;
     cn.lecture.h = 70;
-    cn.position.x = alea(1,LARGEUR-cn.lecture.w);
-    cn.position.y = alea(1,HAUTEUR-LIMITE_BASSE - cn.lecture.h);
+    cn.position.x = alea(1, LARGEUR-cn.lecture.w);
+    cn.position.y = alea(1, HAUTEUR-LIMITE_BASSE - cn.lecture.h);
     do
     {
         cn.vecteurPositionX = alea(-10, 10);
