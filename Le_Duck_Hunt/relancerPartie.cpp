@@ -22,11 +22,6 @@ bool escaped(Sprites sprites, Partie partie)
     return continuer;
 }
 
-bool munitionsEpuisees(Partie partie)
-{
-    return partie.shots == 0;
-}
-
 bool canardsMortsRamasses(Partie partie)
 {
     bool tousRamasses = true;

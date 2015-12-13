@@ -36,7 +36,7 @@ void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMe
         showBouton(ecran, boutons, msgs, BOUTON_QUIT, sx, sy);
         break;
     case 6:
-        std::string score = intToString(partie.niveau);
+        std::string score = intToString(partie.niveau+1);
         std::string mess = "Niveau " + score;
         msgs[MSG_NIVEAU].source = TTF_RenderText_Solid(msgs[MSG_NIVEAU].font, mess.c_str(), msgs[MSG_NIVEAU].textColor);
         msgs[MSG_NIVEAU].position.x = (LARGEUR/2) - (msgs[MSG_NIVEAU].source->w/2);
@@ -89,12 +89,6 @@ void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, 
         sprites.hits.position.x += sprites.hits.lecture.w + 3;
         SDL_BlitSurface(sprites.hits.source, &sprites.hits.lecture, ecran, &sprites.hits.position);
     }
-
-    if(partie.afficherMsgTransition)
-    {
-    //    showMessage(...);
-    }
-
     showPoints(msgs, ecran, partie);
 
     SDL_BlitSurface(sprites.viseur.source, NULL, ecran, &sprites.viseur.position);

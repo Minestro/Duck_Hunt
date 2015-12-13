@@ -45,14 +45,12 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
 
             if(joueurMaladroit(partie) && roundTerminee(sprites, partie))
             {
-                partie.afficherMsgTransition = true;
                 chien.etat = CHIEN_RIGOLE;
                 chien.image[CHIEN_RIGOLE].position = chien.image[CHIEN_MARCHE].position;
                 chien.tempsDepuisEtat = SDL_GetTicks();
             }
             else if(partie.canardsEnVie == 1 && roundTerminee(sprites, partie))
             {
-                partie.afficherMsgTransition = true;
                 chien.etat = CHIEN_CONTENT_SIMPLE;
                 chien.image[CHIEN_CONTENT_SIMPLE].position = chien.image[CHIEN_MARCHE].position;
                 chien.image[CHIEN_CONTENT_SIMPLE].lecture.x = (partie.tableauChasse.typeCanard[0]) * 90;
@@ -60,7 +58,6 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
             }
             else if(partie.canardsEnVie == 0 && roundTerminee(sprites, partie))
             {
-                partie.afficherMsgTransition = true;
                 chien.etat = CHIEN_CONTENT_DOUBLE;
                 chien.image[CHIEN_CONTENT_DOUBLE].position = chien.image[CHIEN_MARCHE].position;
                 chien.image[CHIEN_CONTENT_DOUBLE].lecture.y = (partie.tableauChasse.typeCanard[0]) * 80;
@@ -128,7 +125,6 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
 
             if(SDL_GetTicks() - chien.tempsDepuisEtat > 2500)
             {
-                partie.afficherMsgTransition = false;
                 partie.relancer = true;
                 chien.etat = CHIEN_MARCHE;
             }
@@ -139,7 +135,6 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
 
             if(SDL_GetTicks() - chien.tempsDepuisEtat > 2500)
             {
-                partie.afficherMsgTransition = false;
                 partie.relancer = true;
                 chien.etat = CHIEN_MARCHE;
             }
@@ -148,7 +143,6 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
         case CHIEN_CONTENT_DOUBLE:
             if(SDL_GetTicks() - chien.tempsDepuisEtat > 2500)
             {
-                partie.afficherMsgTransition = false;
                 partie.relancer = true;
                 chien.etat = CHIEN_MARCHE;
             }
@@ -271,7 +265,7 @@ void changementDirection(Canard &canard)
     switch(canard.etat)
     {
         case ALIVE:
-            if(alea(0, 100) == 33
+            if(alea(0, 100) == 42
                 && canard.position.x > 0
                 && canard.position.x + canard.lecture.w < LARGEUR
                 && canard.position.y > 0

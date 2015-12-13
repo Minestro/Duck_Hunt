@@ -70,46 +70,44 @@ int main(int argc, char* argv[])
                 sprites.canard[i].vitesseAnimationTime = temps.currentTime;
             }
         }
-        if (temps.currentTime >= chien.vitesseAnimationTime + chien.vitesseAnimation)
-        {
-            switchSpriteChien(chien, partie, sprites);
-            chien.vitesseAnimationTime = temps.currentTime;
-        }
-
-        if (temps.currentTime >= temps.timeFps + temps.fpsTime)
-        {
-            genererRendu(ecran, sprites, sourisEvent, partie, chien, msgs);
-            SDL_Flip(ecran);
-
-            temps.timeFps = temps.currentTime;
-        }
-
-        if(munitionsEpuisees(partie))
+        if(partie.shots <= 0)
         {
             for(int i = 0 ; i < sprites.canardActifs ; i++)
             {
                 canardSurvivant(sprites.canard[i]);
             }
         }
+        if (temps.currentTime >= chien.vitesseAnimationTime + chien.vitesseAnimation)
+        {
+            switchSpriteChien(chien, partie, sprites);
+            chien.vitesseAnimationTime = temps.currentTime;
+        }
         if(partie.relancer)
         {
             relancerPartie(partie, sprites);
         }
-
-        if(partie.round == 5)
+        if(partie.round >= 5)
         {
             partie.round = 0;
             partie.niveau ++;
             initPartie(partie, sprites.canardActifs);
+            partie.jeu = true;
             for (int i=0; i<sprites.canardActifs; i++)
             {
                 initCanard(sprites.canard[i], partie);
             }
+            initTableau(partie.tableauChasse, sprites);
             modeMenu = 6;
         }
         if (keystate[SDLK_ESCAPE])
         {
             modeMenu = 5;
+        }
+        if (temps.currentTime >= temps.timeFps + temps.fpsTime)
+        {
+            genererRendu(ecran, sprites, sourisEvent, partie, chien, msgs);
+            SDL_Flip(ecran);
+            temps.timeFps = temps.currentTime;
         }
         SDL_Delay(1);
     }

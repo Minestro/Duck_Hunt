@@ -15,7 +15,7 @@ void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, Time temps, 
         }
         partie.alreadyGetEvent = true;
     }
-    if (sourisEvent.clicGauche && !munitionsEpuisees(partie) && partie.jeu)
+    if (sourisEvent.clicGauche && !(partie.shots < 0) && partie.jeu)
     {
         if (!partie.alreadyClic)
         {
@@ -27,6 +27,7 @@ void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, Time temps, 
             partie.alreadyShot = true;
             canard.etat = TOUCHED;
             partie.score += canard.type * 500;
+            //partie.canardsEnVie--;
             canard.tempsDepuisTir = temps.currentTime;
             if(partie.hit[partie.round * 2] == HIT_EMPTY)
             {
@@ -37,6 +38,10 @@ void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, Time temps, 
                 partie.hit[partie.round * 2 + 1] = HIT_OK;
             }
         }
+    }
+    if (partie.shots < 0)
+    {
+        partie.shots = 0;
     }
 }
 

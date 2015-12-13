@@ -3,6 +3,8 @@
 void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[], Partie &partie, Chien &chien)
 {
     bool sortir = false;
+    time.currentTime = SDL_GetTicks();
+    time.timeMenu = time.currentTime;
     while (!sortir && modeMenu!=0)
     {
         if (getEvents(sourisEvent, 1))
@@ -47,6 +49,7 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
                     sprites.canard[i].type = alea(0, 3);
                     initCanard(sprites.canard[i], partie);
                 }
+                partie.niveau = 0;
                 initPartie(partie, sprites.canardActifs);
                 initTableau(partie.tableauChasse, sprites);
             }
@@ -78,12 +81,14 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
             {
                 modeMenu = 0;
                 time.timeMenu = time.currentTime;
-            } else {
-            if (time.currentTime >= time.timeFps + time.fpsTime)
-            {
-                showMenu(ecran, sprites, boutons, modeMenu, msgs, partie, sourisEvent.sx, sourisEvent.sy);
-                time.timeFps = time.currentTime;
             }
+            else
+            {
+                if (time.currentTime >= time.timeFps + time.fpsTime)
+                {
+                    showMenu(ecran, sprites, boutons, modeMenu, msgs, partie, sourisEvent.sx, sourisEvent.sy);
+                    time.timeFps = time.currentTime;
+                }
             }
             break;
         default:

@@ -59,8 +59,8 @@ void initTime(Time &time)
 {
     time.fpsTime = (1 / (FPS_MAX * 1.0) * 1000); // Calcule en ms le temps entre chaque actualisation d'image à partir de la constante FPS_LIMIT.
     time.timeFps = 0;
-    time.menuTime = 0;
-    time.timeMenu = 2000;           //temps d'affichage du niveau par exemple.
+    time.menuTime = 2000;       //temps d'affichage du niveau par exemple.
+    time.timeMenu = 0;
     time.currentTime = SDL_GetTicks();
 }
 
@@ -68,7 +68,6 @@ void initPartie(Partie &partie, int nbCanards)
 {
     partie.round = 0;
     partie.jeu = false;
-    partie.afficherMsgTransition = false;
     partie.relancer = false;
     partie.chienEnChasse = false;
     for(int i = 0 ; i < nbCanards ; i++)

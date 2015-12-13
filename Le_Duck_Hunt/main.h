@@ -112,7 +112,6 @@ struct Message // Une structure pour afficher avec les fontes, par exemple les s
 struct Partie
 {
     TableauChasse tableauChasse;
-    bool afficherMsgTransition;
     bool relancer;
     bool jeu;
     bool chienEnChasse;
@@ -249,7 +248,6 @@ void showBouton(SDL_Surface *ecran, Boutons &boutons, Message msgs[], int bouton
 void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[], Partie &partie, Chien &chien);
 bool testHoverBouton(int, int, Bouton, SDL_Rect lecture);
 
-bool munitionsEpuisees(Partie partie);
 bool escaped(Sprites sprites, Partie partie);
 bool roundTerminee(Sprites sprites, Partie partie);
 bool canardsMortsRamasses(Partie partie);
