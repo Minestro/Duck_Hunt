@@ -30,7 +30,7 @@ void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMe
         showBouton(ecran, boutons, msgs, BOUTON_SCORE, sx, sy);
         break;
     case 5:
-        msgs[MSG_PAUSE].source = TTF_RenderText_Solid(msgs[MSG_PAUSE].font, "Jeu en pause", msgs[MSG_PAUSE].textColor);
+        msgs[MSG_PAUSE].source = TTF_RenderText_Solid(msgs[MSG_PAUSE].font, msgs[MSG_PAUSE].message.c_str(), msgs[MSG_PAUSE].textColor);
         msgs[MSG_PAUSE].position.x = (LARGEUR/2) - (msgs[MSG_PAUSE].source->w/2);
         SDL_BlitSurface(msgs[MSG_PAUSE].source, NULL, ecran, &msgs[MSG_PAUSE].position);
 
@@ -57,6 +57,31 @@ void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMe
             SDL_BlitSurface(msgs[MSG_TABLEAU_SCORE].source, NULL, ecran, &msgs[MSG_TABLEAU_SCORE].position);
         }
         showBouton(ecran, boutons, msgs, BOUTON_RETOUR, sx, sy);
+        break;
+    case 8:
+        mess = "";
+
+        msgs[MSG_TEXTE].source = TTF_RenderText_Solid(msgs[MSG_TEXTE].font, "Nouveau High Score ! Votre Score :", msgs[MSG_TEXTE].textColor);
+        msgs[MSG_TEXTE].position.y = 100;
+        msgs[MSG_TEXTE].position.x = (LARGEUR/2) - (msgs[MSG_TEXTE].source->w/2);
+        SDL_BlitSurface(msgs[MSG_TEXTE].source, NULL, ecran, &msgs[MSG_TEXTE].position);
+
+        msgs[MSG_SCORE_ROUGE].source = TTF_RenderText_Solid(msgs[MSG_SCORE_ROUGE].font, intToString(partie.score).c_str(), msgs[MSG_SCORE_ROUGE].textColor);
+        msgs[MSG_SCORE_ROUGE].position.y = 170;
+        msgs[MSG_SCORE_ROUGE].position.x = (LARGEUR/2) - (msgs[MSG_SCORE_ROUGE].source->w/2);
+        SDL_BlitSurface(msgs[MSG_SCORE_ROUGE].source, NULL, ecran, &msgs[MSG_SCORE_ROUGE].position);
+
+        msgs[MSG_TEXTE].source = TTF_RenderText_Solid(msgs[MSG_TEXTE].font, "Entrez votre pseudo (10 car max):", msgs[MSG_TEXTE].textColor);
+        msgs[MSG_TEXTE].position.y = 250;
+        msgs[MSG_TEXTE].position.x = (LARGEUR/2) - (msgs[MSG_TEXTE].source->w/2);
+        SDL_BlitSurface(msgs[MSG_TEXTE].source, NULL, ecran, &msgs[MSG_TEXTE].position);
+
+        msgs[MSG_PSEUDO].source = TTF_RenderText_Solid(msgs[MSG_PSEUDO].font, partie.pseudoT, msgs[MSG_PSEUDO].textColor);
+        msgs[MSG_PSEUDO].position.y = 300;
+        msgs[MSG_PSEUDO].position.x = (LARGEUR/2)-100;
+        SDL_BlitSurface(msgs[MSG_PSEUDO].source, NULL, ecran, &msgs[MSG_PSEUDO].position);
+
+        showBouton(ecran, boutons, msgs, BOUTON_OK, sx, sy);
         break;
     }
     SDL_BlitSurface(sprites.viseur.source, NULL, ecran, &sprites.viseur.position);

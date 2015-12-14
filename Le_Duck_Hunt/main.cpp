@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
     srand((unsigned)time(NULL));
 
     int modeJeu = 0;    // Le mode de jeu.
-    int modeMenu = 1;   // Détermine la page du menu à afficher.
+    int modeMenu = 8;   // Détermine la page du menu à afficher.
 
     Partie partie;
     partie.score = 0;

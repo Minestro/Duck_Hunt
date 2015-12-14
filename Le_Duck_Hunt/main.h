@@ -67,6 +67,9 @@
 #define MSG_1_TOUCHE 5
 #define MSG_2_TOUCHE 6
 #define MSG_TABLEAU_SCORE 7
+#define MSG_TEXTE 8
+#define MSG_SCORE_ROUGE 9
+#define MSG_PSEUDO 10
 
 //Les différents noms des boutons
 #define BOUTON_PLAY 0
@@ -77,6 +80,7 @@
 #define BOUTON_MODE_CLASSIQUE 5
 #define BOUTON_MODE_DEUX 6
 #define BOUTON_RETOUR 7
+#define BOUTON_OK 8
 
 //Pour les valeurs d'un tableau
 #define NOT_SET -1
@@ -89,8 +93,9 @@ const int FPS_MAX = 60;
 const int LIMITE_BASSE = 270;
 const int NB_MAX_CANARDS = 2;
 const int NB_BOUTONS_DIFFERENTS = 10;
-const int NOMBRE_MESSAGES = 10;
+const int NOMBRE_MESSAGES = 11;
 const int NB_HIGH_SCORE = 10;
+const int LONGUEUR_MAX_PSEUDO = 10;
 
 const unsigned int VITESSE_N = 30;
 const unsigned int VITESSE_M = 25;
@@ -140,6 +145,8 @@ struct Partie
     int xChute[NB_MAX_CANARDS];
     bool canardRamasse[NB_MAX_CANARDS];
     HighScore highScore[NB_HIGH_SCORE];
+    char pseudoT[LONGUEUR_MAX_PSEUDO];
+    std::string pseudo;
 };
 
 struct Sprite // Peut représenter une image comme une feuille de sprites
@@ -243,7 +250,9 @@ struct Time
     Uint32 currentTime;
     Uint32 timeFps;
     Uint32 timeMenu;
-    int fpsTime, menuTime;
+    Uint32 timeKey;
+    Uint32 timeDefKey;
+    int fpsTime, menuTime, keyTime, defKeyTime;
 };
 
 

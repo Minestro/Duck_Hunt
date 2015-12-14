@@ -14,12 +14,17 @@ void initMessage(Message msgs[])
     msgs[MSG_SCORE].position.y = 667;
     msgs[MSG_PAUSE].position.y = 100;
     msgs[MSG_NIVEAU].position.y = HAUTEUR/2;
+    msgs[MSG_0_TOUCHE].position.x = LARGEUR / 2;
+    msgs[MSG_0_TOUCHE].position.y = 20;
 
     msgs[MSG_SCORE].fontSize = 35;
     msgs[MSG_BOUTONS].fontSize = 40;
     msgs[MSG_PAUSE].fontSize = 40;
     msgs[MSG_NIVEAU].fontSize = 70;
+    msgs[MSG_TEXTE].fontSize = 35;
+    msgs[MSG_SCORE_ROUGE].fontSize = 60;
     msgs[MSG_TABLEAU_SCORE].fontSize = 50;
+    msgs[MSG_PSEUDO].fontSize = 50;
     msgs[MSG_0_TOUCHE].fontSize = 50;
 
     for (int i = 0 ; i < NOMBRE_MESSAGES; i++)
@@ -28,11 +33,11 @@ void initMessage(Message msgs[])
         msgs[i].textColor.g = 255;
         msgs[i].textColor.b = 255;
         msgs[i].font = TTF_OpenFont("font/duck_hunt.ttf", msgs[MSG_SCORE].fontSize);
-
     }
+    msgs[MSG_SCORE_ROUGE].textColor = {255,0,0};
+
     msgs[MSG_0_TOUCHE].message = "AUCUN_CANARD_MORT";
-    msgs[MSG_0_TOUCHE].position.x = LARGEUR / 2;
-    msgs[MSG_0_TOUCHE].position.y = 20;
+    msgs[MSG_PAUSE].message = "Jeu en pause";
 }
 
 void initBouton(Boutons &boutons)
@@ -43,6 +48,7 @@ void initBouton(Boutons &boutons)
     boutons.bouton[BOUTON_REPRENDRE].contenu = "Reprendre";
     boutons.bouton[BOUTON_RETOUR].contenu = "Retour";
     boutons.bouton[BOUTON_SCORE].contenu = "High Score";
+    boutons.bouton[BOUTON_OK].contenu = "OK";
     for(int i = 0 ; i < 2 ; i++)
     {
         boutons.lecture[i].x = i * 226;
@@ -64,6 +70,10 @@ void initTime(Time &time)
     time.timeFps = 0;
     time.menuTime = 2000;       //temps d'affichage du niveau par exemple.
     time.timeMenu = 0;
+    time.keyTime = 700;
+    time.timeKey = 0;
+    time.defKeyTime = 100;
+    time.timeDefKey = 0;
     time.currentTime = SDL_GetTicks();
 }
 

@@ -3,8 +3,21 @@
 void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[], Partie &partie, Chien &chien)
 {
     bool sortir = false;
+    int lastKeyPressed;
+    int lastKeyPressedBis;
+    bool keyPressed = false;
+    bool keyPressedBis = false;
+    bool defilTouche = false;
+    for (int i=0; i<LONGUEUR_MAX_PSEUDO; i++)
+    {
+        partie.pseudoT[i] = 0;
+    }
+    int carActif = 0;
+    Uint8 *keystate = SDL_GetKeyState(NULL);
     time.currentTime = SDL_GetTicks();
     time.timeMenu = time.currentTime;
+    time.timeKey = time.currentTime;
+    time.timeDefKey = time.currentTime;
     while (!sortir && modeMenu!=0)
     {
         if (getEvents(sourisEvent, 1))
@@ -105,6 +118,70 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
             if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_RETOUR], boutons.lecture[0]))&&sourisEvent.clicGauche)
             {
                 modeMenu = 1;
+            }
+            if (time.currentTime >= time.timeFps + time.fpsTime)
+            {
+                showMenu(ecran, sprites, boutons, modeMenu, msgs, partie, sourisEvent.sx, sourisEvent.sy);
+                time.timeFps = time.currentTime;
+            }
+            break;
+        case 8:
+            boutons.bouton[BOUTON_OK].position.x = (LARGEUR/2) - (boutons.lecture[0].w/2);
+            boutons.bouton[BOUTON_OK].position.y = 600;
+            lastKeyPressedBis = lastKeyPressed;
+            keyPressedBis = keyPressed;
+            keyPressed = false;
+            if (carActif < LONGUEUR_MAX_PSEUDO-1)
+            {
+                for (int i=97; i<123; i++)
+                {
+                    if (keystate[i])
+                    {
+                        lastKeyPressed = i;
+                        keyPressed = true;
+                    }
+                }
+            }
+            if ((carActif > 0)&&keystate[SDLK_BACKSPACE])
+            {
+                lastKeyPressed = -1;
+                keyPressed = true;
+            }
+            if ((lastKeyPressedBis !=lastKeyPressed)||(defilTouche&&(time.currentTime >= time.timeDefKey + time.defKeyTime))||(keyPressedBis!=keyPressed))
+            {
+                if (keyPressedBis!=keyPressed)
+                {
+                    defilTouche = false;
+                }
+                if (carActif < LONGUEUR_MAX_PSEUDO-1)
+                {
+                    for (int i=97; i<123; i++)
+                    {
+                        if (keystate[i])
+                        {
+                            partie.pseudoT[carActif]=(i-32);
+                            carActif++;
+                            time.timeKey = time.currentTime;
+                        }
+                    }
+                }
+                if ((carActif > 0)&&keystate[SDLK_BACKSPACE])
+                {
+                    partie.pseudoT[carActif-1]=0;
+                    carActif--;
+                    time.timeKey = time.currentTime;
+                }
+                if (defilTouche)
+                {
+                    time.timeDefKey = time.currentTime;
+                }
+            }
+            else
+            {
+                if ((time.currentTime >= time.timeKey + time.keyTime)&&keyPressed)
+                {
+                    defilTouche = true;
+                }
             }
             if (time.currentTime >= time.timeFps + time.fpsTime)
             {
