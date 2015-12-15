@@ -95,7 +95,7 @@ const int NB_MAX_CANARDS = 2;
 const int NB_BOUTONS_DIFFERENTS = 10;
 const int NOMBRE_MESSAGES = 11;
 const int NB_HIGH_SCORE = 10;
-const int LONGUEUR_MAX_PSEUDO = 10;
+const int LONGUEUR_MAX_PSEUDO = 11;
 
 const unsigned int VITESSE_N = 30;
 const unsigned int VITESSE_M = 25;
@@ -257,8 +257,12 @@ struct Time
 
 
 bool testHighScore (std::string fichier, Partie &partie);
-void getScore (std::string fichier, std::string &nom, std::string &score, int ligne);
+void getScore (std::string fichier, HighScore HighScore[]);
+void addScore (std::string fichier, std::string nom, int score, HighScore highScore[]);
 bool getEvents(SourisEvent &sourisEvent, bool);
+void echangerTabHS(HighScore highScore[], int pos1, int pos2);
+int separer(HighScore highscore[], int debut, int fin);
+void triScore (HighScore highScore[],  int debut, int fin);
 
 void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien chien, Message msgs[]);
 void showChien(SDL_Surface *ecran, Chien chien);
@@ -286,6 +290,7 @@ void initChien(Chien &chien);
 void initMessage(Message msgs[]);
 void initTableau(TableauChasse &tableau, Sprites sprites);
 void initHighScore(HighScore highScore[]);
+void initFichiers();
 
 SDL_Surface *loadImage(std::string);
 SDL_Surface *loadImageWithColorKey(std::string, int, int, int);

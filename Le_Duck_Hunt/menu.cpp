@@ -12,12 +12,14 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
     {
         partie.pseudoT[i] = 0;
     }
+    getScore("scoresClassic", partie.highScore);
     int carActif = 0;
     Uint8 *keystate = SDL_GetKeyState(NULL);
     time.currentTime = SDL_GetTicks();
     time.timeMenu = time.currentTime;
     time.timeKey = time.currentTime;
     time.timeDefKey = time.currentTime;
+    partie.score = -99;
     while (!sortir && modeMenu!=0)
     {
         if (getEvents(sourisEvent, 1))
@@ -128,6 +130,7 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
         case 8:
             boutons.bouton[BOUTON_OK].position.x = (LARGEUR/2) - (boutons.lecture[0].w/2);
             boutons.bouton[BOUTON_OK].position.y = 600;
+
             lastKeyPressedBis = lastKeyPressed;
             keyPressedBis = keyPressed;
             keyPressed = false;
@@ -183,10 +186,17 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
                     defilTouche = true;
                 }
             }
+
+            partie.pseudo = std::string(partie.pseudoT);
             if (time.currentTime >= time.timeFps + time.fpsTime)
             {
                 showMenu(ecran, sprites, boutons, modeMenu, msgs, partie, sourisEvent.sx, sourisEvent.sy);
                 time.timeFps = time.currentTime;
+            }
+            if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_OK], boutons.lecture[0]))&&sourisEvent.clicGauche)
+            {
+                addScore("scoresClassic", partie.pseudo, partie.score, partie.highScore);
+                modeMenu = 1;
             }
             break;
         default:

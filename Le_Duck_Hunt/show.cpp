@@ -46,11 +46,10 @@ void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMe
         break;
     case 7:
         msgs[MSG_TABLEAU_SCORE].position.y = 0;
-        for (int i=1; i<NB_HIGH_SCORE+1; i++)
+        for (int i=0; i<NB_HIGH_SCORE; i++)
         {
             ligne = "";
-            getScore("scoresClassic", nom, score2, i);
-            ligne = nom + " " + score2;
+            ligne = partie.highScore[i].nom + " " + intToString(partie.highScore[i].score);
             msgs[MSG_TABLEAU_SCORE].source = TTF_RenderText_Solid(msgs[MSG_TABLEAU_SCORE].font, ligne.c_str(), msgs[MSG_TABLEAU_SCORE].textColor);
             msgs[MSG_TABLEAU_SCORE].position.x = (LARGEUR/2) - (msgs[MSG_TABLEAU_SCORE].source->w/2);
             msgs[MSG_TABLEAU_SCORE].position.y += i + msgs[MSG_TABLEAU_SCORE].fontSize-10;

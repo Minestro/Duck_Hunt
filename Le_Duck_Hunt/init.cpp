@@ -8,6 +8,39 @@ void initTableau(TableauChasse &tableau, Sprites sprites)
     }
 }
 
+void initFichiers()
+{
+    std::fstream f1, f2;
+    f1.open("scoresClassic", std::ios::in);
+    if (f1.fail())
+    {
+        f2.open("scoresClassic", std::ios::out);
+        for (int i=0; i<NB_HIGH_SCORE; i++)
+        {
+            f2 << "Not_Set";
+            f2 << " ";
+            f2 << 0;
+            f2 << " ";
+        }
+        f2.close();
+    }
+    f1.close();
+    f1.open("scoresAvancee", std::ios::in);
+    if (f1.fail())
+    {
+        f2.open("scoresAvancee", std::ios::out);
+        for (int i=0; i<NB_HIGH_SCORE; i++)
+        {
+            f2 << "Not_Set";
+            f2 << " ";
+            f2 << 0;
+            f2 << " ";
+        }
+        f2.close();
+    }
+    f1.close();
+}
+
 void initMessage(Message msgs[])
 {
     msgs[MSG_SCORE].position.x = 580;

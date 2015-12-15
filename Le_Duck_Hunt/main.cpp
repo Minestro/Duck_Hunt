@@ -41,8 +41,11 @@ int main(int argc, char* argv[])
     SourisEvent sourisEvent;
     initSourisEvent(sourisEvent);
 
+    initFichiers();
+
     SDL_ShowCursor(SDL_DISABLE);
-    do
+    menu(ecran, sprites, boutons, modeMenu, modeJeu, sourisEvent, temps, msgs, partie, chien);
+    while (modeJeu != 0)
     {
         if (modeMenu != 0)
         {
@@ -112,8 +115,6 @@ int main(int argc, char* argv[])
 
         SDL_Delay(1);
     }
-    while (modeJeu != 0);
-
     SDL_Quit();
     IMG_Quit();
     TTF_Quit();
