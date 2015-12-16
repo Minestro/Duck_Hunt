@@ -45,7 +45,6 @@ SDL_Surface *loadImageWithColorKey(std::string filename, int r, int g, int b)
     if(loadedImage == NULL)
     {
         std::cout << "Problème lors d'un chargement d'image : " << filename << std::endl;
-        exit(EXIT_FAILURE);
     }
 
     //If the image loaded
@@ -81,10 +80,12 @@ SDL_Surface *loadImageWithColorKey(std::string filename, int r, int g, int b)
 
 /*** fonction qui charge les images ***/
 
-void chargerImages(Sprites &sprites, Chien &chien)
+void chargerImages(Sprites &sprites, Chien &chien, Boutons &boutons)
 {
     SDL_Rect initializer;
     initializer.x = initializer.y = 0;
+
+    boutons.source = loadImageWithColorKey("sprites/boutons.bmp", 0, 0, 0);
 
     sprites.background_menu.source = load_image("sprites/menu.png");
     sprites.background.source = load_image("sprites/backGame.png");
@@ -112,7 +113,7 @@ void chargerImages(Sprites &sprites, Chien &chien)
     sprites.shots.lecture.h = 50;
 
     sprites.canardSprite[DARK] = loadImageWithColorKey("sprites/canardNoir.png", 228, 255, 0);
-    sprites.canardSprite[CHESNUT] = loadImageWithColorKey("sprites/canardNoir.png", 228, 255, 0);
+    sprites.canardSprite[CHESNUT] = loadImageWithColorKey("sprites/canardMarron.png", 228, 255, 0);
     sprites.canardSprite[BLOOD] = loadImageWithColorKey("sprites/canardRouge.png", 228, 255, 0);
     sprites.canardSprite[BLUISH_PURPLE] = loadImageWithColorKey("sprites/canardViolet.png", 228, 255, 0);
 

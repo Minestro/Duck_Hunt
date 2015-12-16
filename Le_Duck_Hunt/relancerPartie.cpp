@@ -6,15 +6,7 @@ bool escaped(Sprites sprites, Partie partie)
     int i = 0;
     while(continuer && i < sprites.canardActifs)
     {
-        continuer = (sprites.canard[i].echappe && sprites.canard[i].etat == ALIVE
-                    && (
-                        sprites.canard[i].position.x + sprites.canard[i].lecture.w < 0
-                        || sprites.canard[i].position.x > LARGEUR
-                        || sprites.canard[i].position.y + sprites.canard[i].lecture.h < 0
-                        || sprites.canard[i].position.y > HAUTEUR - LIMITE_BASSE
-
-                    ))
-                    || sprites.canard[i].etat == DEAD;
+        continuer = partie.tableauChasse.typeCanard[i] == DUCK_ESCAPED;
         i++;
     }
     return continuer;
@@ -26,14 +18,22 @@ bool canardsMortsRamasses(Partie partie)
     int i = 0;
     while(tousRamasses && i < NB_MAX_CANARDS)
     {
-        tousRamasses = partie.canardRamasse[i++];
+        tousRamasses = (partie.tableauChasse.typeCanard[i] != DUCK_ESCAPED) && (partie.tableauChasse.typeCanard[i] != NOT_SET);
+        i++;
     }
     return tousRamasses;
 }
 
 bool roundTerminee(Sprites sprites, Partie partie)
 {
-    return canardsMortsRamasses(partie) || escaped(sprites, partie);
+    bool tableauChasseRempli = true;
+    int i = 0;
+    while(tableauChasseRempli && i < sprites.canardActifs)
+    {
+        tableauChasseRempli = partie.tableauChasse.typeCanard[i++] != NOT_SET;
+    }
+
+    return tableauChasseRempli || escaped(sprites, partie);
 }
 
 bool joueurMaladroit(Partie partie)

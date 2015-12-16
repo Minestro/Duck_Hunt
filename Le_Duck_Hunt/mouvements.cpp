@@ -5,6 +5,42 @@ int alea(int mini, int maxi)
     return (rand() % (++maxi - mini))  + mini;
 }
 
+void ramasserCanard(Chien &chien, Partie &partie, Sprites sprites, int i)
+{
+    switch(chien.etat)
+    {
+        case CHIEN_MARCHE:
+            if(partie.chienEnChasse)
+            {
+                if(
+                    (
+                        abs((chien.image[CHIEN_MARCHE].position.x + chien.image[CHIEN_MARCHE].lecture.w / 2) - (partie.xChute[i])) < 10
+                    )
+                  )
+                {
+                    partie.tableauChasse.typeCanard[i] = sprites.canard[i].type;
+                    partie.chienEnChasse = false;
+                    for(int j = 0 ; j < sprites.canardActifs ; j++)
+                    {
+                        partie.canardRamasse[j] = true;
+                    }
+                }
+            }
+            break;
+        case CHIEN_CONTENT:
+            if(chien.image[CHIEN_CONTENT].position.x <= partie.xChute[i])
+            {
+                if(chien.vecteurPositionX < 0)
+                {
+                    chien.vecteurPositionX *= -1;
+                    chien.image[CHIEN_MARCHE].lecture.y = chien.image[CHIEN_MARCHE].lecture.h;
+                }
+                chien.image[CHIEN_CONTENT].lecture.y = 100;
+            }
+            break;
+    }
+}
+
 bool chienDevientHeureux(Chien chien, Partie partie)
 {
     return (
@@ -53,7 +89,16 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
             {
                 chien.etat = CHIEN_CONTENT_SIMPLE;
                 chien.image[CHIEN_CONTENT_SIMPLE].position = chien.image[CHIEN_MARCHE].position;
-                chien.image[CHIEN_CONTENT_SIMPLE].lecture.x = (partie.tableauChasse.typeCanard[0]) * 90;
+
+                if(partie.tableauChasse.typeCanard[0] > NOT_SET) // Si il y a un type d'affecté <-- --> si la case correspond à un type de canard ramassé
+                {
+                    chien.image[CHIEN_CONTENT_SIMPLE].lecture.x = (partie.tableauChasse.typeCanard[0]) * 90;
+                }
+                else
+                {
+                    chien.image[CHIEN_CONTENT_SIMPLE].lecture.x = (partie.tableauChasse.typeCanard[1]) * 90;
+                }
+
                 chien.tempsDepuisEtat = SDL_GetTicks();
             }
             else if(partie.canardsEnVie == 0 && roundTerminee(sprites, partie))
@@ -154,9 +199,20 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
     }
 }
 
-void canardSurvivant(Sprites &sprites, int numeroCanard)
+void canardSurvivant(Sprites &sprites, Partie &partie, int numeroCanard)
 {
     sprites.canard[numeroCanard].echappe = sprites.canard[numeroCanard].etat == ALIVE;
+    if((
+                partie.tableauChasse.typeCanard[numeroCanard] == NOT_SET)
+        && (
+            sprites.canard[numeroCanard].position.x + sprites.canard[numeroCanard].lecture.w < 0
+            || sprites.canard[numeroCanard].position.x > LARGEUR
+            || sprites.canard[numeroCanard].position.y + sprites.canard[numeroCanard].lecture.h < 0
+            || sprites.canard[numeroCanard].position.y > HAUTEUR - LIMITE_BASSE
+        ) && sprites.canard[numeroCanard].echappe)
+    {
+        partie.tableauChasse.typeCanard[numeroCanard] = DUCK_ESCAPED;
+    }
 }
 
 
@@ -209,7 +265,7 @@ void detectionBordsChien(Chien &chien)
 
 
 
-void detectionBordsCanard(Canard &canard, Partie &partie)
+void detectionBordsCanard(Canard &canard, Partie &partie, int i)
 {
     switch(canard.etat)
     {
@@ -245,7 +301,7 @@ void detectionBordsCanard(Canard &canard, Partie &partie)
                 partie.canardsEnVie--;
                 partie.canardAbbatu = true;
                 partie.chienEnChasse = true;
-                sauvegarderPositionX(partie, canard);
+                sauvegarderPositionX(partie, canard, i);
             }
             break;
         case DEAD:
@@ -254,9 +310,9 @@ void detectionBordsCanard(Canard &canard, Partie &partie)
     }
 }
 
-void sauvegarderPositionX(Partie &partie, Canard canard) // On sauvegarde la position Y à la mort d'un canard pour que le chien puisse le retrouver
+void sauvegarderPositionX(Partie &partie, Canard canard, int i) // On sauvegarde la position Y à la mort d'un canard pour que le chien puisse le retrouver
 {
-    partie.xChute[(partie.canardsEnVie + 1) % NB_MAX_CANARDS] = canard.position.x + canard.lecture.w / 2;
+    partie.xChute[i] = canard.position.x + canard.lecture.w / 2;
 }
 
 void changementDirection(Canard &canard)

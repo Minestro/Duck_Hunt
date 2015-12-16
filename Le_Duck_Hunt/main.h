@@ -85,6 +85,7 @@
 //Pour les valeurs d'un tableau
 #define NOT_SET -1
 #define TO_RESET -2
+#define DUCK_ESCAPED -3
 
 const int HAUTEUR = 761;
 const int LARGEUR = 750;
@@ -295,22 +296,23 @@ void initFichiers();
 
 SDL_Surface *loadImage(std::string);
 SDL_Surface *loadImageWithColorKey(std::string, int, int, int);
-void chargerImages(Sprites &sprites, Chien &chien);
+void chargerImages(Sprites &sprites, Chien &chien, Boutons &boutons);
 
 void changementDirection(Canard &canard);
 void mouvementsCanard(Canard &canard);
-void detectionBordsCanard(Canard &canard, Partie &partie);
+void detectionBordsCanard(Canard &canard, Partie &partie, int i);
 void switchSpriteCanard(Canard &canard);
-void sauvegarderPositionX(Partie &partie, Canard canard);
+void sauvegarderPositionX(Partie &partie, Canard canard, int i);
 void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, Time temps, int &modeJeu);
 bool testShot(SourisEvent sourisEvent, SDL_Rect lecture, SDL_Rect position);
 void touched(Canard &canard, Time temps);
-void canardSurvivant(Sprites &sprites, int numeroCanard);
+void canardSurvivant(Sprites &sprites, Partie &partie, int numeroCanard);
 
 void controlesChien(Chien &chien, Partie &partie, Sprites sprites);
 bool chienDevientHeureux(Chien chien, Partie partie);
 void detectionBordsChien(Chien &chien);
 void switchSpriteChien(Chien &chien, Partie &partie, Sprites sprites);
+void ramasserCanard(Chien &chien, Partie &partie, Sprites sprites, int i);
 
 int alea(int mini, int maxi);
 std::string intToString (int number);

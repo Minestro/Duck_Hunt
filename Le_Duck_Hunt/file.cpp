@@ -39,6 +39,7 @@ void getScore (std::string fichier, HighScore highScore[])
     while ((i<NB_HIGH_SCORE)&&(!f1.eof()));
     triScore(highScore, 0, NB_HIGH_SCORE-1);
     f1.close();
+
     f1.open(fichier.c_str(), std::ios::out);
     if(f1.fail())
     {
@@ -57,13 +58,8 @@ void getScore (std::string fichier, HighScore highScore[])
 void addScore (std::string fichier, std::string nom, int score, HighScore highScore[])
 {
     std::fstream f1;
-    getScore(fichier.c_str(), highScore);
     HighScore highScoreTmp[NB_HIGH_SCORE+1];
-    for (int i=0; i<NB_HIGH_SCORE; i++)
-    {
-        highScoreTmp[i].nom = highScore[i].nom;
-        highScoreTmp[i].score = highScore[i].score;
-    }
+    getScore(fichier.c_str(), highScoreTmp);
     highScoreTmp[NB_HIGH_SCORE].nom = nom;
     highScoreTmp[NB_HIGH_SCORE].score = score;
     triScore(highScoreTmp, 0, NB_HIGH_SCORE);
@@ -74,11 +70,11 @@ void addScore (std::string fichier, std::string nom, int score, HighScore highSc
     }
     for (int i=0; i<NB_HIGH_SCORE; i++)
     {
-        highScore[NB_HIGH_SCORE-i-1].nom = highScoreTmp[i].nom;
-        highScore[NB_HIGH_SCORE-i-1].score = highScoreTmp[i].score;
-        f1 << highScoreTmp[i].nom;
+        highScore[i].nom = highScoreTmp[i].nom;
+        highScore[i].score = highScoreTmp[i].score;
+        f1 << highScore[i].nom;
         f1 << " ";
-        f1 << highScoreTmp[i].score;
+        f1 << highScore[i].score;
         f1 << " ";
     }
     f1.close();
@@ -102,7 +98,7 @@ int separer(HighScore highscore[], int debut, int fin)
     sep = debut;
     for(i = sep ; i < fin ; i++)
     {
-        if(highscore[i].score < highscore[fin].score)
+        if(highscore[i].score > highscore[fin].score)
         {
             echangerTabHS(highscore, i, sep);
             sep++;

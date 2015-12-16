@@ -32,10 +32,10 @@ int main(int argc, char* argv[])
     Sprites sprites;
     Chien chien;
 
-    chargerImages(sprites, chien);
-
     Boutons boutons;
     initBouton(boutons);
+
+    chargerImages(sprites, chien, boutons);
 
     Uint8 *keystate = SDL_GetKeyState(NULL);
     SourisEvent sourisEvent;
@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
             if ((temps.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse))
             {
                 mouvementsCanard(sprites.canard[i]);
-                detectionBordsCanard(sprites.canard[i], partie);
+                detectionBordsCanard(sprites.canard[i], partie, i);
                 changementDirection(sprites.canard[i]);
                 if(sprites.canard[i].etat == TOUCHED)
                 {
@@ -77,14 +77,22 @@ int main(int argc, char* argv[])
         {
             for(int i = 0 ; i < sprites.canardActifs ; i++)
             {
-                canardSurvivant(sprites, i);
+                canardSurvivant(sprites, partie, i);
             }
         }
         if (temps.currentTime >= chien.vitesseAnimationTime + chien.vitesseAnimation)
         {
             switchSpriteChien(chien, partie, sprites);
             chien.vitesseAnimationTime = temps.currentTime;
+            for(int i = 0 ; i < sprites.canardActifs ; i++)
+            {
+                if(partie.tableauChasse.typeCanard[i] == NOT_SET)
+                {
+                    ramasserCanard(chien, partie, sprites, i);
+                }
+            }
         }
+
         if(partie.relancer)
         {
             relancerPartie(partie, sprites);

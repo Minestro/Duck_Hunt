@@ -67,7 +67,9 @@ void initMessage(Message msgs[])
         msgs[i].textColor.b = 255;
         msgs[i].font = TTF_OpenFont("font/duck_hunt.ttf", msgs[MSG_SCORE].fontSize);
     }
-    msgs[MSG_SCORE_ROUGE].textColor = {255,0,0};
+    msgs[MSG_SCORE_ROUGE].textColor.r = 255;
+    msgs[MSG_SCORE_ROUGE].textColor.g = 0;
+    msgs[MSG_SCORE_ROUGE].textColor.b = 0;
 
     msgs[MSG_0_TOUCHE].message = "AUCUN_CANARD_MORT";
     msgs[MSG_PAUSE].message = "Jeu en pause";
@@ -75,7 +77,6 @@ void initMessage(Message msgs[])
 
 void initBouton(Boutons &boutons)
 {
-    boutons.source = loadImageWithColorKey("sprites/boutons.bmp", 0, 0, 0);
     boutons.bouton[BOUTON_PLAY].contenu = "Jouer";
     boutons.bouton[BOUTON_QUIT].contenu = "Quitter";
     boutons.bouton[BOUTON_REPRENDRE].contenu = "Reprendre";

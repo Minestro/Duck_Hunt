@@ -67,6 +67,7 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
                     initCanard(sprites.canard[i], partie);
                 }
                 partie.niveau = 0;
+                partie.score = 0;
                 initPartie(partie, sprites.canardActifs);
                 initTableau(partie.tableauChasse, sprites);
             }
@@ -195,7 +196,7 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
             if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_OK], boutons.lecture[0]))&&sourisEvent.clicGauche)
             {
                 addScore("scoresClassic", partie.pseudo, partie.score, partie.highScore);
-                modeMenu = 1;
+                modeMenu = 7;
             }
             break;
         case 9:
