@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
     srand((unsigned)time(NULL));
 
     int modeJeu = 0;    // Le mode de jeu.
-    int modeMenu = 8;   // Détermine la page du menu à afficher.
+    int modeMenu = 9;   // Détermine la page du menu à afficher.
 
     Partie partie;
     partie.score = 0;
@@ -91,16 +91,26 @@ int main(int argc, char* argv[])
         }
         if(partie.round >= 5)
         {
-            partie.round = 0;
-            partie.niveau ++;
-            initPartie(partie, sprites.canardActifs);
-            partie.jeu = true;
-            for (int i=0; i<sprites.canardActifs; i++)
+            if(finPartie(partie))
             {
-                initCanard(sprites.canard[i], partie);
+               if (testHighScore("scoresClassic", partie))
+               {
+                   modeMenu = 8;
+               } else {
+                   modeMenu = 9;
+               }
+            } else {
+                partie.round = 0;
+                partie.niveau ++;
+                initPartie(partie, sprites.canardActifs);
+                partie.jeu = true;
+                for (int i=0; i<sprites.canardActifs; i++)
+                {
+                    initCanard(sprites.canard[i], partie);
+                }
+                initTableau(partie.tableauChasse, sprites);
+                modeMenu = 6;
             }
-            initTableau(partie.tableauChasse, sprites);
-            modeMenu = 6;
         }
         if (keystate[SDLK_ESCAPE])
         {

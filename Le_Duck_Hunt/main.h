@@ -281,6 +281,7 @@ bool canardsMortsRamasses(Partie partie);
 bool joueurMaladroit(Partie partie);
 
 void relancerPartie(Partie &partie, Sprites &sprites);
+bool finPartie(Partie partie);
 void initPartie(Partie &partie, int nbCanards);
 void initBouton(Boutons &boutons);
 void initSourisEvent(SourisEvent &SourisEvent);

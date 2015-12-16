@@ -3,27 +3,16 @@
 bool testHighScore (std::string fichier, Partie &partie)
 {
     bool newHS = false;
-    int readScore;
-    std::string readNom;
-    std::fstream f1;
-    f1.open(fichier.c_str(), std::ios::in);
-    if(f1.fail())
+    int i=0;
+    getScore(fichier, partie.highScore);
+    while (i<NB_HIGH_SCORE && !newHS)
     {
-        std::cerr << "ouverture impossible du fichier des score" << std::endl;
-        return 0;
-    }
-    f1 >> readNom;
-    f1 >> readScore;
-    while (!f1.eof() && !newHS)
-    {
-        if (readScore < partie.score)
+        if (partie.highScore[i].score < partie.score)
         {
             newHS = true;
         }
-        f1 >> readNom;
-        f1 >> readScore;
+        i++;
     }
-    f1.close();
     return newHS;
 }
 
@@ -48,6 +37,20 @@ void getScore (std::string fichier, HighScore highScore[])
         i++;
     }
     while ((i<NB_HIGH_SCORE)&&(!f1.eof()));
+    triScore(highScore, 0, NB_HIGH_SCORE-1);
+    f1.close();
+    f1.open(fichier.c_str(), std::ios::out);
+    if(f1.fail())
+    {
+        std::cerr << "ouverture impossible du fichier des score" << std::endl;
+    }
+    for (int i=0; i<NB_HIGH_SCORE; i++)
+    {
+        f1 << highScore[i].nom;
+        f1 << " ";
+        f1 << highScore[i].score;
+        f1 << " ";
+    }
     f1.close();
 }
 
@@ -71,8 +74,8 @@ void addScore (std::string fichier, std::string nom, int score, HighScore highSc
     }
     for (int i=0; i<NB_HIGH_SCORE; i++)
     {
-        highScore[i].nom = highScoreTmp[i].nom;
-        highScore[i].score = highScoreTmp[i].score;
+        highScore[NB_HIGH_SCORE-i-1].nom = highScoreTmp[i].nom;
+        highScore[NB_HIGH_SCORE-i-1].score = highScoreTmp[i].score;
         f1 << highScoreTmp[i].nom;
         f1 << " ";
         f1 << highScoreTmp[i].score;

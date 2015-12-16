@@ -27,7 +27,6 @@ void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, Time temps, 
             partie.alreadyShot = true;
             canard.etat = TOUCHED;
             partie.score += canard.type * 500;
-            //partie.canardsEnVie--;
             canard.tempsDepuisTir = temps.currentTime;
             if(partie.hit[partie.round * 2] == HIT_EMPTY)
             {

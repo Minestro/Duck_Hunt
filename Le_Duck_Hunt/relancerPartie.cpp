@@ -41,6 +41,20 @@ bool joueurMaladroit(Partie partie)
     return partie.shots == 0 && partie.canardsEnVie == NB_MAX_CANARDS;
 }
 
+
+bool finPartie(Partie partie)
+{
+    int nbHits = 0;
+    for (int i=0; i<10; i++)
+    {
+        if (partie.hit[i] == 2)
+        {
+            nbHits++;
+        }
+    }
+    return (nbHits<6);
+}
+
 void relancerPartie(Partie &partie, Sprites &sprites)
 {
     for(int i = partie.round * 2 ; i < partie.round * 2 + 2 ; i++)

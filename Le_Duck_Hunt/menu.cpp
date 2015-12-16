@@ -198,6 +198,20 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
                 modeMenu = 1;
             }
             break;
+        case 9:
+            boutons.bouton[BOUTON_RETOUR].position.x = (LARGEUR/2) - (boutons.lecture[0].w/2);
+            boutons.bouton[BOUTON_RETOUR].position.y = 600;
+
+            if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_RETOUR], boutons.lecture[0]))&&sourisEvent.clicGauche)
+            {
+                modeMenu = 1;
+            }
+            if (time.currentTime >= time.timeFps + time.fpsTime)
+            {
+                showMenu(ecran, sprites, boutons, modeMenu, msgs, partie, sourisEvent.sx, sourisEvent.sy);
+                time.timeFps = time.currentTime;
+            }
+            break;
         default:
             break;
         }
