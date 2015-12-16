@@ -89,11 +89,16 @@ void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMe
         SDL_BlitSurface(msgs[MSG_TEXTE].source, NULL, ecran, &msgs[MSG_TEXTE].position);
 
         msgs[MSG_SCORE_ROUGE].source = TTF_RenderText_Solid(msgs[MSG_SCORE_ROUGE].font, intToString(partie.score).c_str(), msgs[MSG_SCORE_ROUGE].textColor);
-        msgs[MSG_SCORE_ROUGE].position.y = 50;
+        msgs[MSG_SCORE_ROUGE].position.y = 40;
         msgs[MSG_SCORE_ROUGE].position.x = (LARGEUR/2) - (msgs[MSG_SCORE_ROUGE].source->w/2);
         SDL_BlitSurface(msgs[MSG_SCORE_ROUGE].source, NULL, ecran, &msgs[MSG_SCORE_ROUGE].position);
 
-        msgs[MSG_TABLEAU_SCORE].position.y = 70;
+        msgs[MSG_TEXTE].source = TTF_RenderText_Solid(msgs[MSG_TEXTE].font, "Meilleurs joueurs :", msgs[MSG_TEXTE].textColor);
+        msgs[MSG_TEXTE].position.y = 80;
+        msgs[MSG_TEXTE].position.x = (LARGEUR/2) - (msgs[MSG_TEXTE].source->w/2);
+        SDL_BlitSurface(msgs[MSG_TEXTE].source, NULL, ecran, &msgs[MSG_TEXTE].position);
+
+        msgs[MSG_TABLEAU_SCORE].position.y = 100;
         for (int i=0; i<NB_HIGH_SCORE; i++)
         {
             ligne = "";
