@@ -46,11 +46,10 @@ void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMe
         break;
     case 7:
         msgs[MSG_TABLEAU_SCORE].position.y = 0;
-        for (int i=1; i<NB_HIGH_SCORE+1; i++)
+        for (int i=0; i<NB_HIGH_SCORE; i++)
         {
             ligne = "";
-            getScore("scoresClassic", nom, score2, i);
-            ligne = nom + " " + score2;
+            ligne = partie.highScore[i].nom + " " + intToString(partie.highScore[i].score);
             msgs[MSG_TABLEAU_SCORE].source = TTF_RenderText_Solid(msgs[MSG_TABLEAU_SCORE].font, ligne.c_str(), msgs[MSG_TABLEAU_SCORE].textColor);
             msgs[MSG_TABLEAU_SCORE].position.x = (LARGEUR/2) - (msgs[MSG_TABLEAU_SCORE].source->w/2);
             msgs[MSG_TABLEAU_SCORE].position.y += i + msgs[MSG_TABLEAU_SCORE].fontSize-10;
@@ -82,6 +81,29 @@ void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMe
         SDL_BlitSurface(msgs[MSG_PSEUDO].source, NULL, ecran, &msgs[MSG_PSEUDO].position);
 
         showBouton(ecran, boutons, msgs, BOUTON_OK, sx, sy);
+        break;
+    case 9:
+        msgs[MSG_TEXTE].source = TTF_RenderText_Solid(msgs[MSG_TEXTE].font, "GameOver ! Votre Score :", msgs[MSG_TEXTE].textColor);
+        msgs[MSG_TEXTE].position.y = 0;
+        msgs[MSG_TEXTE].position.x = (LARGEUR/2) - (msgs[MSG_TEXTE].source->w/2);
+        SDL_BlitSurface(msgs[MSG_TEXTE].source, NULL, ecran, &msgs[MSG_TEXTE].position);
+
+        msgs[MSG_SCORE_ROUGE].source = TTF_RenderText_Solid(msgs[MSG_SCORE_ROUGE].font, intToString(partie.score).c_str(), msgs[MSG_SCORE_ROUGE].textColor);
+        msgs[MSG_SCORE_ROUGE].position.y = 50;
+        msgs[MSG_SCORE_ROUGE].position.x = (LARGEUR/2) - (msgs[MSG_SCORE_ROUGE].source->w/2);
+        SDL_BlitSurface(msgs[MSG_SCORE_ROUGE].source, NULL, ecran, &msgs[MSG_SCORE_ROUGE].position);
+
+        msgs[MSG_TABLEAU_SCORE].position.y = 70;
+        for (int i=0; i<NB_HIGH_SCORE; i++)
+        {
+            ligne = "";
+            ligne = partie.highScore[i].nom + " " + intToString(partie.highScore[i].score);
+            msgs[MSG_TABLEAU_SCORE].source = TTF_RenderText_Solid(msgs[MSG_TABLEAU_SCORE].font, ligne.c_str(), msgs[MSG_TABLEAU_SCORE].textColor);
+            msgs[MSG_TABLEAU_SCORE].position.x = (LARGEUR/2) - (msgs[MSG_TABLEAU_SCORE].source->w/2);
+            msgs[MSG_TABLEAU_SCORE].position.y += i + msgs[MSG_TABLEAU_SCORE].fontSize-10;
+            SDL_BlitSurface(msgs[MSG_TABLEAU_SCORE].source, NULL, ecran, &msgs[MSG_TABLEAU_SCORE].position);
+        }
+        showBouton(ecran, boutons, msgs, BOUTON_RETOUR, sx, sy);
         break;
     }
     SDL_BlitSurface(sprites.viseur.source, NULL, ecran, &sprites.viseur.position);

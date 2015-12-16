@@ -41,15 +41,16 @@ int main(int argc, char* argv[])
     SourisEvent sourisEvent;
     initSourisEvent(sourisEvent);
 
+    initFichiers();
 
     SDL_ShowCursor(SDL_DISABLE);
-    do
+    menu(ecran, sprites, boutons, modeMenu, modeJeu, sourisEvent, temps, msgs, partie, chien);
+    while (modeJeu != 0)
     {
         if (modeMenu != 0)
         {
             menu(ecran, sprites, boutons, modeMenu, modeJeu, sourisEvent, temps, msgs, partie, chien);
         }
-
         temps.currentTime = SDL_GetTicks();
         partie.alreadyShot = partie.alreadyGetEvent = partie.alreadyClic = false;
         for (int i = 0 ; i < sprites.canardActifs ; i++)
@@ -76,7 +77,7 @@ int main(int argc, char* argv[])
         {
             for(int i = 0 ; i < sprites.canardActifs ; i++)
             {
-                canardSurvivant(sprites, i, partie);
+                canardSurvivant(sprites, i);
             }
         }
         if (temps.currentTime >= chien.vitesseAnimationTime + chien.vitesseAnimation)
@@ -84,26 +85,33 @@ int main(int argc, char* argv[])
             switchSpriteChien(chien, partie, sprites);
             chien.vitesseAnimationTime = temps.currentTime;
         }
-
         if(partie.relancer)
         {
             relancerPartie(partie, sprites);
         }
-
         if(partie.round >= 5)
         {
-            partie.round = 0;
-            partie.niveau++;
-            initPartie(partie, sprites.canardActifs);
-            partie.jeu = true;
-            for (int i = 0; i < sprites.canardActifs; i++)
+            if(finPartie(partie))
             {
-                initCanard(sprites.canard[i], partie);
+               if (testHighScore("scoresClassic", partie))
+               {
+                   modeMenu = 8;
+               } else {
+                   modeMenu = 9;
+               }
+            } else {
+                partie.round = 0;
+                partie.niveau ++;
+                initPartie(partie, sprites.canardActifs);
+                partie.jeu = true;
+                for (int i=0; i<sprites.canardActifs; i++)
+                {
+                    initCanard(sprites.canard[i], partie);
+                }
+                initTableau(partie.tableauChasse, sprites);
+                modeMenu = 6;
             }
-            initTableau(partie.tableauChasse, sprites);
-            modeMenu = 6;
         }
-
         if (keystate[SDLK_ESCAPE])
         {
             modeMenu = 5;
@@ -117,8 +125,6 @@ int main(int argc, char* argv[])
 
         SDL_Delay(1);
     }
-    while (modeJeu != 0);
-
     SDL_Quit();
     IMG_Quit();
     TTF_Quit();

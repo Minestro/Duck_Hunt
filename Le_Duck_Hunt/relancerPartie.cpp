@@ -1,5 +1,24 @@
 #include "main.h"
 
+bool escaped(Sprites sprites, Partie partie)
+{
+    bool continuer = true;
+    int i = 0;
+    while(continuer && i < sprites.canardActifs)
+    {
+        continuer = (sprites.canard[i].echappe && sprites.canard[i].etat == ALIVE
+                    && (
+                        sprites.canard[i].position.x + sprites.canard[i].lecture.w < 0
+                        || sprites.canard[i].position.x > LARGEUR
+                        || sprites.canard[i].position.y + sprites.canard[i].lecture.h < 0
+                        || sprites.canard[i].position.y > HAUTEUR - LIMITE_BASSE
+
+                    ))
+                    || sprites.canard[i].etat == DEAD;
+        i++;
+    }
+    return continuer;
+}
 
 bool canardsMortsRamasses(Partie partie)
 {
@@ -14,21 +33,26 @@ bool canardsMortsRamasses(Partie partie)
 
 bool roundTerminee(Sprites sprites, Partie partie)
 {
-    bool tableauRempli = true;
-    int i = 0;
-    while(tableauRempli && i < sprites.canardActifs)
-    {
-        tableauRempli = partie.tableauChasse.typeCanard[i] != NOT_SET;
-        i++;
-    }
-
-    return tableauRempli || escaped(sprites, partie);
-    // return canardsMortsRamasses(partie) || escaped(sprites, partie);
+    return canardsMortsRamasses(partie) || escaped(sprites, partie);
 }
 
 bool joueurMaladroit(Partie partie)
 {
     return partie.shots == 0 && partie.canardsEnVie == NB_MAX_CANARDS;
+}
+
+
+bool finPartie(Partie partie)
+{
+    int nbHits = 0;
+    for (int i=0; i<10; i++)
+    {
+        if (partie.hit[i] == 2)
+        {
+            nbHits++;
+        }
+    }
+    return (nbHits<6);
 }
 
 void relancerPartie(Partie &partie, Sprites &sprites)
@@ -55,18 +79,6 @@ void relancerPartie(Partie &partie, Sprites &sprites)
     partie.canardsEnVie = sprites.canardActifs;
     partie.shots = 3;
     partie.round++;
-}
-
-bool escaped(Sprites sprites, Partie &partie)
-{
-    bool continuer = true;
-    int i = 0;
-    while(continuer && i < sprites.canardActifs)
-    {
-        continuer = partie.tableauChasse.typeCanard[i] == DUCK_ESCAPED;
-        i++;
-    }
-    return continuer;
 }
 
 

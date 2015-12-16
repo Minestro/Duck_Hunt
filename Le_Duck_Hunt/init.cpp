@@ -8,6 +8,39 @@ void initTableau(TableauChasse &tableau, Sprites sprites)
     }
 }
 
+void initFichiers()
+{
+    std::fstream f1, f2;
+    f1.open("scoresClassic", std::ios::in);
+    if (f1.fail())
+    {
+        f2.open("scoresClassic", std::ios::out);
+        for (int i=0; i<NB_HIGH_SCORE; i++)
+        {
+            f2 << "Not_Set";
+            f2 << " ";
+            f2 << 0;
+            f2 << " ";
+        }
+        f2.close();
+    }
+    f1.close();
+    f1.open("scoresAvancee", std::ios::in);
+    if (f1.fail())
+    {
+        f2.open("scoresAvancee", std::ios::out);
+        for (int i=0; i<NB_HIGH_SCORE; i++)
+        {
+            f2 << "Not_Set";
+            f2 << " ";
+            f2 << 0;
+            f2 << " ";
+        }
+        f2.close();
+    }
+    f1.close();
+}
+
 void initMessage(Message msgs[])
 {
     msgs[MSG_SCORE].position.x = 580;
@@ -34,9 +67,7 @@ void initMessage(Message msgs[])
         msgs[i].textColor.b = 255;
         msgs[i].font = TTF_OpenFont("font/duck_hunt.ttf", msgs[MSG_SCORE].fontSize);
     }
-    msgs[MSG_SCORE_ROUGE].textColor.r = 255;
-    msgs[MSG_SCORE_ROUGE].textColor.g = 0;
-    msgs[MSG_SCORE_ROUGE].textColor.b = 0;
+    msgs[MSG_SCORE_ROUGE].textColor = {255,0,0};
 
     msgs[MSG_0_TOUCHE].message = "AUCUN_CANARD_MORT";
     msgs[MSG_PAUSE].message = "Jeu en pause";

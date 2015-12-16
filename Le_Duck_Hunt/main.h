@@ -31,6 +31,9 @@
 
 // Etats possibles
 
+/*#define ESCAPING 4 // IL s'enfuit !*/
+// J'ai pensé à rajouté un attribut de type booléen dans la structure Canard plutôt :p
+
 #define ALIVE 3 // En vie : le canard vole.
 #define TOUCHED 2 // Touché : il s'arrête de voler pour dire aurevoir à la vie.
 #define FREE_FALLING 1 // En chute libre : il tombe verticalement.
@@ -82,7 +85,6 @@
 //Pour les valeurs d'un tableau
 #define NOT_SET -1
 #define TO_RESET -2
-#define DUCK_ESCAPED -3
 
 const int HAUTEUR = 761;
 const int LARGEUR = 750;
@@ -93,12 +95,12 @@ const int NB_MAX_CANARDS = 2;
 const int NB_BOUTONS_DIFFERENTS = 10;
 const int NOMBRE_MESSAGES = 11;
 const int NB_HIGH_SCORE = 10;
-const int LONGUEUR_MAX_PSEUDO = 10;
+const int LONGUEUR_MAX_PSEUDO = 11;
 
-const unsigned int VITESSE_N = 20;
-const unsigned int VITESSE_M = 18;
-const unsigned int VITESSE_B = 14;
-const unsigned int VITESSE_V = 10;
+const unsigned int VITESSE_N = 30;
+const unsigned int VITESSE_M = 25;
+const unsigned int VITESSE_B = 20;
+const unsigned int VITESSE_V = 15;
 
 
 struct HighScore{
@@ -255,8 +257,12 @@ struct Time
 
 
 bool testHighScore (std::string fichier, Partie &partie);
-void getScore (std::string fichier, std::string &nom, std::string &score, int ligne);
+void getScore (std::string fichier, HighScore HighScore[]);
+void addScore (std::string fichier, std::string nom, int score, HighScore highScore[]);
 bool getEvents(SourisEvent &sourisEvent, bool);
+void echangerTabHS(HighScore highScore[], int pos1, int pos2);
+int separer(HighScore highscore[], int debut, int fin);
+void triScore (HighScore highScore[],  int debut, int fin);
 
 void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien chien, Message msgs[]);
 void showChien(SDL_Surface *ecran, Chien chien);
@@ -269,12 +275,13 @@ void showBouton(SDL_Surface *ecran, Boutons &boutons, Message msgs[], int bouton
 void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[], Partie &partie, Chien &chien);
 bool testHoverBouton(int, int, Bouton, SDL_Rect lecture);
 
-bool escaped(Sprites sprites, Partie &partie);
+bool escaped(Sprites sprites, Partie partie);
 bool roundTerminee(Sprites sprites, Partie partie);
 bool canardsMortsRamasses(Partie partie);
 bool joueurMaladroit(Partie partie);
 
 void relancerPartie(Partie &partie, Sprites &sprites);
+bool finPartie(Partie partie);
 void initPartie(Partie &partie, int nbCanards);
 void initBouton(Boutons &boutons);
 void initSourisEvent(SourisEvent &SourisEvent);
@@ -284,6 +291,7 @@ void initChien(Chien &chien);
 void initMessage(Message msgs[]);
 void initTableau(TableauChasse &tableau, Sprites sprites);
 void initHighScore(HighScore highScore[]);
+void initFichiers();
 
 SDL_Surface *loadImage(std::string);
 SDL_Surface *loadImageWithColorKey(std::string, int, int, int);
@@ -297,7 +305,7 @@ void sauvegarderPositionX(Partie &partie, Canard canard);
 void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, Time temps, int &modeJeu);
 bool testShot(SourisEvent sourisEvent, SDL_Rect lecture, SDL_Rect position);
 void touched(Canard &canard, Time temps);
-void canardSurvivant(Sprites &sprites, int numeroCanard, Partie &partie);
+void canardSurvivant(Sprites &sprites, int numeroCanard);
 
 void controlesChien(Chien &chien, Partie &partie, Sprites sprites);
 bool chienDevientHeureux(Chien chien, Partie partie);
