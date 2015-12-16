@@ -133,10 +133,10 @@ int main(int argc, char* argv[])
 
         SDL_Delay(1);
     }
+    libererImages(sprites, chien, boutons);
     SDL_Quit();
     IMG_Quit();
     TTF_Quit();
-    //vider les images
     return EXIT_SUCCESS;
 }
 

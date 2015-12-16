@@ -297,6 +297,7 @@ void initFichiers();
 SDL_Surface *loadImage(std::string);
 SDL_Surface *loadImageWithColorKey(std::string, int, int, int);
 void chargerImages(Sprites &sprites, Chien &chien, Boutons &boutons);
+void libererImages(Sprites &sprites, Chien &chien, Boutons &boutons);
 
 void changementDirection(Canard &canard);
 void mouvementsCanard(Canard &canard);

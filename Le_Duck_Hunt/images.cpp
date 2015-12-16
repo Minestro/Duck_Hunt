@@ -87,7 +87,6 @@ void chargerImages(Sprites &sprites, Chien &chien, Boutons &boutons)
 
     boutons.source = loadImageWithColorKey("sprites/boutons.bmp", 0, 0, 0);
 
-    sprites.background_menu.source = load_image("sprites/menu.png");
     sprites.background.source = load_image("sprites/backGame.png");
     sprites.background.position = initializer;
 
@@ -151,7 +150,25 @@ void chargerImages(Sprites &sprites, Chien &chien, Boutons &boutons)
     chien.image[CHIEN_CONTENT_DOUBLE].lecture.w = 112;
 }
 
-/*void libererImages(Sprites i)
+void libererImages(Sprites &sprites, Chien &chien, Boutons &boutons)
 {
-   //A faire
-}*/
+    SDL_FreeSurface(boutons.source);
+    SDL_FreeSurface(sprites.background_menu.source);
+    SDL_FreeSurface(sprites.background.source);
+    SDL_FreeSurface(sprites.background_blit.source);
+    SDL_FreeSurface(sprites.viseur.source);
+    SDL_FreeSurface(sprites.hits.source);
+    SDL_FreeSurface(sprites.shots.source);
+    SDL_FreeSurface(sprites.canardSprite[DARK]);
+    SDL_FreeSurface(sprites.canardSprite[CHESNUT]);
+    SDL_FreeSurface(sprites.canardSprite[BLOOD]);
+    SDL_FreeSurface(sprites.canardSprite[BLUISH_PURPLE]);
+    SDL_FreeSurface(sprites.points.source);
+    SDL_FreeSurface(chien.image[CHIEN_MARCHE].source);
+    SDL_FreeSurface(chien.image[CHIEN_CONTENT].source);
+    SDL_FreeSurface(chien.image[CHIEN_SAUTE_1].source);
+    SDL_FreeSurface(chien.image[CHIEN_SAUTE_2].source);
+    SDL_FreeSurface(chien.image[CHIEN_RIGOLE].source);
+    SDL_FreeSurface(chien.image[CHIEN_CONTENT_SIMPLE].source);
+    SDL_FreeSurface(chien.image[CHIEN_CONTENT_DOUBLE].source);
+}
