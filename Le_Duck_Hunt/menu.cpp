@@ -19,7 +19,6 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
     time.timeMenu = time.currentTime;
     time.timeKey = time.currentTime;
     time.timeDefKey = time.currentTime;
-    partie.score = -99;
     while (!sortir && modeMenu!=0)
     {
         if (getEvents(sourisEvent, 1))

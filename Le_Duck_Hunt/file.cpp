@@ -53,6 +53,7 @@ void getScore (std::string fichier, HighScore highScore[])
 
 void addScore (std::string fichier, std::string nom, int score, HighScore highScore[])
 {
+    std::fstream f1;
     getScore(fichier.c_str(), highScore);
     HighScore highScoreTmp[NB_HIGH_SCORE+1];
     for (int i=0; i<NB_HIGH_SCORE; i++)
@@ -62,12 +63,22 @@ void addScore (std::string fichier, std::string nom, int score, HighScore highSc
     }
     highScoreTmp[NB_HIGH_SCORE].nom = nom;
     highScoreTmp[NB_HIGH_SCORE].score = score;
-    triScore(highScoreTmp, 0, NB_HIGH_SCORE-1);
+    triScore(highScoreTmp, 0, NB_HIGH_SCORE);
+    f1.open(fichier.c_str(), std::ios::out);
+    if(f1.fail())
+    {
+        std::cerr << "ouverture impossible du fichier des score" << std::endl;
+    }
     for (int i=0; i<NB_HIGH_SCORE; i++)
     {
         highScore[i].nom = highScoreTmp[i].nom;
         highScore[i].score = highScoreTmp[i].score;
+        f1 << highScoreTmp[i].nom;
+        f1 << " ";
+        f1 << highScoreTmp[i].score;
+        f1 << " ";
     }
+    f1.close();
 }
 
 void triScore (HighScore highScore[],  int debut, int fin)
