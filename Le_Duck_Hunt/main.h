@@ -97,6 +97,7 @@ const int NB_BOUTONS_DIFFERENTS = 10;
 const int NOMBRE_MESSAGES = 11;
 const int NB_HIGH_SCORE = 10;
 const int LONGUEUR_MAX_PSEUDO = 11;
+const int NB_CANARDS_POUR_GAGNER = 6;
 
 const unsigned int VITESSE_N = 30;
 const unsigned int VITESSE_M = 25;
@@ -313,7 +314,7 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites);
 bool chienDevientHeureux(Chien chien, Partie partie);
 void detectionBordsChien(Chien &chien);
 void switchSpriteChien(Chien &chien, Partie &partie, Sprites sprites);
-void ramasserCanard(Chien &chien, Partie &partie, Sprites sprites, int i);
+void ramasserCanard(Chien &chien, Partie &partie, Sprites sprites);
 
 int alea(int mini, int maxi);
 std::string intToString (int number);

@@ -84,15 +84,8 @@ int main(int argc, char* argv[])
         {
             switchSpriteChien(chien, partie, sprites);
             chien.vitesseAnimationTime = temps.currentTime;
-            for(int i = 0 ; i < sprites.canardActifs ; i++)
-            {
-                if(partie.tableauChasse.typeCanard[i] == NOT_SET)
-                {
-                    ramasserCanard(chien, partie, sprites, i);
-                }
-            }
+            ramasserCanard(chien, partie, sprites);
         }
-
         if(partie.relancer)
         {
             relancerPartie(partie, sprites);
@@ -101,13 +94,17 @@ int main(int argc, char* argv[])
         {
             if(finPartie(partie))
             {
-               if (testHighScore("scoresClassic", partie))
-               {
-                   modeMenu = 8;
-               } else {
-                   modeMenu = 9;
-               }
-            } else {
+                if (testHighScore("scoresClassic", partie))
+                {
+                    modeMenu = 8;
+                }
+                else
+                {
+                    modeMenu = 9;
+                }
+            }
+            else
+            {
                 partie.round = 0;
                 partie.niveau ++;
                 initPartie(partie, sprites.canardActifs);
