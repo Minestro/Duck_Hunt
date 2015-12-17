@@ -1,5 +1,16 @@
 #include "images.h"
 
+
+/****************** Nom de la fonction ****************************
+* load_image                                                      *
+******************** Auteur , Dates *******************************
+* Nom : MOODLE                                                    *
+********************* Description *********************************
+*                                                                 *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
+
 SDL_Surface *load_image( std::string filename )
 {
     //Temporary storage for the image that's loaded
@@ -31,6 +42,19 @@ SDL_Surface *load_image( std::string filename )
 // * paramètre de sortie : SDL_Surface contenant
 //   l'image.
 // ----------------------------------------------
+
+
+
+/****************** Nom de la fonction ****************************
+* loadImageWithColorKey                                           *
+******************** Auteur , Dates *******************************
+* Nom : MOODLE                                                    *
+********************* Description *********************************
+*                                                                 *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
+
 
 SDL_Surface *loadImageWithColorKey(std::string filename, int r, int g, int b)
 {
@@ -76,6 +100,18 @@ SDL_Surface *loadImageWithColorKey(std::string filename, int r, int g, int b)
     //Return the optimized image
     return optimizedImage;
 }
+
+
+
+/****************** Nom de la fonction ****************************
+* chargerImages                                                   *
+******************** Auteur , Dates *******************************
+* Nom : JACQUOT, LE HO                                            *
+********************* Description *********************************
+* Charge les images                                               *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
 
 
 /*** fonction qui charge les images ***/
@@ -149,6 +185,17 @@ void chargerImages(Sprites &sprites, Chien &chien, Boutons &boutons)
     chien.image[CHIEN_CONTENT_DOUBLE].lecture.h = 80;
     chien.image[CHIEN_CONTENT_DOUBLE].lecture.w = 112;
 }
+
+
+/****************** Nom de la fonction ****************************
+* libererImages                                                   *
+******************** Auteur , Dates *******************************
+* Nom : JACQUOT                                                   *
+********************* Description *********************************
+* Libère les images de la mémoire                                 *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
 
 void libererImages(Sprites &sprites, Chien &chien, Boutons &boutons)
 {

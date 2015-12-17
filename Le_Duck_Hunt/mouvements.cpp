@@ -1,6 +1,17 @@
 #include "mouvements.h"
 #include "alea.h"
 
+
+/****************** Nom de la fonction ****************************
+* ramasserCanard                                                  *
+******************** Auteur , Dates *******************************
+* Nom : LE HO                                                     *
+********************* Description *********************************
+* Condition pour ramasser les canards                             *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
+
 void ramasserCanard(Chien &chien, Partie &partie, Sprites sprites)
 {
     bool present = false;
@@ -45,6 +56,17 @@ void ramasserCanard(Chien &chien, Partie &partie, Sprites sprites)
     }
 }
 
+
+/****************** Nom de la fonction ****************************
+* chienDevientHeureux                                             *
+******************** Auteur , Dates *******************************
+* Nom : LE HO                                                     *
+********************* Description *********************************
+* Condition pour que le chien devienne heureux                    *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
+
 bool chienDevientHeureux(Chien chien, Partie partie)
 {
     return (
@@ -56,6 +78,16 @@ bool chienDevientHeureux(Chien chien, Partie partie)
             || (partie.canardAbbatu && !chien.devantHerbe));
 
 }
+
+/****************** Nom de la fonction ****************************
+* chienDevientHeureux                                             *
+******************** Auteur , Dates *******************************
+* Nom : LE HO                                                     *
+********************* Description *********************************
+* Toutes les instructions permettant l'animation du chien         *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
 
 void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
 {
@@ -203,6 +235,17 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
     }
 }
 
+
+/****************** Nom de la fonction ****************************
+* canardSurvivant                                                 *
+******************** Auteur , Dates *******************************
+* Nom : LE HO                                                     *
+********************* Description *********************************
+*                                                                 *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
+
 void canardSurvivant(Sprites &sprites, Partie &partie, int numeroCanard)
 {
     sprites.canard[numeroCanard].echappe = sprites.canard[numeroCanard].etat == ALIVE;
@@ -219,6 +262,15 @@ void canardSurvivant(Sprites &sprites, Partie &partie, int numeroCanard)
     }
 }
 
+/****************** Nom de la fonction ****************************
+* mouvementsCanard                                                *
+******************** Auteur , Dates *******************************
+* Nom : LE HO                                                     *
+********************* Description *********************************
+* Permet au canard de se déplacer                                 *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
 
 void mouvementsCanard(Canard &canard) // mouvement physique et mouvement au niveau de l'animation
 {
@@ -251,6 +303,16 @@ void mouvementsCanard(Canard &canard) // mouvement physique et mouvement au nive
     }
 }
 
+/****************** Nom de la fonction ****************************
+* detectionBordsChien                                             *
+******************** Auteur , Dates *******************************
+* Nom : LE HO                                                     *
+********************* Description *********************************
+* Condition de collision du chien avec les bords                  *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
+
 void detectionBordsChien(Chien &chien)
 {
     if(chien.image[CHIEN_MARCHE].position.x + chien.image[CHIEN_MARCHE].lecture.w > LARGEUR)
@@ -267,7 +329,15 @@ void detectionBordsChien(Chien &chien)
     }
 }
 
-
+/****************** Nom de la fonction ****************************
+* detectionBordsCanard                                            *
+******************** Auteur , Dates *******************************
+* Nom : LE HO                                                     *
+********************* Description *********************************
+* Condition de collision des canards avec les bords               *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
 
 void detectionBordsCanard(Canard &canard, Partie &partie, int i)
 {
@@ -313,6 +383,16 @@ void detectionBordsCanard(Canard &canard, Partie &partie, int i)
             break;
     }
 }
+
+/****************** Nom de la fonction ****************************
+* detectionBordsChien                                             *
+******************** Auteur , Dates *******************************
+* Nom : LE HO                                                     *
+********************* Description *********************************
+* Génére les changements de direction des canards                 *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
 
 void changementDirection(Canard &canard)
 {

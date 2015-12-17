@@ -1,5 +1,17 @@
 ﻿#include "show.h"
 
+
+/****************** Nom de la fonction ****************************
+* showBouton                                                      *
+******************** Auteur , Dates *******************************
+* Nom : JACQUOT                                                   *
+********************* Description *********************************
+* Affiche les boutons du menu                                     *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
+
+
 void showBouton(SDL_Surface *ecran, Boutons &boutons, Message msgs[], int boutonNom, int sx, int sy)
 {
     SDL_BlitSurface(boutons.source, &boutons.lecture[testHoverBouton(sx, sy, boutons.bouton[boutonNom], boutons.lecture[0])], ecran, &boutons.bouton[boutonNom].position);
@@ -11,10 +23,31 @@ void showBouton(SDL_Surface *ecran, Boutons &boutons, Message msgs[], int bouton
     SDL_FreeSurface(msgs[MSG_BOUTONS].source);
 }
 
+/****************** Nom de la fonction ****************************
+* touched                                                         *
+******************** Auteur , Dates *******************************
+* Nom : LE HO                                                     *
+********************* Description *********************************
+* Affiche le chien                                                *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
+
 void showChien(SDL_Surface *ecran, Chien chien)
 {
     SDL_BlitSurface(chien.image[chien.etat].source, &chien.image[chien.etat].lecture, ecran, &chien.image[chien.etat].position);
 }
+
+
+/****************** Nom de la fonction ****************************
+* touched                                                         *
+******************** Auteur , Dates *******************************
+* Nom : JACQUOT                                                   *
+********************* Description *********************************
+* Affiche le menu                                                 *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
 
 void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMenu, Message msgs[], Partie partie, int sx, int sy)
 {
@@ -114,6 +147,16 @@ void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMe
     SDL_BlitSurface(sprites.viseur.source, NULL, ecran, &sprites.viseur.position);
 }
 
+/****************** Nom de la fonction ****************************
+* touched                                                         *
+******************** Auteur , Dates *******************************
+* Nom : JACQUOT                                                   *
+********************* Description *********************************
+*                                                                 *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
+
 void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien chien, Message msgs[])
 {
     SDL_BlitSurface(sprites.background.source, NULL, ecran, &sprites.background.position);
@@ -162,6 +205,16 @@ void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, 
     SDL_BlitSurface(sprites.viseur.source, NULL, ecran, &sprites.viseur.position);
 }
 
+/****************** Nom de la fonction ****************************
+* showPointsCanard                                                *
+******************** Auteur , Dates *******************************
+* Nom : LE HO                                                     *
+********************* Description *********************************
+* Affiche les points gagné lorsque l'on touche un canard          *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
+
 void showPointsCanard(SDL_Surface *ecran, Canard canard, Sprite &points)
 {
     points.position.x = canard.position.x + canard.lecture.w / 2;
@@ -170,6 +223,16 @@ void showPointsCanard(SDL_Surface *ecran, Canard canard, Sprite &points)
     SDL_BlitSurface(points.source, &points.lecture, ecran, &points.position);
 }
 
+/****************** Nom de la fonction ****************************
+* showPoints                                                      *
+******************** Auteur , Dates *******************************
+* Nom : JACQUOT                                                   *
+********************* Description *********************************
+* Affiche le score du joueur                                      *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
+
 void showPoints(Message msgs[], SDL_Surface *ecran, Partie partie)
 {
     msgs[MSG_SCORE].source = TTF_RenderText_Solid(msgs[MSG_SCORE].font, intToString(partie.score).c_str(), msgs[MSG_SCORE].textColor);
@@ -177,6 +240,15 @@ void showPoints(Message msgs[], SDL_Surface *ecran, Partie partie)
     SDL_FreeSurface(msgs[MSG_SCORE].source);
 }
 
+/****************** Nom de la fonction ****************************
+* showMessage                                                     *
+******************** Auteur , Dates *******************************
+* Nom : JACQUOT                                                   *
+********************* Description *********************************
+* Affiche                                                         *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
 
 void showMessage(SDL_Surface *ecran, Message &msg)
 {

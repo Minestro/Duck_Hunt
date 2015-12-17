@@ -1,6 +1,19 @@
 #include "menu.h"
 #include "alea.h"
 
+
+
+/****************** Nom de la fonction ****************************
+* menu                                                            *
+******************** Auteur , Dates *******************************
+* Nom : JACQUOT                                                   *
+********************* Description *********************************
+*                                                                 *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
+
+
 void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[], Partie &partie, Chien &chien)
 {
     bool sortir = false;

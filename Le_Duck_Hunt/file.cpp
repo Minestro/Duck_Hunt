@@ -1,5 +1,16 @@
 #include "file.h"
 
+
+/****************** Nom de la fonction ****************************
+* testHighScore                                                   *
+******************** Auteur , Dates *******************************
+* Nom : JACQUOT                                                   *
+********************* Description *********************************
+* Trouve le score le plus élevé                                   *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
+
 bool testHighScore (std::string fichier, Partie &partie)
 {
     bool newHS = false;
@@ -15,6 +26,17 @@ bool testHighScore (std::string fichier, Partie &partie)
     }
     return newHS;
 }
+
+
+/****************** Nom de la fonction ****************************
+* getScore                                                        *
+******************** Auteur , Dates *******************************
+* Nom : JACQUOT                                                   *
+********************* Description *********************************
+* Enregistre les scores dans un fichier                           *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
 
 void getScore (std::string fichier, HighScore highScore[])
 {
@@ -55,6 +77,16 @@ void getScore (std::string fichier, HighScore highScore[])
     f1.close();
 }
 
+/****************** Nom de la fonction ****************************
+* addScore                                                        *
+******************** Auteur , Dates *******************************
+* Nom : JACQUOT                                                   *
+********************* Description *********************************
+* Ajoute une nouveau score                                        *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
+
 void addScore (std::string fichier, std::string nom, int score, HighScore highScore[])
 {
     std::fstream f1;
@@ -80,6 +112,17 @@ void addScore (std::string fichier, std::string nom, int score, HighScore highSc
     f1.close();
 }
 
+
+/****************** Nom de la fonction ****************************
+* triScore                                                        *
+******************** Auteur , Dates *******************************
+* Nom : JACQUOT                                                   *
+********************* Description *********************************
+* Tri rapide sur les scores                                       *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
+
 void triScore (HighScore highScore[],  int debut, int fin)
 {
     int pivot;
@@ -90,6 +133,17 @@ void triScore (HighScore highScore[],  int debut, int fin)
         triScore(highScore, pivot + 1, fin);
     }
 }
+
+
+/****************** Nom de la fonction ****************************
+* separer                                                         *
+******************** Auteur , Dates *******************************
+* Nom : JACQUOT                                                   *
+********************* Description *********************************
+*                                                                 *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
 
 int separer(HighScore highscore[], int debut, int fin)
 {
@@ -108,6 +162,16 @@ int separer(HighScore highscore[], int debut, int fin)
 
     return sep;
 }
+
+/****************** Nom de la fonction ****************************
+* echangerTabHS                                                   *
+******************** Auteur , Dates *******************************
+* Nom : JACQUOT                                                   *
+********************* Description *********************************
+*                                                                 *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
 
 void echangerTabHS(HighScore highScore[], int pos1, int pos2)
 {

@@ -1,5 +1,16 @@
 #include "shot.h"
 
+
+/****************** Nom de la fonction ****************************
+* testShot                                                        *
+******************** Auteur , Dates *******************************
+* Nom : JACQUOT                                                   *
+********************* Description *********************************
+* Vérifie que la souris est sur le canard                         *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
+
 bool testShot(SourisEvent sourisEvent, SDL_Rect lecture, SDL_Rect position)
 {
     return((sourisEvent.sx < position.x+lecture.w)&&(sourisEvent.sx > position.x)&&(sourisEvent.sy > position.y)&&(sourisEvent.sy < position.y+lecture.h));
@@ -43,6 +54,16 @@ void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, Time temps, 
         partie.shots = 0;
     }
 }
+
+/****************** Nom de la fonction ****************************
+* touched                                                         *
+******************** Auteur , Dates *******************************
+* Nom : JACQUOT                                                   *
+********************* Description *********************************
+*                                                                 *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
 
 void touched(Canard &canard, Time temps)
 {

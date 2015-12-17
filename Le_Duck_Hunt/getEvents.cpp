@@ -1,5 +1,16 @@
 ﻿#include "getEvents.h"
 
+
+/****************** Nom de la fonction ****************************
+* getEvents                                                       *
+******************** Auteur , Dates *******************************
+* Nom : JACQUOT                                                   *
+********************* Description *********************************
+* Actualise les évènements de la souris                           *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
+
 bool getEvents(SourisEvent &sourisEvent, bool testClic)
 {
     if (testClic)

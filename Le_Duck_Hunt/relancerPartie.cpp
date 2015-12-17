@@ -1,5 +1,17 @@
 #include "relancerPartie.h"
 
+
+/****************** Nom de la fonction ****************************
+* escaped                                                         *
+******************** Auteur , Dates *******************************
+* Nom : LE HO                                                     *
+********************* Description *********************************
+* Vérifie que tous les canards ce sont échappés                   *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
+
+
 bool escaped(Sprites sprites, Partie partie)
 {
     bool continuer = true;
@@ -11,6 +23,17 @@ bool escaped(Sprites sprites, Partie partie)
     }
     return continuer;
 }
+
+/****************** Nom de la fonction ****************************
+* canardsMortsRamasses                                            *
+******************** Auteur , Dates *******************************
+* Nom : LE HO                                                     *
+********************* Description *********************************
+* Vérifie que le chien à ramasser tous les canards morts          *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
+
 
 bool canardsMortsRamasses(Partie partie)
 {
@@ -34,6 +57,15 @@ bool joueurMaladroit(Partie partie)
     return partie.shots == 0 && partie.canardsEnVie == NB_MAX_CANARDS;
 }
 
+/****************** Nom de la fonction ****************************
+* finPartie                                                       *
+******************** Auteur , Dates *******************************
+* Nom : JACQUOT                                                   *
+********************* Description *********************************
+* Permet le passage au round suivant                              *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
 
 bool finPartie(Partie partie)
 {
@@ -47,6 +79,16 @@ bool finPartie(Partie partie)
     }
     return (nbHits<6);
 }
+
+/****************** Nom de la fonction ****************************
+* relancerPartie                                                  *
+******************** Auteur , Dates *******************************
+* Nom : JACQUOT                                                   *
+********************* Description *********************************
+* Permet de relancer la partie                                    *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
 
 void relancerPartie(Partie &partie, Sprites &sprites)
 {

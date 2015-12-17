@@ -1,5 +1,16 @@
 #include "switchSprite.h"
 
+
+/****************** Nom de la fonction ****************************
+* switchSpriteChien                                               *
+******************** Auteur , Dates *******************************
+* Nom : LE HO                                                     *
+********************* Description *********************************
+* Echange les sprites du chien                                    *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
+
 void switchSpriteChien(Chien &chien, Partie &partie)
 {
     switch(chien.etat)
@@ -34,6 +45,17 @@ void switchSpriteChien(Chien &chien, Partie &partie)
             break;
     }
 }
+
+
+/****************** Nom de la fonction ****************************
+* switchSpriteCanard                                              *
+******************** Auteur , Dates *******************************
+* Nom : LE HO                                                     *
+********************* Description *********************************
+* Echange les sprites du canard                                   *
+*********************** Entrées ***********************************
+* ES:                                                             *
+*******************************************************************/
 
 void switchSpriteCanard(Canard &canard)
 {
