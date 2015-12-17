@@ -12,12 +12,6 @@
 
 int main(int argc, char* argv[])
 {
-    std::cout << "Les arguments du programmes sont : " << std::endl;
-    for(int i = 0 ; i < argc ; i++)
-    {
-        std::cout << i << " : " << argv[i] << std::endl;
-    }
-
     /* INITIALISATIONS DES BIBLIOTHEQUES : IMG, SDL, TTF */
     IMG_Init(IMG_INIT_PNG);
     SDL_Init(SDL_INIT_VIDEO);

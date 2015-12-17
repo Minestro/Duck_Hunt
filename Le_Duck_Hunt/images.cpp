@@ -147,10 +147,18 @@ void chargerImages(Sprites &sprites, Chien &chien, Boutons &boutons, std::string
     sprites.shots.lecture.w = 75;
     sprites.shots.lecture.h = 50;
 
-    sprites.canardSprite[DARK] = loadImageWithColorKey("sprites/"+theme+"/canardNoir.png", 228, 255, 0);
-    sprites.canardSprite[CHESNUT] = loadImageWithColorKey("sprites/"+theme+"/canardMarron.png", 228, 255, 0);
-    sprites.canardSprite[BLOOD] = loadImageWithColorKey("sprites/"+theme+"/canardRouge.png", 228, 255, 0);
-    sprites.canardSprite[BLUISH_PURPLE] = loadImageWithColorKey("sprites/"+theme+"/canardViolet.png", 228, 255, 0);
+    if (theme == "classique")
+    {
+        sprites.canardSprite[DARK] = loadImageWithColorKey("sprites/"+theme+"/canardNoir.png", 228, 255, 0);
+        sprites.canardSprite[CHESNUT] = loadImageWithColorKey("sprites/"+theme+"/canardMarron.png", 228, 255, 0);
+        sprites.canardSprite[BLOOD] = loadImageWithColorKey("sprites/"+theme+"/canardRouge.png", 228, 255, 0);
+        sprites.canardSprite[BLUISH_PURPLE] = loadImageWithColorKey("sprites/"+theme+"/canardViolet.png", 228, 255, 0);
+    } else if (theme== "island") {
+        sprites.canardSprite[DARK] = loadImageWithColorKey("sprites/"+theme+"/canardNoir.png", 0, 255, 255);
+        sprites.canardSprite[CHESNUT] = loadImageWithColorKey("sprites/"+theme+"/canardMarron.png", 0, 0, 0);
+        sprites.canardSprite[BLOOD] = loadImageWithColorKey("sprites/"+theme+"/canardRouge.png", 0, 0, 0);
+        sprites.canardSprite[BLUISH_PURPLE] = loadImageWithColorKey("sprites/"+theme+"/canardViolet.png", 0, 0, 0);
+    }
 
     sprites.points.source = loadImageWithColorKey("sprites/"+theme+"/points.png", 0, 0, 0);
     sprites.points.lecture.h = 17;

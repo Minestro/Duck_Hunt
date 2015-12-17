@@ -276,16 +276,16 @@ void initCanard(Canard &cn, Partie partie)
     switch (cn.type)
     {
         case DARK:
-            cn.vitesse = VITESSE_N-((partie.niveau-1)*2);
+            cn.vitesse = VITESSE_N-((partie.niveau)*2);
             break;
         case CHESNUT:
-            cn.vitesse = VITESSE_M-((partie.niveau-1)*2);
+            cn.vitesse = VITESSE_M-((partie.niveau)*2);
             break;
         case BLOOD:
-            cn.vitesse = VITESSE_B-((partie.niveau-1)*2);
+            cn.vitesse = VITESSE_B-((partie.niveau)*2);
             break;
         case BLUISH_PURPLE:
-            cn.vitesse = VITESSE_V-((partie.niveau-1)*2);
+            cn.vitesse = VITESSE_V-((partie.niveau)*2);
             break;
     }
     if (cn.vitesse<0)
