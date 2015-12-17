@@ -9,7 +9,7 @@
 ********************* Description *********************************
 * Condition pour ramasser les canards                             *
 *********************** Entrées ***********************************
-* ES:                                                             *
+* ES: (Chien &chien, Partie &partie. E :sprites                   *
 *******************************************************************/
 
 void ramasserCanard(Chien &chien, Partie &partie, Sprites sprites)
@@ -64,7 +64,7 @@ void ramasserCanard(Chien &chien, Partie &partie, Sprites sprites)
 ********************* Description *********************************
 * Condition pour que le chien devienne heureux                    *
 *********************** Entrées ***********************************
-* ES:                                                             *
+* E:(Chien chien, Partie partie)                                  *
 *******************************************************************/
 
 bool chienDevientHeureux(Chien chien, Partie partie)
@@ -86,7 +86,7 @@ bool chienDevientHeureux(Chien chien, Partie partie)
 ********************* Description *********************************
 * Toutes les instructions permettant l'animation du chien         *
 *********************** Entrées ***********************************
-* ES:                                                             *
+* ES: Chien &chien, Partie &partie. E  sprites                    *
 *******************************************************************/
 
 void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
@@ -241,7 +241,9 @@ void controlesChien(Chien &chien, Partie &partie, Sprites sprites)
 ******************** Auteur , Dates *******************************
 * Nom : LE HO                                                     *
 ********************* Description *********************************
-*                                                                 *
+* est appelée si les munitions sont épuisées :
+* Affecte à la bonne case du tableau de chasse la valeur canard échappée
+* si ce canard est en dehors de l'écran                                                 *
 *********************** Entrées ***********************************
 * ES:                                                             *
 *******************************************************************/
@@ -334,7 +336,7 @@ void detectionBordsChien(Chien &chien)
 ******************** Auteur , Dates *******************************
 * Nom : LE HO                                                     *
 ********************* Description *********************************
-* Condition de collision des canards avec les bords               *
+* Condition de collision des canards avec les bords              *
 *********************** Entrées ***********************************
 * ES:                                                             *
 *******************************************************************/
