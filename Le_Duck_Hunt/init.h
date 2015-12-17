@@ -1,7 +1,7 @@
 #ifndef INIT_H
 #define INIT_H
 
-#include "main.h"
+#include "constantes.h"
 #include "alea.h"
 #include "structures.h"
 

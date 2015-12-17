@@ -1,7 +1,7 @@
 #ifndef RELANCERPARTIE_H
 #define RELANCERPARTIE_H
 
-#include "main.h"
+#include "constantes.h"
 #include "alea.h"
 #include "init.h"
 #include "structures.h"

@@ -43,9 +43,6 @@
 
 // Etats possibles
 
-/*#define ESCAPING 4 // IL s'enfuit !*/
-// J'ai pensé à rajouté un attribut de type booléen dans la structure Canard plutôt :p
-
 #define ALIVE 3 // En vie : le canard vole.
 #define TOUCHED 2 // Touché : il s'arrête de voler pour dire aurevoir à la vie.
 #define FREE_FALLING 1 // En chute libre : il tombe verticalement.

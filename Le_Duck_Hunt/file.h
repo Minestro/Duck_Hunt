@@ -1,7 +1,7 @@
 #ifndef FILE_H
 #define FILE_H
 
-#include "main.h"
+#include "constantes.h"
 #include "structures.h"
 
 bool testHighScore (std::string fichier, Partie &partie);

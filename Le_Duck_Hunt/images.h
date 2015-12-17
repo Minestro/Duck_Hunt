@@ -1,7 +1,7 @@
 #ifndef IMAGES_H
 #define IMAGES_H
 
-#include "main.h"
+#include "constantes.h"
 #include "structures.h"
 
 SDL_Surface *load_image(std::string);

@@ -1,7 +1,7 @@
 #ifndef GETEVENTS_H
 #define GETEVENTS_H
 
-#include "main.h"
+#include "constantes.h"
 #include "structures.h"
 
 bool getEvents(SourisEvent &sourisEvent, bool);

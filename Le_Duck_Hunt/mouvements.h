@@ -1,7 +1,7 @@
 #ifndef MOUVEMENTS_H
 #define MOUVEMENTS_H
 
-#include "main.h"
+#include "constantes.h"
 #include "relancerPartie.h"
 #include "alea.h"
 #include "structures.h"

@@ -1,7 +1,7 @@
 #ifndef SHOW_H
 #define SHOW_H
 
-#include "main.h"
+#include "constantes.h"
 #include "menu.h"
 #include "structures.h"
 

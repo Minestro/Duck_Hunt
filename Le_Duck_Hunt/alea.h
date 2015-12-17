@@ -1,7 +1,7 @@
 #ifndef ALEA_H
 #define ALEA_H
 
-#include "main.h"
+#include "constantes.h"
 #include "structures.h"
 
 int alea(int mini, int maxi);

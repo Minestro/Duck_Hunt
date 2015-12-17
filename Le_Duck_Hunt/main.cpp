@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
     Message msgs[NOMBRE_MESSAGES];
     initMessage(msgs);
 
-    SDL_Surface *ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF);
+    SDL_Surface *ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN);
 
     /* Titre */
     SDL_WM_SetCaption("Duck Hunt", NULL);

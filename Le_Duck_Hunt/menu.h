@@ -1,7 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "main.h"
+#include "constantes.h"
 #include "show.h"
 #include "file.h"
 #include "getEvents.h"

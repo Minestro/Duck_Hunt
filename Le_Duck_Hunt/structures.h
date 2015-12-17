@@ -18,7 +18,7 @@ struct Message // Une structure pour afficher avec les fontes, par exemple les s
 {
     SDL_Color textColor;    //couleur du texte
     int fontSize;   //taille de la police
-    std::string message; // le contenu du texte#include "main.h"
+    std::string message; // le contenu du texte#include "constantes.h"
     SDL_Rect position; //position de l'affichage tu texte
     TTF_Font *font; // police
     SDL_Surface *source; // image-texte à afficher

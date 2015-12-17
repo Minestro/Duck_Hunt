@@ -1,7 +1,7 @@
 #ifndef SHOT_H
 #define SHOT_H
 
-#include "main.h"
+#include "constantes.h"
 #include "getEvents.h"
 #include "alea.h"
 #include "structures.h"
