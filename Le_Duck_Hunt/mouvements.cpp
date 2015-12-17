@@ -1,4 +1,5 @@
 #include "mouvements.h"
+#include "alea.h"
 
 void ramasserCanard(Chien &chien, Partie &partie, Sprites sprites)
 {

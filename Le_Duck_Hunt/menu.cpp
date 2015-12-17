@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "alea.h"
 
 void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[], Partie &partie, Chien &chien)
 {

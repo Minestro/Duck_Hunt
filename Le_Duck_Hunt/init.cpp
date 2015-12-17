@@ -1,4 +1,5 @@
 #include "init.h"
+#include "alea.h"
 
 void initTableau(TableauChasse &tableau, Sprites sprites)
 {
