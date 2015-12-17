@@ -12,6 +12,12 @@
 
 int main(int argc, char* argv[])
 {
+    std::cout << "Les arguments du programmes sont : " << std::endl;
+    for(int i = 0 ; i < argc ; i++)
+    {
+        std::cout << i << " : " << argv[i] << std::endl;
+    }
+
     /* INITIALISATIONS DES BIBLIOTHEQUES : IMG, SDL, TTF */
     IMG_Init(IMG_INIT_PNG);
     SDL_Init(SDL_INIT_VIDEO);
@@ -20,7 +26,7 @@ int main(int argc, char* argv[])
     Message msgs[NOMBRE_MESSAGES];
     initMessage(msgs);
 
-    SDL_Surface *ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN);
+    SDL_Surface *ecran = SDL_SetVideoMode(LARGEUR, HAUTEUR, BPP, SDL_HWSURFACE | SDL_DOUBLEBUF);
 
     /* Titre */
     SDL_WM_SetCaption("Duck Hunt", NULL);
@@ -54,6 +60,7 @@ int main(int argc, char* argv[])
     initFichiers();
 
     SDL_ShowCursor(SDL_DISABLE);
+
     menu(ecran, sprites, boutons, modeMenu, modeJeu, sourisEvent, temps, msgs, partie, chien);
     while (modeJeu != 0)
     {
