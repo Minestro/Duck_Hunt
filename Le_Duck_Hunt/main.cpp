@@ -51,7 +51,8 @@ int main(int argc, char* argv[])
     Boutons boutons;
     initBouton(boutons);
 
-    chargerImages(sprites, chien, boutons);
+    chargerImages(sprites, chien, boutons, "classique");
+    boutons.bouton[BOUTON_THEME_CLASSIQUE].actif = true;
 
     Uint8 *keystate = SDL_GetKeyState(NULL);
     SourisEvent sourisEvent;

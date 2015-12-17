@@ -123,12 +123,19 @@ void initBouton(Boutons &boutons)
     boutons.bouton[BOUTON_RETOUR].contenu = "Retour";
     boutons.bouton[BOUTON_SCORE].contenu = "High Score";
     boutons.bouton[BOUTON_OK].contenu = "OK";
-    for(int i = 0 ; i < 2 ; i++)
+    boutons.bouton[BOUTON_OPTIONS].contenu = "Options";
+    boutons.bouton[BOUTON_THEME_CLASSIQUE].contenu = "Classique";
+    boutons.bouton[BOUTON_THEME_ISLAND].contenu = "Island";
+    for (int i = 0 ; i < 2 ; i++)
     {
         boutons.lecture[i].x = i * 226;
         boutons.lecture[i].y = 0;
         boutons.lecture[i].w = 216;
         boutons.lecture[i].h = 74;
+    }
+    for (int i=0; i<NB_BOUTONS_DIFFERENTS; i++)
+    {
+        boutons.bouton[i].actif = false;
     }
 }
 

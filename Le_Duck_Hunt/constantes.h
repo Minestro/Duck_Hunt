@@ -15,24 +15,24 @@
 
 
 // Contexte
-#define HAUTEUR 761
-#define LARGEUR 750
-#define BPP 16
-#define FPS_MAX 60
-#define LIMITE_BASSE 270
+const int HAUTEUR=761;
+const int LARGEUR=750;
+const int BPP=16;
+const int FPS_MAX=60;
+const int LIMITE_BASSE=270;
 
 // Constantes jeu
-#define NB_MAX_CANARDS 2
-#define NB_BOUTONS_DIFFERENTS 10
-#define NOMBRE_MESSAGES 11
-#define NB_HIGH_SCORE 10
-#define LONGUEUR_MAX_PSEUDO 11
-#define NB_CANARDS_POUR_GAGNER 6
+const int NB_MAX_CANARDS=2;
+const int NB_BOUTONS_DIFFERENTS=11;
+const int NOMBRE_MESSAGES=11;
+const int NB_HIGH_SCORE=10;
+const int LONGUEUR_MAX_PSEUDO=11;
+const int NB_CANARDS_POUR_GAGNER=6;
 
-#define VITESSE_N 30
-#define VITESSE_M 25
-#define VITESSE_B 20
-#define VITESSE_V 15
+const int VITESSE_N=30;
+const int VITESSE_M=25;
+const int VITESSE_B=20;
+const int VITESSE_V=15;
 
 // Type du canard
 #define DARK 0 // Noir, ne pas toucher.
@@ -90,6 +90,8 @@
 #define BOUTON_MODE_DEUX 6
 #define BOUTON_RETOUR 7
 #define BOUTON_OK 8
+#define BOUTON_THEME_CLASSIQUE 9
+#define BOUTON_THEME_ISLAND 10
 
 //Pour les valeurs d'un tableau
 #define NOT_SET -1

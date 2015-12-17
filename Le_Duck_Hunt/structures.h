@@ -123,6 +123,7 @@ struct Bouton
 {
     SDL_Rect position;
     std::string contenu;
+    bool actif;
 };
 
 struct Boutons

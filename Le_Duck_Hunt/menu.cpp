@@ -1,6 +1,6 @@
 #include "menu.h"
 #include "alea.h"
-
+#include "images.h"
 
 
 /****************** Nom de la fonction ****************************
@@ -19,6 +19,7 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
     bool sortir = false;
     int lastKeyPressed;
     int lastKeyPressedBis;
+    int lastMenu = 1;
     bool keyPressed = false;
     bool keyPressedBis = false;
     bool defilTouche = false;
@@ -48,19 +49,16 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
             break;
         case 1 :
             boutons.bouton[BOUTON_PLAY].position.x = (LARGEUR - boutons.lecture[0].w) / 2;
-            boutons.bouton[BOUTON_PLAY].position.y = 150;
+            boutons.bouton[BOUTON_PLAY].position.y = 100;
 
             boutons.bouton[BOUTON_SCORE].position.x = (LARGEUR - boutons.lecture[0].w) / 2;
-            boutons.bouton[BOUTON_SCORE].position.y = 300;
+            boutons.bouton[BOUTON_SCORE].position.y = 250;
+
+            boutons.bouton[BOUTON_OPTIONS].position.x = (LARGEUR - boutons.lecture[0].w) / 2;
+            boutons.bouton[BOUTON_OPTIONS].position.y = 400;
 
             boutons.bouton[BOUTON_QUIT].position.x = (LARGEUR - boutons.lecture[0].w) / 2;
-            boutons.bouton[BOUTON_QUIT].position.y = 450;
-
-            if (time.currentTime >= time.timeFps + time.fpsTime)
-            {
-                showMenu(ecran, sprites, boutons, modeMenu, msgs, partie, sourisEvent.sx, sourisEvent.sy);
-                time.timeFps = time.currentTime;
-            }
+            boutons.bouton[BOUTON_QUIT].position.y = 550;
 
             if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_QUIT], boutons.lecture[0]))&&sourisEvent.clicGauche)
             {
@@ -69,6 +67,8 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
             }
             else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_PLAY], boutons.lecture[0]))&&sourisEvent.clicGauche)
             {
+                time.currentTime = SDL_GetTicks();
+                time.timeMenu = time.currentTime;
                 modeJeu = 1;
                 modeMenu = 6;
                 initChien(chien);
@@ -89,13 +89,47 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
             {
                 modeMenu = 7;
             }
+            else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_OPTIONS], boutons.lecture[0]))&&sourisEvent.clicGauche)
+            {
+                modeMenu = 2;
+            }
+            break;
+        case 2:
+            boutons.bouton[BOUTON_RETOUR].position.x = (LARGEUR/2) - (boutons.lecture[0].w/2);
+            boutons.bouton[BOUTON_RETOUR].position.y = 600;
+
+            boutons.bouton[BOUTON_THEME_CLASSIQUE].position.x = ((LARGEUR/2) - (boutons.lecture[0].w/2))/2;
+            boutons.bouton[BOUTON_THEME_CLASSIQUE].position.y = 200;
+
+            boutons.bouton[BOUTON_THEME_ISLAND].position.x = (((LARGEUR/2) - (boutons.lecture[0].w/2))/2)+((LARGEUR/2) - (boutons.lecture[0].w/2));
+            boutons.bouton[BOUTON_THEME_ISLAND].position.y = 200;
+
+            if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_RETOUR], boutons.lecture[0]))&&sourisEvent.clicGauche)
+            {
+                modeMenu = lastMenu;
+            } else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_THEME_CLASSIQUE], boutons.lecture[0]))&&sourisEvent.clicGauche)
+            {
+                boutons.bouton[BOUTON_THEME_CLASSIQUE].actif = true;
+                boutons.bouton[BOUTON_THEME_ISLAND].actif = false;
+                libererImages(sprites, chien, boutons);
+                chargerImages(sprites, chien, boutons, "classique");
+            } else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_THEME_ISLAND], boutons.lecture[0]))&&sourisEvent.clicGauche)
+            {
+                boutons.bouton[BOUTON_THEME_CLASSIQUE].actif = false;
+                boutons.bouton[BOUTON_THEME_ISLAND].actif = true;
+                libererImages(sprites, chien, boutons);
+                chargerImages(sprites, chien, boutons, "island");
+            }
             break;
         case 5 :
             boutons.bouton[BOUTON_REPRENDRE].position.x = (LARGEUR/2) - (boutons.lecture[0].w/2);
             boutons.bouton[BOUTON_REPRENDRE].position.y = 200;
 
+            boutons.bouton[BOUTON_OPTIONS].position.x = (LARGEUR/2) - (boutons.lecture[0].w/2);
+            boutons.bouton[BOUTON_OPTIONS].position.y = 400;
+
             boutons.bouton[BOUTON_QUIT].position.x = (LARGEUR/2) - (boutons.lecture[0].w/2);
-            boutons.bouton[BOUTON_QUIT].position.y = 400;
+            boutons.bouton[BOUTON_QUIT].position.y = 600;
 
             if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_QUIT], boutons.lecture[0]))&&sourisEvent.clicGauche)
             {
@@ -104,12 +138,10 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
             else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_REPRENDRE], boutons.lecture[0]))&&sourisEvent.clicGauche)
             {
                 modeMenu = 0;
-            }
-
-            if (time.currentTime >= time.timeFps + time.fpsTime)
+            } else if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_OPTIONS], boutons.lecture[0]))&&sourisEvent.clicGauche)
             {
-                showMenu(ecran, sprites, boutons, modeMenu, msgs, partie, sourisEvent.sx, sourisEvent.sy);
-                time.timeFps = time.currentTime;
+                modeMenu = 2;
+                lastMenu = 5;
             }
             break;
         case 6:
@@ -117,14 +149,6 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
             {
                 modeMenu = 0;
                 time.timeMenu = time.currentTime;
-            }
-            else
-            {
-                if (time.currentTime >= time.timeFps + time.fpsTime)
-                {
-                    showMenu(ecran, sprites, boutons, modeMenu, msgs, partie, sourisEvent.sx, sourisEvent.sy);
-                    time.timeFps = time.currentTime;
-                }
             }
             break;
         case 7:
@@ -134,11 +158,6 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
             if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_RETOUR], boutons.lecture[0]))&&sourisEvent.clicGauche)
             {
                 modeMenu = 1;
-            }
-            if (time.currentTime >= time.timeFps + time.fpsTime)
-            {
-                showMenu(ecran, sprites, boutons, modeMenu, msgs, partie, sourisEvent.sx, sourisEvent.sy);
-                time.timeFps = time.currentTime;
             }
             break;
         case 8:
@@ -202,11 +221,6 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
             }
 
             partie.pseudo = std::string(partie.pseudoT);
-            if (time.currentTime >= time.timeFps + time.fpsTime)
-            {
-                showMenu(ecran, sprites, boutons, modeMenu, msgs, partie, sourisEvent.sx, sourisEvent.sy);
-                time.timeFps = time.currentTime;
-            }
             if ((testHoverBouton(sourisEvent.sx, sourisEvent.sy, boutons.bouton[BOUTON_OK], boutons.lecture[0]))&&sourisEvent.clicGauche)
             {
                 addScore("scoresClassic", partie.pseudo, partie.score, partie.highScore);
@@ -221,15 +235,15 @@ void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu,
             {
                 modeMenu = 1;
             }
-            if (time.currentTime >= time.timeFps + time.fpsTime)
-            {
-                showMenu(ecran, sprites, boutons, modeMenu, msgs, partie, sourisEvent.sx, sourisEvent.sy);
-                time.timeFps = time.currentTime;
-            }
             break;
         default:
             break;
         }
+        if (time.currentTime >= time.timeFps + time.fpsTime)
+            {
+                showMenu(ecran, sprites, boutons, modeMenu, msgs, partie, sourisEvent.sx, sourisEvent.sy);
+                time.timeFps = time.currentTime;
+            }
         SDL_Flip(ecran);
     }
 }

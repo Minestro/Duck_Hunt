@@ -14,11 +14,10 @@
 
 void showBouton(SDL_Surface *ecran, Boutons &boutons, Message msgs[], int boutonNom, int sx, int sy)
 {
-    SDL_BlitSurface(boutons.source, &boutons.lecture[testHoverBouton(sx, sy, boutons.bouton[boutonNom], boutons.lecture[0])], ecran, &boutons.bouton[boutonNom].position);
     msgs[MSG_BOUTONS].source = TTF_RenderText_Solid(msgs[MSG_BOUTONS].font, boutons.bouton[boutonNom].contenu.c_str(), msgs[MSG_BOUTONS].textColor);
     msgs[MSG_BOUTONS].position.x=boutons.bouton[boutonNom].position.x+(boutons.lecture[0].w - msgs[MSG_BOUTONS].source->w)/2;
     msgs[MSG_BOUTONS].position.y=boutons.bouton[boutonNom].position.y+(boutons.lecture[0].h - msgs[MSG_BOUTONS].source->h)/2;
-    SDL_BlitSurface(boutons.source, &boutons.lecture[testHoverBouton(sx, sy, boutons.bouton[boutonNom], boutons.lecture[0])], ecran, &boutons.bouton[boutonNom].position);
+    SDL_BlitSurface(boutons.source, &boutons.lecture[(testHoverBouton(sx, sy, boutons.bouton[boutonNom], boutons.lecture[0])) || (boutons.bouton[boutonNom].actif)], ecran, &boutons.bouton[boutonNom].position);
     SDL_BlitSurface(msgs[MSG_BOUTONS].source, NULL, ecran, &msgs[MSG_BOUTONS].position);
     SDL_FreeSurface(msgs[MSG_BOUTONS].source);
 }
@@ -60,7 +59,20 @@ void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMe
     case 1 :
         showBouton(ecran, boutons, msgs, BOUTON_PLAY, sx, sy);
         showBouton(ecran, boutons, msgs, BOUTON_QUIT, sx, sy);
+        showBouton(ecran, boutons, msgs, BOUTON_OPTIONS, sx, sy);
         showBouton(ecran, boutons, msgs, BOUTON_SCORE, sx, sy);
+        break;
+    case 2:
+        mess = "";
+
+        msgs[MSG_TEXTE].source = TTF_RenderText_Solid(msgs[MSG_TEXTE].font, "Choisissez le theme du jeu :", msgs[MSG_TEXTE].textColor);
+        msgs[MSG_TEXTE].position.y = 100;
+        msgs[MSG_TEXTE].position.x = (LARGEUR/2) - (msgs[MSG_TEXTE].source->w/2);
+        SDL_BlitSurface(msgs[MSG_TEXTE].source, NULL, ecran, &msgs[MSG_TEXTE].position);
+
+        showBouton(ecran, boutons, msgs, BOUTON_RETOUR, sx, sy);
+        showBouton(ecran, boutons, msgs, BOUTON_THEME_CLASSIQUE, sx, sy);
+        showBouton(ecran, boutons, msgs, BOUTON_THEME_ISLAND, sx, sy);
         break;
     case 5:
         msgs[MSG_PAUSE].source = TTF_RenderText_Solid(msgs[MSG_PAUSE].font, msgs[MSG_PAUSE].message.c_str(), msgs[MSG_PAUSE].textColor);
@@ -68,6 +80,7 @@ void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMe
         SDL_BlitSurface(msgs[MSG_PAUSE].source, NULL, ecran, &msgs[MSG_PAUSE].position);
 
         showBouton(ecran, boutons, msgs, BOUTON_REPRENDRE, sx, sy);
+        showBouton(ecran, boutons, msgs, BOUTON_OPTIONS, sx, sy);
         showBouton(ecran, boutons, msgs, BOUTON_QUIT, sx, sy);
         break;
     case 6:
