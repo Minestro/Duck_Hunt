@@ -97,6 +97,7 @@ int main(int argc, char* argv[])
             ramasserCanard(chien, partie, sprites);
 
             chien.vitesseAnimationTime = temps.currentTime;
+            ramasserCanard(chien, partie, sprites);
         }
         if(partie.relancer)
         {
