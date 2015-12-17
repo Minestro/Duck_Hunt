@@ -9,18 +9,30 @@
 #include <iostream>
 #include <fstream>
 
-// Note ! Mets en commentaire le ce define, moi j'en ai besoin pour chez moi
-
-/*#define VIETKHANG
-#ifdef VIETKHANG
-#include "../DuckHunt/include/SDL/SDL.h"
-#include "../DuckHunt/include/SDL/SDL_image.h"
-#include "../DuckHunt/include/SDL/SDL_ttf.h"
-#else*/
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
-//#endif
+
+
+// Contexte
+#define HAUTEUR 761
+#define LARGEUR 750
+#define BPP 16
+#define FPS_MAX 60
+#define LIMITE_BASSE 270
+
+// Constantes jeu
+#define NB_MAX_CANARDS 2
+#define NB_BOUTONS_DIFFERENTS 10
+#define NOMBRE_MESSAGES 11
+#define NB_HIGH_SCORE 10
+#define LONGUEUR_MAX_PSEUDO 11
+#define NB_CANARDS_POUR_GAGNER 6
+
+#define VITESSE_N 30
+#define VITESSE_M 25
+#define VITESSE_B 20
+#define VITESSE_V 15
 
 // Type du canard
 #define DARK 0 // Noir, ne pas toucher.
@@ -85,235 +97,6 @@
 //Pour les valeurs d'un tableau
 #define NOT_SET -1
 #define TO_RESET -2
-
-const int HAUTEUR = 761;
-const int LARGEUR = 750;
-const int BPP = 16;
-const int FPS_MAX = 60;
-const int LIMITE_BASSE = 270;
-const int NB_MAX_CANARDS = 2;
-const int NB_BOUTONS_DIFFERENTS = 10;
-const int NOMBRE_MESSAGES = 11;
-const int NB_HIGH_SCORE = 10;
-const int LONGUEUR_MAX_PSEUDO = 11;
-
-const unsigned int VITESSE_N = 30;
-const unsigned int VITESSE_M = 25;
-const unsigned int VITESSE_B = 20;
-const unsigned int VITESSE_V = 15;
-
-
-struct HighScore{
-    std::string nom;
-    int score;
-};
-
-struct TableauChasse
-{
-    int typeCanard[NB_MAX_CANARDS];
-    // si le canard n'est pas récupéré alors la case vaut NOT_SET,
-    // sinon, il vaut la valeur de son type
-};
-
-struct Message // Une structure pour afficher avec les fontes, par exemple les scores, ou le niveau !
-{
-    SDL_Color textColor;    //couleur du texte
-    int fontSize;   //taille de la police
-    std::string message; // le contenu du texte
-    SDL_Rect position; //position de l'affichage tu texte
-    TTF_Font *font; // police
-    SDL_Surface *source; // image-texte à afficher
-};
-
-struct Partie
-{
-    TableauChasse tableauChasse;
-    bool relancer;
-    bool jeu;
-    bool chienEnChasse;
-    int canardsEnVie;
-    int shots;
-    Uint32 temps; //pour un certain mode de jeu
-    int round;
-    int niveau;
-    int score;
-    int hit[10];
-    bool alreadyShot;
-    bool alreadyGetEvent;
-    bool alreadyClic;
-    bool canardAbbatu;
-    int xChute[NB_MAX_CANARDS];
-    bool canardRamasse[NB_MAX_CANARDS];
-    HighScore highScore[NB_HIGH_SCORE];
-    char pseudoT[LONGUEUR_MAX_PSEUDO];
-    std::string pseudo;
-};
-
-struct Sprite // Peut représenter une image comme une feuille de sprites
-{
-    SDL_Surface *source;
-    SDL_Rect position;
-    SDL_Rect lecture;
-};
-
-struct Canard
-{
-    int type; // 0 : noir, 1 : marron, 2 : violet
-    int etat; // 0 : mort, 1 : en chute, 2 : touché, 3 : vivant
-    bool echappe;
-
-    int vecteurPositionY;
-    int vecteurPositionX;
-
-    SDL_Rect lecture;
-    SDL_Rect position;
-
-    int vitesseAnimation;
-    Uint32 vitesseAnimationTime;
-
-    int vitesse;
-    Uint32 vitesseTime;
-
-    int nbFrames;
-    int cycleSprite;
-    Uint32 tempsDepuisTir; // On veut savoir combien de ms se sont écoulés depuis le tir pour passer de TOUCHED à FREE_FALLING
-};
-
-struct Chien
-{
-    int vecteurPositionX;
-    int vecteurPositionY;
-    int etat;
-
-    Sprite image[NOMBRE_IMAGES_CHIEN]; // On va utiliser des feuilles de sprite différentes
-    int nbFrames;
-    int cycleSprite;
-
-    int vitesseAnimation;
-    Uint32 vitesseAnimationTime;
-
-    Uint32 tempsDepuisEtat; // Même principe que tempsDepuisTir mais depuis un certain etat;
-    bool devantHerbe; // si on le blit avant ou après les herbes hautes
-};
-
-struct Sprites // Rassemble toutes les images et les feuilles de sprite
-{
-    Sprite background;
-    Sprite background_blit;
-    Sprite background_menu;
-
-    int canardActifs;
-    Canard canard[NB_MAX_CANARDS];
-
-    Sprite hits;
-    Sprite shots;
-    Sprite viseur;
-    Sprite points;
-    SDL_Surface *canardSprite[NOMBRE_TYPES];
-};
-
-struct Police
-{
-    TTF_Font *fonts;
-    SDL_Color textColor;
-    int fontSize;
-    std::string police;
-};
-
-struct Bouton
-{
-    SDL_Rect position;
-    std::string contenu;
-};
-
-struct Boutons
-{
-    SDL_Surface *source;
-    SDL_Rect lecture[2];
-    Bouton bouton[NB_BOUTONS_DIFFERENTS];
-};
-
-struct SourisEvent
-{
-    bool bl, bl2;
-    bool br, br2;
-    bool bm, bm2;
-    int sx;
-    int sy;
-    bool clicGauche;
-    bool clicDroit;
-    bool clicMolette;
-};
-
-struct Time
-{
-    Uint32 currentTime;
-    Uint32 timeFps;
-    Uint32 timeMenu;
-    Uint32 timeKey;
-    Uint32 timeDefKey;
-    int fpsTime, menuTime, keyTime, defKeyTime;
-};
-
-
-bool testHighScore (std::string fichier, Partie &partie);
-void getScore (std::string fichier, HighScore HighScore[]);
-void addScore (std::string fichier, std::string nom, int score, HighScore highScore[]);
-bool getEvents(SourisEvent &sourisEvent, bool);
-void echangerTabHS(HighScore highScore[], int pos1, int pos2);
-int separer(HighScore highscore[], int debut, int fin);
-void triScore (HighScore highScore[],  int debut, int fin);
-
-void genererRendu(SDL_Surface *ecran, Sprites sprites, SourisEvent sourisEvent, Partie partie, Chien chien, Message msgs[]);
-void showChien(SDL_Surface *ecran, Chien chien);
-void showPointsCanard(SDL_Surface *ecran, Canard canard, Sprite &points);
-void showMessage(SDL_Surface *ecran, Message &msg);
-void showMenu(SDL_Surface *ecran, Sprites sprites, Boutons &boutons, int &modeMenu, Message msgs[], Partie partie, int sx, int sy);
-void showPoints(Message msgs[], SDL_Surface *ecran, Partie partie);
-void showBouton(SDL_Surface *ecran, Boutons &boutons, Message msgs[], int boutonNom, int sx, int sy);
-
-void menu(SDL_Surface *ecran, Sprites &sprites, Boutons &boutons, int &modeMenu, int &modeJeu, SourisEvent &sourisEvent, Time &time, Message msgs[], Partie &partie, Chien &chien);
-bool testHoverBouton(int, int, Bouton, SDL_Rect lecture);
-
-bool escaped(Sprites sprites, Partie partie);
-bool roundTerminee(Sprites sprites, Partie partie);
-bool canardsMortsRamasses(Partie partie);
-bool joueurMaladroit(Partie partie);
-
-void relancerPartie(Partie &partie, Sprites &sprites);
-bool finPartie(Partie partie);
-void initPartie(Partie &partie, int nbCanards);
-void initBouton(Boutons &boutons);
-void initSourisEvent(SourisEvent &SourisEvent);
-void initTime(Time &time);
-void initCanard(Canard &cn, Partie partie);
-void initChien(Chien &chien);
-void initMessage(Message msgs[]);
-void initTableau(TableauChasse &tableau, Sprites sprites);
-void initHighScore(HighScore highScore[]);
-void initFichiers();
-
-SDL_Surface *loadImage(std::string);
-SDL_Surface *loadImageWithColorKey(std::string, int, int, int);
-void chargerImages(Sprites &sprites, Chien &chien);
-
-void changementDirection(Canard &canard);
-void mouvementsCanard(Canard &canard);
-void detectionBordsCanard(Canard &canard, Partie &partie);
-void switchSpriteCanard(Canard &canard);
-void sauvegarderPositionX(Partie &partie, Canard canard);
-void shoot(SourisEvent &sourisEvent,Canard &canard, Partie &partie, Time temps, int &modeJeu);
-bool testShot(SourisEvent sourisEvent, SDL_Rect lecture, SDL_Rect position);
-void touched(Canard &canard, Time temps);
-void canardSurvivant(Sprites &sprites, int numeroCanard);
-
-void controlesChien(Chien &chien, Partie &partie, Sprites sprites);
-bool chienDevientHeureux(Chien chien, Partie partie);
-void detectionBordsChien(Chien &chien);
-void switchSpriteChien(Chien &chien, Partie &partie, Sprites sprites);
-
-int alea(int mini, int maxi);
-std::string intToString (int number);
-
+#define DUCK_ESCAPED -3
 
 #endif // HEADER_H

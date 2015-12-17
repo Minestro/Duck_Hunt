@@ -1,4 +1,14 @@
-#include "main.h"
+#include "file.h"
+#include "getEvents.h"
+#include "images.h"
+#include "init.h"
+#include "menu.h"
+#include "mouvements.h"
+#include "relancerPartie.h"
+#include "shot.h"
+#include "show.h"
+#include "switchSprite.h"
+
 
 int main(int argc, char* argv[])
 {
@@ -32,10 +42,10 @@ int main(int argc, char* argv[])
     Sprites sprites;
     Chien chien;
 
-    chargerImages(sprites, chien);
-
     Boutons boutons;
     initBouton(boutons);
+
+    chargerImages(sprites, chien, boutons);
 
     Uint8 *keystate = SDL_GetKeyState(NULL);
     SourisEvent sourisEvent;
@@ -59,7 +69,7 @@ int main(int argc, char* argv[])
             if ((temps.currentTime >= sprites.canard[i].vitesseTime + sprites.canard[i].vitesse))
             {
                 mouvementsCanard(sprites.canard[i]);
-                detectionBordsCanard(sprites.canard[i], partie);
+                detectionBordsCanard(sprites.canard[i], partie, i);
                 changementDirection(sprites.canard[i]);
                 if(sprites.canard[i].etat == TOUCHED)
                 {
@@ -77,12 +87,15 @@ int main(int argc, char* argv[])
         {
             for(int i = 0 ; i < sprites.canardActifs ; i++)
             {
-                canardSurvivant(sprites, i);
+                canardSurvivant(sprites, partie, i);
             }
         }
         if (temps.currentTime >= chien.vitesseAnimationTime + chien.vitesseAnimation)
         {
-            switchSpriteChien(chien, partie, sprites);
+            switchSpriteChien(chien, partie);
+            controlesChien(chien, partie, sprites);
+            ramasserCanard(chien, partie, sprites);
+
             chien.vitesseAnimationTime = temps.currentTime;
         }
         if(partie.relancer)
@@ -93,13 +106,17 @@ int main(int argc, char* argv[])
         {
             if(finPartie(partie))
             {
-               if (testHighScore("scoresClassic", partie))
-               {
-                   modeMenu = 8;
-               } else {
-                   modeMenu = 9;
-               }
-            } else {
+                if (testHighScore("scoresClassic", partie))
+                {
+                    modeMenu = 8;
+                }
+                else
+                {
+                    modeMenu = 9;
+                }
+            }
+            else
+            {
                 partie.round = 0;
                 partie.niveau ++;
                 initPartie(partie, sprites.canardActifs);
@@ -125,10 +142,10 @@ int main(int argc, char* argv[])
 
         SDL_Delay(1);
     }
+    libererImages(sprites, chien, boutons);
     SDL_Quit();
     IMG_Quit();
     TTF_Quit();
-    //vider les images
     return EXIT_SUCCESS;
 }
 

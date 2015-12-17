@@ -1,4 +1,4 @@
-#include "main.h"
+#include "relancerPartie.h"
 
 bool escaped(Sprites sprites, Partie partie)
 {
@@ -6,15 +6,7 @@ bool escaped(Sprites sprites, Partie partie)
     int i = 0;
     while(continuer && i < sprites.canardActifs)
     {
-        continuer = (sprites.canard[i].echappe && sprites.canard[i].etat == ALIVE
-                    && (
-                        sprites.canard[i].position.x + sprites.canard[i].lecture.w < 0
-                        || sprites.canard[i].position.x > LARGEUR
-                        || sprites.canard[i].position.y + sprites.canard[i].lecture.h < 0
-                        || sprites.canard[i].position.y > HAUTEUR - LIMITE_BASSE
-
-                    ))
-                    || sprites.canard[i].etat == DEAD;
+        continuer = partie.tableauChasse.typeCanard[i] == DUCK_ESCAPED;
         i++;
     }
     return continuer;
@@ -22,13 +14,14 @@ bool escaped(Sprites sprites, Partie partie)
 
 bool canardsMortsRamasses(Partie partie)
 {
-    bool tousRamasses = true;
+    bool tableauChasseRempli = true;
     int i = 0;
-    while(tousRamasses && i < NB_MAX_CANARDS)
+    while(tableauChasseRempli && i < 2)
     {
-        tousRamasses = partie.canardRamasse[i++];
+        tableauChasseRempli = partie.tableauChasse.typeCanard[i++] != NOT_SET;
     }
-    return tousRamasses;
+
+    return tableauChasseRempli;
 }
 
 bool roundTerminee(Sprites sprites, Partie partie)
@@ -80,5 +73,3 @@ void relancerPartie(Partie &partie, Sprites &sprites)
     partie.shots = 3;
     partie.round++;
 }
-
-

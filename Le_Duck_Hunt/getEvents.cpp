@@ -1,4 +1,4 @@
-﻿#include "main.h"
+﻿#include "getEvents.h"
 
 bool getEvents(SourisEvent &sourisEvent, bool testClic)
 {

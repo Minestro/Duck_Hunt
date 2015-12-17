@@ -1,4 +1,4 @@
-﻿#include "main.h"
+﻿#include "show.h"
 
 void showBouton(SDL_Surface *ecran, Boutons &boutons, Message msgs[], int boutonNom, int sx, int sy)
 {
